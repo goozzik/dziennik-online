@@ -1,0 +1,3 @@
+<?php
+#plan lekcji
+?>
