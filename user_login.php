@@ -44,6 +44,11 @@ include_once('template/layout.class.php');
 	} else {
 	
 		#formularz logowania
+    echo "<form action='#' method='post'>";
+    echo "  <input type='text' name='user_login'>";
+    echo "  <input type='text' name='user_password'>";
+    echo "  <input type='submit' value='zaloguj'>";
+    echo "</form>";
 		
 	}
 	
