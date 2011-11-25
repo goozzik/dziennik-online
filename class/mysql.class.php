@@ -6,7 +6,7 @@ $db_name = 'dziennik';
 	var $mysql;
 	
 		public function connect(){
-			$this -> mysql = @new mysqli('localhost', 'root', '', 'allegro_manager');
+			$this -> mysql = @new mysqli('localhost', 'root', '1234', 'dziennik');
 			if(mysqli_connect_errno() != 0) {
 				echo 'Niestety wyst¹pi³ b³¹d po³¹czenia z baz¹ danych, spróbuj ponownie póŸniej.';
 				exit;
