@@ -104,4 +104,6 @@ CREATE TABLE users (
   PRIMARY KEY(id)
 );
 
+ALTER TABLE users ADD login VARCHAR(60);
 
+ALTER TABLE users change password_2 password varchar(255);
