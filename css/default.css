@@ -1,0 +1,17 @@
+body {
+  text-align: center;
+  min-width: 960px; }
+
+#content {
+  text-align: left;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+form div {
+  width: 200px;
+  margin-bottom: 1em;
+}
+
+form input { float:right; }

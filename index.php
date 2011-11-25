@@ -1,3 +1,3 @@
 <?php
-include_once('template/layout.class.php');
+  include_once('template/layout.class.php');
 ?>

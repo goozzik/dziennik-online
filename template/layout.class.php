@@ -1,32 +1,49 @@
 <?php
-session_start();
-#Do³¹czamy klasy
-include_once('class/user.class.php');
-include_once('class/mysql.class.php');
+  session_start();
+  include_once('class/user.class.php');
+  include_once('class/mysql.class.php');
 
-#Do³¹czamy funkcje
-include_once('functions/text.inc.php');
+  include_once('functions/text.inc.php');
 
-#Do³¹czamy configi
+    $mysql = new Mysql();
+    $mysql -> connect();
 
-#£¹czymy siê z db na sta³e
-	$mysql = new Mysql();
-	$mysql -> connect();
-  
-class layout {
+  class layout {
 
-    static public function header_parrent(){
-      echo "HTML CODE";
-    } 
-   
-    static public function form_login(){
-      echo "<form action='#' method='post'>";
-      echo "  <input type='text' name='user_login'>";
-      echo "  <input type='text' name='user_password'>";
-      echo "  <input type='submit' value='zaloguj'>";
-      echo "</form>";
-		 
-    }
-}
+      static public function head(){
+        echo "<head>";
+        echo "  <link rel='stylesheet' type='text/css' href='/css/default.css'>";
+        echo "  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>";
+        echo "</head>";
+      }
+
+      static public function content(){
+        echo "<div id='content'>";
+      }
+
+      static public function div_end(){
+        echo "</div>";
+      }
+
+      static public function header_parrent(){
+        echo "HTML CODE";
+      }
+
+      static public function user_login_form(){
+        echo "<form action='#' method='post'>";
+        echo "  <div>";
+        echo "    <label>Login</label>";
+        echo "    <input type='text' name='user_login'>";
+        echo "  </div>";
+        echo "  <div>";
+        echo "    <label>Has¿o</label>";
+        echo "    <input type='text' name='user_password'>";
+        echo "  </div>";
+        echo "  <div>";
+        echo "    <input type='submit' value='Zaloguj'>";
+        echo "  </div>";
+        echo "</form>";
+      }
+  }
 
 ?>

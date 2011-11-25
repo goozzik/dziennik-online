@@ -1,5 +1,5 @@
 <?php
-	function generate_password(){
+  function generate_password(){
 
-	}
+  }
 ?>
