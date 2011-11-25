@@ -12,4 +12,21 @@ include_once('functions/text.inc.php');
 #£¹czymy siê z db na sta³e
 	$mysql = new Mysql();
 	$mysql -> connect();
+  
+class layout {
+
+    static public function header_parrent(){
+      echo "HTML CODE";
+    } 
+   
+    static public function form_login(){
+      echo "<form action='#' method='post'>";
+      echo "  <input type='text' name='user_login'>";
+      echo "  <input type='text' name='user_password'>";
+      echo "  <input type='submit' value='zaloguj'>";
+      echo "</form>";
+		 
+    }
+}
+
 ?>
