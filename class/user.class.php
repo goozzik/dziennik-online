@@ -14,8 +14,8 @@
     }
 
     public function login(){
-    global $db_name; //nazwa bazy danych deklarowana w class/mysql.class.php
-    global $mysql;   //obiekt po³¹czenia z mysql zadeklarowany w mysql.class.php
+      global $db_name; //nazwa bazy danych deklarowana w class/mysql.class.php
+      global $mysql;   //obiekt po³¹czenia z mysql zadeklarowany w mysql.class.php
 
       $this -> login = sText($this -> login);
       $this -> password = md5($this -> password);
@@ -50,6 +50,10 @@
 
       }
 
+    }
+
+    public function logout(){
+      session_unset();
     }
 
     public function change_password(){

@@ -44,6 +44,14 @@
         echo "  </div>";
         echo "</form>";
       }
+
+      static public function sign_in_link(){
+        echo "<a href='/user_login.php'>Zaloguj</a>";
+      }
+
+      static public function sign_out_link(){
+        echo "<a href='/user_logout.php'>Wyloguj</a>";
+      }
   }
 
 ?>

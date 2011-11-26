@@ -1,9 +1,6 @@
 <?php
   include_once('template/layout.class.php');
 
-  layout::head();
-  layout::content();
-
     if(!empty($_POST['user_login'])){
 
       $user = new User();
@@ -29,8 +26,10 @@
         header('Location:index.php');
       }
     } else {
+      layout::head();
+      layout::content();
       layout::user_login_form();
+      layout::div_end();
     }
 
-  layout::div_end();
 ?>
