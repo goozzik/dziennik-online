@@ -1,6 +1,7 @@
 <?php
   session_start();
   include_once('class/user.class.php');
+  include_once('class/teacher.class.php');
   include_once('class/admin.class.php');
   include_once('class/mysql.class.php');
 

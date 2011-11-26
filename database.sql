@@ -113,3 +113,9 @@ ALTER TABLE users change password_2 password varchar(255);
    password: test */
 
 INSERT INTO users (login, password) VALUES ('test', '098f6bcd4621d373cade4e832627b4f6');
+
+/* Test admin
+   login: test_admin
+   password: test_admin */
+
+INSERT INTO users (login, password, account_type) VALUES ('test_admin', '01b114342d7fc811669eb24dbe609cc4', 'admin')
