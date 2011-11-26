@@ -107,3 +107,9 @@ CREATE TABLE users (
 ALTER TABLE users ADD login VARCHAR(60);
 
 ALTER TABLE users change password_2 password varchar(255);
+
+/* Test user
+   login: test
+   password: test */
+
+INSERT INTO users (login, password) VALUES ('test', '098f6bcd4621d373cade4e832627b4f6');
