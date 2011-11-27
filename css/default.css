@@ -10,8 +10,12 @@ body {
 }
 
 form div {
-  width: 200px;
+  width: 300px;
   margin-bottom: 1em;
 }
 
 form input { float:right; }
+form td { border: 1px black solid; }
+table { border-spacing: 0; }
+
+.big_label { text-align:center; }

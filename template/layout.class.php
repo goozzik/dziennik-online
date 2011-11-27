@@ -7,16 +7,17 @@
 
   include_once('functions/text.inc.php');
 
-    $mysql = new Mysql();
-    $mysql -> connect();
+  $mysql = new Mysql();
+  $mysql -> connect();
 
   class layout {
 
       static public function head(){
-        echo "<head>";
-        echo "  <link rel='stylesheet' type='text/css' href='/css/default.css'>";
-        echo "  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>";
-        echo "</head>";
+        echo "<head>
+                <link rel='stylesheet' type='text/css' href='/css/default.css'>
+                <script src='/js/jquery.js' type='text/javascript'></script>
+                <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+              </head>";
       }
 
       static public function content(){
@@ -32,19 +33,19 @@
       }
 
       static public function user_login_form(){
-        echo "<form action='#' method='post'>";
-        echo "  <div>";
-        echo "    <label>Login</label>";
-        echo "    <input type='text' name='user_login'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>Has¿o</label>";
-        echo "    <input type='text' name='user_password'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <input type='submit' value='Zaloguj'>";
-        echo "  </div>";
-        echo "</form>";
+        echo "<form action='#' method='post'>
+                <div>
+                  <label>Login</label>
+                  <input type='text' name='user_login'>
+                </div>
+                <div>
+                  <label>Has¿o</label>
+                  <input type='text' name='user_password'>
+                </div>
+                <div>
+                  <input type='submit' value='Zaloguj'>
+                </div>
+              </form>";
       }
 
       static public function sign_in_link(){
@@ -56,43 +57,47 @@
       }
 
       static public function admin_new_teacher_form(){
-        echo "<form action='#' method='post'>";
-        echo "  <div>";
-        echo "    <label>Login</label>";
-        echo "    <input type='text' name='user_login'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>Has¿o</label>";
-        echo "    <input type='text' name='user_password'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>Imi¿</label>";
-        echo "    <input type='text' name='user_first_name'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>Nazwisko</label>";
-        echo "    <input type='text' name='user_last_name'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>E-mail</label>";
-        echo "    <input type='text' name='user_mail'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>Klasa</label>";
-        echo "    <input type='text' name='class_name'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>Profil</label>";
-        echo "    <input type='text' name='class_profile'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <label>Rocznik</label>";
-        echo "    <input type='text' name='class_year'>";
-        echo "  </div>";
-        echo "  <div>";
-        echo "    <input type='submit' value='Utwórz'>";
-        echo "  </div>";
-        echo "</form>";
+        echo "<form action='#' method='post'>
+                <div>
+                  <label>Login</label>
+                  <input type='text' name='user_login'>
+                </div>
+                <div>
+                  <label>Has¿o</label>
+                  <input type='text' name='user_password'>
+                </div>
+                <div>
+                  <label>Imi¿</label>
+                  <input type='text' name='user_first_name'>
+                </div>
+                <div>
+                  <label>Nazwisko</label>
+                  <input type='text' name='user_last_name'>
+                </div>
+                <div>
+                  <label>E-mail</label>
+                  <input type='text' name='user_mail'>
+                </div>
+                <div>
+                  <input type='submit' value='Utwórz'>
+                </div>
+              </form>";
+      }
+
+      static public function teacher_new_class_form(){
+        echo "<form action='#' method='post'>
+                <div>
+                  <label>Nazwa (np. G)</label>
+                  <input type='text' name='class_name'>
+                </div>
+                <div>
+                  <label>Rocznik</label>
+                  <input type='text' name='class_yearbook'>
+                </div>
+                <div>
+                  <input type='submit' value='Utwórz'>
+                </div>
+              </form>";
       }
   }
 
