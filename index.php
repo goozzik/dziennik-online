@@ -4,7 +4,7 @@
   layout::head();
   layout::content();
 
-    if(!$_SESSION['user']['login']) {
+    if(empty($_SESSION['user']['login'])) {
       layout::sign_in_link();
     } else {
       layout::sign_out_link();

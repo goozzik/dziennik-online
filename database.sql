@@ -9,7 +9,7 @@ CREATE TABLE bells (
 CREATE TABLE classes (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id INTEGER UNSIGNED NULL,
-  name INTEGER UNSIGNED NULL,
+  name VARCHAR(255) NULL,
   school_id INTEGER UNSIGNED NULL,
   yearbook INTEGER UNSIGNED NULL,
   PRIMARY KEY(id)
@@ -96,18 +96,16 @@ CREATE TABLE time_tables (
 
 CREATE TABLE users (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  login VARCHAR(60) NULL,
   first_name VARCHAR(255) NULL,
   last_name VARCHAR(255) NULL,
   account_type VARCHAR(255) NULL,
-  password_2 VARCHAR(255) NULL,
+  password VARCHAR(255) NULL,
   mail VARCHAR(255) BINARY NULL,
   class_id INTEGER UNSIGNED NULL,
+  school_id INTEGER UNSIGNED NULL,
   PRIMARY KEY(id)
 );
-
-ALTER TABLE users ADD login VARCHAR(60);
-
-ALTER TABLE users change password_2 password varchar(255);
 
 /* Test user
    login: test
@@ -119,4 +117,10 @@ INSERT INTO users (login, password) VALUES ('test', '098f6bcd4621d373cade4e83262
    login: test_admin
    password: test_admin */
 
-INSERT INTO users (login, password, account_type) VALUES ('test_admin', '01b114342d7fc811669eb24dbe609cc4', 'admin')
+INSERT INTO users (login, password, account_type) VALUES ('test_admin', '01b114342d7fc811669eb24dbe609cc4', 'admin');
+
+/* Test teacher
+   login: test_teacher
+   password: test_teacher */
+
+INSERT INTO users (login, password, account_type) VALUES ('test_teacher', '62397d32e4fa81fb1d753736aa714caf', 'teacher');

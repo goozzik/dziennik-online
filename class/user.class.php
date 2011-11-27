@@ -32,12 +32,13 @@
           # Nadajemy sesje aby potem nie trzeba by³o wykonywaæ niepotrzebnych zapytañ do bazy
           $_SESSION['user']['id'] = $result['id'];
           $_SESSION['user']['login'] = $result['login'];
-          $_SESSION['user']['fist_name'] = $result['fist_name'];
+          $_SESSION['user']['first_name'] = $result['first_name'];
           $_SESSION['user']['last_name'] = $result['last_name'];
           $_SESSION['user']['account_type'] = $result['account_type'];
           $_SESSION['user']['password'] = $result['password'];
           $_SESSION['user']['mail'] = $result['mail'];
           $_SESSION['user']['class_id'] = $result['class_id'];
+          $_SESSION['user']['school_id'] = $result['school_id'];
 
           #print_r($_SESSION);
           return 1;
