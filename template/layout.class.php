@@ -1,11 +1,10 @@
 <?php
   session_start();
-  include_once('class/mysql.class.php');
   include_once('class/user.class.php');
-  include_once('class/admin.class.php');
   include_once('class/teacher.class.php');
   include_once('class/class.class.php');
-  include_once('class/student.class.php');
+  include_once('class/admin.class.php');
+  include_once('class/mysql.class.php');
 
   include_once('functions/text.inc.php');
 
@@ -98,22 +97,6 @@
                 </div>
                 <div>
                   <input type='submit' value='Utwórz'>
-                </div>
-              </form>";
-      }
-
-      static public function teacher_new_student_form(){
-        echo "<form action='#' method='post'>
-                <div>
-                  <label>Imi¿</label>
-                  <input type='text' name='user_first_name'>
-                </div>
-                <div>
-                  <label>Nazwisko</label>
-                  <input type='text' name='user_last_name'>
-                </div>
-                <div>
-                  <input type='submit' value='Dodaj'>
                 </div>
               </form>";
       }

@@ -8,7 +8,7 @@
       $user -> password = $_POST['user_password'];
 
       if(empty($_SESSION['user']['login'])){
-        if(empty($_SESSION['locked_to']) || $_SESSION['locked_to'] <= time()){ #jezeli ma zablokowana mozliwosc logowania po 5 probach na 15 min
+        if($_SESSION['locked_to'] <= time()){ #jezeli ma zablokowana mozliwosc logowania po 5 probach na 15 min
           if($user -> login()){
             $_SESSION['locked_to'] = 0; #po poprawnym zalogowaniu resetujemy blokade logowania
             header('Location:index.php');

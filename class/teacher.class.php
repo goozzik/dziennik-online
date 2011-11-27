@@ -16,22 +16,6 @@
         return 1;
       }
 
-      public function create_student($student){
-        global $db_name;
-        global $mysql;
-
-        $mysql -> query("INSERT INTO $db_name.users
-          (school_id, class_id, first_name, last_name, login, password, account_type)
-          VALUES ('$student->school_id',
-                  '$student->class_id',
-                  '$student->first_name',
-                  '$student->last_name',
-                  '$student->login',
-                  '$student->password',
-                  '$student->account_type')");
-        return 1;
-      }
-
       public function reset_parent_password(){
 
       }
