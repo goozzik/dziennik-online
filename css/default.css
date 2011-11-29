@@ -1,3 +1,5 @@
+/* defaults */
+
 body {
   text-align: center;
   min-width: 980px; }
@@ -19,3 +21,30 @@ form td { border: 1px black solid; }
 table { border-spacing: 0; }
 
 .big_label { text-align:center; }
+
+/* student_list.php */
+
+.student_list {
+  border: 2px solid black;
+}
+
+.student_list .no {
+  text-align: center;
+  width: 30px;
+  border-right: 1px solid black;
+}
+
+.student_list .fn {
+  width: 150px;
+  border-right: 1px solid black;
+  padding-left: 10px;
+}
+
+.student_list .ln {
+  width: 150px;
+  padding-left: 10px;
+}
+
+.student_list .first_tr td {
+  border-bottom: 2px solid black;
+}
