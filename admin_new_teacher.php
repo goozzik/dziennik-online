@@ -16,7 +16,7 @@
         echo 'Brak dostępu.';
       }
     } else {
-      layout::head();
+      layout::head_logged();
       layout::content();
       layout::admin_new_teacher_form();
       layout::div_end();

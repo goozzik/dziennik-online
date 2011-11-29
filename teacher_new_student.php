@@ -20,7 +20,7 @@
         echo 'Brak dostępu.';
       }
     } else {
-      layout::head();
+      layout::head_logged();
       layout::content();
       layout::teacher_new_student_form();
       layout::div_end();

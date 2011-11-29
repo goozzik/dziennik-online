@@ -2,10 +2,7 @@
   include_once('template/layout.class.php');
 
     if(empty($_SESSION['user']['login'])){
-      layout::head();
-      layout::content();
-      echo "Musisz być zalogowany.";
-      layout::div_end();
+      header('Location:index.php');
     } else {
       User::logout();
       header('Location:index.php');
