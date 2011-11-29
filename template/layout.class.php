@@ -29,7 +29,7 @@
 			echo '
 				<div id="menu">
 					<ul>
-						<li class="first"><a href="">Uczniowie</a></li><li><a href="">Oceny</a></li><li><a href="">Dokumenty</a></li><li><a href="">Plan lekcji</a></li><li><a href="">Nauczyciele</a></li><li><a href="">Raporty</a></li><li><a href="">Frekwencja</a></li><li><a href="">Ustawienia</a></li><li><a href="">Ustawienia klasy</a></li><li class="last"><a href="">Wyloguj</a></li>
+						<li class="first"><a href="student_list.php">Uczniowie</a></li><li><a href="">Oceny</a></li><li><a href="">Dokumenty</a></li><li><a href="">Plan lekcji</a></li><li><a href="">Nauczyciele</a></li><li><a href="">Raporty</a></li><li><a href="">Frekwencja</a></li><li><a href="">Ustawienia</a></li><li><a href="">Ustawienia klasy</a></li><li class="last"><a href="user_logout.php">Wyloguj</a></li>
 					</ul>
 				</div>';
 				
