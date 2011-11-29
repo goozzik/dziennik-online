@@ -3,6 +3,7 @@
 
     if(!empty($_POST['user_login'])){
       if(!empty($_SESSION['user']['login']) || $_SESSION['user']['account_type'] == 'admin'){
+	  
         $teacher = new Teacher();
         $teacher -> login = $_POST['user_login'];
         $teacher -> password = $_POST['user_password'];

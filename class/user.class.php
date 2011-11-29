@@ -54,7 +54,8 @@
     }
 
     public function logout(){
-      session_unset();
+      @session_unset();
+	  @session_destroy();
     }
 
     public function change_password(){
