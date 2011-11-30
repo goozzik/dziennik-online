@@ -1,0 +1,40 @@
+2011-11-30 13:59:44 Error: [MissingViewException] View file "/Users/goozzik/projects/dziennik/app/View/Users/index.ctp" is missing.
+#0 /Users/goozzik/projects/dziennik/lib/Cake/View/View.php(363): View->_getViewFileName(NULL)
+#1 /Users/goozzik/projects/dziennik/lib/Cake/Controller/Controller.php(900): View->render(NULL, NULL)
+#2 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(114): Controller->render()
+#3 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#4 /Users/goozzik/projects/dziennik/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2011-11-30 13:59:57 Error: [MissingViewException] View file "/Users/goozzik/projects/dziennik/app/View/Users/index.ctp" is missing.
+#0 /Users/goozzik/projects/dziennik/lib/Cake/View/View.php(363): View->_getViewFileName(NULL)
+#1 /Users/goozzik/projects/dziennik/lib/Cake/Controller/Controller.php(900): View->render(NULL, NULL)
+#2 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(114): Controller->render()
+#3 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#4 /Users/goozzik/projects/dziennik/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2011-11-30 14:12:25 Error: [MissingActionException] Action UsersController::zaloguj() could not be found.
+#0 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 /Users/goozzik/projects/dziennik/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2011-11-30 14:12:42 Error: [MissingActionException] Action UsersController::zaloguj() could not be found.
+#0 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 /Users/goozzik/projects/dziennik/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2011-11-30 14:31:03 Error: [MissingHelperException] Helper class JavascriptHelper could not be found.
+#0 /Users/goozzik/projects/dziennik/lib/Cake/View/View.php(577): HelperCollection->load('Javascript', Array)
+#1 /Users/goozzik/projects/dziennik/lib/Cake/View/View.php(359): View->loadHelpers()
+#2 /Users/goozzik/projects/dziennik/lib/Cake/Controller/Controller.php(900): View->render(NULL, NULL)
+#3 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(114): Controller->render()
+#4 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 /Users/goozzik/projects/dziennik/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2011-11-30 14:32:36 Error: [MissingHelperException] Helper class JavascriptHelper could not be found.
+#0 /Users/goozzik/projects/dziennik/lib/Cake/View/View.php(577): HelperCollection->load('Javascript', Array)
+#1 /Users/goozzik/projects/dziennik/lib/Cake/View/View.php(359): View->loadHelpers()
+#2 /Users/goozzik/projects/dziennik/lib/Cake/Controller/Controller.php(900): View->render(NULL, NULL)
+#3 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(114): Controller->render()
+#4 /Users/goozzik/projects/dziennik/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 /Users/goozzik/projects/dziennik/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
