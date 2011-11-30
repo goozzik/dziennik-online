@@ -6,23 +6,22 @@ class UsersController extends AppController {
 
   function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('login'); 
+    $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
   }
 
   function index() {
-      $this->set('users', $this->User->find('all'));
+    $this->set('users', $this->User->find('all'));
   }
 
   function login() {
- if ($this->request->is('post')) { 
-                if ($this->Auth->login()) { 
-                    $this->redirect($this->Auth->redirect()); 
-                } else { 
-                    $this->Session->setFlash('Your username/password 
-combination was incorrect'); 
-                } 
-                } 
-    
+    if ($this->request->is('post')) {
+      if ($this->Auth->login()) {
+          $this->redirect($this->Auth->redirect());
+      } else {
+          $this->Session->setFlash('Your username/password
+combination was incorrect');
+      }
+    }
   }
 
   function logout() {
