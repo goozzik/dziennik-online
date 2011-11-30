@@ -1,6 +1,5 @@
 <?php
 class UsersController extends AppController {
-  var $helpers = array ('Html','Form');
   var $name = 'Users';
   var $components = array('Auth');
 
