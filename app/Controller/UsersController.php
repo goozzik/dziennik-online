@@ -6,7 +6,7 @@ class UsersController extends AppController {
 
   function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
+    $this->Auth->allow('login'); 
   }
 
   function index() {
@@ -14,7 +14,15 @@ class UsersController extends AppController {
   }
 
   function login() {
-
+ if ($this->request->is('post')) { 
+                if ($this->Auth->login()) { 
+                    $this->redirect($this->Auth->redirect()); 
+                } else { 
+                    $this->Session->setFlash('Your username/password 
+combination was incorrect'); 
+                } 
+                } 
+    
   }
 
   function logout() {

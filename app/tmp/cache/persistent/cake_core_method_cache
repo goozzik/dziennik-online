@@ -1,2 +1,2 @@
-1322663628
-a:1:{s:4:"name";a:2:{i:958647470;s:10:"`dziennik`";i:3781846420;s:7:"`users`";}}
+1322681568
+a:2:{s:4:"name";a:12:{i:958647470;s:10:"`dziennik`";i:3781846420;s:7:"`users`";i:3939461121;s:11:"`User`.`id`";i:3245346837;s:17:"`User`.`username`";i:4184166033;s:17:"`User`.`password`";i:11836417;s:19:"`User`.`first_name`";i:115445489;s:18:"`User`.`last_name`";i:4181117650;s:21:"`User`.`account_type`";i:1390282901;s:13:"`User`.`mail`";i:313834211;s:17:"`User`.`class_id`";i:3404127129;s:18:"`User`.`school_id`";i:786993879;s:6:"`User`";}s:6:"fields";a:1:{s:32:"739b10d5cb8b709fb67ec3309a8ba94c";a:9:{i:0;s:11:"`User`.`id`";i:1;s:17:"`User`.`username`";i:2;s:17:"`User`.`password`";i:3;s:19:"`User`.`first_name`";i:4;s:18:"`User`.`last_name`";i:5;s:21:"`User`.`account_type`";i:6;s:13:"`User`.`mail`";i:7;s:17:"`User`.`class_id`";i:8;s:18:"`User`.`school_id`";}}}
