@@ -1,4 +1,5 @@
 <?php
 class AppController extends Controller {
-  var $helpers = array ('Html','Form','Menu','Session');
+  public $helpers = array('Html','Form','Menu','Session');
+  public $components = array('Auth','Session');
 }

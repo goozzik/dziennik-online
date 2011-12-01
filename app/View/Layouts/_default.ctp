@@ -15,7 +15,10 @@
       ?>
     </div>
     <div id='content'>
-      <?php echo $content_for_layout ?>
+      <?php
+        echo $this->Session->flash();
+        echo $content_for_layout;
+      ?>
     </div>
     <div id='footer'>
     </div>

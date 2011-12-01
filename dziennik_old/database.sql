@@ -102,30 +102,22 @@ CREATE TABLE users (
     password char(40),
     first_name varchar(32),
     last_name varchar(32),
-    account_type VARCHAR(255) NULL,
     mail VARCHAR(255) NULL,
-    class_id INTEGER UNSIGNED NULL,
     school_id INTEGER UNSIGNED NULL,
+    class_id INTEGER UNSIGNED NULL,
+    teacher_id INTEGER UNSIGNED NULL,
+    student BOOLEAN NOT NULL DEFAULT 0,
+    teacher BOOLEAN NOT NULL DEFAULT 0,
+    admin BOOLEAN NOT NULL DEFAULT 0,
+    superadmin BOOLEAN NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 
+INSERT INTO users (username, password, superadmin) VALUES ('superadmin', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1');
+INSERT INTO users (username, password, admin) VALUES ('admin', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1');
+INSERT INTO users (username, password, teacher, first_name, last_name, class_id) VALUES ('teacher', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Karolina', 'Olczak', '1');
+INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Jakub', 'Gorzelak', '1', '1');
+INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student2', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Arkadiusz', 'Dudek', '1', '1');
 
-/* Test user
-   login: test
-   password: test */
 
-INSERT INTO users (username, password) VALUES ('test', '098f6bcd4621d373cade4e832627b4f6');
-
-/* Test admin
-   login: test_admin
-   password: test_admin */
-
-INSERT INTO users (username, password, account_type) VALUES ('test_admin', '01b114342d7fc811669eb24dbe609cc4', 'admin');
-
-/* Test teacher
-   login: test_teacher
-   password: test_teacher */
-
-INSERT INTO users (username, password, account_type) VALUES ('test_teacher', '62397d32e4fa81fb1d753736aa714caf', 'teacher');
 INSERT INTO subjects (school_id, class_id, name) VALUES ('1', '1', 'Matematyka');
-INSERT INTO marks (user_id, class_id, subject_id, mark, description_id) VALUES ('1', '1', '1', '5', '1');
