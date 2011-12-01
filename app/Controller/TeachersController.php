@@ -1,7 +1,6 @@
 <?php
 class TeachersController extends AppController {
   public $name = 'Teachers';
-  public $uses = 'User';
 
   function beforeFilter() {
     if(!$this->Session->read('Auth.User.teacher')) {
@@ -11,12 +10,7 @@ class TeachersController extends AppController {
   }
 
   function students() {
-    $this->set('students', $this->User->find('all',
-      array('conditions' => array(
-        'User.student' => true,
-        'User.class_id' => $this->Session->read('Auth.User.class_id')
-      ))
-    ));
+    $this->set('students', $this->Teacher->Student->findAllByTeacherId($this->Session->read('Auth.User.id')));
   }
 
 }
