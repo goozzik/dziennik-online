@@ -116,9 +116,9 @@ CREATE TABLE users (
 INSERT INTO users (username, password, superadmin) VALUES ('superadmin', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1');
 INSERT INTO users (username, password, admin) VALUES ('admin', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1');
 INSERT INTO users (username, password, teacher, first_name, last_name, class_id) VALUES ('teacher', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Karolina', 'Olczak', '1');
-INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Jakub', 'Gorzelak', '1', '1');
-INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student2', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Arkadiusz', 'Dudek', '1', '1');
+INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Jakub', 'Gorzelak', '1', '3');
+INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student2', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Arkadiusz', 'Dudek', '1', '3');
 
 
 INSERT INTO subjects (school_id, class_id, name) VALUES ('1', '1', 'Matematyka');
-INSERT INTO descriptions (subject_id, description, name) VALUES ('1', 'Sprawdzian Planimetria', 'Matematyka');
+INSERT INTO descriptions (subject_id, description) VALUES ('1', 'Sprawdzian Planimetria');
