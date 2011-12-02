@@ -25,6 +25,7 @@ CREATE TABLE descriptions (
 CREATE TABLE subjects (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   school_id INTEGER UNSIGNED NULL,
+  teacher_id INTEGER UNSIGNED NULL,
   class_id INTEGER UNSIGNED NULL,
   name VARCHAR(255) NULL,
   PRIMARY KEY(id)
@@ -120,5 +121,5 @@ INSERT INTO users (username, password, student, first_name, last_name, class_id,
 INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student2', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Arkadiusz', 'Dudek', '1', '3');
 
 
-INSERT INTO subjects (school_id, class_id, name) VALUES ('1', '1', 'Matematyka');
+INSERT INTO subjects (school_id, teacher_id, class_id, name) VALUES ('1', '3', '1', 'Matematyka');
 INSERT INTO descriptions (subject_id, description) VALUES ('1', 'Sprawdzian Planimetria');
