@@ -2,5 +2,5 @@
 class School extends AppModel {
   public $name = 'School';
   public $hasOne = 'Admin';
-  public $hasMany = array('Class', 'Teacher', 'Student' => array('foreignKey' => 'id'));
+  public $hasMany = array('SchoolClass', 'Teacher', 'Student' => array('foreignKey' => 'id'));
 }

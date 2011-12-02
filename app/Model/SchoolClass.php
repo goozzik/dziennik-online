@@ -1,7 +1,8 @@
 <?php
 class SchoolClass extends AppModel {
-  public $name = 'Class';
+  public $name = 'SchoolClass';
   public $useTable = 'classes';
   public $belongsTo = array('School', 'Teacher');
-  public $hasMany = array('Student' => array('foreignKey' => 'id'));
+  public $hasMany = array('Student', 'Subject');
+  public $actsAs = array('Containable');
 }

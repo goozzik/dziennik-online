@@ -2,7 +2,7 @@
 App::import('Model','User');
 class Student extends User {
   public $name = 'Student';
-  public $belongsTo = array('Teacher', 'Class');
+  public $belongsTo = array('Teacher', 'SchoolClass' => array('foreignKey' => 'class_id'));
   public $useTable = 'users';
 
   function beforeValidate() {
