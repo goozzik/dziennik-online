@@ -32,11 +32,11 @@ CREATE TABLE subjects (
 
 CREATE TABLE marks (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  user_id INTEGER UNSIGNED NULL,
+  student_id INTEGER UNSIGNED NULL,
   class_id INTEGER UNSIGNED NULL,
   subject_id TINYINT UNSIGNED NULL,
-  mark TINYINT UNSIGNED NULL,
   description_id INTEGER UNSIGNED NULL,
+  mark TINYINT UNSIGNED NULL,
   PRIMARY KEY(id)
 );
 
@@ -121,3 +121,4 @@ INSERT INTO users (username, password, student, first_name, last_name, class_id,
 
 
 INSERT INTO subjects (school_id, class_id, name) VALUES ('1', '1', 'Matematyka');
+INSERT INTO descriptions (subject_id, description, name) VALUES ('1', 'Sprawdzian Planimetria', 'Matematyka');
