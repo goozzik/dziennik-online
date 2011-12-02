@@ -1,3 +1,55 @@
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+  $(function() {
+    var update = false;
+
+    $('.mark').live('click', function() {
+      var clone = $(this).clone();
+      var old_mark;
+      if(clone.text()) {
+        update = true;
+        old_mark = clone.text();
+        clone.text('');
+      }
+      if(update) {
+        clone.append('<input id="mark_active" name="data[Mark][mark]" type="text" value="' + old_mark + '">');
+      } else {
+        clone.append('<input id="mark_active" name="data[Mark][mark]" type="text">');
+      }
+      $(this).replaceWith(clone);
+      $('#' + clone.attr('id')).children().focus();
+    });
+
+    $('#mark_active').live('blur', function() {
+      var mark = $(this).val();
+      if(parseInt(mark)<1) { mark = '1'; }
+      if(parseInt(mark)>6) { mark = '6'; }
+      var parsed_id = $(this).parent().attr('id').split('-');
+      var data = 'data[Mark][mark]=' + mark +
+        '&data[Mark][student_id]=' + parsed_id[0] +
+        '&data[Mark][description_id]=' + parsed_id[1] +
+        '&data[Mark][subject_id]=' + <?php echo $this->params['subject_id']; ?> +
+        '&data[Mark][class_id]=' + <?php echo $this->Session->read('Auth.User.class_id'); ?>;
+      if(update) {
+        data = data + '&data[Mark][id]=' + parsed_id[2];
+        $.ajax({
+          type: 'POST',
+          url: '/marks/edit',
+          data: data,
+        });
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: '/marks/create',
+          data: data,
+        });
+      }
+      $(this).replaceWith(mark);
+    });
+
+  });
+</script>
+
 <h1>Oceny</h1>
 <table>
   <tr>
@@ -13,7 +65,8 @@
       <td><?php echo $student['Student']['first_name'] ?></td>
       <td><?php echo $student['Student']['last_name'] ?></td>
       <?php foreach ($descriptions as $description): ?>
-        <td><?php $mark = $mark_model->findByDescriptionIdAndStudentId($description['Description']['id'], $student['Student']['id']); echo $mark['Mark']['mark']?></td>
+        <?php $mark = $mark_model->findByDescriptionIdAndStudentId($description['Description']['id'], $student['Student']['id']); ?>
+        <td class="mark" id="<?php echo $student['Student']['id'] . '-' . $description['Description']['id'] . '-' . $mark['Mark']['id']; ?>"><?php echo $mark['Mark']['mark']?></td>
       <?php endforeach; ?>
     </tr>
   <?php endforeach; ?>
