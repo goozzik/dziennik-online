@@ -3,7 +3,10 @@ class StudentsController extends AppController {
   public $name = 'Students';
 
   function beforeFilter() {
-    #
+    if(!$this->Session->read('Auth.User.teacher')) {
+      $this->Session->setFlash('Brak dostępu.', 'flash_error');
+      $this->redirect($this->referer());
+    }
   }
 
   function create() {
