@@ -5,7 +5,7 @@ class DescriptionsController extends AppController {
   function beforeFilter() {
     $this->loadModel('Subject');
     $subject = $this->Subject->findByTeacherIdAndId($this->Session->read('Auth.User.class_id'), $this->request->data['Description']['subject_id']);
-    if(!($this->Session->read('Auth.User.teacher') && empty($subject))) {
+    if(!$this->Session->read('Auth.User.teacher') || empty($subject)) {
       $this->Session->setFlash('Brak dostępu.', 'flash_error');
       $this->redirect($this->referer());
     }
