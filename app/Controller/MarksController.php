@@ -3,7 +3,7 @@ class MarksController extends AppController {
   public $name = 'Marks';
 
   function beforeFilter() {
-    if(!($this->request->data['Mark']['class_id'] == $this->Session->read('Auth.User.class_id' && $this->Session->read('Auth.User.teacher')))) {
+    if(!($this->request->data['Mark']['class_id'] == $this->Session->read('Auth.User.class_id') && $this->Session->read('Auth.User.teacher'))) {
       $this->Session->setFlash('Brak dostępu.', 'flash_error');
       $this->redirect($this->referer());
     }
