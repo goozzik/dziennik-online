@@ -30,4 +30,8 @@ class TeachersController extends AppController {
     }
   }
 
+  function classes() {
+    $this->set('classes', $this->Teacher->SchoolClass->findAllByTeacherId($this->currentUser()));
+  }
+
 }
