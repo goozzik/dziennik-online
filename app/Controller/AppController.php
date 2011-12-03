@@ -10,4 +10,8 @@ class AppController extends Controller {
       return 0;
     }
   }
+
+  function currentUser() {
+    return $this->Session->read('Auth.User.id');
+  }
 }
