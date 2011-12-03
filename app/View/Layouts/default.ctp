@@ -7,9 +7,9 @@
   <body>
     <div id='menu'>
       <?php
-      if($this->Session->read('Auth.User.account_type') == 'teacher') {
+      if($this->Session->read('Auth.User.teacher')) {
         $this->Menu->teacher_menu();
-      } elseif($this->Session->read('Auth.User.account_type') == 'student') {
+      } elseif($this->Session->read('Auth.User.student')) {
         $this->Menu->student_menu();
       }
       ?>

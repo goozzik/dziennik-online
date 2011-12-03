@@ -4,7 +4,6 @@
         <th>Imię</th>
         <th>Nazwisko</th>
         <th>Login</th>
-        <th>Hasło</th>
     </tr>
 
     <?php foreach ($students as $student): ?>
@@ -12,7 +11,6 @@
         <td><?php echo $student['Student']['first_name']; ?></td>
         <td><?php echo $student['Student']['last_name']; ?></td>
         <td><?php echo $student['Student']['username']; ?></td>
-        <td><?php echo $student['Student']['password']; ?></td>
     </tr>
     <?php endforeach; ?>
 
@@ -26,4 +24,4 @@
   echo $this->Form->input('last_name');
   echo $this->Form->end('Dodaj');
   ?>
-</form>';
+</form>
