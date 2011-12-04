@@ -3,7 +3,7 @@ class MenuHelper extends AppHelper {
 
   function teacher_menu() {
     echo '<ul>
-            <li class="first"><a href="/teachers/students">Uczniowie</a></li>
+            <li class="first"><a href="/teacher/students">Uczniowie</a></li>
             <li><a href="/teacher/subjects">Oceny</a></li>
             <li><a href="">Dokumenty</a></li>
             <li><a href="">Plan lekcji</a></li>
@@ -11,7 +11,7 @@ class MenuHelper extends AppHelper {
             <li><a href="">Raporty</a></li>
             <li><a href="">Frekwencja</a></li>
             <li><a href="">Ustawienia</a></li>
-            <li><a href="/teachers/classes">Ustawienia klasy</a>
+            <li><a href="/teacher/classes">Ustawienia klasy</a>
             </li><li class="last"><a href="/users/logout">Wyloguj</a></li>
           </ul>';
   }

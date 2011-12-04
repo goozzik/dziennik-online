@@ -18,6 +18,7 @@
 
 <h1>Dodaj nowego ucznia</h1>
   <?php
+  echo $this->Session->flash('auth');
   echo $this->Form->create('Student', array('action' => 'create'));
   echo $this->Form->input('first_name');
   echo $this->Form->input('last_name');
