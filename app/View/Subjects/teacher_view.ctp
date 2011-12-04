@@ -49,7 +49,7 @@
         update = true;
         old_mark = clone.text();
         clone.text('');
-      }
+      } else { update = false; }
       if(update) {
         clone.append('<input id="mark_active" name="data[Mark][mark]" type="text" value="' + old_mark + '">');
       } else {
@@ -67,19 +67,19 @@
       var data = 'data[Mark][mark]=' + mark +
         '&data[Mark][student_id]=' + parsed_id[0] +
         '&data[Mark][description_id]=' + parsed_id[1] +
-        '&data[Mark][subject_id]=' + <?php echo $this->params['subject_id']; ?> +
+        '&data[Mark][subject_id]=' + <?php echo $this->params['id']; ?> +
         '&data[Mark][class_id]=' + <?php echo $this->Session->read('Auth.User.class_id'); ?>;
       if(update) {
         data = data + '&data[Mark][id]=' + parsed_id[2];
         $.ajax({
           type: 'POST',
-          url: '/marks/edit',
+          url: '/teacher/marks/edit',
           data: data,
         });
       } else {
         $.ajax({
           type: 'POST',
-          url: '/marks/create',
+          url: '/teacher/marks/create',
           data: data,
         });
       }

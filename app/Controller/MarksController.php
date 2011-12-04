@@ -3,32 +3,36 @@ class MarksController extends AppController {
   public $name = 'Marks';
 
   function beforeFilter() {
-    if(!($this->request->data['Mark']['class_id'] == $this->Session->read('Auth.User.class_id') && $this->Session->read('Auth.User.teacher'))) {
+    if ($this->params['teacher']) {
+      $this->isTeacherFilter();
+      if ($this->action == 'teacher_create') {
+        $this->isOwningClassFilter();
+      }
+    }
+  }
+
+  function isOwningClassFilter()
+  {
+    if($this->request->data['Mark']['class_id'] != $this->currentUser('class_id')) {
       $this->Session->setFlash('Brak dostępu.', 'flash_error');
       $this->redirect($this->referer());
     }
   }
 
-  function create() {
+  function teacher_create() {
     if ($this->request->is('post')) {
       $this->Mark->create();
-      if ($this->Mark->save($this->request->data)) {
-        # Hash it due its now maintained by ajax requests
-        #$this->Session->setFlash('Dodano ocenę.', 'flash_success');
-      }
+      $this->Mark->save($this->request->data);
     }
     $this->autoRender = false;
   }
 
-  function edit($id = null) {
+  function teacher_edit($id = null) {
     $this->Mark->id = $id;
     if ($this->request->is('post')) {
-      if ($this->Mark->save($this->request->data)) {
-        # Hash it due its now maintained by ajax requests
-        #$this->Session->setFlash('Ocena została zmieniona.', 'flash_success');
-        $this->autoRender = false;
-      }
+      $this->Mark->save($this->request->data);
     }
+    $this->autoRender = false;
   }
 
 }
