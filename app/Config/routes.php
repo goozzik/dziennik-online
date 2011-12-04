@@ -33,6 +33,7 @@
 
 
 	Router::connect('/teacher/subject/:id', array('teacher' => true, 'controller' => 'subjects', 'action' => 'view', 'id' => '[0-9]+'));
+	Router::connect('/teacher/subjects', array('teacher' => true, 'controller' => 'subjects', 'action' => 'index'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 

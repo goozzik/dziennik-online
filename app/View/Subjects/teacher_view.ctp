@@ -1,4 +1,43 @@
-<script type="text/javascript" src="/js/jquery.js"></script>
+<h1>Przedmioty</h1>
+<ul>
+  <?php foreach ($subjects as $subject): ?>
+    <li><?php echo $this->Html->link($subject['Subject']['name'], '/teacher/subject/' . $subject['Subject']['id']); ?></li>
+  <?php endforeach; ?>
+</ul>
+
+<h1>Oceny</h1>
+<table>
+  <tr>
+    <th>Imię</th>
+    <th>Nazwisko</th>
+    <?php foreach ($descriptions as $description): ?>
+      <th><?php echo $description['Description']['description']; ?> </th>
+    <?php endforeach; ?>
+  </tr>
+
+  <?php foreach ($students as $student): ?>
+    <tr>
+      <td><?php echo $student['Student']['first_name']; ?></td>
+      <td><?php echo $student['Student']['last_name']; ?></td>
+      <?php foreach ($descriptions as $description): ?>
+        <?php $mark = $mark_model->findByDescriptionIdAndStudentId($description['Description']['id'], $student['Student']['id']); ?>
+        <td class="mark" id="<?php echo $student['Student']['id'] . '-' . $description['Description']['id'] . '-' . $mark['Mark']['id']; ?>">
+          <?php echo $mark['Mark']['mark']?>
+        </td>
+      <?php endforeach; ?>
+    </tr>
+  <?php endforeach; ?>
+</table>
+
+<h1>Dodaj Nową ocenę</h1>
+  <?php
+    echo $this->Form->create('Description', array('action' => 'create'));
+    echo $this->Form->input('description', array('type' => 'text', 'label' => 'Opis'));
+    echo $this->Form->input('subject_id', array('value' => $this->params['subject_id'], 'type' => 'hidden') ); 
+    echo $this->Form->end('Dodaj');
+  ?>
+</form>
+
 <script type="text/javascript">
   $(function() {
     var update = false;
@@ -49,34 +88,3 @@
 
   });
 </script>
-
-<h1>Oceny</h1>
-<table>
-  <tr>
-    <th>Imię</th>
-    <th>Nazwisko</th>
-    <?php foreach ($descriptions as $description): ?>
-      <th><?php echo $description['Description']['description']; ?> </th>
-    <?php endforeach; ?>
-  </tr>
-
-  <?php foreach ($students as $student): ?>
-    <tr>
-      <td><?php echo $student['Student']['first_name'] ?></td>
-      <td><?php echo $student['Student']['last_name'] ?></td>
-      <?php foreach ($descriptions as $description): ?>
-        <?php $mark = $mark_model->findByDescriptionIdAndStudentId($description['Description']['id'], $student['Student']['id']); ?>
-        <td class="mark" id="<?php echo $student['Student']['id'] . '-' . $description['Description']['id'] . '-' . $mark['Mark']['id']; ?>"><?php echo $mark['Mark']['mark']?></td>
-      <?php endforeach; ?>
-    </tr>
-  <?php endforeach; ?>
-</table>
-
-<h1>Dodaj Nową ocenę</h1>
-  <?php
-  echo $this->Form->create('Description', array('action' => 'create'));
-  echo $this->Form->input('description', array('type' => 'text', 'label' => 'Opis'));
-  echo $this->Form->input('subject_id', array('value' => $this->params['subject_id'], 'type' => 'hidden') ); 
-  echo $this->Form->end('Dodaj');
-  ?>
-</form>

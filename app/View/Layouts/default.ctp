@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <?php echo $this->Html->css(array('default','menu')); ?>
-    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="/js/jquery.js" type="text/javascript"></script>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   </head>
   <body>

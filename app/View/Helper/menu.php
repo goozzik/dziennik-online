@@ -4,7 +4,7 @@ class MenuHelper extends AppHelper {
   function teacher_menu() {
     echo '<ul>
             <li class="first"><a href="/teachers/students">Uczniowie</a></li>
-            <li><a href="/teachers/subjects">Oceny</a></li>
+            <li><a href="/teacher/subjects">Oceny</a></li>
             <li><a href="">Dokumenty</a></li>
             <li><a href="">Plan lekcji</a></li>
             <li><a href="">Nauczyciele</a></li>

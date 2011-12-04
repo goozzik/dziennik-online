@@ -19,9 +19,15 @@ class SubjectsController extends AppController {
     }
   }
 
+  function teacher_index() {
+    $this->set('subjects', $this->Subject->findAllByClassId($this->currentUser('class_id')));
+  }
+
   function teacher_view() {
-    $this->set('descriptions', $this->Subject->Description->findAllBySubjectId($this->params['subject_id']));
-    $this->set('students', $this->Subject->Teacher->Student->findAllByTeacherId($this->currentUser('id')));
+    $this->set('subjects', $this->Subject->findAllByClassId($this->currentUser('class_id')));
+    $this->set('descriptions', $this->Subject->Description->findAllBySubjectId($this->params['id']));
+    $this->set('students', $this->Subject->Teacher->Student->findAllByClassIdAndStudent($this->currentUser('class_id'), '1'));
     $this->set('mark_model', $this->Subject->Description->Mark);
   }
+
 }
