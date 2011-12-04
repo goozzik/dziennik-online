@@ -3,15 +3,14 @@ class AppController extends Controller {
   public $helpers = array('Html','Form','Menu','Session');
   public $components = array('Auth','Session');
 
-  function isTeacher() {
-    if($this->Session->read('Auth.User.teacher')) {
-      return 1;
-    } else {
-      return 0;
-    }
+  function currentUser($param) {
+    return $this->Session->read('Auth.User.' . $param);
   }
 
-  function currentUser() {
-    return $this->Session->read('Auth.User.id');
+  function isTeacherFilter() {
+    if (!$this->currentUser('teacher')) {
+	  $this->Session->setFlash('Brak dostępu.', 'flash_error');
+	  $this->redirect($this->referer());
+	}
   }
 }
