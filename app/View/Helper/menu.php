@@ -11,7 +11,7 @@ class MenuHelper extends AppHelper {
             <li><a href="">Raporty</a></li>
             <li><a href="">Frekwencja</a></li>
             <li><a href="">Ustawienia</a></li>
-            <li><a href="/teacher/classes">Ustawienia klasy</a>
+            <li><a href="/teacher/school_classes">Ustawienia klasy</a>
             </li><li class="last"><a href="/users/logout">Wyloguj</a></li>
           </ul>';
   }
