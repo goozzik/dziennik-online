@@ -13,9 +13,13 @@ class SchoolClassesController extends AppController {
       $this->SchoolClass->create();
       if ($this->SchoolClass->save($this->request->data)) {
         $this->Session->setFlash('Dodano nową klasę.', 'flash_success');
-        $this->redirect(array('controller' => 'teachers', 'action' => 'classes'));
+        $this->redirect(array('controller' => 'school_classes', 'action' => 'index'));
       }
     }
+  }
+
+  function teacher_index() {
+    $this->set('classes', $this->SchoolClass->findAllByTeacherId($this->currentUser('id')));
   }
 
 }
