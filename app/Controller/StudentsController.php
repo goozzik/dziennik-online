@@ -3,13 +3,23 @@ class StudentsController extends AppController {
   public $name = 'Students';
 
   function beforeFilter() {
-    if(!$this->Session->read('Auth.User.teacher')) {
-      $this->Session->setFlash('Brak dostępu.', 'flash_error');
+    if ($this->params['teacher']) {
+      $this->isTeacherFilter();
+      if ($this->action == 'teacher_create') {
+        isClassSet();
+      }
+    }
+  }
+
+  function isClassSet()
+  {
+    if (!$this->currentUser('class_id')) {
+      $this->Session->setFlash('Najpierw ustaw swoją klasę. Możesz to zrobić <a href="/teacher/classes">tutaj</a>', 'flash_error');
       $this->redirect($this->referer());
     }
   }
 
-  function create() {
+  function teacher_create() {
     if ($this->request->is('post')) {
       $this->Student->create();
       if ($this->Student->save($this->request->data)) {
