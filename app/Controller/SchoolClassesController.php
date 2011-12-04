@@ -3,13 +3,12 @@ class SchoolClassesController extends AppController {
   public $name = 'SchoolClasses';
 
   function beforeFilter() {
-    if(!$this->isTeacher()) {
-      $this->Session->setFlash('Brak dostępu.', 'flash_error');
-      $this->redirect($this->referer());
+    if ($this->params['teacher']) {
+      $this->isTeacherFilter();
     }
   }
 
-  function create() {
+  function teacher_create() {
     if ($this->request->is('post')) {
       $this->SchoolClass->create();
       if ($this->SchoolClass->save($this->request->data)) {
