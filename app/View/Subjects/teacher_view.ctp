@@ -33,7 +33,7 @@
   <?php
     echo $this->Form->create('Description', array('action' => 'create'));
     echo $this->Form->input('description', array('type' => 'text', 'label' => 'Opis'));
-    echo $this->Form->input('subject_id', array('value' => $this->params['subject_id'], 'type' => 'hidden') ); 
+    echo $this->Form->input('subject_id', array('value' => $this->params['id'], 'type' => 'hidden') ); 
     echo $this->Form->end('Dodaj');
   ?>
 </form>

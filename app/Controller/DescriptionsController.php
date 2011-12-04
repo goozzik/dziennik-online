@@ -3,15 +3,24 @@ class DescriptionsController extends AppController {
   public $name = 'Descriptions';
 
   function beforeFilter() {
+    if ($this->params['teacher']) {
+      $this->isTeacherFilter();
+      if ($this->action == 'teacher_create') {
+        $this->isOwningSubjectFilter();
+      }
+    }
+  }
+
+  function isOwningSubjectFilter()
+  {
     $this->loadModel('Subject');
-    $subject = $this->Subject->findByTeacherIdAndId($this->Session->read('Auth.User.class_id'), $this->request->data['Description']['subject_id']);
-    if(!$this->Session->read('Auth.User.teacher') || empty($subject)) {
+    if (!$this->Subject->findByIdAndTeacherId($this->request->data['Description']['subject_id'], $this->currentUser('id'))) {
       $this->Session->setFlash('Brak dostępu.', 'flash_error');
       $this->redirect($this->referer());
     }
   }
 
-  function create() {
+  function teacher_create() {
     if ($this->request->is('post')) {
       $this->Description->create();
       if ($this->Description->save($this->request->data)) {
