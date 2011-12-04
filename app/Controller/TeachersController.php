@@ -9,10 +9,6 @@ class TeachersController extends AppController {
     }
   }
 
-  function students() {
-    $this->set('students', $this->Teacher->Student->findAllByClassId($this->Session->read('Auth.User.class_id')));
-  }
-
   function classes() {
     $this->set('classes', $this->Teacher->SchoolClass->findAllByTeacherId($this->currentUser()));
   }

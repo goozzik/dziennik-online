@@ -5,8 +5,8 @@ class StudentsController extends AppController {
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
-      if ($this->action == 'teacher_create') {
-        isClassSet();
+      if ($this->action == 'teacher_create' || $this->action == 'teacher_index') {
+        $this->isClassSet();
       }
     }
   }
@@ -27,6 +27,10 @@ class StudentsController extends AppController {
         $this->redirect(array('controller' => 'teachers', 'action' => 'students'));
       }
     }
+  }
+
+  function teacher_index() {
+    $this->set('students', $this->Teacher->Student->findAllByClassId($this->current_user('class_id')));
   }
 
 }
