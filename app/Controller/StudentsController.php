@@ -11,14 +11,6 @@ class StudentsController extends AppController {
     }
   }
 
-  function isClassSet()
-  {
-    if (!$this->currentUser('class_id')) {
-      $this->Session->setFlash('Najpierw ustaw swoją klasę. Możesz to zrobić <a href="/teacher/classes">tutaj</a>', 'flash_error');
-      $this->redirect($this->referer());
-    }
-  }
-
   function teacher_create() {
     if ($this->request->is('post')) {
       $this->Student->create();

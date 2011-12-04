@@ -8,6 +8,9 @@ class SubjectsController extends AppController {
       if ($this->action == 'teacher_view') {
         $this->isOwningSubjectFilter();
       }
+      if ($this->action == 'teacher_index') {
+        $this->isClassSet();
+      }
     }
   }
 

@@ -9,8 +9,16 @@ class AppController extends Controller {
 
   function isTeacherFilter() {
     if (!$this->currentUser('teacher')) {
-	  $this->Session->setFlash('Brak dostępu.', 'flash_error');
-	  $this->redirect($this->referer());
-	}
+  	  $this->Session->setFlash('Brak dostępu.', 'flash_error');
+  	  $this->redirect($this->referer());
+  	}
+  }
+
+  function isClassSet()
+  {
+    if (!$this->currentUser('class_id')) {
+      $this->Session->setFlash('Najpierw ustaw swoją klasę. Możesz to zrobić <a href="/teacher/classes">tutaj</a>', 'flash_error');
+      $this->redirect($this->referer());
+    }
   }
 }
