@@ -15,14 +15,14 @@ class StudentsController extends AppController {
     if ($this->request->is('post')) {
       $this->Student->create();
       if ($this->Student->save($this->request->data)) {
-        $this->Session->setFlash('Dodano nowego ucznia.', 'flash_success');
-        $this->redirect(array('controller' => 'teachers', 'action' => 'students'));
+        $this->Session->setFlash ('Dodano nowego ucznia.', 'flash_success');
+        $this->redirect($this->referer());
       }
     }
   }
 
   function teacher_index() {
-    $this->set('students', $this->Teacher->Student->findAllByClassId($this->current_user('class_id')));
+    $this->set('students', $this->Student->findAllByClassIdAndStudent($this->currentUser('class_id'), '1'));
   }
 
 }
