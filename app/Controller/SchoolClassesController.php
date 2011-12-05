@@ -5,6 +5,18 @@ class SchoolClassesController extends AppController {
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
+      if ($this->action == 'teacher_view') {
+        $this->isOwningClassFilter();
+      }
+    }
+  }
+
+  function isOwningClassFilter()
+  {
+    $class = $this->SchoolClass->findById($this->params['id']);
+    if($class['SchoolClass']['teacher_id'] != $this->currentUser('id')) {
+      $this->Session->setFlash('Brak dostępu.', 'flash_error');
+      $this->redirect($this->referer());
     }
   }
 
@@ -22,4 +34,7 @@ class SchoolClassesController extends AppController {
     $this->set('classes', $this->SchoolClass->findAllByTeacherId($this->currentUser('id')));
   }
 
+  function teacher_view() {
+    $this->set('class', $this->SchoolClass->findById($this->params['id']));
+  }
 }

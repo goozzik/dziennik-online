@@ -1,7 +1,8 @@
 <h1>Klasy</h1>
 <ul>
   <?php foreach ($classes as $class): ?>
-    <li><?php echo $class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook']; ?></li>
+    <li><?php echo $this->Html->link($class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook'], '/teacher/school_class/' . $class['SchoolClass']['id']); ?></li>
+
   <?php endforeach; ?>
 </ul>
 
@@ -12,4 +13,3 @@
     echo $this->Form->input('yearbook');
     echo $this->Form->end('Dodaj');
   ?>
-</form>
