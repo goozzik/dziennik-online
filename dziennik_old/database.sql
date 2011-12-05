@@ -98,20 +98,20 @@ CREATE TABLE time_tables (
 );
 
 CREATE TABLE users (
-    id integer UNSIGNED NOT NULL AUTO_INCREMENT,
-    username char(50),
-    password char(40),
-    first_name varchar(32),
-    last_name varchar(32),
-    mail VARCHAR(255) NULL,
-    school_id INTEGER UNSIGNED NULL,
-    class_id INTEGER UNSIGNED NULL,
-    teacher_id INTEGER UNSIGNED NULL,
-    student BOOLEAN NOT NULL DEFAULT 0,
-    teacher BOOLEAN NOT NULL DEFAULT 0,
-    admin BOOLEAN NOT NULL DEFAULT 0,
-    superadmin BOOLEAN NOT NULL DEFAULT 0,
-    PRIMARY KEY (id)
+  id integer UNSIGNED NOT NULL AUTO_INCREMENT,
+  username char(50),
+  password char(40),
+  first_name varchar(32),
+  last_name varchar(32),
+  mail VARCHAR(255) NULL,
+  school_id INTEGER UNSIGNED NULL,
+  class_id INTEGER UNSIGNED NULL,
+  teacher_id INTEGER UNSIGNED NULL,
+  student BOOLEAN NOT NULL DEFAULT 0,
+  teacher BOOLEAN NOT NULL DEFAULT 0,
+  admin BOOLEAN NOT NULL DEFAULT 0,
+  superadmin BOOLEAN NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
 );
 
 INSERT INTO users (username, password, superadmin) VALUES ('superadmin', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1');
@@ -121,5 +121,5 @@ INSERT INTO users (username, password, student, first_name, last_name, class_id,
 INSERT INTO users (username, password, student, first_name, last_name, class_id, teacher_id) VALUES ('student2', 'f1bab0da1e3744bc9c22d63be1af16f5e4f76fc4', '1', 'Arkadiusz', 'Dudek', '1', '3');
 
 
-INSERT INTO subjects (school_id, teacher_id, class_id, name) VALUES ('1', '3', '1', 'Matematyka');
-INSERT INTO descriptions (subject_id, description) VALUES ('1', 'Sprawdzian Planimetria');
+/*INSERT INTO subjects (school_id, teacher_id, class_id, name) VALUES ('1', '3', '1', 'Matematyka');
+INSERT INTO descriptions (subject_id, description) VALUES ('1', 'Sprawdzian Planimetria');*/

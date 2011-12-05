@@ -22,9 +22,16 @@ table { border-spacing: 0; }
 
 .big_label { text-align:center; }
 
+td {
+  border: 1px solid black;
+}
+
+th {
+  border: 1px solid black;
+}
 /* student_list.php */
 
-.student_list {
+/*.student_list {
   border: 2px solid black;
 }
 
@@ -47,4 +54,4 @@ table { border-spacing: 0; }
 
 .student_list .first_tr td {
   border-bottom: 2px solid black;
-}
+}*/

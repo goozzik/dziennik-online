@@ -21,6 +21,10 @@
 		padding-bottom:10px;
 	}
 
+	ul li {
+		display:inline;
+	}
+
 	div#menu ul li 
 	{
 		clear:both;

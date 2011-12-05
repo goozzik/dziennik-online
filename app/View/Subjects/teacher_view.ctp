@@ -29,7 +29,7 @@
   <?php endforeach; ?>
 </table>
 
-<h1>Dodaj Nową ocenę</h1>
+<h1>Dodaj nową ocenę</h1>
   <?php
     echo $this->Form->create('Description', array('action' => 'create'));
     echo $this->Form->input('description', array('type' => 'text', 'label' => 'Opis'));
