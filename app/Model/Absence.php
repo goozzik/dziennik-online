@@ -1,9 +1,8 @@
 <?php
-class Presence extends AppModel {
-  public $name = 'Presence';
+class Absence extends AppModel {
+  public $name = 'Absence';
   public $belongsTo = array('Student',
-                            'SchoolClass' => array('foreignKey' => 'class_id'),
-                            'School');
+                            'SchoolClass' => array('foreignKey' => 'class_id'));
 
   
   function findByDayAndStudentId($day, $student_id)
@@ -24,16 +23,16 @@ class Presence extends AppModel {
   function currentWeek()
   {
   	App::import('model','TimeTable');
-  	$time_table = new TimeTable();
     App::import('CakeSession', 'AuthComponent');
+  	$TimeTable = new TimeTable();
     $class_id = CakeSession::read('Auth.User.class_id');
   	$monday = $this->currentMonday();
-    for ($i=1; $i <= 5; $i++) { 
+    for ($i=1; $i<=5; $i++) { 
       $week[$i] = array(
-	    'day' => date('Y-m-d', $monday),
-	    'time_table' => $time_table->findByWeekDayAndClassId(date('N', $monday), $class_id)
-	  );
-	  $monday += 86400;
+	      'day' => date('Y-m-d', $monday),
+	      'time_table' => $TimeTable->findByWeekDayAndClassId(date('N', $monday), $class_id)
+	    );
+	    $monday += 86400;
     }
     return $week;
   }

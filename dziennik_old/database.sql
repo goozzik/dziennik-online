@@ -50,15 +50,13 @@ CREATE TABLE notes (
   PRIMARY KEY(id)
 );
 
-CREATE TABLE presences (
+CREATE TABLE absences (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   student_id INTEGER UNSIGNED NULL,
   class_id INTEGER UNSIGNED NULL,
   date DATE NULL,
   lesson INTEGER UNSIGNED NULL,
-  justification BOOL NULL,
-  escape BOOL NULL,
-  exemption BOOL NULL,
+  type ENUM('absence','escape','exemption','justification'),
   PRIMARY KEY(id)
 );
 
