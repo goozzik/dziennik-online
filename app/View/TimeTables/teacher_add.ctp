@@ -1,7 +1,7 @@
 
 <h1>Dodaj nowy dzień do planu lekcji</h1>
   <?php
-  echo $this->Form->create('TimeTables', array('action' => 'create'));
+  echo $this->Form->create('TimeTable', array('action' => 'create'));
   
   echo $this->Form->label('day','Dzień tygodnia');
   echo $this->Form->select('week_day', $days);
