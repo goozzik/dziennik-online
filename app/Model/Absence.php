@@ -4,10 +4,10 @@ class Absence extends AppModel {
   public $belongsTo = array('Student',
                             'SchoolClass' => array('foreignKey' => 'class_id'));
 
-  
-  function findByDayAndStudentId($day, $student_id)
-  {
-  	$this->query("SELECT * FROM presences LIMIT 2;");
+  function beforeValidate() {
+    App::import('CakeSession', 'AuthComponent');
+    $this->data['Absence']['class_id'] = CakeSession::read('Auth.User.class_id');
+    return 1;
   }
  
   function currentMonday()
@@ -35,5 +35,19 @@ class Absence extends AppModel {
 	    $monday += 86400;
     }
     return $week;
+  }
+
+  function normalizeType($type)
+  {
+    switch ($type) {
+      case 'absence':
+        return '|';
+      case 'escape':
+        return 'u';
+      case 'exemption':
+        return 'z';
+      case 'justification':
+        return '$';
+    }
   }
 }

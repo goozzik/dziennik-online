@@ -5,10 +5,34 @@ class AbsencesController extends AppController {
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
-      if ($this->action == 'teacher_create') {
-        $this->isOwningClassFilter();
+      if ($this->action == 'teacher_create' || $this->action == 'teacher_edit') {
+        $this->isOwningStudentFilter();
       }
     }
+  }
+
+  function isOwningStudentFilter()
+  {
+    if ($this->Absence->Student->findByClassIdAndId(currentUser('class_id'), $this->request->data['Absence']['student_id']) {
+      $this->Session->setFlash('Brak dostępu.', 'flash_error');
+      $this->redirect($this->referer());
+    }
+  }
+
+  function teacher_create() {
+    if ($this->request->is('post')) {
+      $this->Absence->create();
+      $this->Absence->save($this->request->data);
+    }
+    $this->autoRender = false;
+  }
+
+  function teacher_edit($id = null) {
+    $this->Absence->id = $id;
+    if ($this->request->is('post')) {
+      $this->Absence->save($this->request->data);
+    }
+    $this->autoRender = false;
   }
 
   function teacher_index() {

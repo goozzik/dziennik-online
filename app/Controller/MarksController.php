@@ -5,7 +5,7 @@ class MarksController extends AppController {
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
-      if ($this->action == 'teacher_create') {
+      if ($this->action == 'teacher_create' || $this->action == 'teacher_edit') {
         $this->isOwningClassFilter();
       }
     }
