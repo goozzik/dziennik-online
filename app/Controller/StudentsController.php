@@ -2,6 +2,8 @@
 class StudentsController extends AppController {
   public $name = 'Students';
 
+  
+
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
