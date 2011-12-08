@@ -13,7 +13,7 @@ class AbsencesController extends AppController {
 
   function isOwningStudentFilter()
   {
-    if ($this->Absence->Student->findByClassIdAndId(currentUser('class_id'), $this->request->data['Absence']['student_id']) {
+    if (!$this->Absence->Student->findByClassIdAndId($this->currentUser('class_id'), $this->request->data['Absence']['student_id'])) {
       $this->Session->setFlash('Brak dostępu.', 'flash_error');
       $this->redirect($this->referer());
     }
