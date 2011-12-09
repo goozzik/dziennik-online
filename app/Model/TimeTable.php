@@ -6,7 +6,8 @@ class TimeTable extends AppModel {
   public $actsAs = array('Containable'); 
   
   function beforeValidate() {
-  
+    App::import('CakeSession', 'AuthComponent');
+    $this->data['TimeTable']['class_id'] = CakeSession::read('Auth.User.class_id');
   }
   
 }

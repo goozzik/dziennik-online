@@ -64,7 +64,7 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => '',
+		'password' => '1234',
 		'database' => 'dziennik',
 		'prefix' => '',
 		//'encoding' => 'utf8',
