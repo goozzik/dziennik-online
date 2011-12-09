@@ -43,6 +43,7 @@ class TimeTablesController extends AppController {
           if (empty($this->request->data['TimeTable']['Lesson'][$i]['subject_id'])) { continue; }
           $this->TimeTable->Lesson->create();
           $this->request->data['TimeTable']['Lesson'][$i]['time_table_id'] = $this->TimeTable->id;
+          $this->request->data['TimeTable']['Lesson'][$i]['lesson_number'] = $i;
           $this->TimeTable->Lesson->save($this->request->data['TimeTable']['Lesson'][$i]);
         }
         $this->Session->setFlash('Dodano nowy dzień do planu lekcji.', 'flash_success');
