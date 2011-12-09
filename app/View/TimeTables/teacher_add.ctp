@@ -1,16 +1,15 @@
 <h1>Dodaj nowy dzień do planu lekcji</h1>
-  <?php
-    echo $this->Form->create('TimeTable', array('action' => 'create'));
+<?php
+  echo $this->Form->create('TimeTable', array('action' => 'create'));
+  echo '<div>';
+    echo $this->Form->label('week_day', 'Dzień');
+    echo $this->Form->select('week_day', $days);
+  echo '</div>';
+  for($i = 0; $i<10 ;$i++) {
     echo '<div>';
-      echo $this->Form->label('week_day', 'Dzień');
-      echo $this->Form->select('week_day', $days);
+      echo $this->Form->label('subject_id', $i . ' Lekcja');
+      echo $this->Form->select('Lesson][' . $i . '][subject_id', $lessons);
     echo '</div>';
-    for($i = 0; $i<10 ;$i++) {
-      echo '<div>';
-        echo $this->Form->label('subject_id', $i . ' Lekcja');
-        echo $this->Form->select('Lesson][' . $i . '][subject_id', $lessons);
-      echo '</div>';
-    }
-    echo $this->Form->end('Dodaj nowy dzień');
-  ?>
-</form>
+  }
+  echo $this->Form->end('Dodaj nowy dzień');
+?>

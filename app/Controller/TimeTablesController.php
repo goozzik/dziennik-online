@@ -1,6 +1,13 @@
 <?php
 class TimeTablesController extends AppController {
-   public $name = 'TimeTables';
+  public $name = 'TimeTables';
+
+  public function beforeFilter()
+  {
+    if ($this->params['teacher']) {
+      $this->isTeacherFilter();
+    }
+  }
 
   public function teacher_index(){
   }
