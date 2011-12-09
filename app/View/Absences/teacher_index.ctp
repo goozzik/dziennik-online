@@ -2,6 +2,7 @@
   <tr>
     <th colspan='2' rowspan='2'>
     <?php foreach ($week as $day): ?>
+      <?php if (empty($day['time_table'])) { continue; } ?>
       <th colspan='<?php echo count($day['time_table']['Lesson']); ?>'><?php echo $day['day']; ?></th>
     <?php endforeach ?>
   </tr>
