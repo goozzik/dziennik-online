@@ -12,4 +12,11 @@ class SchoolClass extends AppModel {
     $this->data['SchoolClass']['teacher_id'] = CakeSession::read('Auth.User.id');
     return 1;
   }
+
+  function afterSave() {
+    App::import('CakeSession', 'AuthComponent');
+    $this->Teacher->id = CakeSession::read('Auth.User.id');
+    $this->Teacher->set(array('class_id' => $this->id));
+    $this->Teacher->save();
+  }
 }
