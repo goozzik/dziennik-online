@@ -31,7 +31,7 @@ class TimeTablesController extends AppController {
       $subject[$value['Subject']['id']] = $value['Subject']['name'];
     }
     $this->set('days', $days_week);
-    $this->set('lessons', $subject);
+    $this->set('lessons', $subjects);
   }
 
   public function teacher_create(){
