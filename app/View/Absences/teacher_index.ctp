@@ -2,14 +2,12 @@
   <tr>
     <th colspan='2' rowspan='2'>
     <?php foreach ($week as $day): ?>
-      <?php if (empty($day['time_table'])) { continue; } ?>
       <th colspan='<?php echo count($day['time_table']['Lesson']); ?>'><?php echo $day['day']; ?></th>
     <?php endforeach ?>
   </tr>
 
   <tr> 
     <?php foreach ($week as $day): ?>
-      <?php if (empty($day['time_table'])) { continue; } ?>
       <?php foreach ($day['time_table']['Lesson'] as $lesson): ?>
         <td><?php echo $lesson['lesson_number'] ?></td>
       <?php endforeach ?>
@@ -21,7 +19,6 @@
       <td><?php echo $student['Student']['first_name']; ?></td>
       <td><?php echo $student['Student']['last_name']; ?></td>
       <?php foreach ($week as $day): ?>
-        <?php if (empty($day['time_table'])) { continue; } ?>
         <?php foreach ($day['time_table']['Lesson'] as $lesson): ?>
           <?php
             $absence = $Absence->findByLessonAndDateAndStudentIdAndClassId(

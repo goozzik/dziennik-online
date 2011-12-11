@@ -8,6 +8,16 @@ class AbsencesController extends AppController {
       if ($this->action == 'teacher_create' || $this->action == 'teacher_edit') {
         $this->isOwningStudentFilter();
       }
+      if ($this->action == 'teacher_index') {
+        $this->isTimeTableSetFilter();
+      }
+    }
+  }
+
+  function isTimeTableSetFilter() {
+    if (!$this->Absence->firstDay()) {
+      $this->Session->setFlash('Najpierw musisz uzupełnić plan lekcji. Możesz to zrobić tutaj.', 'flash_error');
+      $this->redirect('/teacher/time_tables/add');
     }
   }
 

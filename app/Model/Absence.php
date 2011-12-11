@@ -9,30 +9,45 @@ class Absence extends AppModel {
     $this->data['Absence']['class_id'] = CakeSession::read('Auth.User.class_id');
     return 1;
   }
- 
-  function currentMonday()
-  {
-    if (date('w') == 1) {
-      $monday = new DateTime();
-    } else {
-      $monday = strtotime('previous monday');
+
+  function intToDay($int) {
+    switch ($int) {
+      case 1: return 'Monday';
+      case 2: return 'Tuesday';
+      case 3: return 'Wednesday';
+      case 4: return 'Thursday';
+      case 5: return 'Friday';
+      case 6: return 'Saturday';
+      case 0: return 'Sunday';
     }
-    return $monday;
   }
 
-  function currentWeek()
-  {
-  	App::import('model','TimeTable');
+  # Used by currentWeek(), return's date of first day of current week.
+  function firstDay() {
+    App::import('model','TimeTable');
+    $TimeTable = new TimeTable();
     App::import('CakeSession', 'AuthComponent');
-  	$TimeTable = new TimeTable();
     $class_id = CakeSession::read('Auth.User.class_id');
-  	$monday = $this->currentMonday();
-    for ($i=1; $i<=5; $i++) { 
+    $first_day = $TimeTable->find('first', array('conditions' => array('TimeTable.class_id' => $class_id), 'order' => array('TimeTable.week_day ASC')));
+    if ($first_day) {
+      return strtotime('last ' . $this->intToDay($first_day['TimeTable']['week_day']));
+    } else {
+      return 0;
+    }
+  }
+
+  function currentWeek() {
+    App::import('model','TimeTable');
+    $TimeTable = new TimeTable();
+    App::import('CakeSession', 'AuthComponent');
+    $class_id = CakeSession::read('Auth.User.class_id');
+    $first_day = $this->firstDay($TimeTable, $class_id);
+    $time_tables = $TimeTable->find('all', array('conditions' => array('TimeTable.class_id' => $class_id), 'order' => array('TimeTable.week_day ASC')));
+    for ($i=0; $i<count($time_tables); $i++) {
       $week[$i] = array(
-	      'day' => date('Y-m-d', $monday),
-	      'time_table' => $TimeTable->findByWeekDayAndClassId(date('N', $monday), $class_id)
-	    );
-	    $monday += 86400;
+        'day' => date('Y-m-d', ($time_tables[$i]['TimeTable']['week_day'] - $time_tables['0']['TimeTable']['week_day']) * 86400 + $first_day),
+        'time_table' => $time_tables[$i]
+      );
     }
     return $week;
   }
