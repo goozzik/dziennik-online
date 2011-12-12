@@ -14,7 +14,7 @@ class TimeTablesController extends AppController {
 
   public function teacher_add(){
     $days_all = $this->TimeTable->findAllByClassId($this->currentUser('class_id'));
-    $subjects = $this->TimeTable->SchoolClass->Subject->findAllByClassId($this->currentUser('class_id'));
+    $_subjects = $this->TimeTable->SchoolClass->Subject->findAllByClassId($this->currentUser('class_id'));
     $days_week = array(
       1 => 'Poniedziałek',
       2 => 'Wtorek',
@@ -27,8 +27,8 @@ class TimeTablesController extends AppController {
     foreach($days_all as $day){
       unset($days_week[$day['TimeTable']['week_day']]);
     }
-    foreach($subjects as $value){
-      $subject[$value['Subject']['id']] = $value['Subject']['name'];
+    foreach($_subjects as $value){
+      $subjects[$value['Subject']['id']] = $value['Subject']['name'];
     }
     $this->set('days', $days_week);
     $this->set('lessons', $subjects);
