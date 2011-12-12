@@ -18,5 +18,6 @@ class SchoolClass extends AppModel {
     $this->Teacher->id = CakeSession::read('Auth.User.id');
     $this->Teacher->set(array('class_id' => $this->id));
     $this->Teacher->save();
+    CakeSession::write('Auth.User.class_id', $this->id); 
   }
 }
