@@ -36,12 +36,13 @@ class Absence extends AppModel {
     }
   }
 
-  function currentWeek() {
+  function currentWeek($first_day = null) {
     App::import('model','TimeTable');
     $TimeTable = new TimeTable();
     App::import('CakeSession', 'AuthComponent');
     $class_id = CakeSession::read('Auth.User.class_id');
-    $first_day = $this->firstDay($TimeTable, $class_id);
+    if ($first_day) { $first_day = strtotime($first_day); }
+    if ($first_day == null) { $first_day = $this->firstDay(); }
     $time_tables = $TimeTable->find('all', array('conditions' => array('TimeTable.class_id' => $class_id), 'order' => array('TimeTable.week_day ASC')));
     for ($i=0; $i<count($time_tables); $i++) {
       $week[$i] = array(
@@ -50,6 +51,10 @@ class Absence extends AppModel {
       );
     }
     return $week;
+  }
+
+  function lastWeekFirstDay($current_week) {
+    return date('Y-m-d', strtotime($current_week['0']['day']) - 7 * 86400);
   }
 
   function normalizeType($type)
