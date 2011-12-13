@@ -1,6 +1,7 @@
 <?php
 class TimeTablesController extends AppController {
   public $name = 'TimeTables';
+  public $helpers = array('TimeTable');
 
   public function beforeFilter()
   {
@@ -10,6 +11,7 @@ class TimeTablesController extends AppController {
   }
 
   public function teacher_index(){
+    $this->set('time_tables', $this->TimeTable->findAllByClassId($this->currentUser('class_id')));
   }
 
   public function teacher_add(){
