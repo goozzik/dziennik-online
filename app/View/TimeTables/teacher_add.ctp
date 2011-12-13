@@ -1,3 +1,4 @@
+<form action='/teacher/time_tables/index'><input type='submit' value='Powrót'/></form>
 <h1>Dodaj nowy dzień do planu lekcji</h1>
 <?php
   echo $this->Form->create('TimeTable', array('action' => 'create'));
