@@ -9,7 +9,7 @@
 <h1>Dodaj nową klasę</h1>
   <?php
     echo $this->Form->create('SchoolClass', array('controller' => 'school_classes', 'action' => 'create'));
-    echo $this->Form->input('name');
-    echo $this->Form->input('yearbook', array('value' => '1990'));
+    echo $this->Form->input('name', array('label' => 'Nazwa'));
+    echo $this->Form->input('yearbook', array('label' => 'Rocznik', 'value' => '1990'));
     echo $this->Form->end('Dodaj');
   ?>
