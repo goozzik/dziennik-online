@@ -50,7 +50,8 @@ class AbsencesController extends AppController {
     $week = $this->Absence->currentWeek();
     $this->set('week', $week);
     $this->set('Absence', $this->Absence);
-    #$this->set('last_week', $this->Absence->lastWeekFirstDay($week));
+    $this->set('last_week', $this->Absence->PreviousWeekFirstDay($week));
+    $this->set('next_week', $this->Absence->NextWeekFirstDay($week));
   }
 
   function teacher_view_week() {
@@ -58,7 +59,8 @@ class AbsencesController extends AppController {
     $week = $this->Absence->currentWeek($this->params['date']);
     $this->set('week', $week);
     $this->set('Absence', $this->Absence);
-    #$this->set('last_week', $this->Absence->lastWeekFirstDay($week));
+    $this->set('last_week', $this->Absence->PreviousWeekFirstDay($week));
+    $this->set('next_week', $this->Absence->NextWeekFirstDay($week));
   }
 
 }

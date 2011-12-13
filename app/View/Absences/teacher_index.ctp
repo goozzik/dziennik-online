@@ -1,3 +1,5 @@
+<a href='/teacher/absences/week/<?php echo $last_week; ?>'><< Poprzedni tydzień</a>
+<a href='/teacher/absences/week/<?php echo $next_week; ?>'>Następny tydzień >></a>
 <table>
   <tr>
     <th colspan='2' rowspan='2'>
@@ -6,7 +8,7 @@
     <?php endforeach ?>
   </tr>
 
-  <tr> 
+  <tr>
     <?php foreach ($week as $day): ?>
       <?php foreach ($day['time_table']['Lesson'] as $lesson): ?>
         <td><?php echo $lesson['lesson_number'] ?></td>

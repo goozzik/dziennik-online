@@ -1,3 +1,5 @@
+<a href='/teacher/absences/week/<?php echo $last_week; ?>'><< Poprzedni tydzień</a>
+<a href='/teacher/absences/week/<?php echo $next_week; ?>'>Następny tydzień >></a>
 <table>
   <tr>
     <th colspan='2' rowspan='2'>

@@ -53,8 +53,12 @@ class Absence extends AppModel {
     return $week;
   }
 
-  function lastWeekFirstDay($current_week) {
+  function PreviousWeekFirstDay($current_week) {
     return date('Y-m-d', strtotime($current_week['0']['day']) - 7 * 86400);
+  }
+
+  function NextWeekFirstDay($current_week) {
+    return date('Y-m-d', strtotime($current_week['0']['day']) + 7 * 86400);
   }
 
   function normalizeType($type)
