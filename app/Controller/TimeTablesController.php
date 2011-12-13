@@ -7,6 +7,17 @@ class TimeTablesController extends AppController {
   {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
+      if ($this->action == 'teacher_index') {
+        $this->isClassOwninigSubjects();
+      }
+    }
+  }
+
+  public function isClassOwninigSubjects() {
+    $class = $this->TimeTable->SchoolClass->findById($this->currentUser('class_id'));
+    if (empty($class['Subject'])) {
+      $this->Session->setFlash('Najpierw musisz dodać przedmioty.', 'flash_error');
+      $this->redirect('/teacher/subjects');
     }
   }
 

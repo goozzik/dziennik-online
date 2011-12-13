@@ -9,7 +9,7 @@
   for($i = 0; $i<10 ;$i++) {
     echo '<div>';
       echo $this->Form->label('subject_id', $i . ' Lekcja');
-      echo $this->Form->select('Lesson][' . $i . '][subject_id', $lessons, array('empty' => false));
+      echo $this->Form->select('Lesson][' . $i . '][subject_id', $lessons);
     echo '</div>';
   }
   echo $this->Form->end('Dodaj nowy dzień');
