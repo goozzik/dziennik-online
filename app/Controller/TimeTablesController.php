@@ -7,7 +7,7 @@ class TimeTablesController extends AppController {
   {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
-      if ($this->action == 'teacher_index') {
+      if ($this->action == 'teacher_index' || $this->action == 'teacher_add') {
         $this->isClassOwninigSubjects();
       }
     }
