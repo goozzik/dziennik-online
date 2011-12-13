@@ -35,7 +35,8 @@
 	Router::connect('/teacher/subject/:id', array('teacher' => true, 'controller' => 'subjects', 'action' => 'view', 'id' => '[0-9]+'));
 	Router::connect('/teacher/subjects', array('teacher' => true, 'controller' => 'subjects', 'action' => 'index'));
 	Router::connect('/teacher/school_class/:id', array('teacher' => true, 'controller' => 'school_classes', 'action' => 'view', 'id' => '[0-9]+'));
-  Router::connect('/teacher/absences/:date', array('teacher' => true, 'controller' => 'absences', 'action' => 'view_week'));
+  Router::connect('/teacher/absences/create', array('teacher' => true, 'controller' => 'absences', 'action' => 'create'));
+  Router::connect('/teacher/absences/week/:date', array('teacher' => true, 'controller' => 'absences', 'action' => 'view_week'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 
