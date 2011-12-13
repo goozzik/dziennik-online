@@ -9,10 +9,13 @@ class UsersController extends AppController {
   function login() {
     if ($this->request->is('post')) {
       if ($this->Auth->login()) {
-          $this->redirect($this->Auth->redirect());
+        $this->Session->setFlash('Zalogowano pomyślnie.');
+        if ($this->currentUser('teacher') && !$this->currentUser('class_id')) {
+          $this->redirect('/teacher/school_classes');
+        }
+        $this->redirect('/teacher/subjects');
       } else {
-          $this->Session->setFlash('Your username/password
-combination was incorrect');
+        $this->Session->setFlash('Twóje hasło/login jest niepoprawne.');
       }
     }
   }
