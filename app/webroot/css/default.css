@@ -11,8 +11,10 @@ body {
   margin-right: auto;
 }
 
-form div {
+form {
   width: 300px;
+}
+form div {
   margin-bottom: 1em;
 }
 
