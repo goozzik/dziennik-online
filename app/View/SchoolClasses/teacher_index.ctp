@@ -1,10 +1,12 @@
-<h1>Klasy</h1>
-<ul>
-  <?php foreach ($classes as $class): ?>
-    <li><?php echo $this->Html->link($class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook'], '/teacher/school_class/' . $class['SchoolClass']['id']); ?></li>
+<?php if (!empty($classes)): ?>
+  <h1>Klasy</h1>
+  <ul>
+    <?php foreach ($classes as $class): ?>
+      <li><?php echo $this->Html->link($class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook'], '/teacher/school_class/' . $class['SchoolClass']['id']); ?></li>
 
-  <?php endforeach; ?>
-</ul>
+    <?php endforeach; ?>
+  </ul>
+<?php endif ?>
 
 <h1>Dodaj nową klasę</h1>
   <?php
