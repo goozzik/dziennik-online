@@ -13,4 +13,15 @@ class Subject extends AppModel {
     $this->data['Subject']['teacher_id'] = CakeSession::read('Auth.User.id');
     return 1;
   }
+
+  function findAllByClassIdAndNoTeacher($class_id) {
+    $_subjects = $this->SubjectTeacher->Subject->findAllByClassId($class_id);
+    $subjects = array();
+    foreach ($_subjects as $subject) {
+      if (!$subject['SubjectTeacher']['id']) {
+        $subjects[$subject['Subject']['id']] = $subject['Subject']['name'];
+      }
+    }
+    return $subjects;
+  }
 }
