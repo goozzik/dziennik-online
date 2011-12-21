@@ -5,6 +5,9 @@ class SubjectTeachersController extends AppController {
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();	
+      if ($this->action == 'teacher_index' || $this->action == 'teacher_create') {
+        $this->isClassSet();
+      }
     }
   }
 
