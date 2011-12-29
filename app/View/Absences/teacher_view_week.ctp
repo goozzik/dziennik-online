@@ -1,14 +1,18 @@
-<a href='/teacher/absences/week/<?php echo $last_week; ?>'><< Poprzedni tydzień</a>
+<link rel="stylesheet" type="text/css" href="/css/absences.css" />
+<div class="navigation">
+<a href='/teacher/absences/week/<?php echo $last_week; ?>'><< Poprzedni tydzień</a> | 
 <a href='/teacher/absences/week/<?php echo $next_week; ?>'>Następny tydzień >></a>
+</div>
 <table>
   <tr>
-    <th colspan='2' rowspan='2'>
+    <th colspan='2' rowspan='1'>
     <?php foreach ($week as $day): ?>
       <th colspan='<?php echo count($day['time_table']['Lesson']); ?>'><?php echo $day['day']; ?></th>
     <?php endforeach ?>
   </tr>
 
   <tr> 
+  <td><strong>Imię</strong></td><td><strong>Nazwisko</strong></td>
     <?php foreach ($week as $day): ?>
       <?php foreach ($day['time_table']['Lesson'] as $lesson): ?>
         <td><?php echo $lesson['lesson_number'] ?></td>
@@ -38,6 +42,11 @@
     </tr>
   <?php endforeach; ?>
 </table>
+
+<div class="navigation">
+<a href='/teacher/absences/week/<?php echo $last_week; ?>'><< Poprzedni tydzień</a> | 
+<a href='/teacher/absences/week/<?php echo $next_week; ?>'>Następny tydzień >></a>
+</div>
 
 <script type="text/javascript">
   $(function() {

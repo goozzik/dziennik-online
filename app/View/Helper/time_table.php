@@ -9,7 +9,7 @@ class TimeTableHelper extends AppHelper {
       case 4: return 'Czwartek';
       case 5: return 'Piątek';
       case 6: return 'Sobota';
-      case 0: return 'Niedziela';
+      case 7: return 'Niedziela';
     }
   }
 

@@ -1,0 +1,15 @@
+input[type="text"]#absence_active {
+	width:14px !important;
+	font-size:8pt;
+}
+
+div.navigation {
+	width:280px;
+	height:30px;
+	margin:0 auto;
+	padding:0;
+}
+
+table th.day {
+	padding-left:0px;
+}

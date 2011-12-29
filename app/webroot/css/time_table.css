@@ -1,0 +1,22 @@
+div.time_tables{
+	width:100%;
+	float:left;
+	
+	margin-bottom:15px;
+	padding-bottom:10px;
+	
+	border-bottom:2px dashed #ddd;
+}
+
+div.time_table_day {
+	padding:10px;
+	padding-top:0px;
+	float:left;
+	min-height:100px;
+	min-width:100px;
+	border-left:1px dashed #eee;
+	
+}
+div.time_table_day  table.day {
+	min-width:200px;
+}
