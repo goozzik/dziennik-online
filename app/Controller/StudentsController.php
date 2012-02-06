@@ -28,8 +28,10 @@ class StudentsController extends AppController {
   }
   
   function teacher_view(){
-  
-	$this->set('student', $this->Student->findAllByClassIdAndId($this->currentUser('class_id'),$this->params['pass'][0]));
+	$student = $this->Student->findAllByClassIdAndId($this->currentUser('class_id'),$this->params['pass'][0]);
+	$this->set('student', $student);
+	
+	$this->set('province', $this->returnProvinceName($student[0]['Student']['province']));
 	$this->set('user_id', $this->params['pass'][0]);
   }
   

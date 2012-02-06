@@ -43,5 +43,9 @@ class AppController extends Controller {
     }
   }
   
+  public function returnProvinceName($province_id){
+	return $this->province[$province_id];
+  }
+  
   
 }

@@ -61,8 +61,8 @@ jQuery.fn.CheckNumber = function(){
 	  <tr><td>Kod pocztowy:</td><td><?php echo $this->Form->input('zip_code',array('label' => ''));?></td></tr>
 	  <tr><td>Województwo:</td><td><?php echo $this->Form->select('province',$province);?></td></tr>
 	  <tr><td>Telefon kontaktowy:</td><td><?php echo $this->Form->input('telephone',array('label' => ''));?></td></tr>
-	  <tr><td>Zajęcia indywidualne:</td><td><?php echo $this->Form->input('telephone',array('label' => ''));?></td></tr>
-	  <tr><td>Zamieszkuje w internacie:</td><td><?php echo $this->Form->input('telephone',array('label' => ''));?></td></tr>
+	  <tr><td>Zajęcia indywidualne:</td><td align="center"><?php echo $this->Form->radio('individual',array('0' => 'Nie','1' => 'Tak'),array('value'=>'0','legend'=>false));?></td></tr>
+	  <tr><td>Zamieszkuje w internacie:</td><td align="center"><?php echo $this->Form->radio('boarding_school',array('0' => 'Nie','1' => 'Tak'),array('value'=>'0','legend'=>false));?></td></tr>
 	  <tr><td colspan="2" align="right"><?php echo $this->Form->end('Dodaj');?></td></tr>
   </table>
 </form>
