@@ -11,7 +11,10 @@
           </tr>
         <?php endforeach; ?>
       </table>
-      <form action='/teacher/time_tables/edit/<?php echo $time_table['TimeTable']['id']; ?>' style='margin-top:10px;'><input type='submit' value='Edytuj'/></form>
+	  <a href="/teacher/time_tables/delete/<?php echo $time_table['TimeTable']['id']; ?>"><button class="edit">Edytuj</button></a><br/>
+	  <a href="/teacher/time_tables/delete/<?php echo $time_table['TimeTable']['id']; ?>"><button class="delete">Usuń!</button></a>
+      <!--<form action='/teacher/time_tables/edit/<?php echo $time_table['TimeTable']['id']; ?>' style='margin-top:10px;'><input type='submit' style="width:100px;" value='Edytuj'/></form>
+      <form action='/teacher/time_tables/delete/<?php echo $time_table['TimeTable']['id']; ?>' style='margin-top:10px;'><input type='submit' style="width:100px;height:25px;padding:0;" value='Usuń'/></form>-->
     </div>
   <?php endforeach; ?>
 </div>

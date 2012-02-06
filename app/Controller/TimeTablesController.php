@@ -64,6 +64,17 @@ class TimeTablesController extends AppController {
       }
     }
   }
+  
+   function teacher_delete()
+   {
+
+    if($this->TimeTable->delete($this->params['pass'][0])){
+		$this->redirect($this->referer());
+	} else {
+		$this->redirect($this->referer());
+	}
+
+   }
 
 }
 ?>

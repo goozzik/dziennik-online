@@ -20,3 +20,15 @@ div.time_table_day {
 div.time_table_day  table.day {
 	min-width:200px;
 }
+
+button.delete {
+	width:100px;
+	height:20px;
+	padding:0px;
+	margin-top:5px;
+}
+button.edit {
+	width:100px;
+	padding:0px;
+	height:24px;	
+}

@@ -4,9 +4,11 @@
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/menu.css">
     <script src="/js/jquery.js" type="text/javascript"></script>
+    <script src="/js/jquery.qtip.min.js" type="text/javascript"></script>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   </head>
   <body>
+	<div class="site">
     <div id='menu'>
           <?php
             if($this->Session->read('Auth.User.teacher')) {
@@ -24,6 +26,7 @@
       ?>
     </div>
 	<div class="footer">
+	</div>
 	</div>
   <body>
 </html>

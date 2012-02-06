@@ -1,12 +1,19 @@
 body {
 	/*padding-top:40px;*/
-	width:980px;
+	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10pt;
 	color: #555;
-	margin: 0;
+	
+}
+
+div.site {
+	width:980px;	
+	margin: 0 auto;
 	background: #fff;
-	_text-align: center;
+	text-align: left;
+	background-color:white;
+	
 }
 
 h1 {
@@ -57,8 +64,11 @@ input[type=text]:focus, input[type=password]:focus  {
 }
 
 /* SELECT */
+input[type=text],input[type=password] {
+	min-width:160px;
+}
 select {
-	min-width:140px;
+	min-width:160px;
 }
 
 /* SUBMIT */
@@ -105,7 +115,51 @@ input[type=submit]:active, input[type=button]:active, button:active{
 	background: -webkit-linear-gradient(top, #9D9D9C, #6B6B6B);
 }
 
+
 div.container {
 	padding: 0px 10px 10px 10px;
+	margin:0 auto;
+	text-align:left;
+	width:980px;
+	background-color:white;
+}
+input#mark_active{
+	width:25px !important;
+	
+}
+th.left ,td.left {
+	text-align:left;
+}
+th.right,td.right {
+	text-align:right;
+}
+th.center,td.center {
+	text-align:center;
+}
+
+td.border_b {
+	 border-bottom:1px dashed #eee;
+}
+
+span.title {
+	font-size:12pt;
+	font-weight:bold;
+	padding:0;
 	margin:0;
+}
+
+a.manage {
+	margin-left:10px;
+	font-size:8pt;
+	font-weight:normal;
+}
+
+div.spacer {
+	clear:both;
+	height:1px;
+	background:url('/img/spacer_line.png');
+	width:500px;
+	margin-top:5px;
+	margin-bottom:5px;
+	
 }

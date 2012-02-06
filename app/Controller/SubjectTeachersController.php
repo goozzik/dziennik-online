@@ -14,6 +14,7 @@ class SubjectTeachersController extends AppController {
   function teacher_index() {
     $this->set('teachers', $this->SubjectTeacher->findAllByClassId($this->currentUser('class_id')));
     $this->set('subjects', $this->SubjectTeacher->Subject->findAllByClassIdAndNoTeacher($this->currentUser('class_id')));
+	#print_r($this->SubjectTeacher->Subject->findAllByClassIdAndNoTeacher($this->currentUser('class_id')));
   }
 
   function teacher_create() {
