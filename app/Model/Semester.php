@@ -1,7 +1,7 @@
 <?php
 class Semestr extends AppModel {
   public $name = 'Semester';
-  public $belongsTo = array('SchoolClass');
+  public $belongsTo = array('SchoolClass' => array('foreignKey' => 'class_id'));
   public $actsAs = array('Containable');
 
   function beforeValidate() {

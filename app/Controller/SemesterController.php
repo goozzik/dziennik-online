@@ -33,7 +33,7 @@ class SemesterController extends AppController {
   function teacher_index() {
     #$this->set('classes', $this->Semester->findAllByTeacherId($this->currentUser('id')));
 	echo '123';
-	print_r($this->Semester->findById('1'));
+	#print_r($this->Semester->findById('1'));
   }
 
   function teacher_view() {
