@@ -1,9 +1,7 @@
 <?php
-class SchoolClass extends AppModel {
-  public $name = 'SchoolClass';
-  public $useTable = 'classes';
-  public $belongsTo = array('School', 'Teacher');
-  public $hasMany = array('Student', 'Subject', 'SubjectTeacher', 'Semester');
+class Semestr extends AppModel {
+  public $name = 'Semester';
+  public $belongsTo = array('SchoolClass');
   public $actsAs = array('Containable');
 
   function beforeValidate() {
