@@ -22,32 +22,16 @@ class Absence extends AppModel {
     }
   }
 
-  # Used by currentWeek(), return's date of first day of current week.
-  function firstDay() {
+  function currentMonth() {
     App::import('model','TimeTable');
     $TimeTable = new TimeTable();
     App::import('CakeSession', 'AuthComponent');
     $class_id = CakeSession::read('Auth.User.class_id');
-    $first_day = $TimeTable->find('first', array('conditions' => array('TimeTable.class_id' => $class_id), 'order' => array('TimeTable.week_day ASC')));
-    if ($first_day) {
-      return strtotime('last ' . $this->intToDay($first_day['TimeTable']['week_day']));
-    } else {
-      return 0;
-    }
-  }
-
-  function currentWeek($first_day = null) {
-    App::import('model','TimeTable');
-    $TimeTable = new TimeTable();
-    App::import('CakeSession', 'AuthComponent');
-    $class_id = CakeSession::read('Auth.User.class_id');
-    if ($first_day) { $first_day = strtotime($first_day); }
-    if ($first_day == null) { $first_day = $this->firstDay(); }
-    $time_tables = $TimeTable->find('all', array('conditions' => array('TimeTable.class_id' => $class_id), 'order' => array('TimeTable.week_day ASC')));
-    for ($i=0; $i<count($time_tables); $i++) {
+    $current_date = getdate();
+    $first_monday = date('Y-m-d', strtotime('First monday of this month'));
+    for ($i=0; $i<4; $i++) {
       $week[$i] = array(
-        'day' => date('Y-m-d', ($time_tables[$i]['TimeTable']['week_day'] - $time_tables['0']['TimeTable']['week_day']) * 86400 + $first_day),
-        'time_table' => $time_tables[$i]
+        'date' => date('Y-m-d', 604800 * $i + strtotime($first_monday)),
       );
     }
     return $week;
@@ -59,19 +43,5 @@ class Absence extends AppModel {
 
   function NextWeekFirstDay($current_week) {
     return date('Y-m-d', strtotime($current_week['0']['day']) + 7 * 86400);
-  }
-
-  function normalizeType($type)
-  {
-    switch ($type) {
-      case 'absence':
-        return '|';
-      case 'escape':
-        return 'u';
-      case 'exemption':
-        return 'z';
-      case 'justification':
-        return '$';
-    }
   }
 }
