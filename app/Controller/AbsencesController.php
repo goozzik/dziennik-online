@@ -9,7 +9,8 @@ class AbsencesController extends AppController {
         $this->isOwningStudentFilter();
       }
       if ($this->action == 'teacher_index') {
-        $this->isTimeTableSetFilter();
+        //$this->isTimeTableSetFilter();
+        true;
       }
     }
   }
