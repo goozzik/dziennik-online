@@ -32,10 +32,10 @@
           $absence_html_id = $student['Student']['id'] . '_' . $week['date'] ;
         ?>
 
-        <td class='absence' id='<?php echo $absence_html_id . '_required_' . $absence['Absence']['id']?>'><?php echo $absence['Absence']['required']; ?></td>
-        <td class='absence' id='<?php echo $absence_html_id . '_justified_' . $absence['Absence']['id']?>'><?php echo $absence['Absence']['justified']; ?></td>
-        <td  class='absence' id='<?php echo $absence_html_id . '_unexcused_' . $absence['Absence']['id']?>'><?php echo $absence['Absence']['unexcused']; ?></td>
-        <td  class='absence' id='<?php echo $absence_html_id . '_late_' . $absence['Absence']['id']?>'><?php echo $absence['Absence']['late']; ?></td>
+        <td class='absence' id='<?php echo $absence_html_id . '_required'?>'><?php echo $absence['Absence']['required']; ?></td>
+        <td class='absence' id='<?php echo $absence_html_id . '_justified'?>'><?php echo $absence['Absence']['justified']; ?></td>
+        <td  class='absence' id='<?php echo $absence_html_id . '_unexcused'?>'><?php echo $absence['Absence']['unexcused']; ?></td>
+        <td  class='absence' id='<?php echo $absence_html_id . '_late'?>'><?php echo $absence['Absence']['late']; ?></td>
       <?php endforeach; ?>
     </tr>
   <?php endforeach; ?>
@@ -48,23 +48,14 @@
 
 <script type="text/javascript">
   $(function() {
-    var update = false;
     var parsed_id;
 
     $('.absence').live('click', function() {
       var clone = $(this).clone();
       parsed_id = $(this).attr('id').split('_');
-      var old_absence;
-      if(parsed_id[3]) {
-        update = true;
-        old_absence = clone.text();
-        clone.text('');
-      } else { update = false; }
-      if(update) {
-        clone.append('<input id="absence_active" type="text" value="' + old_absence + '">');
-      } else {
-        clone.append('<input id="absence_active" type="text">');
-      }
+      old_absence = clone.text();
+      clone.text('');
+      clone.append('<input id="absence_active" type="text" value="' + old_absence + '">');
       $(this).replaceWith(clone);
       $('#' + clone.attr('id')).children().focus();
     });
@@ -72,22 +63,13 @@
     $('#absence_active').live('blur', function() {
       var value = $(this).val();
       var data = 'data[Absence][student_id]=' + parsed_id[0] +
-        '&data[Absence][date]=' + parsed_id[1] +
-        '&data[Absence][' + parsed_id[2] + ']=' + value;
-      if(update) {
-        data = data + '&data[Absence][id]=' + parsed_id[3];
-        $.ajax({
-          type: 'POST',
-          url: '/teacher/absences/edit',
-          data: data,
-        });
-      } else {
-        $.ajax({
-          type: 'POST',
-          url: '/teacher/absences/create',
-          data: data,
-        });
-      }
+      '&data[Absence][date]=' + parsed_id[1] +
+      '&data[Absence][' + parsed_id[2] + ']=' + value;
+      $.ajax({
+        type: 'POST',
+        url: '/teacher/absences/update',
+        data: data,
+      });
       $(this).replaceWith(value);
     });
 

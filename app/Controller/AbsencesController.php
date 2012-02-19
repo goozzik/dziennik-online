@@ -30,17 +30,14 @@ class AbsencesController extends AppController {
     }
   }
 
-  function teacher_create() {
+  function teacher_update() {
     if ($this->request->is('post')) {
-      $this->Absence->create();
-      $this->Absence->save($this->request->data);
-    }
-    $this->autoRender = false;
-  }
-
-  function teacher_edit($id = null) {
-    $this->Absence->id = $id;
-    if ($this->request->is('post')) {
+      $absence = $this->Absence->findByDateAndStudentId($this->request->data['Absence']['date'], $this->request->data['Absence']['student_id']);
+      if ($absence) {
+        $this->Absence->id = $absence['Absence']['id'];
+      } else {
+        $this->Absence->create();
+      }
       $this->Absence->save($this->request->data);
     }
     $this->autoRender = false;
