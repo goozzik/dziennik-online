@@ -1,0 +1,117 @@
+table.marks {
+	border: 1px solid #eee;
+	border-collapse:collapse;
+	border-spacing:0px;
+	border-radius:5px;
+}
+
+table.marks th.title_mark, td.title_mark{
+	
+	padding-top:3px;
+	padding-left:3px;
+	padding-right:3px;
+	padding-bottom:3px;
+	width:25px;
+	height:25px;
+	overflow:hidden;	
+}
+
+table.marks .bg1 {
+	background:url('../../img/header_1.gif');
+	border:1px solid #8857ff;
+	color:#230c5c;
+	text-shadow: -1px 1px 0px #c1a7ff;
+	
+}
+
+table.marks .bg2 {
+	background:url('../../img/header_2.gif');
+	border:1px solid #ceff57;
+	color:#5e8208;
+	text-shadow: -1px 1px 0px #efffc9;
+}
+
+table.marks .bg3 {
+	background:url('../../img/header_3.gif');
+	border: 1px solid #fe577f;
+	color:#7e0723;
+	text-shadow: -1px 1px 0px #ffb6c7;
+}
+
+table.marks .bg4 {
+	background:url('../../img/header_4.gif');
+	border:1px solid #ffc057;
+	color:#ac6b00;
+	text-shadow: -1px 1px 0px #ffc057;
+}
+
+table.marks .bg5 {
+	background:url('../../img/header_5.gif');
+	border:1px solid #57c0ff;
+	color:#044b75;
+	text-shadow: -1px 1px 0px #afe1ff;
+}
+
+table.marks .bg6 {
+	background:url('../../img/header_6.gif');
+	border:1px solid #e1e1e1;
+	color:#6a6a6a;
+	text-shadow: -1px 1px 0px #f6f6f6;
+}
+
+table.marks .bg6:hover {
+	background:url('../../img/header_2.gif');
+	border:1px solid #ceff57;
+	color:#5e8208;
+	text-shadow: -1px 1px 0px #efffc9;
+}
+
+table.marks td.student_record {
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-right:6px;
+	background-color:#f8f8f8;
+}
+
+table.marks td.student_record_ {
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-right:6px;
+	background-color:#fff;
+}
+table.marks td.mark {
+	padding:5px;
+	text-align:center;
+	width:28px;
+	height:28px;
+}
+
+table.marks td.gray{
+	background-color:#f8f8f8;
+}
+
+table.marks td.white{
+	background-color:#fff;
+}
+
+table.marks td.mark_average{
+	padding:5px;
+	text-align:center;
+	width:28px;
+	height:28px;
+	background-color:#f8f8f8;
+}
+
+
+
+table.marks td.mark:hover,td.mark_:hover {
+	/*#border:1px dotted #7fa214;	*/
+	background-color:#eee;
+}
+
+input[type="text"].mark_active{
+	min-width:23px !important;
+	width:23px !important;
+	text-align:center;
+	
+}

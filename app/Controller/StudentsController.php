@@ -1,4 +1,5 @@
 <?php
+App::import('Model','Student');
 class StudentsController extends AppController {
   public $name = 'Students';
 
@@ -23,14 +24,14 @@ class StudentsController extends AppController {
 
   function teacher_index() {
     $this->set('students', $this->Student->findAllByClassIdAndStudent($this->currentUser('class_id'),'1',null,'Student.last_name ASC'));
-    $this->set('province', $this->Student->provinces());
+    $this->set('province', $this->Student->provinces);
     $this->set('school_id', CakeSession::read('Auth.User.school_id'));
   }
 
   function teacher_view(){
     $student = $this->Student->findAllByClassIdAndId($this->currentUser('class_id'),$this->params['pass'][0]);
     $this->set('student', $student);
-    $this->set('province', $this->Stundent->provinceName($student[0]['Student']['province']));
+    $this->set('province', $this->Student->provinceName($student[0]['Student']['province']));
     $this->set('user_id', $this->params['pass'][0]);
   }
 

@@ -3,11 +3,39 @@
   <table>
   
     <?php foreach ($classes as $class): ?>
-	<?php print_r($class['Semester']);?>
-      <?php echo '<tr><td>> '.$this->Html->link($class['SchoolClass']['year'].''.$class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook'], '/teacher/school_class/' . $class['SchoolClass']['id']) .'</td></tr>'; ?>
 
+      <?php echo '<tr><td>> '.$class['SchoolClass']['year'].''.$class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook'].'</td></tr>'; ?>
+		
+		<!-- WYŚWIETLANIE SEMESTRÓW DLA DANEJ KLASY -->
+		
+		<?php if (!empty($class['Semester'])):?>
+			<?php $new_semester = 1; ?>
+		
+			
+			<?php foreach ($class['Semester'] as $semester):?>
+			
+				<?php ++$new_semester; ?>
+				
+				<?php if($semester_actual == $semester['id']):?>
+				
+				<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $semester['semester'] .' - aktualnie wybrany'; ?></td></tr>
+				
+				<?php else: ?>
+					<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $this->Html->link($semester['semester'],'/teacher/semesters/view/' . $class['SchoolClass']['id'].'/'.$semester['id']);?></td></tr>
+				<?php endif ?>
+			
+			<?php endforeach;?>
+				<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $this->Html->link('Dodaj nowy semestr','/teacher/semesters/create/' . $class['SchoolClass']['id'].'/'.$new_semester);?></td></tr>
+		
+		<?php else: ?>
+			<?php $new_semester = 1; ?>
+			<tr><td style="padding-left:20px;">+ <?php echo $this->Html->link('Dodaj nowy semestr','/teacher/semesters/create/' . $class['SchoolClass']['id'].'/'.$new_semester);?></td></tr>
+		<?php endif ?>
+		<!-- KONIEC WYŚWIETLANIE SEMESTRÓW DLA DANEJ KLASY -->
+		
     <?php endforeach; ?>
   </table><br/><br/>
+  
 <?php endif ?>
 
 <span class="title">Dodaj nową klasę</span>

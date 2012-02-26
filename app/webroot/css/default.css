@@ -6,6 +6,11 @@ body {
 	color: #555;
 	
 }
+div.logo {
+	margin-top:0px;
+	margin-left:7px;
+	margin-bottom:10px;
+}
 
 div.site {
 	width:980px;	
@@ -16,6 +21,18 @@ div.site {
 	
 }
 
+div.footer {
+	border-top:1px solid #eee;
+	width:100%;	
+	clear:both;
+	text-align:right;
+	padding-top:3px;
+}
+
+div.footer span.informations {
+	font-size:8pt;
+}
+
 h1 {
 
 	font-size:12pt;
@@ -24,15 +41,24 @@ h1 {
 }
 
 
-a {
+a, .link {
 	text-decoration: none;
 	color:#555;
 	font-weight:bold;
+	cursor:pointer;
 }
 
-a:hover {
+a:hover, .link:hover {
 	text-decoration: underline;
 	color:#555;
+	cursor:pointer;
+}
+
+.link_delete {	
+	color:#660000;
+	font-size:8pt;
+	font-weight:normal;
+	margin-left:10px
 }
 
 table {
@@ -123,10 +149,7 @@ div.container {
 	width:980px;
 	background-color:white;
 }
-input#mark_active{
-	width:25px !important;
-	
-}
+
 th.left ,td.left {
 	text-align:left;
 }

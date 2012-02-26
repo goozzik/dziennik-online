@@ -16,7 +16,7 @@
 			<td class="border_b"><?php echo $this->Html->link($subject['Subject']['name'], '/teacher/subject/' . $subject['Subject']['id']); ?></td>
 			<td class="border_b"><?php echo $this->Html->link('Pokaż oceny', '/teacher/subject/' . $subject['Subject']['id'], array('class'=>'manage')); ?></td>
 			<td class="border_b"><?php echo $this->Html->link('Edytuj', '/teacher/subjects/edit/' . $subject['Subject']['id'], array('class'=>'manage')); ?></td>
-			<td class="border_b"><?php echo $this->Html->link('Usuń', '/teacher/subjects/delete/' . $subject['Subject']['id'], array('class'=>'manage')); ?></td>
+			<td class="border_b"><?php echo '<span onclick="windowYesNo(\'/teacher/subjects/delete/' . $subject['Subject']['id'] . '\')" class="link link_delete">Usuń</span>'; ?></td>
 		</tr>
 	 
   <?php $i++; 
@@ -30,5 +30,5 @@
 	<tr><td>Nazwa</td><td><?php echo $this->Form->input('name', array('label' => ''));?></td></tr>
 	<tr><td colspan="2" class="right"><?php echo $this->Form->end('Dodaj');?></td></tr>
 	
-	
+</table>
 	

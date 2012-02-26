@@ -3,8 +3,11 @@
     <!--<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">-->
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/js/jquery.confirm/jquery.confirm.css">
     <script src="/js/jquery.js" type="text/javascript"></script>
     <script src="/js/jquery.qtip.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.confirm/jquery.confirm.js" type="text/javascript"></script>
+    <script src="/js/prompt.js" type="text/javascript"></script>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   </head>
   <body>
@@ -26,6 +29,15 @@
       ?>
     </div>
 	<div class="footer">
+	
+		<?php
+            if($this->Session->read('Auth.User.teacher')) {
+              $this->Menu->footer();
+            } elseif($this->Session->read('Auth.User.student')) {
+              $this->Menu->footer();
+            }
+          ?>
+		
 	</div>
 	</div>
   <body>

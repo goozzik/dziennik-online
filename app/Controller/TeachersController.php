@@ -38,8 +38,9 @@ class TeachersController extends AppController {
       $this->Teacher->save($this->request->data);
       // This should also update other fields in session, TODO
       $this->Session->write('Auth.User.class_id', $this->request->data['Teacher']['class_id']); 
+      $this->Session->write('Auth.User.semester_id', $this->request->data['Teacher']['semester_id']); 
       $this->Session->setFlash('Zapisano pomyślnie.', 'flash_success');
-      $this->redirect($this->referer());
+      $this->redirect(array('controller' => 'school_classes', 'action' => 'index'));
     }
   }
 }

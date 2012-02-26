@@ -40,7 +40,7 @@ class SubjectsController extends AppController {
     if ($this->request->is('post')) {
       $this->Subject->create();
       if ($this->Subject->save($this->request->data)) {
-        $this->Session->setFlash('Dodano nową klasę.', 'flash_success');
+        $this->Session->setFlash('Dodano nowy przedmiot.', 'flash_success');
         $this->redirect($this->referer());
       }
     }

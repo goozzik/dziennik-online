@@ -6,8 +6,8 @@ class Student extends User {
   public $belongsTo = array('Teacher', 'SchoolClass' => array('foreignKey' => 'class_id'));
   public $useTable = 'users';
 
-  public function provinces() {
-    return array(
+  //public function provinces() {
+   public $provinces =  array(
       0 => 'dolno¿l¿skie',
       1 => 'kujawsko-pomorskie',
       2 => 'lubelskie',
@@ -25,7 +25,9 @@ class Student extends User {
       14 => 'wielkopolskie',
       15 => 'zachodniopomorskie'
     );
-  }
+	
+	
+  //}
 
   public function provinceName($province_id) {
     return $this->provinces[$province_id];

@@ -22,7 +22,7 @@ class TimeTablesController extends AppController {
   }
 
   public function teacher_index(){
-    $this->set('time_tables', $this->TimeTable->findAllByClassId($this->currentUser('class_id')));
+    $this->set('time_tables', $this->TimeTable->findAllByClassId($this->currentUser('class_id'),array(), array('TimeTable.`week_day`' => 'asc')));
   }
 
   public function teacher_add(){

@@ -11,8 +11,8 @@
 	  <tr><td>Kod pocztowy:</td><td><?php echo $student[0]['Student']['zip_code'];?></td></tr>
 	  <tr><td>Województwo:</td><td><?php echo $province;?></td></tr>
 	  <tr><td>Telefon kontaktowy:</td><td><?php echo $student[0]['Student']['telephone'];?></td></tr>
-	  <tr><td>Zajęcia indywidualne:</td><td><?php echo $student[0]['Student']['individual'];?></td></tr>
-	  <tr><td>Zamieszkuje w internacie:</td><td><?php echo $student[0]['Student']['boarding_school'];?></td></tr>
+	  <tr><td>Zajęcia indywidualne:</td><td><?php if($student[0]['Student']['individual'] == 1){echo 'Tak';}else{ echo 'Nie';};?></td></tr>
+	  <tr><td>Zamieszkuje w internacie:</td><td><?php if($student[0]['Student']['boarding_school'] == 1){echo 'Tak';}else{ echo 'Nie';};?></td></tr>
   </table>
 
 <?php endif?>

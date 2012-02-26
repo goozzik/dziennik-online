@@ -11,14 +11,19 @@ div.time_tables{
 div.time_table_day {
 	padding:10px;
 	padding-top:0px;
+	
 	float:left;
-	min-height:100px;
-	min-width:100px;
+	
+	min-height:310px;
+	min-width:174px;
 	border-left:1px dashed #eee;
+	
 	
 }
 div.time_table_day  table.day {
 	min-width:200px;
+	min-height:500px;
+	margin-bottom:10px;
 }
 
 button.delete {
@@ -31,4 +36,19 @@ button.edit {
 	width:100px;
 	padding:0px;
 	height:24px;	
+}
+
+td.lesson_number {
+	width:10px;
+	padding:3px;
+	padding-left:5px;
+	padding-right:5px;
+	border-right:1px dashed #eee;
+	border-bottom:1px solid #eee;
+	text-align:left;
+}
+
+td.lesson_name {
+	border-bottom:1px solid #eee;
+	min-width:174px;
 }

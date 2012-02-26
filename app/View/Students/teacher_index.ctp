@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/css/students.css">
+
 <script type="text/javascript">
 jQuery.fn.CheckNumber = function(){
 	$(this).keydown(function(e)
@@ -23,13 +25,13 @@ jQuery.fn.CheckNumber = function(){
 <?php if (empty($students)): ?>
   <ul><li>Nie masz żadnych uczniów. Możesz dodać ucznia poprzez poniższy formularz.</li></ul>
 <?php else: ?>
-  <table>
+  <table class="students">
     <tr>
-      <th class="left">l.p</th>
-      <th class="left">Imię</th>
-      <th class="left">Nazwisko</th>
-      <th class="left">Login</th>
-      <th class="left">Zarządzaj</th>
+      <th class="center students_top bg6">l.p</th>
+      <th class="center students_top bg6">Imię</th>
+      <th class="center students_top bg6">Nazwisko</th>
+      <th class="center students_top bg6">Login</th>
+      <th class="center students_top bg6">Zarządzaj</th>
     </tr>
 	<?php $i=1;?>
     <?php foreach ($students as $student): ?>
@@ -38,14 +40,22 @@ jQuery.fn.CheckNumber = function(){
         <td class="border_b" style="padding-right:15px;"><?php echo $student['Student']['first_name']; ?></td>
         <td class="border_b" style="padding-right:15px;"><?php echo $student['Student']['last_name']; ?></td>
         <td class="border_b" style="padding-right:15px;"><?php echo $student['Student']['username']; ?></td>
-        <td class="border_b" style="padding-right:15px;">
+        <td class="border_b" style="padding-right:10px;">
 			<a href="students/view/<?php echo $student['Student']['id'];?>" class="manage" style="margin:0">Więcej</a>
 			<a href="students/edit/<?php echo $student['Student']['id'];?>" class="manage">Edytuj</a>
-			<a href="/teacher/students/delete/<?php echo $student['Student']['id']; ?>" style="color:#660000" class="manage">Usuń!</a>
+			<?php echo '<span onclick="windowYesNo(\'/teacher/students/delete/' . $student['Student']['id'] . '\')" class="link link_delete" style="">Usuń</span>'; ?>
+			
 		</td>
       </tr>
 	  <?php $i++;?>
     <?php endforeach; ?>
+	<tr>
+      <th class="center students_top bg6">l.p</th>
+      <th class="center students_top bg6">Imię</th>
+      <th class="center students_top bg6">Nazwisko</th>
+      <th class="center students_top bg6">Login</th>
+      <th class="center students_top bg6">Zarządzaj</th>
+    </tr>
   </table>
 <?php endif ?>
 <br/>
