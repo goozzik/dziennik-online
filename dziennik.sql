@@ -37,6 +37,15 @@ CREATE TABLE IF NOT EXISTS `absences` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
 
+CREATE TABLE IF NOT EXISTS `reports_absences` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `student_id` int(10) unsigned DEFAULT NULL,
+  `class_id` int(10) unsigned DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `percentage` int(6) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
+
 --
 -- Zrzut danych tabeli `absences`
 --
