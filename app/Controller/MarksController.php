@@ -19,17 +19,14 @@ class MarksController extends AppController {
     }
   }
 
-  function teacher_create() {
+  function teacher_update() {
     if ($this->request->is('post')) {
-      $this->Mark->create();
-      $this->Mark->save($this->request->data);
-    }
-    $this->autoRender = false;
-  }
-
-  function teacher_edit($id = null) {
-    $this->Mark->id = $id;
-    if ($this->request->is('post')) {
+      $mark = $this->Mark->findByDescriptionIdAndStudentId($this->request->data['Mark']['description_id'], $this->request->data['Mark']['student_id']);
+      if ($mark) {
+        $this->Mark->id = $mark['Mark']['id'];
+      } else {
+        $this->Mark->create();
+      }
       $this->Mark->save($this->request->data);
     }
     $this->autoRender = false;
