@@ -7,4 +7,6 @@ class Teacher extends User {
     'SchoolClass', 'Subject');
   public $useTable = 'users';
   public $actsAs = array('Containable');
+  
+ 
 }

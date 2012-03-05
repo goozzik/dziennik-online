@@ -18,6 +18,8 @@ class SubjectTeachersController extends AppController {
   }
 
   function teacher_create() {
+  $this->set('teachers', $this->SubjectTeacher->findAllByClassId($this->currentUser('class_id')));
+  $this->set('subjects', $this->SubjectTeacher->Subject->findAllByClassIdAndNoTeacher($this->currentUser('class_id')));
     if ($this->request->is('post')) {
       $this->SubjectTeacher->create();
       if ($this->SubjectTeacher->save($this->request->data)) {
@@ -26,5 +28,22 @@ class SubjectTeachersController extends AppController {
       }
     }
   }
+  
+  function teacher_delete()
+   {
+   $this->set('teachers', $this->SubjectTeacher->findAllByClassId($this->currentUser('class_id')));
+   $this->set('subjects', $this->SubjectTeacher->Subject->findAllByClassIdAndNoTeacher($this->currentUser('class_id')));
+  
+   
+    if($this->SubjectTeacher->delete($this->params['pass'][0])){
+		#$this->redirect('http://www.example.com');
+		header('Location:/teacher/subject_teachers');
+		
+	} else {
+		#$this->redirect('http://www.example.com');
+		header('Location:/teacher/subject_teachers');
+	} 
+
+   }
 
 }

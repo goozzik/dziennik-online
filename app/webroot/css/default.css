@@ -97,6 +97,12 @@ select {
 	min-width:160px;
 }
 
+textarea {
+	min-width:160px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+
 /* SUBMIT */
 input[type=submit], input[type=button], button{
 	height:30px;

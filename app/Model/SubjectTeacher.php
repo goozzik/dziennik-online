@@ -8,4 +8,26 @@ class SubjectTeacher extends AppModel {
     $this->data['SubjectTeacher']['class_id'] = CakeSession::read('Auth.User.class_id');
     return 1;
   }
+  
+    var $validate = array(
+    'first_name' => array(
+        'rule'=>array('minLength', 1), 
+		'required' => true,
+        'message'=>'Imie jest wymagane' ), 
+	'last_name' => array(
+        'rule'=>array('minLength', 1), 
+		'required' => true,
+        'message'=>'Nazwisko jest wymagane' ),
+    'mail' => array(
+        'rule'=>'email', 
+        'message'=>'Podaj poprawny adres e-mail' ),
+	'subject_id' => array(
+        'rule'=>array('numeric'), 
+		'required' => true,
+        'message'=>'Podaj poprawny adres e-mail' ),
+    'telephone' => array(
+        'rule'=>'alphaNumeric', 
+		'required' => false,
+        'message'=>'Podaj numer telefonu składający się wyłącznie z cyfr')
+); 
 }

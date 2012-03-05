@@ -3,15 +3,15 @@
 <table>
 <tr>
       <th align="left">Przedmiot</th>
-      <th style="padding-right:20px;">Imię oraz nazwisko</th>
-	  <th style="padding-right:20px;">więcej</th>
+      <th style="padding-right:30px;">Imię oraz nazwisko</th>
+	  <th>więcej informacji</th>
 	  <th>usuń</th>
 </tr>
   <?php foreach ($teachers as $teacher): ?>
     <tr>
       <td><a href="/teacher/subject/<?php echo $teacher['Subject']['id']?>"><?php echo $teacher['Subject']['name']?></a></td>
       <td><?php echo $teacher['SubjectTeacher']['first_name'] . ' ' . $teacher['SubjectTeacher']['last_name']; ?></td>
-	  <td><a href="/teacher/subject_teachers/view/<?php echo $teacher['SubjectTeacher']['id']?>">więcej</a></td>
+	  <td><a href="/teacher/subject_teachers/view/<?php echo $teacher['SubjectTeacher']['id']?>">usuń</a></td>
 	  <td><a href="/teacher/subject_teachers/delete/<?php echo $teacher['SubjectTeacher']['id']?>">usuń</a></td>
     </tr>
   <?php endforeach ?>
