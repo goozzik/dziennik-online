@@ -3,9 +3,9 @@
 <table>
 <tr>
       <th align="left">Przedmiot</th>
-      <th style="padding-right:20px;">Imię oraz nazwisko</th>
-	  <th style="padding-right:20px;">więcej</th>
-	  <th>usuń</th>
+      <th align="left" style="padding-right:20px;min-width:150px;">Imię oraz nazwisko</th>
+	  <th align="left" style="padding-right:20px;">więcej</th>
+	  <th align="left">usuń</th>
 </tr>
   <?php foreach ($teachers as $teacher): ?>
     <tr>

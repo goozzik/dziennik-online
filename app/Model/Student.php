@@ -8,20 +8,20 @@ class Student extends User {
 
   //public function provinces() {
    public $provinces =  array(
-      0 => 'dolno¿l¿skie',
+      0 => 'dolnoÅ›lÄ…skie',
       1 => 'kujawsko-pomorskie',
       2 => 'lubelskie',
       3 => 'lubuskie',
-      4 => '¿ódzkie',
-      5 => 'ma¿opolskie',
+      4 => 'Å‚Ã³dzkie',
+      5 => 'maÅ‚opolskie',
       6 => 'mazowieckie',
       7 => 'opolskie',
       8 => 'podkarpackie',
       9 => 'podlaskie',
       10 => 'pomorskie',
-      11 => '¿l¿skie',
-      12 => '¿wi¿tokrzyskie',
-      13 => 'warmi¿sko-mazurskie',
+      11 => 'Å›lÄ…skie',
+      12 => 'Å›wiÄ™tokrzyskie',
+      13 => 'warmiÅ„sko-mazurskie',
       14 => 'wielkopolskie',
       15 => 'zachodniopomorskie'
     );
@@ -47,7 +47,7 @@ class Student extends User {
       $check = $Student->find('first',array('conditions' => array('Student.username' => $this->data['Student']['username'])));
       $the_same_logins++;
     }
-    #tu trzeba wymyœliæ inny sposób generowania has³a, mo¿e z ID?
+    #tu trzeba wymyÅ›liÄ‡ inny sposÃ³b generowania hasÅ‚a, moÅ¼e z ID?
     $this->data['Student']['password'] = AuthComponent::password($this->data['Student']['last_name']);
     $this->data['Student']['student'] = '1';
     return 1;

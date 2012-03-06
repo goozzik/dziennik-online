@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 05 Mar 2012, 17:10
+-- Czas wygenerowania: 06 Mar 2012, 15:39
 -- Wersja serwera: 5.1.41
 -- Wersja PHP: 5.3.1
 
@@ -35,21 +35,16 @@ CREATE TABLE IF NOT EXISTS `absences` (
   `unexcused` int(3) unsigned DEFAULT NULL,
   `late` int(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
-
-CREATE TABLE IF NOT EXISTS `reports_absences` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `student_id` int(10) unsigned DEFAULT NULL,
-  `class_id` int(10) unsigned DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `percentage` int(6) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
 
 --
 -- Zrzut danych tabeli `absences`
 --
 
+INSERT INTO `absences` (`id`, `student_id`, `class_id`, `date`, `required`, `justified`, `unexcused`, `late`) VALUES
+(124, 4, 1, '2012-03-05', 10, 1, 1, NULL);
+
+-- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla  `bells`
@@ -108,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `descriptions` (
   `colour` tinyint(4) NOT NULL,
   `subject_id` tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Zrzut danych tabeli `descriptions`
@@ -133,7 +128,35 @@ INSERT INTO `descriptions` (`id`, `type`, `description`, `colour`, `subject_id`)
 (16, '', 'sadsadsadads', 0, 11),
 (17, '123', '123', 123, 11),
 (18, 'aaa', 'aaa', 123, 11),
-(19, 'Sprawdzian', 'To be', 4, 11);
+(19, 'Sprawdzian', 'To be', 4, 11),
+(20, 'KartkÃ³wka', 'Mowa zaleÅ¼na', 0, 31);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `documents`
+--
+
+CREATE TABLE IF NOT EXISTS `documents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  `semester_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `path` text NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Zrzut danych tabeli `documents`
+--
+
+INSERT INTO `documents` (`id`, `class_id`, `semester_id`, `name`, `description`, `path`, `type`, `size`, `date`) VALUES
+(1, 1, 1, '0_2.jpg', 'asd', 'asd', 'image/jpeg', 273190, '2012-03-06 14:43:44'),
+(2, 1, 1, '1_2.jpg', 'asd', 'C:/xampp/htdocs/dziennik-online/app/webroot/documents/files/1_2.jpg', 'image/jpeg', 273190, '2012-03-06 14:51:38');
 
 -- --------------------------------------------------------
 
@@ -208,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `marks` (
   `description_id` int(10) unsigned DEFAULT NULL,
   `mark` varchar(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
 
 --
 -- Zrzut danych tabeli `marks`
@@ -276,7 +299,17 @@ INSERT INTO `marks` (`id`, `student_id`, `class_id`, `semester_id`, `subject_id`
 (58, 16, 1, 2, 19, 11, '6'),
 (59, 28, 1, 2, 19, 11, 'asd'),
 (60, 7, 1, 2, 19, 11, '			'),
-(62, 49, 1, 2, 19, 10, '			');
+(62, 49, 1, 2, 19, 10, '			'),
+(63, 12, 1, 0, 31, 20, '3'),
+(64, 11, 1, 0, 31, 20, '4'),
+(65, 48, 1, 0, 31, 20, '5 '),
+(66, 49, 1, 0, 31, 20, '4-'),
+(67, 8, 1, 0, 31, 20, '6'),
+(68, 25, 1, 0, 31, 20, '1'),
+(69, 9, 1, 0, 31, 20, 'nb'),
+(70, 10, 1, 0, 31, 20, '2'),
+(71, 41, 1, 0, 31, 20, 'asd'),
+(72, 4, 1, 0, 31, 20, 'kn');
 
 -- --------------------------------------------------------
 
@@ -295,6 +328,26 @@ CREATE TABLE IF NOT EXISTS `notes` (
 
 --
 -- Zrzut danych tabeli `notes`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `reports_absences`
+--
+
+CREATE TABLE IF NOT EXISTS `reports_absences` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `student_id` int(10) unsigned DEFAULT NULL,
+  `class_id` int(10) unsigned DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `percentage` int(6) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
+
+--
+-- Zrzut danych tabeli `reports_absences`
 --
 
 
@@ -467,7 +520,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `superadmin` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Zrzut danych tabeli `users`
@@ -501,7 +554,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `p
 (28, 'KrystianMysÅ‚ek', '0ef12186a930fafb1ac82f6a52576a7eea56c886', 'Krystian', 'MysÅ‚ek', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (41, 'ArkadiuszDudek', 'b75b00480251f1feb19506f7ea3b18413dacaa80', 'Arkadiusz', 'Dudek', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (37, 'PiotrKowalski', 'c908704bfaf6dfeba19c67d87036e432a9e82087', 'Piotr', 'Kowalski', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
-(46, 'asdasdasd', '6813eba184738211dfc0bb703c68672d12f588b6', 'asd', 'asdasd', 123123, '123123', '', 'sdasd', 'asdasd', 1, '23234234', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
+(50, 'PiotrBartosik2', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Piotr', 'Bartosik', 123123, 'sasdadssdasad', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (47, 'arekDudek', 'b75b00480251f1feb19506f7ea3b18413dacaa80', 'arek', 'Dudek', 123, '123', '1 maja 11m37', 'Czestochowa', '42217', 14, '123123123', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (48, 'PiotrBartosik', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Piotr', 'Bartosik', 2147483647, 'sasdadssdasad', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 1, 1, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (49, 'PiotrBartosik1', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Piotr', 'Bartosik', 123123, '123123', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 0, 1, NULL, 1, 0, 3, 1, 0, 0, 0, 0);

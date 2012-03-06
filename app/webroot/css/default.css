@@ -67,21 +67,21 @@ table {
 
 /* INPUT TEXT */
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=file] {
 	padding:2px;
 	color:#555;
 	border:1px solid #aaa;
 	border-radius:2px;
 }
 
-input[type=text]:hover, input[type=password]:hover {
+input[type=text]:hover, input[type=password]:hover, input[type=file]:hover  {
 	padding:2px;
 	color:#555;
 	border:1px solid #666;
 	border-radius:2px;
 }
 
-input[type=text]:focus, input[type=password]:focus  {
+input[type=text]:focus, input[type=password]:focus, input[type=file]:focus  {
 	padding:2px;
 	color:#555;
 	border:1px solid #666;
@@ -191,4 +191,42 @@ div.spacer {
 	margin-top:5px;
 	margin-bottom:5px;
 	
+}
+
+table {
+	border: 1px solid #eee;
+	border-collapse:separate;
+	border-spacing:0px;
+	border-radius:5px;
+}
+
+th {
+	background:url('../../img/header_6.gif');
+	border:1px solid #eee;
+	color:#6a6a6a;
+	text-shadow: -1px 1px 0px #f6f6f6;
+		
+	padding-top:5px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-bottom:5px;
+	width:25px;
+	height:25px;
+	overflow:hidden;	
+}
+
+th:hover {
+	background:url('../../img/header_2.gif');
+	border:1px solid #ceff57;
+	color:#5e8208;
+	text-shadow: -1px 1px 0px #efffc9;
+}
+
+td {
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	
+	border-bottom:1px solid #f6f6f6;
 }
