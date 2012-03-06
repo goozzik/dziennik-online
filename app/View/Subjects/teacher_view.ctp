@@ -26,13 +26,22 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
   <tr>
     <td class="right border_b student_record<?php echo $style; ?>" style="padding-right:5px;"><?php ++$i; echo '<b>'.$i.'.</b>'; ?></td>	
     <td class="left border_b student_record<?php echo $style; ?>"><?php echo $student['Student']['first_name']; ?></td>	
-    <td class="left border_b student_record<?php echo $style; ?>" style="padding-left:10px;"><?php echo $student['Student']['last_name']; ?></td>
+    <td class="left border_b student_record<?php echo $style; ?>" style="padding-left:10px;border-right:1px solid #eee;"><?php echo $student['Student']['last_name']; ?></td>
     
     <!-- OCENY -->
+		<?php $number_of_marks = 0;
+		$mark_all_value = 0; ?>
       <?php foreach ($descriptions as $description): ?>
+	  
       <?php $mark = $mark_model->findByDescriptionIdAndStudentId($description['Description']['id'], $student['Student']['id']); ?>
-      <td class="mark <?php echo $name; ?> border_b" id="<?php echo $student['Student']['id'] . '_' . $description['Description']['id']; ?>">
-        <?php echo $mark['Mark']['mark']?>
+      <td style="border-right:1px solid #eee;" class="mark <?php echo $name; ?> border_b" id="<?php echo $student['Student']['id'] . '_' . $description['Description']['id']; ?>">
+        <?php
+			echo $mark['Mark']['mark'];
+			if(!empty($mark['Mark']['mark']) && $mark['Mark']['mark'] != 'nb' && $mark['Mark']['mark'] != 'zw'){
+				$number_of_marks++;
+				$mark_all_value = $mark_all_value+$mark['Mark']['mark'];
+			}
+		?>
       </td>
       <?php ?>
       <?php endforeach; ?>
@@ -40,9 +49,12 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
     <!-- OCENY -->
     
   <!-- PUSTKA -->
-    <th style="border-left:1px solid #eee;"></td>
+    <th style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
   <!-- ŚREDNIE -->
-  <td class="mark_average">4.5</td>
+  <td class="mark_average"><?php 
+	if($number_of_marks > 0 && $mark_all_value > 0){
+		echo round($mark_all_value/$number_of_marks,2);
+	}  ?></td>
   </tr>
   
   <?php endforeach; ?>

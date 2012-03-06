@@ -7,7 +7,7 @@
     
 	<div class='time_table_day'>
 	<div class="buttons" >
-			<a href="/teacher/time_tables/delete/<?php echo $time_table['TimeTable']['id']; ?>"><button class="edit">Edytuj</button></a> 
+			<a href="/teacher/time_tables/edit/<?php echo $time_table['TimeTable']['id']; ?>"><button class="edit">Edytuj</button></a> 
 			<?php echo '<button class="edit" onclick="windowYesNo(\'/teacher/time_tables/delete/' . $time_table['TimeTable']['id'] . '\')" >Usuń</button>'; ?>
 		</div>
       <div class="day_" style="vertical-align: bottom;">
