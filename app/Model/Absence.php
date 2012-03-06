@@ -2,7 +2,8 @@
 class Absence extends AppModel {
   public $name = 'Absence';
   public $belongsTo = array('Student',
-                            'SchoolClass' => array('foreignKey' => 'class_id'));
+    'SchoolClass' => array('foreignKey' => 'class_id'),
+    'AbsenceReport');
 
   function beforeValidate() {
     App::import('CakeSession', 'AuthComponent');

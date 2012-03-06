@@ -44,8 +44,10 @@ class AbsencesController extends AppController {
   }
 
   function teacher_index() {
-    $this->set('students', $this->Absence->Student->findAllByClassIdAndStudent($this->currentUser('class_id'), '1'));
+    $students = $this->Absence->Student->findAllByClassIdAndStudent($this->currentUser('class_id'), '1');
     $month = $this->Absence->currentMonth();
+    $this->Absence->AbsenceReport->calculateFrequencies($students, $month);
+    $this->set('students', $students);
     $this->set('month', $month);
     $this->set('Absence', $this->Absence);
   }

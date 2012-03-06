@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `absences` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `student_id` int(10) unsigned DEFAULT NULL,
   `class_id` int(10) unsigned DEFAULT NULL,
+  `absence_report_id` int(10) unsigned DEFAULT NULL,
   `date` date DEFAULT NULL,
   `required` int(3) unsigned DEFAULT NULL,
   `justified` int(3) unsigned DEFAULT NULL,
@@ -36,6 +37,15 @@ CREATE TABLE IF NOT EXISTS `absences` (
   `late` int(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
+
+CREATE TABLE IF NOT EXISTS `absence_reports` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `student_id` int(10) unsigned DEFAULT NULL,
+  `class_id` int(10) unsigned DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `percentage` float(6) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Zrzut danych tabeli `absences`
@@ -336,22 +346,6 @@ CREATE TABLE IF NOT EXISTS `notes` (
 --
 -- Struktura tabeli dla  `reports_absences`
 --
-
-CREATE TABLE IF NOT EXISTS `reports_absences` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `student_id` int(10) unsigned DEFAULT NULL,
-  `class_id` int(10) unsigned DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `percentage` int(6) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
-
---
--- Zrzut danych tabeli `reports_absences`
---
-
-
--- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla  `schools`
