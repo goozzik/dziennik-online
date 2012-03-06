@@ -8,6 +8,7 @@
     <?php foreach ($month as $week): ?>
       <th colspan='4'><?php echo $week['date']; ?></th>
     <?php endforeach ?>
+    <th>%</th>
   </tr>
 
   <tr>
@@ -37,6 +38,8 @@
         <td  class='absence' id='<?php echo $absence_html_id . '_unexcused'?>'><?php echo $absence['Absence']['unexcused']; ?></td>
         <td  class='absence' id='<?php echo $absence_html_id . '_late'?>'><?php echo $absence['Absence']['late']; ?></td>
       <?php endforeach; ?>
+      <?php $absence_report = $Absence->AbsenceReport->findByDateAndStudentId($month[0]['date'], $student['Student']['id']);?>
+      <td><?php echo $absence_report['AbsenceReport']['percentage'];?><td>
     </tr>
   <?php endforeach; ?>
 </table>
