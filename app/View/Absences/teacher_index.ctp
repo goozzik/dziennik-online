@@ -45,8 +45,8 @@
 </table>
 
 <div class="navigation">
-  <a href='/teacher/absences/week/'><< Poprzedni tydzień</a> | 
-  <a href='/teacher/absences/week/'>Następny tydzień >></a>
+<a href='/teacher/absences/month/<?php echo $previous_month; ?>'><< Poprzedni miesiąc</a> |
+  <a href='/teacher/absences/month/<?php echo $next_month; ?>'>Następny miesiąc >></a>
 </div>
 
 <script type="text/javascript">

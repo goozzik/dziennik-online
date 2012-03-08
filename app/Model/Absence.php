@@ -24,8 +24,6 @@ class Absence extends AppModel {
   }
 
   function currentMonth() {
-    App::import('model','TimeTable');
-    $TimeTable = new TimeTable();
     App::import('CakeSession', 'AuthComponent');
     $class_id = CakeSession::read('Auth.User.class_id');
     $current_date = getdate();
@@ -38,11 +36,15 @@ class Absence extends AppModel {
     return $week;
   }
 
-  function PreviousWeekFirstDay($current_week) {
-    return date('Y-m-d', strtotime($current_week['0']['day']) - 7 * 86400);
+  function getMonth($date) {
+    App::import('CakeSession', 'AuthComponent');
+    $class_id = CakeSession::read('Auth.User.class_id');
+    for ($i=0; $i<4; $i++) {
+      $week[$i] = array(
+        'date' => date('Y-m-d', 604800 * $i + strtotime($date)),
+      );
+    }
+    return $week;
   }
 
-  function NextWeekFirstDay($current_week) {
-    return date('Y-m-d', strtotime($current_week['0']['day']) + 7 * 86400);
-  }
 }

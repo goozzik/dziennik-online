@@ -44,21 +44,17 @@ class AbsencesController extends AppController {
   }
 
   function teacher_index() {
+    if ($this->params['date']) {
+      $month = $this->Absence->getMonth($this->params['date']);
+    } else {
+      $month = $this->Absence->currentMonth();
+    }
     $students = $this->Absence->Student->findAllByClassIdAndStudent($this->currentUser('class_id'), '1');
-    $month = $this->Absence->currentMonth();
     $this->Absence->AbsenceReport->calculateFrequencies($students, $month);
     $this->set('students', $students);
     $this->set('month', $month);
     $this->set('Absence', $this->Absence);
+    $this->set('previous_month', date('Y-m-d', strtotime('previous month first monday of ' . $month[0]['date'])));
+    $this->set('next_month', date('Y-m-d', strtotime('next month first monday of ' . $month[0]['date'])));
   }
-
-  function teacher_view_week() {
-    $this->set('students', $this->Absence->Student->findAllByClassIdAndStudent($this->currentUser('class_id'), '1'));
-    $week = $this->Absence->currentWeek($this->params['date']);
-    $this->set('week', $week);
-    $this->set('Absence', $this->Absence);
-    $this->set('last_week', $this->Absence->PreviousWeekFirstDay($week));
-    $this->set('next_week', $this->Absence->NextWeekFirstDay($week));
-  }
-
 }
