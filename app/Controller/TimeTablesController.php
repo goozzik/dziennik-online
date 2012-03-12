@@ -3,8 +3,7 @@ class TimeTablesController extends AppController {
   public $name = 'TimeTables';
   public $helpers = array('TimeTable');
 
-  public function beforeFilter()
-  {
+  public function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
       if ($this->action == 'teacher_index' || $this->action == 'teacher_add') {
@@ -22,28 +21,13 @@ class TimeTablesController extends AppController {
   }
 
   public function teacher_index(){
-    $this->set('time_tables', $this->TimeTable->findAllByClassId($this->currentUser('class_id'),array(), array('TimeTable.`week_day`' => 'asc')));
+    $this->set('time_tables', $this->TimeTable->findAllByClassId($this->currentUser('class_id'), array(), array('TimeTable.`week_day`' => 'asc')));
   }
 
   public function teacher_add(){
-    $days_all = $this->TimeTable->findAllByClassId($this->currentUser('class_id'));
-    $_subjects = $this->TimeTable->SchoolClass->Subject->findAllByClassId($this->currentUser('class_id'));
-    $days_week = array(
-      1 => 'Poniedziałek',
-      2 => 'Wtorek',
-      3 => 'Środa',
-      4 => 'Czwartek',
-      5 => 'Piątek',
-      6 => 'Sobota',
-      7 => 'Niedziela'
-    );
-    foreach($days_all as $day){
-      unset($days_week[$day['TimeTable']['week_day']]);
-    }
-    foreach($_subjects as $value){
-      $subjects[$value['Subject']['id']] = $value['Subject']['name'];
-    }
-    $this->set('days', $days_week);
+    $available_days = $this->TimeTable->findAllAvailableDaysByClassId($this->currentUser('class_id'));
+    $subjects = $this->TimeTable->findSelectableSubjects($this->currentUser('class_id'));
+    $this->set('days', $available_days);
     $this->set('lessons', $subjects);
   }
 
