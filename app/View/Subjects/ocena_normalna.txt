@@ -29,33 +29,33 @@
 	});
 </script>
 <?php
-echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span class="title"> '.$subject_now['Subject']['name'].'</span> to obecnie przeglÄ…dany przedmiot';
+echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span class="title"> '.$subject_now['Subject']['name'].'</span> to obecnie przegl¹dany przedmiot';
 ?>
 
 <div class="spacer"></div>
 </br>
 <span class="title"><img src="../../img/students_marks_32.png" style="vertical-align: middle;"> Oceny</span>
-<center>
-<table class="marks" style="width:900px">
+<table class="marks" style="width:100%">
   <tr>
-  <th class="left title_mark bg6" style="padding-left:8px;" width="25px">l.p</th>
-  <th class="center title_mark_name bg6" width="100px">ImiÄ™</th>
-  <th class="center title_mark bg6" style="padding-left:10px;" width="100px">Nazwisko</th>
+  <th class="left title_mark bg6" style="padding-left:8px;">l.p</th>
+  <th class="center title_mark bg6" width="150px">Imiê</th>
+  <th class="center title_mark bg6" style="padding-left:10px;" width="150px">Nazwisko</th>
   <?php foreach ($descriptions as $description): ?>
-  <th class="title_mark  bg4"><span class="title_of_mark " title="<center><?php echo htmlspecialchars($description['Description']['type']).' - '.htmlspecialchars($description['Description']['description']); ?> <br/><small>Kliknij aby usunÄ…Ä‡</small></center>"><?php echo substr($description['Description']['type'],0,4); ?></span> </th>
+  <th class="title_mark  bg4"><span class="title_of_mark " title="<center><?php echo htmlspecialchars($description['Description']['type']).' - '.htmlspecialchars($description['Description']['description']); ?> <br/><small>Kliknij aby usun¹æ</small></center>"><?php echo substr($description['Description']['type'],0,4); ?></span> </th>
   <?php endforeach; ?>
+  <th class="center title_mark bg6"></th>
   <th class="center title_mark bg6"><a id="new_mark_type" href="#new_mark"><img src="/img/plus.gif" class="title_of_mark" title="Dodaj nowy typ oceny" style="cursor:pointer;" style="vertical-align: middle"></a></th>
   <th class="center title_mark bg6"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
-  <th class="center title_mark bg6" ><img src="/img/average_ico.png" class="title_of_mark" title="Åšrednia z podanych ocen"></th>
+  <th class="center title_mark bg6" ><img src="/img/average_ico.png" class="title_of_mark" title="Œrednia z podanych ocen"></th>
   </tr>
   <?php $i=0;?>
   <?php foreach ($students as $student): ?>
   <?php if($i%2 == 0)  {$style = "_";$name = 'white';} else { $style = ""; $name = 'gray';} ?>
-  <!-- UCZEÅƒ -->
+  <!-- UCZEÑ -->
   <tr>
     <td class="right border_b student_record<?php echo $style; ?>" style="padding-right:5px;"><?php ++$i; echo '<b>'.$i.'.</b>'; ?></td>	
-    <td class="left border_b student_record<?php echo $style; ?>" width="100px"><?php echo $student['Student']['first_name']; ?></td>	
-    <td class="left border_b student_record<?php echo $style; ?>" style="padding-left:10px;border-right:1px solid #eee;" width="100px"><?php echo $student['Student']['last_name']; ?></td>
+    <td class="left border_b student_record<?php echo $style; ?>" width="150px"><?php echo $student['Student']['first_name']; ?></td>	
+    <td class="left border_b student_record<?php echo $style; ?>" style="padding-left:10px;border-right:1px solid #eee;" width="150px"><?php echo $student['Student']['last_name']; ?></td>
     
     <!-- OCENY -->
 		<?php $number_of_marks = 0;
@@ -63,18 +63,22 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
       <?php foreach ($descriptions as $description): ?>
 	  
       <?php $mark = $mark_model->findByDescriptionIdAndStudentId($description['Description']['id'], $student['Student']['id']); ?>
-      <td style="border-right:1px solid #eee;" class="mark <?php echo $name; ?> border_b" id="<?php echo $student['Student']['id'] . '_' . $description['Description']['id']; ?>"><?php echo $mark['Mark']['mark'];?></td>
-		<?php 
+      <td style="border-right:1px solid #eee;" class="mark <?php echo $name; ?> border_b" id="<?php echo $student['Student']['id'] . '_' . $description['Description']['id']; ?>">
+        <?php
+			echo $mark['Mark']['mark'];
 			if(!empty($mark['Mark']['mark']) && $mark['Mark']['mark'] != 'nb' && $mark['Mark']['mark'] != 'zw'){
 				$number_of_marks++;
 				$mark_all_value = $mark_all_value+$mark['Mark']['mark'];
 			}
 		?>
+      </td>
+      <?php ?>
       <?php endforeach; ?>
       
     <!-- OCENY -->
     
   <!-- PUSTKA -->
+    <th style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none;width:auto;"></td>
     <th style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
  
  <!-- OCENA SEMESTRALNA -->
@@ -90,7 +94,7 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
 	?>
   <td id="semestrymark_<?php echo $student['Student']['id'].'"' .$color ?> class="semestry_mark border_b"><?php echo $mark_semestry['MarkSemesters']['mark'];?></td>
   
-  <!-- ÅšREDNIE -->
+  <!-- ŒREDNIE -->
   <td class="mark_average"><?php 
 	if($number_of_marks > 0 && $mark_all_value > 0){
 		echo round($mark_all_value/$number_of_marks,2);
@@ -99,20 +103,21 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
   
   <?php endforeach; ?>
   
-  <!-- UCZEÅƒ -->
+  <!-- UCZEÑ -->
  <tr>
   <th class="left title_mark bg6" style="padding-left:8px;"></th>
-  <th class="center title_mark_name bg6" width="100px"></th>
+  <th class="center title_mark bg6"></th>
   <th class="center title_mark bg6" style="padding-left:10px;"></th>
   <?php foreach ($descriptions as $description): ?>
   <th class="title_mark bg4"></th>
   <?php endforeach; ?>
   <th class="center title_mark bg6"></th>
   <th class="center title_mark bg6"></th>
-  <th class="center title_mark bg6" ><img src="../../img/average_ico.png" class="title_of_mark" title="Åšrednia z podanych ocen"></th>
+  <th class="center title_mark bg6"></th>
+  <th class="center title_mark bg6" ><img src="../../img/average_ico.png" class="title_of_mark" title="Œrednia z podanych ocen"></th>
   </tr>
 </table>
-</center>
+
 </br>
 <!-- DODAWANIE NOWEGO TYPU OCENY -->
 <div style="display: none;">
@@ -139,7 +144,6 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
       parsed_id = $(this).attr('id').split('_');
       var old_mark = clone.text();
       clone.text('');
-	
       clone.append('<input id="mark_active" class="mark_active" name="data[Mark][mark]" type="text" value="'+old_mark+'">');
       $(this).replaceWith(clone);
       $('#' + clone.attr('id')).children().focus();
@@ -168,7 +172,7 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
 	  }  else if(mark == '6-'){ mark = '6&#45;'; 
 	  }  else if(mark == 'nb'){ mark = 'nb'; 
 	  }  else if(mark == 'zw'){ mark = 'zw'; 
-	  }  else {
+	  }	 else {
 		 mark = ''; 
 	  }
      
@@ -185,10 +189,12 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
       });
       $(this).replaceWith(mark);
     });
- 
+  });
+
   
   //OCENA SEMESTRALNA
- 
+  
+  $(function() {
     var parsed_id2;
 
     $('.semestry_mark').live('click', function() {
