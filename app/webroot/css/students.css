@@ -3,6 +3,7 @@ table.students {
 	border-collapse:separate;
 	border-spacing:0px;
 	border-radius:5px;
+	width:100%;
 }
 
 table.students th.students_top{
@@ -114,4 +115,18 @@ input[type="text"].mark_active{
 	width:23px !important;
 	text-align:center;
 	
+}
+
+.student_manage {
+	text-align:center;
+	width:140px;
+}
+
+.fisrt_name {
+
+width:150px;
+}
+
+.last_name {
+ width:150px;
 }

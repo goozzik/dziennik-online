@@ -1,8 +1,8 @@
 <span class="title">Dokumenty</span></br></br>
 <?php if(!empty($files)){
-	echo '<table>';
+	echo '<table width="100%">';
 		echo '<tr>';
-			echo '<th style="min-width:100px;">Nazwa pliku</th>';
+			echo '<th style="width:100px;">Nazwa pliku</th>';
 			echo '<th>Opis</th>';
 			echo '<!--<th>Typ</th>-->';
 			echo '<th style="min-width:120px;">Data dodania</th>';
@@ -12,12 +12,12 @@
 		foreach($files as $file){
 		
 		echo '<tr>';
-			echo '<td>'.$file['Document']['name'].'</td>';
+			echo '<td style="min-width:100px;">'.$file['Document']['name'].'</td>';
 			echo '<td>'.$file['Document']['description'].'</td>';
 			echo '<!--<td>'.$file['Document']['type'].'</td>-->';
 			echo '<td align="center">'.$file['Document']['date'].'</td>';
-			echo '<td><a href="'.$file['Document']['path'].'">Pobierz<a/></td>';
-			echo '<td><a href="documents/delete/'.$file['Document']['id'].'">Usuń<a/></td>';
+			echo '<td width="60px" align="center"><a href="'.$file['Document']['path'].'">Pobierz<a/></td>';
+			echo '<td width="40px" align="center"><a href="documents/delete/'.$file['Document']['id'].'">Usuń<a/></td>';
 		echo '</tr>';
 		}
 	echo '</table></br></br>';
