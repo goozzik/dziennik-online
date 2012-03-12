@@ -4,7 +4,9 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10pt;
 	color: #555;
-	
+	background-color:#eee;
+	margin:0;
+	padding:0;	
 }
 div.logo {
 	margin-top:0px;
@@ -14,10 +16,12 @@ div.logo {
 
 div.site {
 	width:980px;	
+	padding:0;	
 	margin: 0 auto;
 	background: #fff;
 	text-align: left;
 	background-color:white;
+	
 	
 }
 
@@ -152,7 +156,7 @@ div.container {
 	padding: 0px 10px 10px 10px;
 	margin:0 auto;
 	text-align:left;
-	width:980px;
+	/*width:980px;*/
 	background-color:white;
 }
 
@@ -187,6 +191,15 @@ div.spacer {
 	clear:both;
 	height:1px;
 	background:url('/img/spacer_line.png');
+	width:500px;
+	margin-top:5px;
+	margin-bottom:5px;
+	
+}
+div.spacer-fancy {
+	clear:both;
+	height:1px;
+	background-color:#eee;
 	width:500px;
 	margin-top:5px;
 	margin-bottom:5px;

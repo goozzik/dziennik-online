@@ -13,12 +13,18 @@ class StudentsController extends AppController {
   }
 
   function teacher_create() {
+    $this->set('province', $this->Student->provinces);
+	$this->set('school_id', CakeSession::read('Auth.User.school_id'));
+	
     if ($this->request->is('post')) {
       $this->Student->create();
       if ($this->Student->save($this->request->data)) {
+	
         $this->Session->setFlash ('Dodano nowego ucznia.', 'flash_success');
         $this->redirect($this->referer());
-      }
+      } else {
+		$this->Session->setFlash ('Wystąpił błąd podczas dodawania nowego ucznia.', 'flash_error');
+	  }
     }
   }
 

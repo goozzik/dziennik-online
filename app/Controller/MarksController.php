@@ -22,7 +22,8 @@ class MarksController extends AppController {
   function teacher_update() {
     if ($this->request->is('post')) {
       $mark = $this->Mark->findByDescriptionIdAndStudentId($this->request->data['Mark']['description_id'], $this->request->data['Mark']['student_id']);
-      if ($mark) {
+	  $this->request->data['Mark']['mark'] = rawurlencode($this->request->data['Mark']['mark']);
+	  if ($mark) {
         $this->Mark->id = $mark['Mark']['id'];
       } else {
         $this->Mark->create();
