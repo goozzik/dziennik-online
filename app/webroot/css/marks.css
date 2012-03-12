@@ -11,8 +11,17 @@ table.marks th.title_mark, td.title_mark{
 	padding-left:3px;
 	padding-right:3px;
 	padding-bottom:3px;
-	width:25px;
-	height:25px;
+	/*width:25px;
+	height:25px;*/
+	overflow:hidden;	
+}
+
+th.title_mark_name {
+	padding-top:3px;
+	padding-left:3px;
+	padding-right:3px;
+	padding-bottom:3px;
+	width:100px !important;
 	overflow:hidden;	
 }
 
@@ -86,6 +95,13 @@ table.marks td.mark {
 	height:28px;
 }
 
+table.marks td.semestry_mark {
+	padding:5px;
+	text-align:center;
+	width:28px;
+	height:28px;
+}
+
 table.marks td.gray{
 	background-color:#f8f8f8;
 }
@@ -104,12 +120,19 @@ table.marks td.mark_average{
 
 
 
-table.marks td.mark:hover,td.mark_:hover {
+table.marks td.mark:hover,td.mark_:hover, td.semestry_mark:hover{
 	/*#border:1px dotted #7fa214;	*/
 	background-color:#eee;
 }
 
 input[type="text"].mark_active{
+	min-width:23px !important;
+	width:23px !important;
+	text-align:center;
+	
+}
+
+input[type="text"].semestry_mark_active{
 	min-width:23px !important;
 	width:23px !important;
 	text-align:center;

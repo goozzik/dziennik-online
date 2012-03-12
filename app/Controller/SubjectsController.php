@@ -32,6 +32,9 @@ class SubjectsController extends AppController {
     $this->set('students', $this->Subject->Teacher->Student->findAllByClassIdAndStudent($this->currentUser('class_id'),'1',null,'Student.last_name ASC'));
 	#$this->set('students', $this->Student->findAllByClassIdAndStudent($this->currentUser('class_id'),'1',null,'Student.last_name ASC'));
     $this->set('mark_model', $this->Subject->Description->Mark);
+	#$test = new $this->MarksSemesters();;
+	$this->set('semester_id',$this->currentUser('semester_id'));
+    $this->set('marks_semesters', $this->Subject->MarkSemesters);
     $this->set('subject_now', $this->Subject->findByClassIdAndId($this->currentUser('class_id'),$this->params['id']));
   }
 
