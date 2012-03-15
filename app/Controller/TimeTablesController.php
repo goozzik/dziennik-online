@@ -9,6 +9,9 @@ class TimeTablesController extends AppController {
       if ($this->action == 'teacher_index' || $this->action == 'teacher_add') {
         $this->isClassOwninigSubjects();
       }
+      if ($this->action == 'teacher_delete') {
+        $this->isTeacherOwningTimeTable();
+      }
     }
   }
 
@@ -19,6 +22,15 @@ class TimeTablesController extends AppController {
       $this->redirect('/teacher/subjects');
     }
   }
+
+  public function isTeacherOwningTimeTable() {
+    $time_table = $this->TimeTable->findById($this->params['pass'][0]);
+    if (!$time_table) {
+      $this->Session->setFlash('Brak dostępu.', 'flash_error');
+      $this->redirect($this->referer());
+    }
+  }
+
 
   public function teacher_index(){
     $this->set('time_tables', $this->TimeTable->findAllByClassId($this->currentUser('class_id'), array(), array('TimeTable.`week_day`' => 'asc')));
