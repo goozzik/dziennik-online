@@ -42,9 +42,11 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
   <th class="center title_mark_name bg6" width="100px">Imię</th>
   <th class="center title_mark bg6" style="padding-left:10px;" width="100px">Nazwisko</th>
   <?php foreach ($descriptions as $description): ?>
-  <th class="title_mark  bg4"><span class="title_of_mark " title="<center><?php echo htmlspecialchars($description['Description']['type']).' - '.htmlspecialchars($description['Description']['description']); ?> <br/><small>Kliknij aby usunąć</small></center>"><?php echo substr($description['Description']['type'],0,4); ?></span> </th>
+  <th class="title_mark  bg4"><span class="title_of_mark " title="<center><?php echo htmlspecialchars($description['Description']['type']).' - '.htmlspecialchars($description['Description']['description']); ?> <br/><small>Kliknij aby usunąć</small></center>"><span onclick="windowYesNo('/teacher/descriptions/delete/<?php echo $description['Description']['id']; ?>')" style="cursor:pointer;"><?php echo substr($description['Description']['type'],0,4); ?></a></span> </th>
   <?php endforeach; ?>
-  <th class="center title_mark bg6"><a id="new_mark_type" href="#new_mark"><img src="/img/plus.gif" class="title_of_mark" title="Dodaj nowy typ oceny" style="cursor:pointer;" style="vertical-align: middle"></a></th>
+  
+  <th class="center title_mark bg6"></th>
+  <th class="center title_mark bg6" width="30px"><a id="new_mark_type" href="#new_mark"><img src="/img/plus.gif" class="title_of_mark" title="Dodaj nowy typ oceny" style="cursor:pointer;" style="vertical-align: middle"></a></th>
   <th class="center title_mark bg6"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
   <th class="center title_mark bg6" ><img src="/img/average_ico.png" class="title_of_mark" title="Średnia z podanych ocen"></th>
   </tr>
@@ -63,7 +65,7 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
       <?php foreach ($descriptions as $description): ?>
 	  
       <?php $mark = $mark_model->findByDescriptionIdAndStudentId($description['Description']['id'], $student['Student']['id']); ?>
-      <td style="border-right:1px solid #eee;" class="mark <?php echo $name; ?> border_b" id="<?php echo $student['Student']['id'] . '_' . $description['Description']['id']; ?>"><?php echo $mark['Mark']['mark'];?></td>
+      <td style="border-right:1px solid #eee;" class="mark <?php echo $name; ?> border_b" id="<?php echo $student['Student']['id'] . '_' . $description['Description']['id']; ?>"><?php echo urlencode($mark['Mark']['mark']);?></td>
 		<?php 
 			if(!empty($mark['Mark']['mark']) && $mark['Mark']['mark'] != 'nb' && $mark['Mark']['mark'] != 'zw'){
 				$number_of_marks++;
@@ -76,10 +78,11 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
     
   <!-- PUSTKA -->
     <th style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
+    <th style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
  
  <!-- OCENA SEMESTRALNA -->
 	<?php 
-		$mark_semestry = $marks_semesters->findByClassIdAndStudentIdAndSemesterId($student['Student']['class_id'], $student['Student']['id'], $semester_id); 
+		$mark_semestry = $marks_semesters->findByClassIdAndStudentIdAndSemesterIdAndSubjectId($student['Student']['class_id'], $student['Student']['id'], $semester_id, $subject_now['Subject']['id']); 
 		if($mark_semestry['MarkSemesters']['mark'] == '1' || $mark_semestry['MarkSemesters']['mark'] == '1+' || $mark_semestry['MarkSemesters']['mark'] == 'nkl'  ){
 			$color = 'style="color:#660000;font-weight:bold;"';
 		} elseif($mark_semestry['MarkSemesters']['mark'] == 'zw'){
@@ -88,7 +91,7 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
 			$color = '';
 		}
 	?>
-  <td id="semestrymark_<?php echo $student['Student']['id'].'"' .$color ?> class="semestry_mark border_b"><?php echo $mark_semestry['MarkSemesters']['mark'];?></td>
+  <td id="semestrymark_<?php echo $student['Student']['id'].'"' .$color ?> class="semestry_mark border_b"><?php echo urlencode($mark_semestry['MarkSemesters']['mark']);?></td>
   
   <!-- ŚREDNIE -->
   <td class="mark_average"><?php 
@@ -107,6 +110,7 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
   <?php foreach ($descriptions as $description): ?>
   <th class="title_mark bg4"></th>
   <?php endforeach; ?>
+  <th class="center title_mark bg6"></th>
   <th class="center title_mark bg6"></th>
   <th class="center title_mark bg6"></th>
   <th class="center title_mark bg6" ><img src="../../img/average_ico.png" class="title_of_mark" title="Średnia z podanych ocen"></th>
@@ -149,23 +153,23 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
       var mark = $(this).val();
       if(mark == '1') { mark = '1'; 
 	  }  else if(mark == '1'){ mark = '1'; 
-	  }	 else if(mark == '1+'){ mark = '1&#43;'; 
-	  }  else if(mark == '1-'){ mark = '1&#45;'; 
+	  }	 else if(mark == '1+'){ mark = '1+';  type = 1;
+	  }  else if(mark == '1-'){ mark = '1-';  type = 2;
 	  }  else if(mark == '2'){ mark = '2'; 
-	  }  else if(mark == '2+'){ mark = '2'; 
-	  }  else if(mark == '2-'){ mark = '2&#45;'; 
+	  }  else if(mark == '2+'){ mark = '2+';  type = 1;
+	  }  else if(mark == '2-'){ mark = '2-'; type = 2;
 	  }  else if(mark == '3'){ mark = '3'; 
-	  }  else if(mark == '3+'){ mark = '3&#43;'; 
-	  }  else if(mark == '3-'){ mark = '3&#45;'; 
+	  }  else if(mark == '3+'){ mark = '3+';  type = 1;
+	  }  else if(mark == '3-'){ mark = '3-'; type = 2;
 	  }	 else if(mark == '4'){ mark = '4'; 
-	  }  else if(mark == '4+'){ mark = '4&#43;'; 
-	  }  else if(mark == '4-'){ mark = '4&#45;'; 
+	  }  else if(mark == '4+'){ mark = '4+';  type = 1;
+	  }  else if(mark == '4-'){ mark = '4-'; type = 2;
 	  }	 else if(mark == '5'){ mark = '5'; 
-	  }  else if(mark == '5+'){ mark = '5&#43;'; 
-	  }  else if(mark == '5-'){ mark = '5-'; 
+	  }  else if(mark == '5+'){ mark = '5+';  type = 1;
+	  }  else if(mark == '5-'){ mark = '5-'; type = 2;
 	  }  else if(mark == '6'){ mark = '6'; 
-	  }  else if(mark == '6+'){ mark = '6&#43;'; 
-	  }  else if(mark == '6-'){ mark = '6&#45;'; 
+	  }  else if(mark == '6+'){ mark = '6+';  type = 1;
+	  }  else if(mark == '6-'){ mark = '6-';  type = 2;
 	  }  else if(mark == 'nb'){ mark = 'nb'; 
 	  }  else if(mark == 'zw'){ mark = 'zw'; 
 	  }  else {
@@ -184,6 +188,7 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
         data: data,
       });
       $(this).replaceWith(mark);
+	 
     });
  
   
@@ -204,26 +209,26 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
     $('#semestry_mark_active').live('blur', function() {
       var mark2 = $(this).val();
       if(mark2 == '1') { mark2 = '1'; 
-	  }  else if(mark2 == '1'){ mark2 = '1'; 
-	  }	 else if(mark2 == '1+'){ mark2 = '1&#43;'; 
-	  }  else if(mark2 == '1-'){ mark2 = '1&#45;'; 
-	  }  else if(mark2 == '2'){ mark2 = '2'; 
-	  }  else if(mark2 == '2+'){ mark2 = '2'; 
-	  }  else if(mark2 == '2-'){ mark2 = '2&#45;'; 
-	  }  else if(mark2 == '3'){ mark2 = '3'; 
-	  }  else if(mark2 == '3+'){ mark2 = '3&#43;'; 
-	  }  else if(mark2 == '3-'){ mark2 = '3&#45;'; 
-	  }	 else if(mark2 == '4'){ mark2 = '4'; 
-	  }  else if(mark2 == '4+'){ mark2 = '4&#43;'; 
-	  }  else if(mark2 == '4-'){ mark2 = '4&#45;'; 
-	  }	 else if(mark2 == '5'){ mark2 = '5'; 
-	  }  else if(mark2 == '5+'){ mark2 = '5&#43;'; 
-	  }  else if(mark2 == '5-'){ mark2 = '5-'; 
-	  }  else if(mark2 == '6'){ mark2 = '6'; 
-	  }  else if(mark2 == '6+'){ mark2 = '6&#43;'; 
-	  }  else if(mark2 == '6-'){ mark2 = '6&#45;'; 
-	  }  else if(mark2 == 'nkl'){ mark2 = 'nkl'; 
-	  }  else if(mark2 == 'zw'){ mark2 = 'zw'; 
+	  }  else if(mark2 == '1'){ mark2 = '1'; type = 0;
+	  }	 else if(mark2 == '1+'){ mark2 = '1+'; type = 1;
+	  }  else if(mark2 == '1-'){ mark2 = '1-'; type = 2;
+	  }  else if(mark2 == '2'){ mark2 = '2'; type = 0;
+	  }  else if(mark2 == '2+'){ mark2 = '2+';  type = 1;
+	  }  else if(mark2 == '2-'){ mark2 = '2-';  type = 2;
+	  }  else if(mark2 == '3'){ mark2 = '3'; type = 0;
+	  }  else if(mark2 == '3+'){ mark2 = '3+';  type = 1;
+	  }  else if(mark2 == '3-'){ mark2 = '3-';  type = 2;
+	  }	 else if(mark2 == '4'){ mark2 = '4'; type = 0;
+	  }  else if(mark2 == '4+'){ mark2 = '4+';  type = 1;
+	  }  else if(mark2 == '4-'){ mark2 = '4-';  type = 2;
+	  }	 else if(mark2 == '5'){ mark2 = '5'; type = 0;
+	  }  else if(mark2 == '5+'){ mark2 = '5+';  type = 1;
+	  }  else if(mark2 == '5-'){ mark2 = '5-';  type = 2;
+	  }  else if(mark2 == '6'){ mark2 = '6'; type = 0;
+	  }  else if(mark2 == '6+'){ mark2 = '6+';  type = 1;
+	  }  else if(mark2 == '6-'){ mark2 = '6-';  type = 2;
+	  }  else if(mark2 == 'nkl'){ mark2 = 'nkl'; type = 0;
+	  }  else if(mark2 == 'zw'){ mark2 = 'zw'; type = 0;
 	  }  else {
 		 mark2 = ''; 
 	  }
@@ -232,7 +237,8 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
 	  + '&data[MarkSemester][class_id]=' + <?php echo $this->Session->read('Auth.User.class_id');?>
       + '&data[MarkSemester][semester_id]=' + <?php echo $this->Session->read('Auth.User.semester_id'); ?>
       + '&data[MarkSemester][subject_id]=' + <?php echo $this->params['id']; ?> 
-	  + '&data[MarkSemester][mark]=' + mark2 ;
+	  + '&data[MarkSemester][mark]=' + mark2
+	  + '&type =' + type + '';
       $.ajax({
         type: 'POST',
         url: '/teacher/mark_semesters/update',
@@ -240,5 +246,6 @@ echo '<img src="../../img/alert_y50.png" style="vertical-align:middle;"><span cl
       });
       $(this).replaceWith(mark2);
     });
+	
   });
 </script>

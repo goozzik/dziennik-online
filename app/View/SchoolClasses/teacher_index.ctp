@@ -21,7 +21,7 @@
 				<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $semester['semester'] .' - aktualnie wybrany'; ?></td></tr>
 				
 				<?php else: ?>
-					<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $this->Html->link($semester['semester'],'/teacher/semesters/view/' . $class['SchoolClass']['id'].'/'.$semester['id']);?></td></tr>
+					<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $this->Html->link($semester['semester'],'/teacher/semesters/view/' . $class['SchoolClass']['id'].'/'.$semester['id']);?> -opcje</td></tr>
 				<?php endif ?>
 			
 			<?php endforeach;?>

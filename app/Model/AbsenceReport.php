@@ -18,7 +18,7 @@ class AbsenceReport extends AppModel {
         $unexcused += (float)$absence['Absence']['unexcused'];
       }
       if ($required == 0) { continue; }
-      $percentage = ($justified + $unexcused) / $required * 100;
+      $percentage = ($required-($justified + $unexcused)) / $required * 100;
       $absence_report = $this->findByStudentIdAndDate($student['Student']['id'], $month[0]['date']);
       if ($absence_report) {
         $this->id = $absence_report['AbsenceReport']['id'];

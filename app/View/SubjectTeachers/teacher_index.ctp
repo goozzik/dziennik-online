@@ -1,4 +1,16 @@
-<h1>Nauczyciele</h1>
+<script src="../../js/fancybox/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
+<link rel="stylesheet" href="../../js/fancybox/jquery.fancybox-1.3.4.css">
+<script>
+	$(document).ready(function() {
+		$("#new_teacher").fancybox({
+				'titlePosition'	: 'inside',
+				'overlayColor'	: '#000',
+				'overlayOpacity': 0.5
+		});
+	});
+</script>
+<span class="title">Nauczyciele</span>
+<span class="title" style="float:right;"><a href="#new_teacher_form" id="new_teacher"><img src="../img/student_add_32.png" style="vertical-align: middle"> Dodaj nowego nauczyciela</a></span>
 
 <table>
 <tr>
@@ -18,6 +30,8 @@
 </table>
 
 <?php if (!empty($subjects)): ?>
+<div style="display:none;">
+<div id="new_teacher_form">
   <h1>Dodaj nowego nauczyciela</h1>
   
 	<table>
@@ -28,6 +42,8 @@
 	<tr><td>Godziny zajęć:</td><td><?php echo $this->Form->textarea('work_hours', array('label' => '', 'style'=>'height:100px;'));?></td></tr>
 	<tr><td>Telefon</td><td><?php echo $this->Form->input('telephone', array('label' => ''));?></td></tr>
 	<tr><td>e-mail</td><td><?php echo $this->Form->input('mail', array('label' => ''));?></td></tr>
-    <tr><td colspan="2"><?php echo $this->Form->end('Dodaj');?></td></tr>   
+    <tr><td colspan="2" align="right"><?php echo $this->Form->end('Dodaj');?></td></tr>   
   </table>
+  </div>
+  </div>
 <?php endif ?>

@@ -48,5 +48,9 @@ class StudentsController extends AppController {
       $this->redirect($this->referer());
     }
   }
+  
+   function teacher_edit(){
+	 $this->redirect($this->referer());
+   }
 
 }

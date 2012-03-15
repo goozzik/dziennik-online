@@ -13,7 +13,7 @@ class UsersController extends AppController {
         if ($this->currentUser('teacher') && !$this->currentUser('class_id')) {
           $this->redirect('/teacher/school_classes');
         }
-        $this->redirect('/teacher/subjects');
+        $this->redirect('/');
       } else {
         $this->Session->setFlash('Twóje hasło/login jest niepoprawne.');
       }

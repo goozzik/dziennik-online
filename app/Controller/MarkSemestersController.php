@@ -44,25 +44,32 @@ class MarkSemestersController extends AppController {
 	  echo 2;
     }
 	
-    $this->autoRender = true; 
+    $this->autoRender = false; 
   }
   
     function teacher_update() {
 	print_r($this->request);
     if ($this->request->is('post')) {
       $mark = $this->MarkSemester->findByClassIdAndSemesterIdAndStudentId($this->request->data['MarkSemester']['class_id'], $this->request->data['MarkSemester']['semester_id'], $this->request->data['MarkSemester']['student_id']);
-	  #$this->request->data['MarksSemester']['mark'] = rawurlencode($this->request->data['MarksSemester']['mark']);
-	  if ($mark) {
-		echo 1;
-        $this->MarkSemester->id = $mark['MarkSemester']['id'];
-      } else {
+	 
+		if($this->request->type == 1){ #jezeli 0 - nic, 1 - plus 2 - minus
+			$this->request->data['MarkSemester']['mark'] = urlencode($this->request->data['MarkSemester']['mark'] . '&#43;');
+		} elseif($this->request->type == 2){
+			$this->request->data['MarkSemester']['mark'] = urlencode($this->request->data['MarkSemester']['mark'] . '&#45;');
+		}
+		#print_r( urlencode($this->request->data['MarkSemester']['mark']));
+	
+	 
+	if ($mark) {
+		$this->MarkSemester->id = $mark['MarkSemester']['id'];
+    } else {
         $this->MarkSemester->create();
-      }
+    }
       $this->MarkSemester->save($this->request->data);
     } else {
-		echo 'dupa';
+		#echo 'nic';
 	}
-    $this->autoRender = true;
+    $this->autoRender = false;
   }
 
 }

@@ -28,7 +28,7 @@ class SubjectsController extends AppController {
 
   function teacher_view() {
     $this->set('subjects', $this->Subject->findAllByClassId($this->currentUser('class_id')));
-    $this->set('descriptions', $this->Subject->Description->findAllBySubjectId($this->params['id']));
+    $this->set('descriptions', $this->Subject->Description->findAllBySubjectIdAndSemesterId($this->params['id'],$this->currentUser('semester_id')));
     $this->set('students', $this->Subject->Teacher->Student->findAllByClassIdAndStudent($this->currentUser('class_id'),'1',null,'Student.last_name ASC'));
 	#$this->set('students', $this->Student->findAllByClassIdAndStudent($this->currentUser('class_id'),'1',null,'Student.last_name ASC'));
     $this->set('mark_model', $this->Subject->Description->Mark);
@@ -57,6 +57,9 @@ class SubjectsController extends AppController {
 	} else {
 		$this->redirect($this->referer());
 	}
-
+   }
+   
+   function teacher_edit(){
+	 $this->redirect($this->referer());
    }
 }

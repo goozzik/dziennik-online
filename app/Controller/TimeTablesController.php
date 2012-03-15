@@ -48,6 +48,12 @@ class TimeTablesController extends AppController {
       }
     }
   }
+  
+  public function teacher_edit(){
+	$this->TimeTable->findAllByClassId($this->currentUser('class_id'));
+	$subjects = $this->TimeTable->findSelectableSubjects($this->currentUser('class_id'));
+	$this->set('lessons', $subjects);
+  }
 
   public function teacher_delete() {
     if ($this->TimeTable->delete($this->params['pass'][0])) {

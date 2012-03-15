@@ -22,7 +22,13 @@ class MarksController extends AppController {
   function teacher_update() {
     if ($this->request->is('post')) {
       $mark = $this->Mark->findByDescriptionIdAndStudentId($this->request->data['Mark']['description_id'], $this->request->data['Mark']['student_id']);
-	  $this->request->data['Mark']['mark'] = rawurlencode($this->request->data['Mark']['mark']);
+		
+		if($this->request->type == 1){ #jezeli 0 - nic, 1 - plus 2 - minus
+			$this->request->data['Mark']['mark'] = urlencode($this->request->data['Mark']['mark'] . '&#43;');
+		} elseif($this->request->type == 2){
+			$this->request->data['Mark']['mark'] = urlencode($this->request->data['Mark']['mark'] . '&#45;');
+		} 
+		
 	  if ($mark) {
         $this->Mark->id = $mark['Mark']['id'];
       } else {

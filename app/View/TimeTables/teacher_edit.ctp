@@ -1,4 +1,5 @@
-<h1><?php echo $time_table['TimeTable']['id']; ?></h1>
+<h1><?php //echo $time_table['TimeTable']['id']; ?></h1>
+<center>
 <?php
 	echo $this->Form->create('TimeTable', array('action' => 'edit'));
 	echo '<table style="">';
@@ -10,7 +11,8 @@
       echo $this->Form->select('Lesson][' . $i . '][subject_id', $lessons);
     echo '</td><tr>';
   }
-  echo '<tr><td colspan="2">';
+  echo '<tr><td colspan="2" align="right">';
   echo $this->Form->end('Zapisz');
   echo '</td></tr></table>';
 ?>
+</center>

@@ -1,6 +1,8 @@
-input[type="text"]#absence_active {
-	width:14px !important;
+input.absence_active {
+	width:18px !important;
+	min-width:18px !important;
 	font-size:8pt;
+	text-align:center;
 }
 
 div.navigation {
