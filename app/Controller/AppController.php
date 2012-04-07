@@ -14,11 +14,10 @@ class AppController extends Controller {
     }
   }
 
-  function isClassSet()
-  {
+  function isClassSet() {
     if (!$this->currentUser('class_id')) {
-      $this->Session->setFlash('Najpierw ustaw swoją klasę. Możesz to zrobić <a href="/teacher/classes">tutaj</a>', 'flash_error');
-      $this->redirect($this->referer());
+      $this->Session->setFlash('Najpierw ustaw swoją klasę. Możesz to zrobić tutaj', 'flash_error');
+      $this->redirect('/teacher/school_classes');
     }
   }
 
