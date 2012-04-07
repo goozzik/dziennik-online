@@ -18,6 +18,8 @@ table th.day {
 
 #month {
   font-size:8pt;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .name {
