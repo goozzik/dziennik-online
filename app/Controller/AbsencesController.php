@@ -1,22 +1,22 @@
 <?php
 class AbsencesController extends AppController {
+
   public $name = 'Absences';
 
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
-      if ($this->action == 'teacher_create' || $this->action == 'teacher_edit') {
+      if ($this->action == 'teacher_update') {
         $this->isOwningStudentFilter();
       }
       if ($this->action == 'teacher_index') {
-        //$this->isTimeTableSetFilter();
-        true;
+        $this->isTimeTableSetFilter();
       }
     }
   }
 
   function isTimeTableSetFilter() {
-    if (!$this->Absence->firstDay()) {
+    if (!$this->Absence->SchoolClass->TimeTable->findByClassId($this->currentUser('class_id'))) {
       $this->Session->setFlash('Najpierw musisz uzupełnić plan lekcji. Możesz to zrobić tutaj.', 'flash_error');
       $this->redirect('/teacher/time_tables/add');
     }
@@ -59,4 +59,5 @@ class AbsencesController extends AppController {
     $this->set('justified_all', 0);
     $this->set('unexcused_all', 0);
   }
+
 }

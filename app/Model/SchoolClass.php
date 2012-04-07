@@ -3,7 +3,7 @@ class SchoolClass extends AppModel {
   public $name = 'SchoolClass';
   public $useTable = 'classes';
   public $belongsTo = array('School', 'Teacher');
-  public $hasMany = array('Student', 'Subject', 'SubjectTeacher', 'Semester');
+  public $hasMany = array('Student', 'Subject', 'SubjectTeacher', 'Semester', 'TimeTable');
   public $actsAs = array('Containable');
 
   function beforeValidate() {
