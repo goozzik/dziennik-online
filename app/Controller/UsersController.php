@@ -1,10 +1,7 @@
 <?php
 class UsersController extends AppController {
-  public $name = 'Users';
 
-  function beforeFilter() {
-    #
-  }
+  public $name = 'Users';
 
   function login() {
     if ($this->request->is('post')) {
@@ -25,3 +22,4 @@ class UsersController extends AppController {
   }
 
 }
+?>
