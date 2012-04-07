@@ -2,7 +2,7 @@
 class TimeTable extends AppModel {
   public $name = 'TimeTable';
   public $belongsTo = array('SchoolClass' => array('foreignKey' => 'class_id'));
-  public $hasMany = 'Lesson';
+  public $hasMany = array('Lesson' => array('dependent' => true));
   public $actsAs = array('Containable'); 
 
   function beforeValidate() {

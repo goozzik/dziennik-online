@@ -1,5 +1,6 @@
 <?php
 class TimeTablesController extends AppController {
+
   public $name = 'TimeTables';
   public $helpers = array('TimeTable');
 
@@ -32,18 +33,18 @@ class TimeTablesController extends AppController {
   }
 
 
-  public function teacher_index(){
+  public function teacher_index() {
     $this->set('time_tables', $this->TimeTable->findAllByClassId($this->currentUser('class_id'), array(), array('TimeTable.`week_day`' => 'asc')));
   }
 
-  public function teacher_add(){
+  public function teacher_add() {
     $available_days = $this->TimeTable->findAllAvailableDaysByClassId($this->currentUser('class_id'));
     $subjects = $this->TimeTable->findSelectableSubjects($this->currentUser('class_id'));
     $this->set('days', $available_days);
     $this->set('lessons', $subjects);
   }
 
-  public function teacher_create(){
+  public function teacher_create() {
     if ($this->request->is('post')) {
       $this->TimeTable->create();
       if ($this->TimeTable->save($this->request->data)) {
@@ -60,19 +61,14 @@ class TimeTablesController extends AppController {
       }
     }
   }
-  
-  public function teacher_edit(){
-	$this->TimeTable->findAllByClassId($this->currentUser('class_id'));
-	$subjects = $this->TimeTable->findSelectableSubjects($this->currentUser('class_id'));
-	$this->set('lessons', $subjects);
-  }
 
   public function teacher_delete() {
-    if ($this->TimeTable->delete($this->params['pass'][0])) {
+    if ($this->TimeTable->delete($this->params['pass'][0], true)) {
       $this->redirect($this->referer());
     } else {
       $this->redirect($this->referer());
     }
   }
+
 }
 ?>
