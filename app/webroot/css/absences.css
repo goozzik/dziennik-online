@@ -1,17 +1,51 @@
 input.absence_active {
-	width:18px !important;
-	min-width:18px !important;
-	font-size:8pt;
-	text-align:center;
+  width:18px !important;
+  min-width:18px !important;
+  font-size:8pt;
+  text-align:center;
 }
 
 div.navigation {
-	width:280px;
-	height:30px;
-	margin:0 auto;
-	padding:0;
+  width:280px;
+  height:30px;
+  margin:0 auto;
+  padding:0;
 }
 
 table th.day {
-	padding-left:0px;
+  padding-left:0px;
+}
+
+#month {
+  font-size:8pt;
+}
+
+.name {
+  border-bottom:2px solid #ddd;
+}
+
+.lname {
+  border-bottom:2px solid #ddd;
+  border-right:2px solid #ddd;
+}
+
+.lname_value {
+  border-right:2px solid #ddd;
+}
+
+.summary {
+  border-bottom:2px solid #ddd;
+}
+
+.summary_border {
+  border-right:2px solid #ddd;
+}
+
+.absence {
+  border-right:1px dashed #ddd;
+  text-align:center;
+}
+
+.absence_border {
+  border-right:2px solid #ddd;
 }

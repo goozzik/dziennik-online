@@ -56,5 +56,7 @@ class AbsencesController extends AppController {
     $this->set('Absence', $this->Absence);
     $this->set('previous_month', date('Y-m-d', strtotime('previous month first monday of ' . $month[0]['date'])));
     $this->set('next_month', date('Y-m-d', strtotime('next month first monday of ' . $month[0]['date'])));
+    $this->set('justified_all', 0);
+    $this->set('unexcused_all', 0);
   }
 }
