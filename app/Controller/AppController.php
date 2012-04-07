@@ -1,6 +1,6 @@
 <?php
 class AppController extends Controller {
-  public $helpers = array('Html','Form','Menu','Session');
+  public $helpers = array('Html','Form','Menu','Footer','Session');
   public $components = array('Auth','Session');
 
   function currentUser($param) {

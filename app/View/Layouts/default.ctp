@@ -12,33 +12,35 @@
   </head>
   <body>
 	<div class="site">
+		<div class="logo">
+			<a href="/"><img src="/img/logo.png"></a>
+		</div>
     <div id='menu'>
-          <?php
-            if($this->Session->read('Auth.User.teacher')) {
-              $this->Menu->teacher_menu();
-            } elseif($this->Session->read('Auth.User.student')) {
-              $this->Menu->student_menu();
-            }
-          ?>
+      <?php
+        if($this->Session->read('Auth.User.teacher')) {
+          $this->Menu->teacherMenu();
+        } elseif($this->Session->read('Auth.User.student')) {
+          $this->Menu->studentMenu();
+        } elseif ($this->Session->read('Auth.User.admin')) {
+          $this->Menu->adminMenu();
+        }
+	    ?>
     </div>
     <div class='container'>
-
       <?php
         echo $this->Session->flash();
         echo $content_for_layout;
       ?>
     </div>
-	<div class="footer">
-	
-		<?php
-            if($this->Session->read('Auth.User.teacher')) {
-              $this->Menu->footer();
-            } elseif($this->Session->read('Auth.User.student')) {
-              $this->Menu->footer();
-            }
-          ?>
-		
-	</div>
+		<div class="footer">
+			<?php
+		    if($this->Session->read('Auth.User.teacher')) {
+		      $this->Footer->footer();
+	      } elseif($this->Session->read('Auth.User.student')) {
+	        $this->Footer->footer();
+	      }
+	    ?>
+		</div>
 	</div>
   <body>
 </html>
