@@ -12,10 +12,8 @@ class DescriptionsController extends AppController {
     }
   }
 
-  function isOwningSubjectFilter()
-  {
-    $this->loadModel('Subject');
-    if (!$this->Subject->findByIdAndTeacherId($this->request->data['Description']['subject_id'], $this->currentUser('id'))) {
+  function isOwningSubjectFilter() {
+    if (!$this->Description->Subject->findByIdAndTeacherId($this->request->data['Description']['subject_id'], $this->currentUser('id'))) {
       $this->Session->setFlash('Brak dostępu.', 'flash_error');
       $this->redirect($this->referer());
     }
@@ -23,7 +21,7 @@ class DescriptionsController extends AppController {
 
   function teacher_create() {
     if ($this->request->is('post')) {
-  $this->request->data['Description']['semester_id'] = $this->currentUser('semester_id');
+    $this->request->data['Description']['semester_id'] = $this->currentUser('semester_id');
       $this->Description->create();
       if ($this->Description->save($this->request->data)) {
         $this->Session->setFlash('Dodano ocenę.', 'flash_success');
