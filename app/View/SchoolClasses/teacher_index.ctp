@@ -1,39 +1,44 @@
 <?php if (!empty($classes)): ?>
   <span class="title">Klasy</span>
   <table>
-  
     <?php foreach ($classes as $class): ?>
+	    <tr>
+	    	<td>
+			    <?php echo $class['SchoolClass']['year'] . $class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook']; ?>
+		    </td>
+		  </tr>
+		
+			<!-- WYŚWIETLANIE SEMESTRÓW DLA DANEJ KLASY -->
+			<?php foreach ($class['Semester'] as $semester): ?>
+				<tr>
+					<td style="padding-left:20px;">
+						<?php if ($semester_actual == $semester['id'])
+							echo 'Semestr ' . $semester['semester'] . ' - aktualnie wybrany';
+						else 
+							echo 'Semestr ' . $semester['semester'];
+							echo '<span style="float:right;">';
+							echo $this->Form->create('Teacher', array('teacher' => true, 'controller' => 'teachers', 'action' => 'edit'));
+							echo $this->Form->input('class_id', array('type' => 'hidden', 'value' => $class['SchoolClass']['id']));
+							echo $this->Form->input('semester_id', array('type' => 'hidden', 'value' => $semester['id']));
+							echo $this->Form->end('Ustaw');
+							echo '</span>';
+						?>
+					</td>
+				</tr>
+			<?php endforeach ?>
 
-      <?php echo '<tr><td>> '.$class['SchoolClass']['year'].''.$class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook'].'</td></tr>'; ?>
+			<tr>
+				<td style="padding-left:20px;">
+					<?php 
+						echo $this->Form->create('Semester', array('teacher' => true, 'controller' => 'semester', 'action' => 'create'));
+						echo $this->Form->input('class_id', array('type' => 'hidden', 'value' => $class['SchoolClass']['id']));
+						echo $this->Form->end('Dodaj nowy semestr');
+					?>					
+				</td>
+			</tr>
+			<!-- KONIEC WYŚWIETLANIE SEMESTRÓW DLA DANEJ KLASY -->
 		
-		<!-- WYŚWIETLANIE SEMESTRÓW DLA DANEJ KLASY -->
-		
-		<?php if (!empty($class['Semester'])):?>
-			<?php $new_semester = 1; ?>
-		
-			
-			<?php foreach ($class['Semester'] as $semester):?>
-			
-				<?php ++$new_semester; ?>
-				
-				<?php if($semester_actual == $semester['id']):?>
-				
-				<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $semester['semester'] .' - aktualnie wybrany'; ?></td></tr>
-				
-				<?php else: ?>
-					<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $this->Html->link($semester['semester'],'/teacher/semesters/view/' . $class['SchoolClass']['id'].'/'.$semester['id']);?> -opcje</td></tr>
-				<?php endif ?>
-			
-			<?php endforeach;?>
-				<tr><td style="padding-left:20px;"><?php echo $new_semester; ?>+ <?php echo $this->Html->link('Dodaj nowy semestr','/teacher/semesters/create/' . $class['SchoolClass']['id'].'/'.$new_semester);?></td></tr>
-		
-		<?php else: ?>
-			<?php $new_semester = 1; ?>
-			<tr><td style="padding-left:20px;">+ <?php echo $this->Html->link('Dodaj nowy semestr','/teacher/semesters/create/' . $class['SchoolClass']['id'].'/'.$new_semester);?></td></tr>
-		<?php endif ?>
-		<!-- KONIEC WYŚWIETLANIE SEMESTRÓW DLA DANEJ KLASY -->
-		
-    <?php endforeach; ?>
+    <?php endforeach ?>
   </table><br/><br/>
   
 <?php endif ?>
@@ -41,12 +46,27 @@
 <span class="title">Dodaj nową klasę</span>
 <?php echo $this->Form->create('SchoolClass', array('controller' => 'school_classes', 'action' => 'create'));?>
 	<table>
-	<tr><td>Klasa rok</td><td><?php echo $this->Form->input('year', array('label' => '', 'type'=>'number', 'value'=>'1'));?></td></tr>
-	<tr><td>Nazwa</td><td><?php echo $this->Form->input('name', array('label' => ''));?></td></tr>
-	<tr><td>Profil</td><td> <?php echo $this->Form->input('profile', array('label' => ''));?></td></tr>
-	<tr><td>Rocznik</td><td><?php echo $this->Form->input('yearbook', array('label' => '', 'value' => '2011'));?></td></tr>
-	<tr><td colspan="2" align="right"><?php echo $this->Form->end('Dodaj');?></td></tr>
+		<tr>
+			<td>Klasa rok</td>
+			<td><?php echo $this->Form->input('year', array('label' => '', 'type'=>'number', 'value'=>'1'));?></td>
+		</tr>
+		<tr>
+			<td>Nazwa</td>
+			<td><?php echo $this->Form->input('name', array('label' => ''));?></td>
+		</tr>
+		<tr>
+			<td>Profil</td>
+			<td><?php echo $this->Form->input('profile', array('label' => ''));?></td>
+		</tr>
+		<tr>
+			<td>Rocznik</td>
+			<td><?php echo $this->Form->input('yearbook', array('label' => '', 'value' => '2011'));?></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right"><?php echo $this->Form->end('Dodaj');?></td>
+		</tr>
 	</table>
+<?php echo $this->Form->end(); ?>
 	
  
    

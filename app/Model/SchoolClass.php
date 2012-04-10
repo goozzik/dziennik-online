@@ -18,7 +18,7 @@ class SchoolClass extends AppModel {
     if ($created) {
       App::import('CakeSession', 'AuthComponent');
       $this->Semester->create();
-      $this->Semester->set(array('class_id' => $this->id, 'semester' => 1));
+      $this->Semester->set('class_id', $this->id);
       $this->Semester->save();
       $this->Teacher->id = CakeSession::read('Auth.User.id');
       $this->Teacher->set(array('class_id' => $this->id, 'semester_id' => $this->Semester->id));
