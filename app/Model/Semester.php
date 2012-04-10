@@ -3,6 +3,8 @@ class Semester extends AppModel {
 
   public $name = 'Semester';
   public $belongsTo = array('SchoolClass' => array('foreignKey' => 'class_id'), 'Teacher');
+  public $hasMany = array('Mark' => array('dependent' => true),
+                          'Description' => array('dependent' => true));
   public $actsAs = array('Containable');
     
   public $validate = array(
