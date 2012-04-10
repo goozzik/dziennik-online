@@ -1,7 +1,14 @@
 <?php
 class AppController extends Controller {
-  public $helpers = array('Html','Form','Menu','Footer','Session');
-  public $components = array('Auth','Session');
+
+  public $helpers = array('Html', 'Form', 'Menu', 'Footer', 'Session');
+  public $components = array('Auth', 'Session');
+
+  function beforeFilter() {
+    if ($this->params['teacher']) {
+      $this->isTeacherFilter();
+    }
+  } 
 
   function currentUser($param) {
     return $this->Session->read('Auth.User.' . $param);
@@ -22,3 +29,4 @@ class AppController extends Controller {
   }
 
 }
+?>

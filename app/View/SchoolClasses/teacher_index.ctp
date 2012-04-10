@@ -22,6 +22,7 @@
 							echo $this->Form->input('semester_id', array('type' => 'hidden', 'value' => $semester['id']));
 							echo $this->Form->end('Ustaw');
 							echo '</span>';
+						  echo $this->Form->postButton('Delete', array('teacher' => true, 'controller' => 'semesters', 'action' => 'delete', $semester['id']), array('confirm' => 'Jesteś pewien?'));
 						?>
 					</td>
 				</tr>
