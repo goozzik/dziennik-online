@@ -6,14 +6,7 @@ class SemestersController extends AppController {
   function beforeFilter() {
     if ($this->params['teacher']) {
       $this->isTeacherFilter();
-      if ($this->action == 'teacher_create') {
-        $this->isOwningClassFilter();
-      }
     }
-  }
-
-  function isOwningClassFilter() {
-
   }
 
   function teacher_create() {
