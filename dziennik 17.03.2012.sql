@@ -485,6 +485,7 @@ CREATE TABLE IF NOT EXISTS `semesters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_id` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
   KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
