@@ -4,7 +4,11 @@ class SchoolClass extends AppModel {
   public $name = 'SchoolClass';
   public $useTable = 'classes';
   public $belongsTo = array('School', 'Teacher');
-  public $hasMany = array('Student', 'Subject', 'SubjectTeacher', 'Semester', 'TimeTable');
+  public $hasMany = array('Student' => array('dependent' => true),
+                          'Subject' => array('dependent' => true),
+                          'SubjectTeacher' => array('dependent' => true),
+                          'Semester' => array('dependent' => true),
+                          'TimeTable' => array('dependent' => true));
   public $actsAs = array('Containable');
 
   function beforeValidate() {

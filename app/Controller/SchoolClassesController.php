@@ -1,20 +1,18 @@
 <?php
 class SchoolClassesController extends AppController {
+
   public $name = 'SchoolClasses';
+  public $helpers = array('SchoolClass');
 
   function beforeFilter() {
-    if ($this->params['teacher']) {
-      $this->isTeacherFilter();
-      if ($this->action == 'teacher_view') {
-        $this->isOwningClassFilter();
-      }
+    parent::beforeFilter();
+    if ($this->action == 'teacher_view' || $this->action == 'teacher_delete') {
+      $this->classAuth();
     }
   }
 
-  function isOwningClassFilter()
-  {
-    $class = $this->SchoolClass->findById($this->params['id']);
-    if($class['SchoolClass']['teacher_id'] != $this->currentUser('id')) {
+  private function classAuth() {
+    if (!$this->SchoolClass->findByIdAndTeacherId($this->params['pass']['0'], $this->currentUser('id'))) {
       $this->Session->setFlash('Brak dostępu.', 'flash_error');
       $this->redirect($this->referer());
     }
@@ -31,18 +29,25 @@ class SchoolClassesController extends AppController {
   }
 
   function teacher_index() {
-  
-    $semester = $this->SchoolClass->Semester->findByClassId($this->Session->read('Auth.User.class_id'));	
-	$class = $this->SchoolClass->findById($this->Session->read('Auth.User.class_id'));
+    $semester = $this->SchoolClass->Semester->findByClassId($this->currentUser('class_id'));	
+  	$class = $this->SchoolClass->findById($this->currentUser('class_id'));
     $this->set('classes', $this->SchoolClass->findAllByTeacherId($this->currentUser('id')), array(), array('Semesters.id' => 'ASC'));
-	$this->set('semester_actual', $this->Session->read('Auth.User.semester_id'));
-	$this->set('class_actual', $this->Session->read('Auth.User.class_id'));
-	$this->set('class', $class);
-	$this->set('semester', $semester);
-		
+  	$this->set('semester_actual', $this->currentUser('semester_id'));
+  	$this->set('class_actual', $this->currentUser('class_id'));
+  	$this->set('class', $class);
+  	$this->set('semester', $semester);
   }
 
   function teacher_view() {
     $this->set('class', $this->SchoolClass->findById($this->params['id']));
   }
+
+  function teacher_delete() {
+    if ($this->SchoolClass->delete($this->params['pass']['0'])) {
+      $this->Session->setFlash('Usunięto klasę pomyślnie.', 'flash_success');
+      $this->redirect('/teacher/school_classes');
+    }
+  }
+
 }
+?>

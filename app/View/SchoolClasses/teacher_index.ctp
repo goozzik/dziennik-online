@@ -4,7 +4,9 @@
     <?php foreach ($classes as $class): ?>
 	    <tr>
 	    	<td>
-			    <?php echo $class['SchoolClass']['year'] . $class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook']; ?>
+			    <?php echo $class['SchoolClass']['year'] . $class['SchoolClass']['name'] . ' ' . $class['SchoolClass']['yearbook'];
+					  echo $this->Form->postLink('Usuń', array('teacher' => true, 'controller' => 'school_classes', 'action' => 'delete', $class['SchoolClass']['id']), array('confirm' => 'Jesteś pewien?', 'style' => 'float:right'));
+					?>
 		    </td>
 		  </tr>
 		
@@ -12,17 +14,13 @@
 			<?php foreach ($class['Semester'] as $semester): ?>
 				<tr>
 					<td style="padding-left:20px;">
-						<?php if ($semester_actual == $semester['id'])
-							echo 'Semestr ' . $semester['semester'] . ' - aktualnie wybrany';
+						<?php 
+						echo 'Semestr ' . $semester['semester'];
+						if ($semester_actual == $semester['id'])
+							echo ' - aktualnie wybrany';
 						else 
-							echo 'Semestr ' . $semester['semester'];
-							echo '<span style="float:right;">';
-							echo $this->Form->create('Teacher', array('teacher' => true, 'controller' => 'teachers', 'action' => 'edit'));
-							echo $this->Form->input('class_id', array('type' => 'hidden', 'value' => $class['SchoolClass']['id']));
-							echo $this->Form->input('semester_id', array('type' => 'hidden', 'value' => $semester['id']));
-							echo $this->Form->end('Ustaw');
-							echo '</span>';
-						  echo $this->Form->postButton('Delete', array('teacher' => true, 'controller' => 'semesters', 'action' => 'delete', $semester['id']), array('confirm' => 'Jesteś pewien?'));
+							echo $this->SchoolClass->activateSemesterButton($class['SchoolClass']['id'], $semester['semester']);
+						  echo $this->Form->postButton('Usuń', array('teacher' => true, 'controller' => 'semesters', 'action' => 'delete', $semester['id']), array('confirm' => 'Jesteś pewien?', 'style' => 'float:'));
 						?>
 					</td>
 				</tr>
