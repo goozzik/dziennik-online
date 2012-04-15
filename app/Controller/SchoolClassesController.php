@@ -29,17 +29,9 @@ class SchoolClassesController extends AppController {
   }
 
   function teacher_index() {
-    $semester = $this->SchoolClass->Semester->findByClassId($this->currentUser('class_id'));	
-  	$class = $this->SchoolClass->findById($this->currentUser('class_id'));
     $this->set('classes', $this->SchoolClass->findAllByTeacherId($this->currentUser('id')), array(), array('Semesters.id' => 'ASC'));
-  	$this->set('semester_actual', $this->currentUser('semester_id'));
-  	$this->set('class_actual', $this->currentUser('class_id'));
-  	$this->set('class', $class);
-  	$this->set('semester', $semester);
-  }
-
-  function teacher_view() {
-    $this->set('class', $this->SchoolClass->findById($this->params['id']));
+    $this->set('semester_actual', $this->currentUser('semester_id'));
+    $this->set('class_actual', $this->currentUser('class_id'));
   }
 
   function teacher_delete() {
