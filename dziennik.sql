@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 06 Mar 2012, 15:39
+-- Czas wygenerowania: 17 Mar 2012, 11:31
 -- Wersja serwera: 5.1.41
 -- Wersja PHP: 5.3.1
 
@@ -36,23 +36,110 @@ CREATE TABLE IF NOT EXISTS `absences` (
   `unexcused` int(3) unsigned DEFAULT NULL,
   `late` int(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=173 ;
+
+--
+-- Zrzut danych tabeli `absences`
+--
+
+INSERT INTO `absences` (`id`, `student_id`, `class_id`, `absence_report_id`, `date`, `required`, `justified`, `unexcused`, `late`) VALUES
+(125, 4, 1, NULL, '2012-03-05', 10, 1, 3, 6),
+(126, 4, 1, NULL, '2012-03-12', 40, NULL, NULL, NULL),
+(127, 43, 1, NULL, '2012-03-05', 14, 1, NULL, NULL),
+(128, 6, 1, NULL, '2012-03-05', NULL, NULL, NULL, NULL),
+(129, 7, 1, NULL, '2012-03-05', 12, 6, NULL, NULL),
+(130, 8, 1, NULL, '2012-03-05', 12, 2, NULL, NULL),
+(131, 10, 1, NULL, '2012-03-05', 12, 3, NULL, NULL),
+(132, 9, 1, NULL, '2012-03-05', 22, 12, NULL, NULL),
+(133, 11, 1, NULL, '2012-03-05', 12, 11, NULL, NULL),
+(134, 13, 1, NULL, '2012-03-05', 12, 4, NULL, NULL),
+(135, 14, 1, NULL, '2012-03-05', 12, 2, NULL, NULL),
+(136, 16, 1, NULL, '2012-03-05', 12, 3, NULL, NULL),
+(137, 17, 1, NULL, '2012-03-05', 12, 5, NULL, NULL),
+(138, 18, 1, NULL, '2012-03-05', 12, 5, NULL, NULL),
+(139, 12, 1, NULL, '2012-03-05', 12, 10, NULL, NULL),
+(140, 19, 1, NULL, '2012-03-05', 12, 4, NULL, NULL),
+(141, 20, 1, NULL, '2012-03-05', 12, 2, NULL, NULL),
+(142, 21, 1, NULL, '2012-03-05', 12, 8, NULL, NULL),
+(143, 22, 1, NULL, '2012-03-05', 12, 7, NULL, NULL),
+(144, 24, 1, NULL, '2012-03-05', 12, 1, NULL, NULL),
+(145, 25, 1, NULL, '2012-03-05', 12, 8, NULL, NULL),
+(146, 41, 1, NULL, '2012-03-05', 12, 7, NULL, NULL),
+(147, 28, 1, NULL, '2012-03-05', 12, 8, NULL, NULL),
+(148, 37, 1, NULL, '2012-03-05', 12, 6, NULL, NULL),
+(149, 50, 1, NULL, '2012-03-05', 12, 7, NULL, NULL),
+(150, 47, 1, NULL, '2012-03-05', 12, 9, NULL, NULL),
+(151, 48, 1, NULL, '2012-03-05', 12, 9, NULL, NULL),
+(152, 49, 1, NULL, '2012-03-05', 12, 9, NULL, NULL),
+(153, 43, 1, NULL, '2012-03-12', 10, NULL, NULL, NULL),
+(154, 6, 1, NULL, '2012-03-12', 40, 10, NULL, 1),
+(155, 7, 1, NULL, '2012-03-19', NULL, NULL, NULL, NULL),
+(156, 52, 1, NULL, '2012-05-14', NULL, NULL, NULL, NULL),
+(157, 4, 1, NULL, '2012-03-19', 11, 3, NULL, NULL),
+(158, 7, 1, NULL, '2012-03-12', NULL, NULL, NULL, NULL),
+(159, 14, 1, NULL, '2012-03-12', 40, 18, 11, NULL),
+(160, 43, 1, NULL, '2012-03-19', NULL, NULL, NULL, NULL),
+(161, 6, 1, NULL, '2012-03-19', NULL, NULL, NULL, NULL),
+(162, 8, 1, NULL, '2012-03-12', NULL, NULL, NULL, NULL),
+(163, 9, 1, NULL, '2012-03-12', 40, 11, NULL, NULL),
+(164, 10, 1, NULL, '2012-03-12', NULL, 11, NULL, NULL),
+(165, 11, 1, NULL, '2012-03-12', NULL, 11, NULL, NULL),
+(166, 13, 1, NULL, '2012-03-12', NULL, 12, NULL, NULL),
+(167, 12, 1, NULL, '2012-03-12', NULL, NULL, NULL, NULL),
+(168, 14, 1, NULL, '2012-03-19', 30, NULL, 11, NULL),
+(169, 48, 1, NULL, '2012-03-12', NULL, NULL, NULL, NULL),
+(170, 16, 1, NULL, '2012-03-19', NULL, NULL, NULL, NULL),
+(171, 17, 1, NULL, '2012-03-12', NULL, 2, NULL, NULL),
+(172, 43, 1, NULL, '2012-04-02', 40, 11, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `absence_reports`
+--
 
 CREATE TABLE IF NOT EXISTS `absence_reports` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `student_id` int(10) unsigned DEFAULT NULL,
   `class_id` int(10) unsigned DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `percentage` float(6) unsigned DEFAULT NULL,
+  `percentage` float unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
--- Zrzut danych tabeli `absences`
+-- Zrzut danych tabeli `absence_reports`
 --
 
-INSERT INTO `absences` (`id`, `student_id`, `class_id`, `date`, `required`, `justified`, `unexcused`, `late`) VALUES
-(124, 4, 1, '2012-03-05', 10, 1, 1, NULL);
+INSERT INTO `absence_reports` (`id`, `student_id`, `class_id`, `date`, `percentage`) VALUES
+(1, 4, NULL, '2012-03-05', 88.5246),
+(2, 43, NULL, '2012-03-05', 95.8333),
+(3, 6, NULL, '2012-03-05', 75),
+(4, 7, NULL, '2012-03-05', 50),
+(5, 8, NULL, '2012-03-05', 83.3333),
+(6, 10, NULL, '2012-03-05', 0),
+(7, 9, NULL, '2012-03-05', 62.9032),
+(8, 11, NULL, '2012-03-05', 0),
+(9, 12, NULL, '2012-03-05', 16.6667),
+(10, 13, NULL, '2012-03-05', 0),
+(11, 14, NULL, '2012-03-05', 48.7805),
+(12, 16, NULL, '2012-03-05', 75),
+(13, 17, NULL, '2012-03-05', 41.6667),
+(14, 18, NULL, '2012-03-05', 58.3333),
+(15, 19, NULL, '2012-03-05', 66.6667),
+(16, 20, NULL, '2012-03-05', 16.6667),
+(17, 21, NULL, '2012-03-05', 33.3333),
+(18, 22, NULL, '2012-03-05', 41.6667),
+(19, 24, NULL, '2012-03-05', 91.6667),
+(20, 25, NULL, '2012-03-05', 33.3333),
+(21, 28, NULL, '2012-03-05', 33.3333),
+(22, 41, NULL, '2012-03-05', 41.6667),
+(23, 37, NULL, '2012-03-05', 50),
+(24, 50, NULL, '2012-03-05', 41.6667),
+(25, 47, NULL, '2012-03-05', 25),
+(26, 48, NULL, '2012-03-05', 25),
+(27, 49, NULL, '2012-03-05', 25),
+(28, 43, NULL, '2012-04-02', 72.5);
 
 -- --------------------------------------------------------
 
@@ -88,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `classes` (
   `school_id` int(10) unsigned DEFAULT NULL,
   `teacher_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Zrzut danych tabeli `classes`
@@ -98,7 +185,8 @@ INSERT INTO `classes` (`id`, `year`, `name`, `profile`, `yearbook`, `school_id`,
 (1, 3, 'G', ' informatyk', 2011, NULL, 3),
 (2, 4, 'G', 'informatyk', 2011, NULL, 3),
 (3, 1, 'G', 'informatyk', 1997, NULL, 3),
-(5, 1, 'asdasd', 'asd', 2011, NULL, 3);
+(5, 1, 'asdasd', 'asd', 2011, NULL, 3),
+(6, 1, '1H', 'Biol-Chem', 2011, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -112,34 +200,32 @@ CREATE TABLE IF NOT EXISTS `descriptions` (
   `description` varchar(255) DEFAULT NULL,
   `colour` tinyint(4) NOT NULL,
   `subject_id` tinyint(3) unsigned DEFAULT NULL,
+  `semester_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Zrzut danych tabeli `descriptions`
 --
 
-INSERT INTO `descriptions` (`id`, `type`, `description`, `colour`, `subject_id`) VALUES
-(1, '', 'Sprawdzian "To Be"', 0, 1),
-(2, '', 'Sprawdzian "MÅ‚oda Polska"', 0, 5),
-(3, '', 'asdasd', 0, 5),
-(4, '', 'Sprawdzian z Trygonometrii', 0, 2),
-(5, '', 'Praca domowa "Just to"', 0, 1),
-(6, '', 'Sprawdzian z miÄ™Å›ni', 0, 9),
-(7, '', 'Praca domowa "Just to"', 0, 8),
-(8, '', 'Sprawdzian z Trygonometrii', 0, 10),
-(9, '', 'Asasdasd', 0, 1),
-(10, '', '1', 0, 19),
-(11, '', '', 0, 19),
-(12, '', '', 0, 19),
-(13, '', '123123', 0, 19),
-(14, '', 'asdasdasdsasad', 0, 19),
-(15, '', 'adsasdasdsad', 0, 11),
-(16, '', 'sadsadsadads', 0, 11),
-(17, '123', '123', 123, 11),
-(18, 'aaa', 'aaa', 123, 11),
-(19, 'Sprawdzian', 'To be', 4, 11),
-(20, 'KartkÃ³wka', 'Mowa zaleÅ¼na', 0, 31);
+INSERT INTO `descriptions` (`id`, `type`, `description`, `colour`, `subject_id`, `semester_id`) VALUES
+(1, '123', '123123', 1, 31, 0),
+(2, '1231123123123', '12312313123123', 1, 31, 0),
+(3, '123123', '123123', 123, 25, 0),
+(4, 'KartkÃ³wka', '123', 123, 31, 0),
+(5, '23456789', '1234', 2, 31, 0),
+(6, 'rrrr', 'rrr', 1, 31, 0),
+(7, '123', '321', 99, 31, 0),
+(8, '1', '1', 1, 31, 0),
+(9, '1', '1', 1, 31, 0),
+(10, '1', '1', 1, 31, 0),
+(15, 'KartkÃ³wka', 'Sprawdzian z Trygonometrii', 1, 31, 2),
+(18, '123', 'Sprawdzian z Trygonometrii', 1, 31, 1),
+(19, 'KartkÃ³wka', 'Sprawdzian z Trygonometrii', 1, 30, 1),
+(20, 'KartkÃ³wka', 'z Trygonometrii', 1, 33, 1),
+(21, 'KartkÃ³wka', 'Pitagoras', 1, 33, 1),
+(22, 'KartkÃ³wka', 'Sprawdzian z Trygonometrii', 1, 33, 2),
+(23, 'KartkÃ³wka', 'Sprawdzian z Trygonometrii', 1, 33, 2);
 
 -- --------------------------------------------------------
 
@@ -158,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `size` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Zrzut danych tabeli `documents`
@@ -166,7 +252,8 @@ CREATE TABLE IF NOT EXISTS `documents` (
 
 INSERT INTO `documents` (`id`, `class_id`, `semester_id`, `name`, `description`, `path`, `type`, `size`, `date`) VALUES
 (1, 1, 1, '0_2.jpg', 'asd', 'asd', 'image/jpeg', 273190, '2012-03-06 14:43:44'),
-(2, 1, 1, '1_2.jpg', 'asd', 'C:/xampp/htdocs/dziennik-online/app/webroot/documents/files/1_2.jpg', 'image/jpeg', 273190, '2012-03-06 14:51:38');
+(2, 1, 1, '1_2.jpg', 'asd', 'C:/xampp/htdocs/dziennik-online/app/webroot/documents/files/1_2.jpg', 'image/jpeg', 273190, '2012-03-06 14:51:38'),
+(9, 1, 2, '0_to do - dziennik.txt', 'Nowy szablon testowy plik', 'C:\\xampp\\htdocs\\dziennik-online\\app\\webroot\\documents\\files\\0_to do - dziennik.txt', 'text/plain', 715, '2012-03-10 13:35:57');
 
 -- --------------------------------------------------------
 
@@ -180,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `lessons` (
   `time_table_id` int(10) unsigned DEFAULT NULL,
   `lesson_number` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
 
 --
 -- Zrzut danych tabeli `lessons`
@@ -224,7 +311,23 @@ INSERT INTO `lessons` (`id`, `subject_id`, `time_table_id`, `lesson_number`) VAL
 (35, 20, 15, 1),
 (36, 17, 15, 2),
 (37, 20, 15, 3),
-(38, 24, 15, 4);
+(38, 24, 15, 4),
+(39, 25, 18, 0),
+(40, 30, 18, 1),
+(41, 25, 18, 2),
+(42, 11, 18, 3),
+(43, 25, 19, 0),
+(44, 32, 19, 1),
+(45, 32, 19, 2),
+(46, 11, 19, 4),
+(47, 30, 20, 0),
+(48, 11, 20, 1),
+(49, 11, 20, 2),
+(50, 25, 21, 0),
+(51, 25, 21, 1),
+(52, 28, 21, 2),
+(53, 26, 21, 3),
+(54, 26, 21, 4);
 
 -- --------------------------------------------------------
 
@@ -239,87 +342,99 @@ CREATE TABLE IF NOT EXISTS `marks` (
   `semester_id` int(11) NOT NULL,
   `subject_id` tinyint(3) unsigned DEFAULT NULL,
   `description_id` int(10) unsigned DEFAULT NULL,
-  `mark` varchar(3) DEFAULT NULL,
+  `mark` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Zrzut danych tabeli `marks`
 --
 
 INSERT INTO `marks` (`id`, `student_id`, `class_id`, `semester_id`, `subject_id`, `description_id`, `mark`) VALUES
-(1, 46, 1, 2, 1, 1, '1'),
-(2, 12, 1, 2, 1, 5, '2'),
-(3, 48, 1, 2, 1, 1, '3'),
-(4, 8, 1, 2, 1, 1, '4'),
-(5, 46, 1, 2, 19, 11, '			'),
-(6, 11, 1, 2, 19, 11, '6'),
-(7, 48, 1, 2, 19, 11, '3'),
-(8, 8, 1, 2, 19, 11, '1'),
-(9, 22, 1, 2, 19, 11, '			'),
-(10, 46, 1, 2, 19, 10, '			'),
-(11, 8, 1, 2, 19, 10, '			'),
-(12, 41, 1, 2, 19, 11, '			'),
-(13, 19, 1, 2, 19, 12, 'nkl'),
-(14, 24, 1, 2, 19, 13, '			'),
-(15, 24, 1, 2, 19, 13, '			'),
-(16, 25, 1, 2, 19, 11, '			'),
-(17, 10, 1, 2, 19, 11, '3'),
-(18, 12, 1, 2, 19, 11, '			'),
-(19, 49, 1, 2, 19, 11, '			'),
-(20, 9, 1, 2, 19, 11, '2'),
-(21, 41, 1, 2, 19, 13, '3'),
-(22, 47, 1, 2, 19, 11, '3'),
-(23, 8, 1, 2, 19, 12, '			'),
-(24, 9, 1, 2, 19, 12, '5'),
-(25, 41, 1, 2, 19, 12, '5'),
-(26, 7, 1, 2, 19, 12, '5'),
-(27, 4, 1, 2, 19, 12, '			'),
-(28, 49, 1, 2, 19, 12, '			'),
-(29, 11, 1, 2, 19, 12, '4'),
-(30, 12, 1, 2, 19, 12, '			'),
-(31, 46, 1, 2, 19, 12, '			'),
-(32, 48, 1, 2, 19, 12, '3'),
-(33, 48, 1, 2, 19, 12, '			'),
-(34, 25, 1, 2, 19, 12, '3'),
-(35, 41, 1, 2, 19, 10, '3'),
-(36, 7, 1, 2, 19, 10, '3'),
-(37, 17, 1, 2, 19, 12, '1'),
-(38, 49, 1, 2, 19, 13, '3'),
-(39, 11, 1, 2, 19, 10, '			'),
-(40, 9, 1, 2, 19, 13, '4'),
-(41, 8, 1, 2, 19, 13, '4'),
-(42, 48, 1, 2, 19, 13, '3'),
-(43, 11, 1, 2, 19, 13, '4'),
-(44, 47, 1, 2, 19, 13, '4'),
-(45, 12, 1, 2, 19, 13, '4'),
-(46, 46, 1, 2, 19, 13, '			'),
-(47, 13, 1, 2, 19, 13, '4'),
-(48, 9, 1, 2, 19, 14, '3'),
-(49, 25, 1, 2, 19, 13, '3'),
-(50, 10, 1, 2, 19, 13, '			'),
-(61, 11, 1, 2, 19, 14, '4'),
-(51, 10, 1, 2, 19, 12, '6-'),
-(52, 6, 1, 2, 19, 10, '3'),
-(53, 12, 1, 2, 19, 10, '			'),
-(54, 8, 1, 2, 19, 14, '			'),
-(55, 48, 1, 2, 19, 14, '			'),
-(56, 19, 1, 2, 19, 11, 'zw'),
-(57, 16, 1, 2, 19, 12, 'nk'),
-(58, 16, 1, 2, 19, 11, '6'),
-(59, 28, 1, 2, 19, 11, 'asd'),
-(60, 7, 1, 2, 19, 11, '			'),
-(62, 49, 1, 2, 19, 10, '			'),
-(63, 12, 1, 0, 31, 20, '3'),
-(64, 11, 1, 0, 31, 20, '4'),
-(65, 48, 1, 0, 31, 20, '5 '),
-(66, 49, 1, 0, 31, 20, '4-'),
-(67, 8, 1, 0, 31, 20, '6'),
-(68, 25, 1, 0, 31, 20, '1'),
-(69, 9, 1, 0, 31, 20, 'nb'),
-(70, 10, 1, 0, 31, 20, '2'),
-(71, 41, 1, 0, 31, 20, 'asd'),
-(72, 4, 1, 0, 31, 20, 'kn');
+(1, 51, 1, 2, 25, 3, '2'),
+(2, 52, 1, 2, 25, 3, '2'),
+(3, 12, 1, 2, 25, 3, '3'),
+(4, 48, 1, 2, 25, 3, '2'),
+(5, 50, 1, 2, 25, 3, '3'),
+(6, 8, 1, 2, 25, 3, '3'),
+(7, 49, 1, 2, 25, 3, '3'),
+(8, 11, 1, 2, 25, 3, '3'),
+(9, 17, 1, 2, 25, 3, '3'),
+(10, 4, 1, 2, 25, 3, '3'),
+(11, 7, 1, 2, 25, 3, '3'),
+(12, 47, 1, 2, 25, 3, ''),
+(13, 22, 1, 2, 25, 3, '3'),
+(14, 37, 1, 2, 25, 3, '3'),
+(15, 19, 1, 2, 25, 3, '3'),
+(16, 21, 1, 2, 25, 3, '3 '),
+(17, 14, 1, 2, 25, 3, '1-'),
+(18, 52, 1, 2, 31, 1, '3 '),
+(19, 52, 1, 2, 31, 2, '4-'),
+(20, 51, 1, 2, 31, 15, '5 '),
+(21, 12, 1, 2, 31, 15, ''),
+(22, 51, 1, 1, 30, 19, '1'),
+(23, 11, 1, 1, 30, 19, '2'),
+(24, 48, 1, 1, 30, 19, '3'),
+(25, 8, 1, 1, 30, 19, '4-'),
+(26, 10, 1, 1, 30, 19, '3-'),
+(27, 12, 1, 1, 33, 20, '2'),
+(28, 12, 1, 1, 33, 21, '3'),
+(29, 4, 1, 2, 33, 22, '3'),
+(30, 4, 1, 2, 33, 23, '5 ');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `mark_semesters`
+--
+
+CREATE TABLE IF NOT EXISTS `mark_semesters` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `student_id` int(10) unsigned DEFAULT NULL,
+  `class_id` int(10) unsigned DEFAULT NULL,
+  `semester_id` int(11) NOT NULL,
+  `subject_id` tinyint(3) unsigned DEFAULT NULL,
+  `mark` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+
+--
+-- Zrzut danych tabeli `mark_semesters`
+--
+
+INSERT INTO `mark_semesters` (`id`, `student_id`, `class_id`, `semester_id`, `subject_id`, `mark`) VALUES
+(1, 11, 1, 2, 31, '4 '),
+(2, 48, 1, 2, 25, '3 '),
+(3, 9, 1, 2, 31, '4'),
+(4, 10, 1, 2, 31, '5'),
+(5, 41, 1, 2, 31, 'zw'),
+(6, 47, 1, 2, 31, '6'),
+(7, 49, 1, 2, 31, '4a'),
+(8, 7, 1, 2, 31, '5'),
+(9, 17, 1, 2, 31, '2'),
+(10, 25, 1, 2, 31, '3'),
+(11, 8, 1, 2, 31, '4 '),
+(12, 52, 1, 2, 31, 'nkl'),
+(13, 12, 1, 2, 31, 'zw'),
+(14, 50, 1, 2, 31, '4-'),
+(15, 4, 1, 2, 33, '4'),
+(16, 37, 1, 2, 31, '3'),
+(17, 22, 1, 2, 31, '1'),
+(18, 43, 1, 2, 31, '1'),
+(19, 16, 1, 2, 31, '4'),
+(20, 19, 1, 2, 31, '5'),
+(21, 21, 1, 2, 25, '5-'),
+(22, 24, 1, 2, 31, '5'),
+(23, 51, 1, 2, 31, '5 '),
+(24, 28, 1, 2, 31, '6'),
+(25, 13, 1, 2, 31, '6'),
+(26, 14, 1, 2, 31, '6'),
+(27, 6, 1, 2, 31, '6'),
+(28, 18, 1, 2, 31, '6'),
+(29, 12, 1, 1, 33, '2'),
+(30, 52, 1, 1, 30, '2'),
+(31, 51, 1, 1, 30, '3'),
+(32, 11, 1, 1, 30, '3');
 
 -- --------------------------------------------------------
 
@@ -342,10 +457,6 @@ CREATE TABLE IF NOT EXISTS `notes` (
 
 
 -- --------------------------------------------------------
-
---
--- Struktura tabeli dla  `reports_absences`
---
 
 --
 -- Struktura tabeli dla  `schools`
@@ -374,8 +485,9 @@ CREATE TABLE IF NOT EXISTS `semesters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_id` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
   KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Zrzut danych tabeli `semesters`
@@ -401,7 +513,8 @@ INSERT INTO `semesters` (`id`, `class_id`, `semester`) VALUES
 (17, 3, 3),
 (18, 5, 1),
 (19, 5, 2),
-(20, 3, 4);
+(20, 3, 4),
+(21, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -417,19 +530,17 @@ CREATE TABLE IF NOT EXISTS `subjects` (
   `name` varchar(255) DEFAULT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Zrzut danych tabeli `subjects`
 --
 
 INSERT INTO `subjects` (`id`, `school_id`, `teacher_id`, `class_id`, `name`, `deleted`) VALUES
-(31, NULL, 3, 1, 'NP', 0),
+(33, NULL, 3, 1, 'Matematyka', 0),
 (30, NULL, 3, 1, 'OB', 0),
-(11, NULL, 3, 1, 'asdasd', 0),
 (25, NULL, 3, 1, 'Angielski', 0),
 (10, NULL, 3, 2, 'Matematyka', 0),
-(32, NULL, 3, 1, 'BB', 0),
 (26, NULL, 3, 1, 'Niemiecki', 0),
 (27, NULL, 3, 1, 'JapoÅ„ski', 0),
 (28, NULL, 3, 1, 'WÅ‚oski', 0),
@@ -451,14 +562,14 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `telephone` varchar(32) NOT NULL,
   `mail` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Zrzut danych tabeli `teachers`
 --
 
 INSERT INTO `teachers` (`id`, `class_id`, `subject_id`, `first_name`, `last_name`, `work_hours`, `telephone`, `mail`) VALUES
-(14, 1, 19, 'arek', 'Dudek', '', '48795763205', 'asd@o2.pl'),
+(20, 1, 27, 'Dudek', 'Bartosik', '', '123123123', 'asd@o2.pl'),
 (19, 1, 30, 'asdasd', 'Bartosik', '', '123123-123123', 'asd@o2.pl');
 
 -- --------------------------------------------------------
@@ -472,15 +583,14 @@ CREATE TABLE IF NOT EXISTS `time_tables` (
   `class_id` int(10) unsigned DEFAULT NULL,
   `week_day` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Zrzut danych tabeli `time_tables`
 --
 
 INSERT INTO `time_tables` (`id`, `class_id`, `week_day`) VALUES
-(8, 1, 2),
-(14, 1, 1);
+(21, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -514,7 +624,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `superadmin` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 --
 -- Zrzut danych tabeli `users`
@@ -533,14 +643,13 @@ INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `p
 (10, 'Dawid ChwaÅ‚owski', '8a0596599ffb73fa3335054c4117247258e8548b', 'Dawid ', 'ChwaÅ‚owski', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (11, 'BartoszBartosik', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Bartosz', 'Bartosik', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (12, 'DominikBagmat', 'c79dcc7c1e6b24ef285ed4a5895ef35ef40a7071', 'Dominik', 'Bagmat', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
-(13, 'MateuszOstrowski', '0eb73ab2423e1d82b88ad0ea9920db7ff3c0a088', 'Mateusz', 'Ostrowski', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (14, 'SebastianPiwowarczyk', '52c41d7b1b7b1ca5e45f2fcb3cece116dfd177c5', 'Sebastian', 'Piwowarczyk', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (45, 'ArkadiuszKoÅ¼uch1', '86f7e00637b4634921834d25a5a0dd39749a5dc2', 'Arkadiusz', 'KoÅ¼uch', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 2, 0, 3, 1, 0, 0, 0, 0),
 (16, 'ArkadiuszKoÅ¼uch', '86f7e00637b4634921834d25a5a0dd39749a5dc2', 'Arkadiusz', 'KoÅ¼uch', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (17, 'DawidKierat', 'fa109bf3787261186c8f5116be6ace3b2bb0d177', 'Dawid', 'Kierat', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (18, 'MateuszRomaÅ„ski', '093992a3f32692e47ba53bb92b0ca8be9bd8d7e9', 'Mateusz', 'RomaÅ„ski', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (19, 'MichaÅ‚Mijalski', 'dfbcd63606908bf156e2b68111da02274d0b530f', 'MichaÅ‚', 'Mijalski', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
-(20, 'KamilPjanka', 'cac1a181f38ad493ca5a7e287f75cc2169912700', 'Kamil', 'Pjanka', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
+(51, 'Dudek123123', 'b0d1f5386adcf43b16f16ff4cc5d55e0c53d7126', 'Dudek', '123123', 123123, '123132', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (21, 'RafaÅ‚MoÅ„ka', '6fdfb57684f8bd607599fcd54099c38d8d0c3b99', 'RafaÅ‚', 'MoÅ„ka', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (22, 'KrystianKondracki', '3046b65eb460668252e08b28df9bf4733b086b67', 'Krystian', 'Kondracki', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (24, 'Szymon KuczyÅ„ski', '3f1865eb600b5aee2c4d83ef830f3eb201994a2e', 'Szymon ', 'KuczyÅ„ski', 0, '', '', '', '', 0, '', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
@@ -551,8 +660,10 @@ INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `p
 (50, 'PiotrBartosik2', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Piotr', 'Bartosik', 123123, 'sasdadssdasad', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (47, 'arekDudek', 'b75b00480251f1feb19506f7ea3b18413dacaa80', 'arek', 'Dudek', 123, '123', '1 maja 11m37', 'Czestochowa', '42217', 14, '123123123', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
 (48, 'PiotrBartosik', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Piotr', 'Bartosik', 2147483647, 'sasdadssdasad', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 1, 1, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
-(49, 'PiotrBartosik1', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Piotr', 'Bartosik', 123123, '123123', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 0, 1, NULL, 1, 0, 3, 1, 0, 0, 0, 0);
+(49, 'PiotrBartosik1', 'f7c4e390c418ac1e02f337cd1b60aaa21e35632e', 'Piotr', 'Bartosik', 123123, '123123', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 0, 1, NULL, 1, 0, 3, 1, 0, 0, 0, 0),
+(52, 'Dudekasd', '7df1240e316d96bb996fa3a0a413cb3113310940', 'Dudek', 'asd', 123123, '123', '1 maja 11m37', 'Czestochowa', '42217', 8, '48795763205', NULL, 0, 0, NULL, 1, 0, 3, 1, 0, 0, 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
