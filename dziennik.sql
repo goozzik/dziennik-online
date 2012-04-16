@@ -174,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `classes` (
   `yearbook` int(10) unsigned DEFAULT NULL,
   `school_id` int(10) unsigned DEFAULT NULL,
   `teacher_id` int(10) unsigned DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
@@ -486,6 +487,7 @@ CREATE TABLE IF NOT EXISTS `semesters` (
   `class_id` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
   `teacher_id` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
