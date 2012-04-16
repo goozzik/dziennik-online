@@ -622,6 +622,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `teacher` tinyint(1) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   `superadmin` tinyint(1) NOT NULL DEFAULT '0',
+  `director` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
