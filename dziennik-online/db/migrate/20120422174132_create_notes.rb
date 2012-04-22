@@ -1,7 +1,7 @@
 class CreateNotes < ActiveRecord::Migration
 
   def up
-    create_table :schools do |t|
+    create_table :notes do |t|
       t.integer :user_id
       t.integer :class_id
       t.integer :teacher_id
@@ -12,7 +12,7 @@ class CreateNotes < ActiveRecord::Migration
   end
 
   def down
-    drop_table :schools
+    drop_table :notes
   end
 
 end
