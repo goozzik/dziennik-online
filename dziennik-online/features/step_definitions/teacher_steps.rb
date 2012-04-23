@@ -8,3 +8,13 @@ Then /^I should see new class form$/ do
   assert page.has_xpath?("//form[@action='/teacher/school_classes']")
   assert page.has_xpath?("//input[@value='Stwórz']")
 end
+
+When /^I create class$/ do
+  visit('/teacher/school_classes')
+  fill_in('Klasa', :with => '3')
+  fill_in('Nazwa', :with => 'G')
+  fill_in('Profil', :with => 'Informatyk')
+  fill_in('Rocznik', :with => '2013')
+  click_button('Stwórz')
+  assert SchoolClass.first(:conditions => ['year = ? AND name = ? AND profile = ? AND yearbook = ?', 3, 'G', 'Informatyk', '2013'])
+end
