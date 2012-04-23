@@ -1,5 +1,7 @@
-<% @school_classes.each do |school_class| %>
-  <%= school_class.fullname %>
+<% unless @school_classes.nil? %>
+  <% @school_classes.each do |school_class| %>
+    <%= school_class.fullname %>
+  <% end %>
 <% end %>
 
 <h2>Dodaj nową klasę</h2>

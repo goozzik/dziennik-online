@@ -7,7 +7,7 @@ class Teacher::SchoolClassesController < ApplicationController
 
   def create
     @school_class = current_teacher.school_classes.build(params[:school_class])
-    @school_class.save ? redirect_to(teacher_school_classes_path) : render(teacher_school_classes_path)
+    @school_class.save ? redirect_to(:action => "index") : render(:action => "index")
   end
 
 end
