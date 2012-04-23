@@ -3,8 +3,6 @@ class CreateUsers < ActiveRecord::Migration
   def up
     create_table :users do |t|
       t.string :user_name
-      t.string :password_hash
-      t.string :password_salt
       t.string :first_name
       t.string :last_name
       t.integer :pesel
@@ -13,7 +11,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :city
       t.string :zip_code
       t.string :telephone
-      t.string :mail
       t.boolean :individual
       t.boolean :boarding_school
       t.integer :school_id

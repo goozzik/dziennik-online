@@ -164,8 +164,6 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
 
   create_table "users", :force => true do |t|
     t.string   "user_name"
-    t.string   "password_hash"
-    t.string   "password_salt"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "pesel"
@@ -174,7 +172,6 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.string   "city"
     t.string   "zip_code"
     t.string   "telephone"
-    t.string   "mail"
     t.boolean  "individual"
     t.boolean  "boarding_school"
     t.integer  "school_id"
