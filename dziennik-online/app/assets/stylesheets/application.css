@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
 */
+#login_box {
+  margin: 0 auto;
+  width: 400px;
+}
