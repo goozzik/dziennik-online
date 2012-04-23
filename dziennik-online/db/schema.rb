@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "user_name"
+    t.string   "username"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "pesel"
