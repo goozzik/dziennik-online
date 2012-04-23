@@ -1,5 +1,12 @@
 DziennikOnline::Application.routes.draw do
+
+  devise_for :teachers
+
   devise_for :users
+
+  namespace :teacher do
+    resources :school_classes
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

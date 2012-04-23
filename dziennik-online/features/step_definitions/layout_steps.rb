@@ -3,6 +3,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
   case page_name
   when 'the home page'
     visit('/')
+  when 'the teacher school classes index page'
+    visit('/teacher/school_classes')
   end
 end
 
