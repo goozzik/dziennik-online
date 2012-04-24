@@ -11,3 +11,4 @@ Feature: Teacher School Classes
     Then I should have class and updated teacher class_id
     And I should have semester and updated teacher semester_id
     And I should see "3 G 2013"
+    And I should see "Semestr 1 - aktualnie wybrany"

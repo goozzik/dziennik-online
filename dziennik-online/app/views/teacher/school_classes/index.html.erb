@@ -1,22 +1,35 @@
-<% unless @school_classes.nil? %>
-  <% @school_classes.each do |school_class| %>
-    <%= school_class.fullname %>
+<table>
+  <% unless @school_classes.nil? %>
+    <% @school_classes.each do |school_class| %>
+      <tr>
+        <td><%= school_class.fullname %><td>
+      </tr>
+
+      <% school_class.semesters.each do |semester| %>
+        <tr>
+          <td>Semestr <%= semester_status_info(semester) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <tr>
+      <td><%= button_to("Dodaj nowy semestr", {:controller => 'teacher/school_classes', :action => 'create'}) %><td>
+    </tr>
   <% end %>
-<% end %>
+</table>
 
-<h2>Dodaj nową klasę</h2>
-<%= form_for @school_class, :url => teacher_school_classes_path do |f| %>
-  <div><%= f.label :year, 'Klasa' %><br />
-  <%= f.number_field :year %></div>
+  <h2>Dodaj nową klasę</h2>
+  <%= form_for @school_class, :url => teacher_school_classes_path do |f| %>
+    <div><%= f.label :year, 'Klasa' %><br />
+    <%= f.number_field :year %></div>
 
-  <div><%= f.label :name, 'Nazwa' %><br />
-  <%= f.text_field :name %></div>
+    <div><%= f.label :name, 'Nazwa' %><br />
+    <%= f.text_field :name %></div>
 
-  <div><%= f.label :profile, 'Profil' %><br />
-  <%= f.text_field :profile %></div>
+    <div><%= f.label :profile, 'Profil' %><br />
+    <%= f.text_field :profile %></div>
 
-  <div><%= f.label :yearbook, 'Rocznik' %><br />
-  <%= f.number_field :yearbook, :value => '2011' %></div>
+    <div><%= f.label :yearbook, 'Rocznik' %><br />
+    <%= f.number_field :yearbook, :value => '2011' %></div>
 
-  <div><%= f.submit "Stwórz" %></div>
-<% end %>
+    <div><%= f.submit "Stwórz" %></div>
+  <% end %>
