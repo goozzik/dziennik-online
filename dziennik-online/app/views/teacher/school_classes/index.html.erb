@@ -10,7 +10,10 @@
 
       <% school_class.semesters.each do |semester| %>
         <tr>
-          <td>Semestr <%= semester_status_info(semester) %></td>
+          <td>
+            Semestr <%= semester_status_info(semester) %>
+            <%= button_to("Usuń", {:controller => 'teacher/semesters', :action => 'destroy', :id => semester.id}, :method => :delete, :confirm => "Jesteś pewien?") %>
+          </td>
         </tr>
       <% end %>
 

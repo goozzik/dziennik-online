@@ -5,4 +5,10 @@ class Teacher::SemestersController < ApplicationController
     @semester.save ? redirect_to(:controller => "school_classes", :action => "index") : render(:action => "index")
   end
 
+  def destroy
+    @semester = Semester.find(params[:id])
+    @semester.destroy
+    redirect_to :controller => "school_classes", :action => "index"
+  end
+
 end

@@ -8,20 +8,43 @@ Feature: Teacher School Classes
   Scenario: Create class
     Given I am logged in as a teacher
     When I create class
-    Then I should have class and updated teacher class_id
-    And I should have semester and updated teacher semester_id
+    Then I should have active class and updated teacher class_id
+    And I should have active semester and updated teacher semester_id
     And I should see "3 G 2013"
     And I should see "Semestr 1 - aktualnie wybrany"
 
-  Scenario: Create semester when i have class with semester
+  Scenario: Create semester when I have class with semester
     Given I am logged in as a teacher
     When I create class
-    And click buttton add new semestr
+    And I create semester
     Then old semester should be unactive and new one should be active
     Then I should see "Semestr 2"
 
-  Scenario: Delete school class
+  Scenario: Delete active school class
     Given I am logged in as a teacher
     When I create class
-    And follow link to delete class
+    And I delete class
     Then class and semester should be deleted
+    And I should have not set up current semester and school class
+
+  Scenario: Delete not active school class
+    Given I am logged in as a teacher
+    When I create two classes
+    And I delete class
+    Then old class and semester should be deleted
+    And I should have set up current semester and school class
+
+  Scenario: Delete active semester
+    Given I am logged in as a teacher
+    When I create class
+    And I delete semester
+    Then semester should be deleted
+    And I should have not set up current semester
+
+  Scenario: Delete not active semester
+    Given I am logged in as a teacher
+    When I create class
+    And I create semester
+    And I delete semester
+    Then old semester should be deleted
+    And I should have set up current semester

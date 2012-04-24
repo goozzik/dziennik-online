@@ -5,11 +5,19 @@ class Teacher < User
   attr_accessible :school_class_id, :semester_id
 
   def school_class
-    SchoolClass.find(self.school_class_id)
+    if self.school_class_id
+      SchoolClass.find(self.school_class_id)
+    else
+      return nil
+    end
   end
 
   def semester
-    Semester.find(self.semester_id)
+    if self.semester_id
+      Semester.find(self.semester_id)
+    else
+      return nil
+    end
   end
 
 end

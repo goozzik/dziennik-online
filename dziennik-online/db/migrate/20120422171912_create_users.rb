@@ -14,7 +14,6 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :individual
       t.boolean :boarding_school
       t.integer :school_class_id
-      t.integer :class_id
       t.integer :semester_id
       t.integer :teacher_id
       t.boolean :student
