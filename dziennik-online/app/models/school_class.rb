@@ -15,6 +15,17 @@ class SchoolClass < ActiveRecord::Base
     [self.year, self.name, self.yearbook].join(' ')
   end
 
+  def activate
+    SchoolClass.deactivate(self.teacher_id)
+    self.update_attributes(:active => true)
+    self.teacher.update_attributes(:school_class_id => self.id)
+  end
+
+  def self.deactivate(teacher_id)
+    active_school_class = SchoolClass.first(:conditions => ['teacher_id = ? AND active = ?', teacher_id, true])
+    active_school_class.update_attributes(:active => false) if active_school_class
+  end
+
   private
 
     def unactive_old_school_class

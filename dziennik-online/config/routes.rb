@@ -9,6 +9,9 @@ DziennikOnline::Application.routes.draw do
     resources :semesters
   end
 
+  match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

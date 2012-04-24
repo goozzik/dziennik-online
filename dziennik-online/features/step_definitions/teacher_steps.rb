@@ -100,7 +100,7 @@ When /^I set first semester as active$/ do
 end
 
 Then /^first semester should be active and second not active$/ do
-  assert Teacher.first.semester_id == Teacher.semesters.find_by_active(true).id
+  assert Teacher.first.semester_id == Semester.find_by_active(true).id
   assert !Semester.last.active
   step "I should see \"Semestr 1 - aktualnie wybrany\""
 end

@@ -9,6 +9,18 @@ class Semester < ActiveRecord::Base
 
   before_destroy :unset_teacher_semester_id, :if => :active
 
+  def activate
+    Semester.deactivate(self.teacher_id)
+    self.update_attributes(:active => true)
+    self.teacher.update_attributes(:semester_id => self.id)
+    self.school_class.activate if self.school_class != self.teacher.school_class
+  end
+
+  def self.deactivate(teacher_id)
+    active_semester = Semester.first(:conditions => ['teacher_id = ? AND active = ?', teacher_id, true])
+    active_semester.update_attributes(:active => false) if active_semester
+  end
+
   private
 
     def inherit_from_school_class
