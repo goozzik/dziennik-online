@@ -3,7 +3,7 @@ class CreateAbsenceReports < ActiveRecord::Migration
   def up
     create_table :absence_reports do |t|
       t.integer :student_id
-      t.integer :class_id
+      t.integer :school_class_id
       t.date :date
       t.float :percentage
 

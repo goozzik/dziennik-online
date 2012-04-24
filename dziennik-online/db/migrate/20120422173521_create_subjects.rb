@@ -4,7 +4,7 @@ class CreateSubjects < ActiveRecord::Migration
     create_table :subjects do |t|
       t.integer :school_id
       t.integer :teacher_id
-      t.integer :class_id
+      t.integer :school_class_id
       t.string :name
       t.boolean :deleted # For what is it?
 

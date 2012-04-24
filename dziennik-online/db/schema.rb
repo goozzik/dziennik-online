@@ -15,16 +15,16 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
 
   create_table "absence_reports", :force => true do |t|
     t.integer  "student_id"
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.date     "date"
     t.float    "percentage"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.integer  "absence_report_id"
     t.date     "date"
     t.boolean  "required"
@@ -55,15 +55,15 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
   end
 
   create_table "documents", :force => true do |t|
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.integer  "semester_id"
     t.string   "name"
     t.string   "description"
     t.string   "path"
     t.string   "type"
     t.integer  "size"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "lessons", :force => true do |t|
@@ -76,22 +76,22 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
 
   create_table "marks", :force => true do |t|
     t.integer  "student_id"
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.integer  "semester_id"
     t.integer  "subject_id"
     t.integer  "description_id"
     t.string   "mark"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "notes", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.integer  "teacher_id"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "school_classes", :force => true do |t|
@@ -116,38 +116,38 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
 
   create_table "semester_marks", :force => true do |t|
     t.integer  "student_id"
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.integer  "semester_id"
     t.integer  "subject_id"
     t.integer  "mark"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "semesters", :force => true do |t|
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.integer  "semester"
     t.integer  "teacher_id"
     t.boolean  "active"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "subjects", :force => true do |t|
     t.integer  "school_id"
     t.integer  "teacher_id"
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.string   "name"
     t.boolean  "deleted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "time_tables", :force => true do |t|
-    t.integer  "class_id"
+    t.integer  "school_class_id"
     t.integer  "week_day"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.string   "telephone"
     t.boolean  "individual"
     t.boolean  "boarding_school"
-    t.integer  "school_id"
+    t.integer  "school_class_id"
     t.integer  "class_id"
     t.integer  "semester_id"
     t.integer  "teacher_id"

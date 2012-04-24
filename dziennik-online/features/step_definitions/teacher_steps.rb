@@ -23,3 +23,10 @@ Then /^I should have class and updated teacher class_id$/ do
   assert school_class
   assert Teacher.first.school_class == school_class
 end
+
+Then /^I should have semester and updated teacher semester_id$/ do
+  school_class = SchoolClass.first(:conditions => ['year = ? AND name = ? AND profile = ? AND yearbook = ?', 3, 'G', 'Informatyk', '2013'])
+  semester = Semester.first(:conditions => ['school_class_id = ?', school_class.id])
+  assert semester
+  assert Teacher.first.semester == semester
+end

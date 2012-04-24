@@ -9,4 +9,5 @@ Feature: Teacher School Classes
     Given I am logged in as a teacher
     When I create class
     Then I should have class and updated teacher class_id
-    Then I should see "3 G 2013"
+    And I should have semester and updated teacher semester_id
+    And I should see "3 G 2013"

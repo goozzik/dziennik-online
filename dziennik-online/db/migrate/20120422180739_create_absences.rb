@@ -3,7 +3,7 @@ class CreateAbsences < ActiveRecord::Migration
   def up
     create_table :absences do |t|
       t.integer :student_id
-      t.integer :class_id
+      t.integer :school_class_id
       t.integer :absence_report_id
       t.date :date
       t.boolean :required

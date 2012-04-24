@@ -2,7 +2,7 @@ class CreateDocuments < ActiveRecord::Migration
 
   def up
     create_table :documents do |t|
-      t.integer :class_id
+      t.integer :school_class_id
       t.integer :semester_id
       t.string :name
       t.string :description

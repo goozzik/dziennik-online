@@ -2,7 +2,7 @@ class CreateSemesters < ActiveRecord::Migration
 
   def up
     create_table :semesters do |t|
-      t.integer :class_id
+      t.integer :school_class_id
       t.integer :semester
       t.integer :teacher_id
       t.boolean :active
