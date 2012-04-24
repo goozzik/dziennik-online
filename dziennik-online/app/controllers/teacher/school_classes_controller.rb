@@ -12,9 +12,9 @@ class Teacher::SchoolClassesController < ApplicationController
   end
 
   def destroy
-    @school_class = SchoolClass.find(params[:id])
+    @school_class = current_teacher.school_classes.find(params[:id])
     @school_class.destroy
-    redirect_to :action => "index"
+    redirect_to(:action => "index")
   end
 
 end
