@@ -13,6 +13,7 @@
           <td>
             Semestr <%= semester_status_info(semester) %>
             <%= button_to("Usuń", {:controller => 'teacher/semesters', :action => 'destroy', :id => semester.id}, :method => :delete, :confirm => "Jesteś pewien?") %>
+            <%= button_to("Ustaw", {:controller => 'teacher/semesters', :action => 'active', :id => semester.id}) %>
           </td>
         </tr>
       <% end %>

@@ -17,7 +17,7 @@ Feature: Teacher School Classes
     Given I am logged in as a teacher
     When I create class
     And I create semester
-    Then old semester should be unactive and new one should be active
+    Then first semester should be unactive and new one should be active
     Then I should see "Semestr 2"
 
   Scenario: Delete active school class
@@ -31,7 +31,7 @@ Feature: Teacher School Classes
     Given I am logged in as a teacher
     When I create two classes
     And I delete class
-    Then old class and semester should be deleted
+    Then first class and semester should be deleted
     And I should have set up current semester and school class
 
   Scenario: Delete active semester
@@ -46,5 +46,12 @@ Feature: Teacher School Classes
     When I create class
     And I create semester
     And I delete semester
-    Then old semester should be deleted
+    Then first semester should be deleted
     And I should have set up current semester
+
+  Scenario: Set semester as active when other is active
+    Given I am logged in as a teacher
+    When I create class
+    And I create semester
+    And I set first semester as active
+    Then first semester should be active and second not active

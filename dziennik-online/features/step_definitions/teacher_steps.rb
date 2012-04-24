@@ -37,7 +37,7 @@ When /^I create semester$/ do
   click_button('Dodaj nowy semestr')
 end
 
-Then /^old semester should be unactive and new one should be active$/ do
+Then /^first semester should be unactive and new one should be active$/ do
   assert !Semester.first.active
   assert Semester.last.active
 end
@@ -77,7 +77,7 @@ When /^I create two classes$/ do
   click_button('Stwórz')
 end
 
-Then /^old class and semester should be deleted$/ do
+Then /^first class and semester should be deleted$/ do
   assert SchoolClass.count == 1
   assert Semester.count == 1
 end
@@ -87,10 +87,20 @@ Then /^I should have set up current semester and school class$/ do
   assert Teacher.first.semester.active
 end
 
-Then /^old semester should be deleted$/ do
+Then /^first semester should be deleted$/ do
   assert Semester.count == 1
 end
 
 Then /^I should have set up current semester$/ do
   assert Teacher.first.semester.active
+end
+
+When /^I set first semester as active$/ do
+  click_button("Ustaw")
+end
+
+Then /^first semester should be active and second not active$/ do
+  assert Teacher.first.semester_id == Teacher.semesters.find_by_active(true).id
+  assert !Semester.last.active
+  step "I should see \"Semestr 1 - aktualnie wybrany\""
 end
