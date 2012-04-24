@@ -143,18 +143,6 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "teachers", :force => true do |t|
-    t.integer  "class_id"
-    t.integer  "subject_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "work_hours"
-    t.string   "telephone"
-    t.string   "mail"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "time_tables", :force => true do |t|
     t.integer  "class_id"
     t.integer  "week_day"

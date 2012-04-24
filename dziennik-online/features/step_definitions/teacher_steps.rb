@@ -16,5 +16,10 @@ When /^I create class$/ do
   fill_in('Profil', :with => 'Informatyk')
   fill_in('Rocznik', :with => '2013')
   click_button('Stwórz')
-  assert SchoolClass.first(:conditions => ['year = ? AND name = ? AND profile = ? AND yearbook = ?', 3, 'G', 'Informatyk', '2013'])
+end
+
+Then /^I should have class and updated teacher class_id$/ do
+  school_class = SchoolClass.first(:conditions => ['year = ? AND name = ? AND profile = ? AND yearbook = ?', 3, 'G', 'Informatyk', '2013'])
+  assert school_class
+  assert Teacher.first.school_class == school_class
 end

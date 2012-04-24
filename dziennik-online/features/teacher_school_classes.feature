@@ -8,4 +8,5 @@ Feature: Teacher School Classes
   Scenario: Create class
     Given I am logged in as a teacher
     When I create class
+    Then I should have class and updated teacher class_id
     Then I should see "3 G 2013"
