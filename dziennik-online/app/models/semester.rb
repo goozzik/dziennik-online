@@ -4,9 +4,8 @@ class Semester < ActiveRecord::Base
   belongs_to :school_class
   attr_accessible :semester, :active, :school_class_id
 
-  before_validation :inherit_from_school_class
   after_create :set_teacher_current_semester
-  before_create :unactive_old_semester, :set_active, :set_semester_number
+  before_create :unactive_old_semester, :set_active, :set_semester_number, :inherit_from_school_class
 
   private
 

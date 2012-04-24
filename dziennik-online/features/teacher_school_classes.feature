@@ -19,3 +19,9 @@ Feature: Teacher School Classes
     And click buttton add new semestr
     Then old semester should be unactive and new one should be active
     Then I should see "Semestr 2"
+
+  Scenario: Delete school class
+    Given I am logged in as a teacher
+    When I create class
+    And follow link to delete class
+    Then class and semester should be deleted

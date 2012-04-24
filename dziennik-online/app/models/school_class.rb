@@ -1,7 +1,7 @@
 class SchoolClass < ActiveRecord::Base
 
   belongs_to :teacher
-  has_many :semesters
+  has_many :semesters, :dependent => :destroy
   attr_accessible :year, :name, :profile, :yearbook, :active
   validates_presence_of :year, :name, :profile, :yearbook
 

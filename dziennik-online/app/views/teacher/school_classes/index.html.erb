@@ -2,7 +2,10 @@
   <% unless @school_classes.nil? %>
     <% @school_classes.each do |school_class| %>
       <tr>
-        <td><%= school_class.fullname %><td>
+        <td>
+          <%= school_class.fullname %>
+          <%= link_to("Usuń", {:controller => 'teacher/school_classes', :action => 'destroy', :id => school_class.id}, :method => :delete, :confirm => "Jesteś pewien?") %>
+        <td>
       </tr>
 
       <% school_class.semesters.each do |semester| %>

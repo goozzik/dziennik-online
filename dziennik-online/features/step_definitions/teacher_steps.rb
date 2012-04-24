@@ -41,3 +41,12 @@ Then /^old semester should be unactive and new one should be active$/ do
   assert !Semester.first.active
   assert Semester.last.active
 end
+
+When /^follow link to delete class$/ do
+  click_link('Usuń')
+end
+
+Then /^class and semester should be deleted$/ do
+  assert SchoolClass.count == 0
+  assert Semester.count == 0
+end
