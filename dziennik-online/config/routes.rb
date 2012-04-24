@@ -6,6 +6,7 @@ DziennikOnline::Application.routes.draw do
 
   namespace :teacher do
     resources :school_classes
+    resources :semesters
   end
 
   # The priority is based upon order of creation:

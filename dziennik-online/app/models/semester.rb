@@ -6,17 +6,21 @@ class Semester < ActiveRecord::Base
 
   before_validation :inherit_from_school_class
   after_create :set_teacher_current_semester
-  before_create :set_unactive, :set_active
+  before_create :unactive_old_semester, :set_active, :set_semester_number
 
   private
+
+    def set_semester_number
+      self.semester = self.school_class.semesters.count + 1
+    end
 
     def set_teacher_current_semester
       self.teacher.update_attributes(:semester_id => self.id)
     end
 
-    def set_unactive
-      semester = Semester.first(:conditions => ['teacher_id = ? AND active = ?', self.teacher_id, true])
-      semester.try('update_attributes(:active => false)')
+    def unactive_old_semester
+      old_active_semester = Semester.first(:conditions => ['teacher_id = ? AND active = ?', self.teacher_id, true])
+      old_active_semester.update_attributes(:active => false) if old_active_semester
     end
 
     def set_active

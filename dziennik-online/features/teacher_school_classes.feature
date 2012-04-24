@@ -12,3 +12,10 @@ Feature: Teacher School Classes
     And I should have semester and updated teacher semester_id
     And I should see "3 G 2013"
     And I should see "Semestr 1 - aktualnie wybrany"
+
+  Scenario: Create semester when i have class with semester
+    Given I am logged in as a teacher
+    When I create class
+    And click buttton add new semestr
+    Then old semester should be unactive and new one should be active
+    Then I should see "Semestr 2"

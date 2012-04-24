@@ -32,3 +32,12 @@ Then /^I should have semester and updated teacher semester_id$/ do
   assert Teacher.first.semester == semester
   assert semester.active
 end
+
+When /^click buttton add new semestr$/ do
+  click_button('Dodaj nowy semestr')
+end
+
+Then /^old semester should be unactive and new one should be active$/ do
+  assert !Semester.first.active
+  assert Semester.last.active
+end
