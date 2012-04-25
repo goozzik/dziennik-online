@@ -13,6 +13,12 @@ class Teacher::SubjectsController < ApplicationController
     @subject.save ? redirect_to(:controller => "teacher/subjects", :action => "index") : render(:action => "index")
   end
 
+  def show
+    @subject = current_teacher.school_class.subjects.find(params[:id])
+    @descriptions = current_teacher.semester.descriptions.where('subject_id = ' + params[:id])
+    @students = current_teacher.school_class.students
+  end
+
   private
 
     def is_teacher_have_active_class?

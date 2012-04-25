@@ -23,3 +23,11 @@ Feature: Subjects
     When I create class
     And I create subject
     Then I should have subject
+
+  Scenario: I go to the subject
+    Given I am logged in as a teacher
+    When I create class
+    And I create subject
+    And I go to the teacher subject page
+    Then I should see 
+

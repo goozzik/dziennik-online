@@ -8,6 +8,7 @@ DziennikOnline::Application.routes.draw do
     resources :school_classes
     resources :semesters
     resources :subjects
+    resources :descriptions
   end
 
   match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
