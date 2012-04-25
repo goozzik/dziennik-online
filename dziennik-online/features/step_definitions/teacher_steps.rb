@@ -104,3 +104,14 @@ Then /^first semester should be active and second not active$/ do
   assert !Semester.last.active
   step "I should see \"Semestr 1 - aktualnie wybrany\""
 end
+
+When /^I create subject$/ do
+  visit('/teacher/subjects')
+  fill_in('Nazwa', :with => 'Matematyka')
+  click_button('Stwórz')
+end
+
+Then /^I should have subject$/ do
+  assert Teacher.first.school_class.subjects
+  assert page.has_content?("Matematyka")
+end
