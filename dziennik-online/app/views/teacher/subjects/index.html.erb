@@ -5,3 +5,11 @@
 <% else %>
   Nie masz żadnych przedmiotów. Możesz dodać przedmiot poprzez poniższy formularz.
 <% end %>
+
+<h2>Dodaj nową klasę</h2>
+<%= form_for @subject, :url => teacher_subjects_path do |f| %>
+  <div><%= f.label :name, 'Nazwa' %><br />
+  <%= f.text_field :name %></div>
+
+  <div><%= f.submit "Stwórz" %></div>
+<% end %>

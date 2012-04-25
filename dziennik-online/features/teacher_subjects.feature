@@ -10,13 +10,13 @@ Feature: Subjects
     Given I am logged in as a teacher
     When I create class
     And I delete semester
-    And I go to the teacher subjects
+    And I go to the teacher subjects index page
     Then I should see "Najpierw dodaj semestr."
 
-  Scenario: I have class and semester and I go to subjects
+  Scenario: I have class and semester and no subjects and I go to subjects
     Given I am logged in as a teacher
     When I create class
-    And I go to the teacher subjects
+    And I go to the teacher subjects index page
     Then I should see "Nie masz żadnych przedmiotów. Możesz dodać przedmiot poprzez poniższy formularz."
 
   Scenario: I create subject
