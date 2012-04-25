@@ -17,7 +17,7 @@
 
 <h2 class="title"><%= image_tag("subjects_add_32.png") %> Dodaj nowy przedmiot</h2>
 <%= form_for @subject, :url => teacher_subjects_path do |f| %>
-  <span><%= f.label :name, 'Nazwa' %><br />
+  <span><%= f.label :name, 'Nazwa' %>
   <%= f.text_field :name %></span>
 
   <span><%= f.submit "Stwórz" %></span>
