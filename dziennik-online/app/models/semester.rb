@@ -8,7 +8,7 @@ class Semester < ActiveRecord::Base
   before_create :inherit_from_school_class, :unactive_old_semester, :set_active, :set_semester_number
   after_create :set_teacher_current_semester_and_class
 
-  before_destroy :unset_teacher_semester_id, :if => :active
+  before_destroy :unset_teacher_semester_id
 
   def activate
     Semester.deactivate(self.teacher_id)
@@ -46,7 +46,7 @@ class Semester < ActiveRecord::Base
     end
 
     def unset_teacher_semester_id
-      self.teacher.update_attributes(:semester_id => nil)
+      self.teacher.update_attributes(:semester_id => nil) if self.active
     end
 
 end

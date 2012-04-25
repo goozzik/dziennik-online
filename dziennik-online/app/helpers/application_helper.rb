@@ -37,4 +37,8 @@ module ApplicationHelper
      </center>'
   end
 
+  def flash_messages
+    flash[:notice] if flash[:notice]
+  end
+
 end

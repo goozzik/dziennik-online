@@ -11,7 +11,7 @@ class SchoolClass < ActiveRecord::Base
   before_create :unactive_old_school_class, :set_active
   after_create :create_semester
 
-  before_destroy :unset_teacher_school_class_id, :if => :active
+  before_destroy :unset_teacher_school_class_id
 
   def fullname
     [self.year, self.name, self.yearbook].join(' ')
@@ -45,7 +45,7 @@ class SchoolClass < ActiveRecord::Base
     end
 
     def unset_teacher_school_class_id
-      self.teacher.update_attributes(:school_class_id => nil)
+      self.teacher.update_attributes(:school_class_id => nil) if self.active
     end
 
 end
