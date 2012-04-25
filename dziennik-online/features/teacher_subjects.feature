@@ -2,9 +2,8 @@ Feature: Subjects
 
   Scenario: I dont have class and I go to subjects
     Given I am logged in as a teacher
-    When I go to the subjects
+    When I go to the teacher subjects index page
     Then I should see "Najpierw dodaj klasę."
-    And I should see "Dodaj nową klasę"
 
   Scenario: I have class but no semester and I go to subjects
     Given I am logged in as a teacher
