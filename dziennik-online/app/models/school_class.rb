@@ -3,7 +3,7 @@ class SchoolClass < ActiveRecord::Base
   belongs_to :teacher
   has_many :semesters, :dependent => :destroy
   attr_accessible :year, :name, :profile, :yearbook, :active
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'created_at ASC'
 
   validates_presence_of :year, :name, :profile, :yearbook
 
