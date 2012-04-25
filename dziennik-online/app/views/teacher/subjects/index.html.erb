@@ -1,0 +1,7 @@
+<% unless @subjects.empty? %>
+  <% @subjects.each do |subject| %>
+    <%= subject.name %>
+  <% end %>
+<% else %>
+  Nie masz żadnych przedmiotów. Możesz dodać przedmiot poprzez poniższy formularz.
+<% end %>
