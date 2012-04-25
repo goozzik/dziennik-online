@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Dziennik-online</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="site">
+      <div id="logo">
+      </div>
+      <% if user_signed_in? %>
+        <%= navigation %>
+      <% end %>
+      <div id='container'>
+        <%= flash_messages %>
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

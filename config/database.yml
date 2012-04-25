@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: dziennik-online_development
+  pool: 5
+  username: dziennik_online
+  password:
+
+test: &test
+  adapter: postgresql
+  encoding: utf8
+  database: dziennik-online_test
+  pool: 5
+  username: dziennik_online
+  password:
+
+cucumber:
+  <<: *test
