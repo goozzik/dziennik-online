@@ -250,3 +250,7 @@ td {
   margin: 0 auto;
   width: 400px;
 }
+
+h2.title img {
+  vertical-align: middle;
+}
