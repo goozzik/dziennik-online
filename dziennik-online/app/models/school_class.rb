@@ -2,6 +2,7 @@ class SchoolClass < ActiveRecord::Base
 
   belongs_to :teacher
   has_many :semesters, :dependent => :destroy
+  has_many :subjects, :dependent => :destroy
   attr_accessible :year, :name, :profile, :yearbook, :active
   default_scope :order => 'created_at ASC'
 
