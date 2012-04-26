@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.string   "street"
     t.string   "city"
     t.string   "zip_code"
+    t.string   "province"
     t.string   "telephone"
     t.boolean  "individual"
     t.boolean  "boarding_school"
@@ -185,7 +186,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

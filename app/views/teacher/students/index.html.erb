@@ -1,0 +1,68 @@
+<h2 class="title"><%= image_tag("students_32.png") %> Uczniowie</h2>
+
+<% unless @students.empty? %>
+  <table class="students">
+    <tr>
+      <th class="center students_top bg6">l.p</th>
+      <th class="center students_top bg6 first_name">Imię</th>
+      <th class="center students_top bg6 last_name">Nazwisko</th>
+      <th class="center students_top bg6">Login</th>
+      <th class="center students_top bg6">NIU</th>
+      <th class="center students_top bg6 student_manage">Zarządzaj</th>
+    </tr>
+    <% @students.each_with_index do |student, i| %>
+      <tr>
+        <td class="right border_b" style="padding-right:10px;"><%= i+1 %></td>
+        <td class="border_b fisrt_name" style="padding-right:15px;"><%= student.first_name %></td>
+        <td class="border_b last_name" style="padding-right:15px;"><%= student.last_name %></td>
+        <td class="border_b" style="padding-right:15px;"><%= student.username %></td>
+        <td class="border_b" style="padding-right:15px;"><%= student.niu %></td>
+        <td class="border_b student_manage" style="padding-right:10px;">
+          <%= link_to('Więcej', teacher_student_path(student)) %>
+          <%= link_to('Edytuj', teacher_student_path(student)) %>
+          <%= link_to('Usuń', teacher_student_path(student), :method => :delete, :confirm => "Jesteś pewien?") %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  Nie masz żadnych uczniów. Możesz dodać ucznia poprzez poniższy formularz.
+<% end %>
+
+<h2 class="title"><%= image_tag("student_add_32.png") %> Dodaj nowego ucznia</span>
+  <%= form_for @student, :url => teacher_students_path do |f| %>
+    <div><%= f.label :first_name, 'Imię' %><br />
+    <%= f.text_field :first_name %></div>
+
+    <div><%= f.label :last_name, 'Nazwisko' %><br />
+    <%= f.text_field :last_name %></div>
+
+    <div><%= f.label :pesel, 'Pesel' %><br />
+    <%= f.text_field :pesel %></div>
+
+    <div><%= f.label :niu, 'Numer ewidencyjny ucznia' %><br />
+    <%= f.text_field :pesel %></div>
+
+    <div><%= f.label :street, 'Ulica' %><br />
+    <%= f.text_field :street %></div>
+
+    <div><%= f.label :city, 'Miasto' %><br />
+    <%= f.text_field :city %></div>
+
+    <div><%= f.label :zip_code, 'Kod pocztowy' %><br />
+    <%= f.text_field :zip_code %></div>
+
+    <div><%= f.label :province, 'Województwo' %><br />
+    <%= f.text_field :province %></div>
+
+    <div><%= f.label :telephone, 'Telefon kontaktowy' %><br />
+    <%= f.text_field :telephone %></div>
+
+    <div><%= f.label :individual, 'Zajęcia indywidualne' %><br />
+    <%= f.check_box :individual %></div>
+
+    <div><%= f.label :boarding_school, 'Zamieszkuje w internacie' %><br />
+    <%= f.check_box :boarding_school %></div>
+
+    <div><%= f.submit "Dodaj" %></div>
+  <% end %>

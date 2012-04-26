@@ -10,3 +10,9 @@ Feature: Students
     When I create class
     And I go to the teacher students index page
     Then I should see "Nie masz żadnych uczniów. Możesz dodać ucznia poprzez poniższy formularz."
+
+  Scenario: I add student
+    Given I am logged in as a teacher
+    When I create class
+    And I add student
+    Then I should have student

@@ -1,5 +1,7 @@
 class Teacher < User
 
+  default_scope :conditions => ["teacher = ?", true]
+
   has_many :school_classes
   has_many :semesters
   attr_accessible :school_class_id, :semester_id

@@ -115,3 +115,16 @@ Then /^I should have subject$/ do
   assert Teacher.first.school_class.subjects
   assert page.has_content?("Matematyka")
 end
+
+When /^I add student$/ do
+  step "I go to the teacher students index page"
+  fill_in('Imię', :with => 'Janusz')
+  fill_in('Nazwisko', :with => 'Poncek')
+  click_button("Dodaj")
+end
+
+Then /^I should have student$/ do
+  assert Student.last
+  step "I should see \"Janusz\""
+  step "I should see \"Poncek\""
+end
