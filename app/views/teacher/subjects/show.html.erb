@@ -1,3 +1,5 @@
+<%= javascript_include_tag "jquery.fancybox-1.3.4.pack" %>
+<%= stylesheet_link_tag "jquery.fancybox-1.3.4" %>
 <h2 class="title"><%= image_tag("students_marks_32.png") %> Oceny - <%= @subject.name %></h2>
 
 <table class="marks">
@@ -15,16 +17,46 @@
 
     <th class="center title_mark bg6"></th>
     <th class="center title_mark bg6" width="30px">
-      <a id="new_mark_type" href="#new_mark"><%= image_tag("plus.gif", :class => "title_of_mark", :title => "Dodaj nowy typ oceny", :style => "cursor:pointer;vertical-align: middle;") %></a>
+      <a id="new_description_link" href="#new_description"><%= image_tag("plus.gif", :class => "title_of_mark", :title => "Dodaj nowy typ oceny", :style => "cursor:pointer;vertical-align: middle;") %></a>
     </th>
     <th class="center title_mark bg6"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
     <th class="center title_mark bg6"><% image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen") %></th>
   </tr>
-  <td>
-    <% @students.each_with_index do |student, i| %>
-      <td class="right border_b student_record" style="padding-right:5px;"><%= i %></td>
+  <% @students.each_with_index do |student, i| %>
+    <tr>
+      <td class="right border_b student_record" style="padding-right:5px;"><%= i+1 %></td>
       <td class="left border_b student_record" width="100px"><%= student.first_name %></td>
       <td class="left border_b student_record>" style="padding-left:10px;border-right:1px solid #eee;" width="100px"><%= student.last_name %></td>
-    <% end %>
+    </tr>
+  <% end %>
 
 </table>
+
+<div style="display: none;">
+  <div id="new_description">
+    <h2 class="title"><% image_tag('marks_type.png') %> Dodaj nowy typ oceny</h2>
+    <%= form_for @description, :url => teacher_descriptions_path do |f| %>
+      <div><%= f.label :type, 'Typ' %><br />
+      <%= f.text_field :type %></div>
+
+      <div><%= f.label :description, 'Opis' %><br />
+      <%= f.text_field :description %></div>
+
+      <div><%= f.label :colour, 'Kolor' %><br />
+      <%= f.text_field :colour %></div>
+
+      <div><%= f.submit "Dodaj" %></div>
+    <% end %>
+    </table>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("#new_description_link").fancybox({
+        'titlePosition' : 'inside',
+        'overlayColor'  : '#000',
+        'overlayOpacity': 0.5
+    });
+  });
+</script>

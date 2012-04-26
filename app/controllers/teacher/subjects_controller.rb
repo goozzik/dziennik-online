@@ -17,6 +17,7 @@ class Teacher::SubjectsController < ApplicationController
     @subject = current_teacher.school_class.subjects.find(params[:id])
     @descriptions = current_teacher.semester.descriptions.where('subject_id = ' + params[:id])
     @students = current_teacher.school_class.students
+    @description = Description.new
   end
 
 end
