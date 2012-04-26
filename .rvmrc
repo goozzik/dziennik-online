@@ -1,1 +1,1 @@
-rvm ruby@dziennik_online
+rvm use 1.9.3@dziennik-online
