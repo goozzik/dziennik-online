@@ -27,7 +27,14 @@ Feature: Subjects
   Scenario: I go to the subject
     Given I am logged in as a teacher
     When I create class
+    And I add student
     And I create subject
     And I go to the teacher subject page
-    Then I should see 
+    Then I should see "Oceny - Matematyka"
 
+  Scenario: I create new description
+    Given I am logged in as a teacher
+    When I create class
+    And I create subject
+    And I create description
+    Then I should see new description

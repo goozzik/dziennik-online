@@ -9,8 +9,8 @@
     <th class="center title_mark bg6" style="padding-left:10px;" width="100px">Nazwisko</th>
     <% @descriptions.each do |description| %>
       <th class="title_mark bg4">
-        <span class="title_of_mark" title="<center><%= description.type + ' - ' + description.description %><br/><small>Kliknij aby usunąć</small></center>">
-          <span onclick="windowYesNo(\"/teacher/descriptions/<%= description.id %>\")" style="cursor:pointer;">
+        <span class="title_of_mark" title="<center><%= description.desc_type + ' - ' + description.description %><br/><small>Kliknij aby usunąć</small></center>">
+          <span onclick="windowYesNo(\"/teacher/descriptions/<%= description.id %>\")" style="cursor:pointer;"><%= truncate(description.desc_type, :length => 4, :omission => '') %></span>
         </span>
       </th>
     <% end %>
@@ -27,6 +27,9 @@
       <td class="right border_b student_record" style="padding-right:5px;"><%= i+1 %></td>
       <td class="left border_b student_record" width="100px"><%= student.first_name %></td>
       <td class="left border_b student_record>" style="padding-left:10px;border-right:1px solid #eee;" width="100px"><%= student.last_name %></td>
+      <% @descriptions.each do |description| %>
+        <td><%= Mark.find_by_student_id_and_description_id(student.id, description.id) %></td>
+      <% end %>
     </tr>
   <% end %>
 
@@ -36,8 +39,9 @@
   <div id="new_description">
     <h2 class="title"><% image_tag('marks_type.png') %> Dodaj nowy typ oceny</h2>
     <%= form_for @description, :url => teacher_descriptions_path do |f| %>
-      <div><%= f.label :type, 'Typ' %><br />
-      <%= f.text_field :type %></div>
+      <%= f.hidden_field :subject_id, :value => @subject.id %>
+      <div><%= f.label :desc_type, 'Typ' %><br />
+      <%= f.text_field :desc_type %></div>
 
       <div><%= f.label :description, 'Opis' %><br />
       <%= f.text_field :description %></div>
@@ -45,7 +49,7 @@
       <div><%= f.label :colour, 'Kolor' %><br />
       <%= f.text_field :colour %></div>
 
-      <div><%= f.submit "Dodaj" %></div>
+      <div><%= f.submit "Stwórz" %></div>
     <% end %>
     </table>
   </div>

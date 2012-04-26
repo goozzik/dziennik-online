@@ -128,3 +128,15 @@ Then /^I should have student$/ do
   step "I should see \"Janusz\""
   step "I should see \"Poncek\""
 end
+
+When /^I create description$/ do
+  visit('/teacher/subjects/' + Subject.last.id.to_s)
+  fill_in('Typ', :with => 'Kartkówka')
+  fill_in('Opis', :with => 'Trygonometria')
+  fill_in('Kolor', :with => 'zielony')
+  click_button("Stwórz")
+end
+
+Then /^I should see new description$/ do
+  assert page.has_content?("Kart")
+end

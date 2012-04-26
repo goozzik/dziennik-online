@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
   create_table "descriptions", :force => true do |t|
     t.integer  "subject_id"
     t.integer  "semester_id"
-    t.string   "type"
+    t.string   "desc_type"
     t.integer  "colour"
     t.string   "description"
     t.datetime "created_at",  :null => false
