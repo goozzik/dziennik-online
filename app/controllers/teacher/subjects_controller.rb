@@ -18,13 +18,7 @@ class Teacher::SubjectsController < ApplicationController
     @descriptions = current_teacher.semester.descriptions.where('subject_id = ' + params[:id])
     @students = current_teacher.school_class.students
     @description = Description.new
-#    @marks = []
-#    @students.each_with_index do |student, i|
-#      @marks[i] = []
-#      @descriptions.each_with_index do |description, j|
-#        @marks[i][j] = Mark.find_by_student_id_and_description_id(student.id, description.id)
-#      end
-#    end
+    @marks = Mark.find_by_students_and_descriptions(@students, @descriptions)
   end
 
 end
