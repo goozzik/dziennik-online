@@ -39,21 +39,27 @@ end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
-#
-#   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { :except => [:widgets] } may not do what you expect here
-#     # as tCucumber::Rails::Database.javascript_strategy overrides
-#     # this setting.
-#     DatabaseCleaner.strategy = :truncation
-#   end
-#
-#   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
-#     DatabaseCleaner.strategy = :transaction
-#   end
-#
+
+Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
+ # { :except => [:widgets] } may not do what you expect here
+ # as tCucumber::Rails::Database.javascript_strategy overrides
+ # this setting.
+ DatabaseCleaner.strategy = :truncation
+end
+
+Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
+ DatabaseCleaner.strategy = :transaction
+end
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# Force backtraces from Thin to output to STDERR
+# workaround for http://stackoverflow.com/questions/4627928/get-rails-exceptions-to-show-using-capybara-and-selenium
+module Thin::Logging
+  def log_error(e=$!)
+    STDERR.print "#{e}\n\t" + e.backtrace.join("\n\t")
+  end
+end

@@ -26,6 +26,9 @@ FactoryGirl.define do
 
     factory :student do
       student true
+      username 'student1'
+      first_name 'Jacek'
+      last_name 'Placek'
     end
   end
 

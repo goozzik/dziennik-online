@@ -24,6 +24,10 @@ group :test do
   gem 'cucumber-rails', '1.3.0', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner', '0.7.2'
+  gem "selenium-webdriver", "2.21.2"
+  gem 'selenium'
+  gem 'selenium-client'
+  gem 'thin'
 end
 
 gem 'jquery-rails'

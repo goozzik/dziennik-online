@@ -38,3 +38,17 @@ Feature: Subjects
     And I create subject
     And I create description
     Then I should see new description
+
+#  @selenium
+#  Scenario: I add mark
+#    Given I am logged in as a teacher
+#    And I have class with: semester, subject, student, description
+#    When I add mark
+#    Then I should see that student have mark "5"
+#
+#  @selenium
+#  Scenario: I update mark
+#    Given I am logged in as a teacher
+#    And I have class with: semester, subject, student, description, mark
+#    When I update mark
+#    Then I should see that student have mark "4"

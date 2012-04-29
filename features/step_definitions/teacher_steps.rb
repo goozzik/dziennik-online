@@ -140,3 +140,27 @@ end
 Then /^I should see new description$/ do
   assert page.has_content?("Kart")
 end
+
+Given /^I have class with: semester, subject, student, description$/ do
+  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+  subject = FactoryGirl.create(:subject, :school_class_id => school_class.id)
+  FactoryGirl.create(:student, :school_class_id => school_class.id)
+  FactoryGirl.create(:description, :subject_id => subject.id)
+end
+
+When /^I add mark$/ do
+  visit('/teacher/subjects/' + Subject.last.id.to_s)
+end
+
+Then /^I should see that student have mark "([^"]*)"$/ do |mark|
+  step "I should see \"#{mark}\""
+end
+
+Given /^I have class with: semester, subject, student, description, mark$/ do
+  step "I have class with: semester, subject, student, description"
+  FactoryGirl.create(:mark, :semester_id => Semester.last.id)
+end
+
+When /^I update mark$/ do
+  #TODO
+end
