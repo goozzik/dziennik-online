@@ -18,7 +18,8 @@ class Teacher::SubjectsController < ApplicationController
     @descriptions = current_teacher.semester.descriptions.where('subject_id = ' + params[:id])
     @students = current_teacher.school_class.students
     @description = Description.new
-    @marks = Mark.find_by_students_and_descriptions(@students, @descriptions)
+    @marks = Mark.find_all_by_students_and_descriptions(@students, @descriptions)
+    @semestral_marks = SemestralMark.find_all_by_students_and_semester_id_and_subject_id(@students, current_teacher.semester_id, @subject.id)
   end
 
 end

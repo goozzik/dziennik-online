@@ -32,7 +32,7 @@
       <% end %>
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
-      <td id="semestrymark_<%= student.id %>" class="semestry_mark border_b"></td>
+      <td id="semestral_mark_<%= student.id %>" class="semestral_mark border_b"><%= @semestral_marks[i].mark %></td>
       <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id, current_teacher.semester_id)) %></td>
     </tr>
   <% end %>
@@ -81,6 +81,7 @@
 
     $('#mark_active').live('blur', function() {
       mark = $(this).val();
+      /* TODO */
       /*if (mark.match(/-/)) {
 
       } else if (mark.match(/+/)) {
@@ -93,6 +94,37 @@
       $.ajax({
         type: 'PUT',
         url: '/teacher/marks/update',
+        data: data,
+      });
+      $(this).replaceWith(mark);
+    });
+
+    var parsed_id2;
+
+    $('.semestral_mark').live('click', function() {
+      clone = $(this).clone();
+      parsed_id2 = $(this).attr('id').split('_');
+      old_mark = clone.text();
+      clone.text('');
+      clone.append('<input id="semestral_mark_active" name="semestral_mark[mark]" type="text" value="'+old_mark+'">');
+      $(this).replaceWith(clone);
+      $('#' + clone.attr('id')).children().focus();
+    });
+
+    $('#semestral_mark_active').live('blur', function() {
+      mark = $(this).val();
+      /* TODO */
+      /*if (mark.match(/-/)) {
+
+      } else if (mark.match(/+/)) {
+
+      }*/
+      var data = 'semestral_mark[mark]=' + mark +
+      '&semestral_mark[student_id]=' + parsed_id2[2] +
+      '&semestral_mark[subject_id]=' + <%= @subject.id %>
+      $.ajax({
+        type: 'POST',
+        url: '/teacher/semestral_marks/update',
         data: data,
       });
       $(this).replaceWith(mark);

@@ -114,21 +114,21 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "semester_marks", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "school_class_id"
-    t.integer  "semester_id"
-    t.integer  "subject_id"
-    t.integer  "mark"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "semesters", :force => true do |t|
     t.integer  "school_class_id"
     t.integer  "semester"
     t.integer  "teacher_id"
     t.boolean  "active"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "semestral_marks", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "school_class_id"
+    t.integer  "semester_id"
+    t.integer  "subject_id"
+    t.integer  "mark"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

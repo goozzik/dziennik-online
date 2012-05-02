@@ -5,6 +5,7 @@ DziennikOnline::Application.routes.draw do
   devise_for :users
 
   match 'teacher/marks/update' => 'teacher/marks#update'
+  match 'teacher/semestral_marks/update' => 'teacher/semestral_marks#update'
   match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
 
   namespace :teacher do

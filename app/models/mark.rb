@@ -7,7 +7,7 @@ class Mark < ActiveRecord::Base
 
   before_create :inherit_from_semester
 
-  def self.find_by_students_and_descriptions(students, descriptions)
+  def self.find_all_by_students_and_descriptions(students, descriptions)
     marks = []
     students.each_with_index do |student, i|
       marks[i] = []

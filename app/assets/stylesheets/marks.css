@@ -93,7 +93,7 @@ table.marks td.mark {
   height:28px;
 }
 
-table.marks td.semestry_mark {
+table.marks td.semestral_mark {
   padding:5px;
   text-align:center;
   width:28px;
@@ -116,12 +116,12 @@ table.marks td.mark_average{
   background-color:#f8f8f8;
 }
 
-table.marks td.mark:hover,td.mark_:hover, td.semestry_mark:hover {
+table.marks td.mark:hover,td.mark_:hover, td.semestral_mark:hover {
   /*#border:1px dotted #7fa214; */
   background-color:#eee;
 }
 
-input[type="text"]#mark_active, input[type="text"]#semestry_mark_active {
+input[type="text"]#mark_active, input[type="text"]#semestral_mark_active {
   min-width:23px !important;
   width:23px !important;
   text-align:center;

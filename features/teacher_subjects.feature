@@ -59,3 +59,10 @@ Feature: Subjects
     And I have class with: semester, subject, student, description and two marks
     When I go to the teacher subject page
     Then I should see that student have average mark "2.50"
+
+#  TODO
+#  @selenium
+#  Scenario: I add semestry mark
+#
+#  @selenium
+#  Scenario: I update semestry mark

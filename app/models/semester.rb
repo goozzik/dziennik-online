@@ -4,6 +4,7 @@ class Semester < ActiveRecord::Base
   belongs_to :school_class
   has_many :descriptions, :dependent => :destroy
   has_many :marks, :dependent => :destroy
+  has_many :semestral_marks, :dependent => :destroy
   attr_accessible :semester, :active, :school_class_id
   default_scope :order => 'created_at ASC'
 
