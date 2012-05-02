@@ -39,6 +39,7 @@ Feature: Subjects
     And I create description
     Then I should see new description
 
+# TODO - not working selenium with session variables
 #  @selenium
 #  Scenario: I add mark
 #    Given I am logged in as a teacher
@@ -52,3 +53,9 @@ Feature: Subjects
 #    And I have class with: semester, subject, student, description, mark
 #    When I update mark
 #    Then I should see that student have mark "4"
+
+  Scenario: I have two marks and I should see average mark
+    Given I am logged in as a teacher
+    And I have class with: semester, subject, student, description and two marks
+    When I go to the teacher subject page
+    Then I should see that student have average mark "2.50"

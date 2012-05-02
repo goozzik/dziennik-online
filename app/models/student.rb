@@ -10,6 +10,16 @@ class Student < User
 
   before_create :inherit_from_school_class
 
+  def average_from_subject(subject_id, semester_id)
+    marks = Mark.find_all_by_student_id_and_subject_id_and_semester_id(self.id, subject_id, semester_id).collect { |mark| mark.mark.to_f }
+    unless marks.empty?
+      sum = marks.inject { |sum, element| sum + element }
+      sum / marks.count
+    else
+      0.0
+    end
+  end
+
   private
 
     def set_student

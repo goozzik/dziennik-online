@@ -19,3 +19,7 @@ When /^(?:|I )go to (.+)$/ do |page_name|
     raise "No route given: " + page_name
   end
 end
+
+Then /^show me the page$/ do
+  save_and_open_page
+end

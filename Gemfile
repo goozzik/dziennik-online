@@ -28,6 +28,7 @@ group :test do
   gem 'selenium'
   gem 'selenium-client'
   gem 'thin'
+  gem 'launchy'
 end
 
 gem 'jquery-rails'

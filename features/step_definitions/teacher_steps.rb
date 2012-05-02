@@ -158,9 +158,19 @@ end
 
 Given /^I have class with: semester, subject, student, description, mark$/ do
   step "I have class with: semester, subject, student, description"
-  FactoryGirl.create(:mark, :semester_id => Semester.last.id)
+  FactoryGirl.create(:mark, :semester_id => Semester.last.id, :description_id => Description.last.id, :student_id => Student.last.id, :subject_id => Subject.last.id)
 end
 
 When /^I update mark$/ do
   #TODO
+end
+
+Given /^I have class with: semester, subject, student, description and two marks$/ do
+  step "I have class with: semester, subject, student, description, mark"
+  FactoryGirl.create(:description, :subject_id => Subject.last.id)
+  FactoryGirl.create(:mark, :mark => 4, :semester_id => Semester.last.id, :description_id => Description.last.id, :student_id => Student.last.id, :subject_id => Subject.last.id)
+end
+
+Then /^I should see that student have average mark "([^"]*)"$/ do |mark|
+  step "I should see \"#{mark}\""
 end

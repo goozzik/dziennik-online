@@ -80,7 +80,7 @@ table.marks td.student_record {
   background-color:#f8f8f8;
 }
 
-table.marks td.student_record_ {
+table.marks td.student_record {
   padding-top:4px;
   padding-bottom:4px;
   padding-right:6px;
@@ -116,18 +116,12 @@ table.marks td.mark_average{
   background-color:#f8f8f8;
 }
 
-table.marks td.mark:hover,td.mark_:hover, td.semestry_mark:hover{
+table.marks td.mark:hover,td.mark_:hover, td.semestry_mark:hover {
   /*#border:1px dotted #7fa214; */
   background-color:#eee;
 }
 
-input[type="text"].mark_active{
-  min-width:23px !important;
-  width:23px !important;
-  text-align:center;
-}
-
-input[type="text"].semestry_mark_active{
+input[type="text"]#mark_active, input[type="text"]#semestry_mark_active {
   min-width:23px !important;
   width:23px !important;
   text-align:center;

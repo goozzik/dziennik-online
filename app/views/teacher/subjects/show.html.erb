@@ -20,7 +20,7 @@
       <a id="new_description_link" href="#new_description"><%= image_tag("plus.gif", :class => "title_of_mark", :title => "Dodaj nowy typ oceny", :style => "cursor:pointer;vertical-align: middle;") %></a>
     </th>
     <th class="center title_mark bg6"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
-    <th class="center title_mark bg6"><% image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen") %></th>
+    <th class="center title_mark bg6"><%= image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen") %></th>
   </tr>
   <% @students.each_with_index do |student, i| %>
     <tr>
@@ -32,7 +32,8 @@
       <% end %>
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
-      
+      <td id="semestrymark_<%= student.id %>" class="semestry_mark border_b"></td>
+      <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id, current_teacher.semester_id)) %></td>
     </tr>
   <% end %>
 
