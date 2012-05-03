@@ -2,6 +2,7 @@ class Student < User
 
   default_scope :conditions => ["student = ?", true]
   belongs_to :school_class
+  has_many :absences, :dependent => :destroy
 
   attr_accessible :email, :student, :first_name, :last_name, :pesel, :street, :city, :zip_code, :province, :telephone, :individual, :boarding_school
 
@@ -18,6 +19,24 @@ class Student < User
     else
       0.0
     end
+  end
+
+  def sumarize_required_absences(absences)
+    required = 0
+    absences.each { |absence| required += absence.required if absence && absence.required }
+    required
+  end
+
+  def sumarize_justified_absences(absences)
+    justified = 0
+    absences.each { |absence| justified += absence.justified if absence && absence.justified }
+    justified
+  end
+
+  def sumarize_unexcused_absences(absences)
+    unexcused = 0
+    absences.each { |absence| unexcused += absence.unexcused if absence && absence.unexcused }
+    unexcused
   end
 
   private

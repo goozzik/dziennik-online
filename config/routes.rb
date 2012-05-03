@@ -4,8 +4,6 @@ DziennikOnline::Application.routes.draw do
 
   devise_for :users
 
-  match 'teacher/marks/update' => 'teacher/marks#update'
-  match 'teacher/semestral_marks/update' => 'teacher/semestral_marks#update'
   match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
 
   namespace :teacher do
@@ -14,6 +12,9 @@ DziennikOnline::Application.routes.draw do
     resources :subjects
     resources :descriptions
     resources :students
+    resources :absences
+    resources :marks
+    resources :semestral_marks
   end
 
   # The priority is based upon order of creation:

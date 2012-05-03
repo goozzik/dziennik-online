@@ -13,24 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20120422182439) do
 
-  create_table "absence_reports", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "school_class_id"
-    t.date     "date"
-    t.float    "percentage"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
     t.integer  "school_class_id"
     t.integer  "absence_report_id"
     t.date     "date"
-    t.boolean  "required"
-    t.boolean  "justified"
-    t.boolean  "unexcused"
-    t.boolean  "late"
+    t.integer  "required"
+    t.integer  "justified"
+    t.integer  "unexcused"
+    t.integer  "late"
     t.time     "end_time"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false

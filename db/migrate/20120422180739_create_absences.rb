@@ -6,10 +6,10 @@ class CreateAbsences < ActiveRecord::Migration
       t.integer :school_class_id
       t.integer :absence_report_id
       t.date :date
-      t.boolean :required
-      t.boolean :justified
-      t.boolean :unexcused
-      t.boolean :late
+      t.integer :required
+      t.integer :justified
+      t.integer :unexcused
+      t.integer :late
       t.time :end_time
 
       t.timestamps

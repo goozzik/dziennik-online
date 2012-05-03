@@ -32,7 +32,7 @@
       <% end %>
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
-      <td id="semestral_mark_<%= student.id %>" class="semestral_mark border_b"><%= @semestral_marks[i].mark %></td>
+      <td id="semestral_mark_<%= student.id %>" class="semestral_mark border_b"><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
       <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id, current_teacher.semester_id)) %></td>
     </tr>
   <% end %>
@@ -123,7 +123,7 @@
       '&semestral_mark[student_id]=' + parsed_id2[2] +
       '&semestral_mark[subject_id]=' + <%= @subject.id %>
       $.ajax({
-        type: 'POST',
+        type: 'PUT',
         url: '/teacher/semestral_marks/update',
         data: data,
       });

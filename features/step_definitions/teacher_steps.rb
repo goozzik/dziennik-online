@@ -174,3 +174,38 @@ end
 Then /^I should see that student have average mark "([^"]*)"$/ do |mark|
   step "I should see \"#{mark}\""
 end
+
+Given /^I have abseneces for may$/ do
+  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+  student = FactoryGirl.create(:student, :school_class_id => school_class.id)
+  FactoryGirl.create(:absence, :student_id => student.id)
+  FactoryGirl.create(:absence, :date => "2012-05-14" ,:student_id => student.id)
+  FactoryGirl.create(:absence, :date => "2012-05-21" ,:student_id => student.id)
+  FactoryGirl.create(:absence, :date => "2012-05-28" ,:student_id => student.id)
+end
+
+Then /^I should see may absences$/ do
+  step "I should see \"2012-05-07\""
+  assert page.has_xpath?("//td[@class='absence'][contains(text(), \"33\")]")
+  assert page.has_xpath?("//td[@class='absence'][contains(text(), \"6\")]")
+  assert page.has_xpath?("//td[@class='absence'][contains(text(), \"2\")]")
+  step "I should see \"75.76\""
+  step "I should see \"24\""
+  step "I should see \"8\""
+end
+
+When /^I follow link for next month$/ do
+  click_link("Następny miesiąc >>")
+end
+
+Then /^I should see june absences$/ do
+  step "I should see \"2012-06-04\""
+end
+
+When /^I follow link for previous month$/ do
+  click_link("<< Poprzedni miesiąc")
+end
+
+Then /^I should see april absences$/ do
+  step "I should see \"2012-04-02\""
+end
