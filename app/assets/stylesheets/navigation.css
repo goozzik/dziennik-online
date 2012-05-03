@@ -57,3 +57,12 @@ div#navigation ul a, span.menu {
   padding-right:4px;
 
 }
+
+img.home_menu {
+  padding:12px;
+}
+
+div#icon_navigation {
+  width:800px;
+  margin:0 auto;
+}

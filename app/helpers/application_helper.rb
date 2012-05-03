@@ -19,6 +19,12 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def icon_navigation
+    if current_user.teacher
+      teacher_icon_navigation
+    end
+  end
+
   def teacher_navigation
     '<center>
        <ul>
@@ -35,6 +41,22 @@ module ApplicationHelper
          '<li class="last"><a href="/users/logout">Wyloguj</a></li>' +
        '</ul>
      </center>'
+  end
+
+  def teacher_icon_navigation
+    '<div id="icon_navigation">
+       <a href="teacher/subjects"><img src="/assets/menu_01.png" class="home_menu"></a>
+       <a href="teacher/absences"><img src="/assets/menu_02.png" class="home_menu"></a>
+       <a href="teacher/time_tables"><img src="/assets/menu_03.png" class="home_menu"></a>
+       <a href="teacher/subject_teachers"><img src="/assets/menu_04.png" class="home_menu"></a>
+       <a href="teacher/documents"><img src="/assets/menu_05.png" class="home_menu"></a>
+       <a href="teacher/documents"><img src="/assets/menu_06.png" class="home_menu"></a>
+       <a href=""><img src="/assets/menu_07.png" class="home_menu"></a>
+       <a href="teacher/school_classes"><img src="/assets/menu_08.png" class="home_menu"></a>
+       <a href="teacher/students"><img src="/assets/menu_09.png" class="home_menu"></a>
+       <!--<a href=""><img src="/assets/menu_10.png" class="home_menu"></a>-->
+       <a href=""><img src="/assets/menu_11.png" class="home_menu"></a>
+    </div>'.html_safe
   end
 
   def flash_messages

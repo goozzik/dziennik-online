@@ -3,6 +3,19 @@ Then /^I should see teacher navigation$/ do
   assert page.has_xpath?("//div[@id='navigation']")
 end
 
+Then /^I should see teacher icon navigation$/ do
+  assert page.has_xpath?("//a[@href='teacher/subjects']/img[@src='/assets/menu_01.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='teacher/absences']/img[@src='/assets/menu_02.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='teacher/time_tables']/img[@src='/assets/menu_03.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='teacher/subject_teachers']/img[@src='/assets/menu_04.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='teacher/documents']/img[@src='/assets/menu_05.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='teacher/documents']/img[@src='/assets/menu_06.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='']/img[@src='/assets/menu_07.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='teacher/school_classes']/img[@src='/assets/menu_08.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='teacher/students']/img[@src='/assets/menu_09.png'][@class='home_menu']")
+  assert page.has_xpath?("//a[@href='']/img[@src='/assets/menu_11.png'][@class='home_menu']")
+end
+
 Then /^I should see new class form$/ do
   assert page.has_content?("Dodaj nową klasę")
   assert page.has_xpath?("//form[@action='/teacher/school_classes']")

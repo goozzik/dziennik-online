@@ -8,3 +8,4 @@ Feature: Layout
     Given I am logged in as a teacher
     When I go to the home page
     Then I should see teacher navigation
+    And I should see teacher icon navigation
