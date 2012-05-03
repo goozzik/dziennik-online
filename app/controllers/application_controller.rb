@@ -16,17 +16,24 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def is_teacher_have_active_class?
+    def teacher_has_active_class?
       unless current_teacher.school_class
         flash[:notice] = "Najpierw dodaj klasę."
         redirect_to(:controller => "teacher/school_classes", :action => "index")
       end
     end
 
-    def is_teacher_have_active_semester?
+    def teacher_has_active_semester?
       unless current_teacher.semester
         flash[:notice] = "Najpierw dodaj semestr."
         redirect_to(:controller => "teacher/school_classes", :action => "index")
+      end
+    end
+
+    def teacher_has_students?
+      if current_teacher.school_class.students.empty?
+        flash[:notice] = "Najpierw dodaj uczniów."
+        redirect_to(:controller => "teacher/students", :action => "index")
       end
     end
 

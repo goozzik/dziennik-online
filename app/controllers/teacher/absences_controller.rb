@@ -1,5 +1,7 @@
 class Teacher::AbsencesController < ApplicationController
 
+  before_filter :teacher_has_active_class?, :teacher_has_students?, :only => [:index]
+
   def index
     @month = Chronic.parse('monday this month', :now => (params[:date].nil? ? Time.now : Time.parse(params[:date])))
     @weeks = Absence.get_weeks_from_month(@month)

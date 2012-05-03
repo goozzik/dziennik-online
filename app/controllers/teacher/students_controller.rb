@@ -1,6 +1,6 @@
 class Teacher::StudentsController < ApplicationController
 
-  before_filter :is_teacher_have_active_class?, :only => [:index]
+  before_filter :teacher_has_active_class?, :only => [:index]
 
   def index
     @students = current_teacher.school_class.students

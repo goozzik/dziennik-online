@@ -141,6 +141,10 @@ Then /^I should see new description$/ do
   assert page.has_content?("Kart")
 end
 
+Given /^I have class$/ do
+  FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+end
+
 Given /^I have class with: semester, subject, student, description$/ do
   school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
   subject = FactoryGirl.create(:subject, :school_class_id => school_class.id)
