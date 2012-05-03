@@ -226,3 +226,7 @@ end
 Then /^I should see april absences$/ do
   step "I should see \"2012-04-02\""
 end
+
+Then /^I should see create new time table button$/ do
+  assert page.has_xpath?("//input[@type='submit'][@value='Dodaj nowy dzień']")
+end

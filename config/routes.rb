@@ -15,6 +15,7 @@ DziennikOnline::Application.routes.draw do
     resources :absences
     resources :marks
     resources :semestral_marks
+    resources :time_tables
   end
 
   # The priority is based upon order of creation:

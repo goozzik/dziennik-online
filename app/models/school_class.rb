@@ -4,6 +4,7 @@ class SchoolClass < ActiveRecord::Base
   has_many :semesters, :dependent => :destroy
   has_many :subjects, :dependent => :destroy
   has_many :students, :dependent => :destroy, :conditions => ['student = ?', true]
+  has_many :time_tables, :dependent => :destroy
   attr_accessible :year, :name, :profile, :yearbook, :active
   default_scope :order => 'created_at ASC'
 

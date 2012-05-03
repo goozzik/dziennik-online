@@ -1,0 +1,10 @@
+<div id="time_tables">
+  <% if @time_tables.empty? %>
+    Nie masz żadnych dni w planie lekcji.
+  <% else %>
+    <% @time_tables.each do |time_table| %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= button_to('Dodaj nowy dzień', new_teacher_time_table_path, :method => :get) %>
