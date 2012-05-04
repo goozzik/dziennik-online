@@ -11,3 +11,9 @@ Feature: Time tables
     Given I am logged in as a teacher
     When I go to the teacher time tables index page
     Then I should see "Najpierw dodaj klasę."
+
+#  Scenario: I create time table
+#    Given I am logged in as a teacher
+#    And I have class
+#    When I create time table
+#    Then I should see new time table

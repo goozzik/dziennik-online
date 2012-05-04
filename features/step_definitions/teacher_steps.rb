@@ -230,3 +230,9 @@ end
 Then /^I should see create new time table button$/ do
   assert page.has_xpath?("//input[@type='submit'][@value='Dodaj nowy dzień']")
 end
+
+When /^I create time table$/ do
+end
+
+Then /^I should see new time table$/ do
+end

@@ -1,0 +1,31 @@
+<%= form_for @time_table, :url => teacher_time_tables_path do |f| %>
+  <div>
+    <%= f.label :week_day, "Dzień" %>
+    <%= f.select :week_day, @days %>
+  </div>
+
+  <%= f.fields_for :lessons, Lesson.new do |lesson| %>
+    <div>
+      <%= lesson.label :subject_id, "Lekcja 0" %>
+      <%= lesson.select :subject_id, @subjects, :include_blank => true %>
+    </div>
+  <% end %>
+
+  <%= link_to_add_lesson("Dodaj kolejną lekcję", f, @subjects) %>
+
+  <%= f.submit "Zapisz" %>
+<% end %>
+
+<script>
+  lesson_count = 1;
+
+  function add_fields(link, association, content) {
+    new_id = new Date().getTime();
+    regexp = new RegExp("new_" + association, "g")
+    content = content.replace(regexp, new_id);
+    regexp = new RegExp("Lekcja", "g")
+    content = content.replace(regexp, "Lekcja " + lesson_count)
+    $(link).before(content);
+    lesson_count++;
+  }
+</script>

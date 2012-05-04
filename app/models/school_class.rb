@@ -1,3 +1,4 @@
+# coding: utf-8
 class SchoolClass < ActiveRecord::Base
 
   belongs_to :teacher
@@ -28,6 +29,12 @@ class SchoolClass < ActiveRecord::Base
   def self.deactivate(teacher_id)
     active_school_class = SchoolClass.first(:conditions => ['teacher_id = ? AND active = ?', teacher_id, true])
     active_school_class.update_attributes(:active => false) if active_school_class
+  end
+
+  def available_time_table_days
+    available = {0 => 'Niedziela', 1 => 'Poniedziałek', 2 => 'Wtorek', 3 => 'Środa', 4 => 'Czwartek', 5 => 'Piątek', 6 => 'Sobota'}
+    time_tables.each { |time_table| available.delete(time_table.week_day) }
+    available.collect { |d| [d.last, d.first] }
   end
 
   private
