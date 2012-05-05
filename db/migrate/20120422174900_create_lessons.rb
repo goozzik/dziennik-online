@@ -4,7 +4,7 @@ class CreateLessons < ActiveRecord::Migration
     create_table :lessons do |t|
       t.integer :subject_id
       t.integer :time_table_id
-      t.integer :lesson_number
+      t.integer :number
 
       t.timestamps
     end

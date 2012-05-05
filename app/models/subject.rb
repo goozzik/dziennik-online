@@ -1,6 +1,7 @@
 class Subject < ActiveRecord::Base
 
   belongs_to :school_class
+  has_many :lessons, :dependent => :destroy
   has_many :descriptions, :dependent => :destroy
 
   attr_accessible :name

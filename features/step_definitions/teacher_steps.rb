@@ -236,3 +236,18 @@ end
 
 Then /^I should see new time table$/ do
 end
+
+Given /^I have monday time table$/ do
+  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+  subject = FactoryGirl.create(:subject, :school_class_id => school_class.id)
+  time_table = FactoryGirl.create(:time_table, :school_class_id => school_class.id)
+  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 0)
+  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 1)
+end
+
+Then /^I should see monday time table$/ do
+  assert page.has_content?("Poniedziałek")
+  assert page.has_xpath?("//td[@class='lesson_number'][contains(text(), '0')]")
+  assert page.has_xpath?("//td[@class='lesson_number'][contains(text(), '1')]")
+  assert page.has_xpath?("//td[@class='lesson_name'][contains(text(), 'Matematyka')]")
+end

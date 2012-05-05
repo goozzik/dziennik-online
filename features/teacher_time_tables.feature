@@ -17,3 +17,9 @@ Feature: Time tables
 #    And I have class
 #    When I create time table
 #    Then I should see new time table
+
+  Scenario: I go to time tables when I have monday time table
+    Given I am logged in as a teacher
+    And I have monday time table
+    When I go to the teacher time tables index page
+    Then I should see monday time table

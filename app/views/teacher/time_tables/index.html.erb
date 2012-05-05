@@ -3,6 +3,19 @@
     Nie masz żadnych dni w planie lekcji.
   <% else %>
     <% @time_tables.each do |time_table| %>
+      <div class="time_table_day">
+        <table class="day" >
+          <tr>
+            <th colspan='2'><%= time_table.week_day_name %></th>
+          </tr>
+          <% time_table.lessons.each do |lesson| %>
+            <tr>
+              <td class="lesson_number"><%= lesson.number %></td>
+              <td class="lesson_name"><%= lesson.subject.name %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     <% end %>
   <% end %>
 </div>

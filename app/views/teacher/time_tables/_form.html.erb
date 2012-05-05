@@ -4,11 +4,14 @@
     <%= f.select :week_day, @days %>
   </div>
 
-  <%= f.fields_for :lessons, Lesson.new do |lesson| %>
-    <div>
-      <%= lesson.label :subject_id, "Lekcja 0" %>
-      <%= lesson.select :subject_id, @subjects, :include_blank => true %>
-    </div>
+  <% 0.upto(5).each do |number| %>
+    <%= f.fields_for :lessons, Lesson.new do |lesson| %>
+      <%= lesson.hidden_field :number, :value => number %>
+      <div>
+        <%= lesson.label :subject_id, "Lekcja #{number}" %>
+        <%= lesson.select :subject_id, @subjects, :include_blank => true %>
+      </div>
+    <% end %>
   <% end %>
 
   <%= link_to_add_lesson("Dodaj kolejną lekcję", f, @subjects) %>
@@ -17,7 +20,7 @@
 <% end %>
 
 <script>
-  lesson_count = 1;
+  lesson_count = 6;
 
   function add_fields(link, association, content) {
     new_id = new Date().getTime();
@@ -25,6 +28,8 @@
     content = content.replace(regexp, new_id);
     regexp = new RegExp("Lekcja", "g")
     content = content.replace(regexp, "Lekcja " + lesson_count)
+    regexp = new RegExp("new_lesson_number", "g")
+    content = content.replace(regexp, lesson_count)
     $(link).before(content);
     lesson_count++;
   }
