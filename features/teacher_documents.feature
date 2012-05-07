@@ -1,5 +1,10 @@
 Feature: Documents
 
+  Scenario: I go to documents when I dont have class
+    Given I am logged in as a teacher
+    When I go to the teacher documents index page
+    Then I should see "Najpierw dodaj klasę."
+
   Scenario: I go to documents when I dont have any documents uploaded
     Given I am logged in as a teacher
     And I have class
