@@ -254,3 +254,19 @@ td {
 h2.title img {
   vertical-align: middle;
 }
+
+th.document_name {
+  width: 150px;
+}
+
+th.document_desc {
+  width: 550px;
+}
+
+th.document_created_at {
+  width: 150px;
+}
+
+table#documents {
+  width: 100%;
+}

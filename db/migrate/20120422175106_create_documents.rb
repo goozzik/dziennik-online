@@ -6,9 +6,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.integer :semester_id
       t.string :name
       t.string :description
-      t.string :path
-      t.string :type
-      t.integer :size
+      t.string :document
 
       t.timestamps
     end

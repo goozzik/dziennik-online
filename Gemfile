@@ -10,6 +10,7 @@ gem 'devise', '2.0.4'
 gem 'cancan', '1.6.7'
 gem 'chronic', '0.6.7'
 gem 'factory_girl_rails', '3.1.0'
+gem 'carrierwave', '0.6.2'
 
 # Gems used only for assets and not required
 # in production environments by default.

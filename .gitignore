@@ -13,4 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore Cakephp app version.
 /dziennik-cakephp
+
+# Ignore development uploadtest files.
+/public/uploads

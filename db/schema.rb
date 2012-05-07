@@ -50,9 +50,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.integer  "semester_id"
     t.string   "name"
     t.string   "description"
-    t.string   "path"
-    t.string   "type"
-    t.integer  "size"
+    t.string   "document"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

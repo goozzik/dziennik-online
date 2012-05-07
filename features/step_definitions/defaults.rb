@@ -19,6 +19,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
     visit('/teacher/absences?date=2012-05-07')
   when 'the teacher time tables index page'
     visit('/teacher/time_tables')
+  when 'the teacher documents index page'
+    visit('/teacher/documents')
   else
     raise "No route given: " + page_name
   end

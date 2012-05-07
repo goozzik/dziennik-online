@@ -278,3 +278,29 @@ end
 Then /^I should see first monday and second tuesday time table$/ do
   assert page.body =~ /Poniedziałek.*Wtorek/m
 end
+
+Then /^I should see that I dont have any documents$/ do
+  step "I should see \"Ta klasa nie ma żadnych plików. Możesz dodać plik poprzez poniższy formularz.\""
+end
+
+When /^I upload document$/ do
+  visit('/teacher/documents')
+  fill_in('Nazwa', :with => 'trollface')
+  fill_in('Opis', :with => 'Test trollface jpeg file for cucumber tests.')
+  attach_file('Wybierz plik', "#{Rails.root}/features/fixtures/test.jpeg")
+  click_button('Wyślij')
+end
+
+Then /^I should see that I have uploaded documents$/ do
+  step "I should see \"trollface\""
+  step "I should see \"Test trollface jpeg file for cucumber tests.\""
+end
+
+Given /^I have document$/ do
+  step "I have class"
+  step "I upload document"
+end
+
+When /^I delete document$/ do
+  click_link("Usuń")
+end
