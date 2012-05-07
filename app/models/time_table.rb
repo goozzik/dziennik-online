@@ -3,7 +3,7 @@
 class TimeTable < ActiveRecord::Base
 
   belongs_to :school_class
-  has_many :lessons
+  has_many :lessons, :dependent => :destroy
 
   attr_accessible :week_day, :lessons_attributes
   accepts_nested_attributes_for :lessons, :reject_if => lambda { |lesson| lesson[:subject_id].blank? }, :allow_destroy => true

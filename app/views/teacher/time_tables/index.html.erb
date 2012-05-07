@@ -6,7 +6,10 @@
       <div class="time_table_day">
         <table class="day" >
           <tr>
-            <th colspan='2'><%= time_table.week_day_name %></th>
+            <th colspan='2'>
+              <%= time_table.week_day_name %>
+              <%= link_to("Usuń", {:controller => 'teacher/time_tables', :action => 'destroy', :id => time_table.id}, :method => :delete, :confirm => "Jesteś pewien?", :class => "delete_link") %>
+            </th>
           </tr>
           <% time_table.lessons.each do |lesson| %>
             <tr>

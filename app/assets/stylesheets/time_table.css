@@ -48,3 +48,8 @@ td.lesson_name {
   border-bottom:1px solid #eee;
   min-width:174px;
 }
+
+.delete_link {
+  float: right;
+  font-size: 11px;
+}

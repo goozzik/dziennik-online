@@ -251,3 +251,15 @@ Then /^I should see monday time table$/ do
   assert page.has_xpath?("//td[@class='lesson_number'][contains(text(), '1')]")
   assert page.has_xpath?("//td[@class='lesson_name'][contains(text(), 'Matematyka')]")
 end
+
+When /^I delete time table$/ do
+  step "I go to the teacher time tables index page"
+  click_link("Usuń")
+end
+
+Then /^I should not see monday time table$/ do
+  assert !page.has_content?("Poniedziałek")
+  assert !page.has_xpath?("//td[@class='lesson_number'][contains(text(), '0')]")
+  assert !page.has_xpath?("//td[@class='lesson_number'][contains(text(), '1')]")
+  assert !page.has_xpath?("//td[@class='lesson_name'][contains(text(), 'Matematyka')]")
+end

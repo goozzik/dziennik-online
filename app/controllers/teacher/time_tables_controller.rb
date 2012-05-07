@@ -17,4 +17,10 @@ class Teacher::TimeTablesController < ApplicationController
     @time_table.save ? redirect_to(:controller => "teacher/time_tables", :action => "index") : render(:action => "new")
   end
 
+  def destroy
+    time_table = current_teacher.school_class.time_tables.find(params[:id])
+    time_table.destroy
+    redirect_to(:controller => "teacher/time_tables", :action => "index")
+  end
+
 end
