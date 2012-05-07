@@ -263,3 +263,18 @@ Then /^I should not see monday time table$/ do
   assert !page.has_xpath?("//td[@class='lesson_number'][contains(text(), '1')]")
   assert !page.has_xpath?("//td[@class='lesson_name'][contains(text(), 'Matematyka')]")
 end
+
+Given /^I have tuesday and monday time tables$/ do
+  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+  subject = FactoryGirl.create(:subject, :school_class_id => school_class.id)
+  time_table = FactoryGirl.create(:time_table, :school_class_id => school_class.id, :week_day => 2)
+  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 0)
+  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 1)
+  time_table = FactoryGirl.create(:time_table, :school_class_id => school_class.id, :week_day => 1)
+  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 0)
+  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 1)
+end
+
+Then /^I should see first monday and second tuesday time table$/ do
+  assert page.body =~ /Poniedziałek.*Wtorek/m
+end

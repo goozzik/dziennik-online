@@ -29,3 +29,9 @@ Feature: Time tables
     And I have monday time table
     When I delete time table
     Then I should not see monday time table
+
+  Scenario: I go to time tables and I see ordered time tables
+    Given I am logged in as a teacher
+    And I have tuesday and monday time tables
+    When I go to the teacher time tables index page
+    Then I should see first monday and second tuesday time table

@@ -2,6 +2,7 @@
 
 class TimeTable < ActiveRecord::Base
 
+  default_scope :order => 'week_day ASC'
   belongs_to :school_class
   has_many :lessons, :dependent => :destroy
 
