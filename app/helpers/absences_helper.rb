@@ -11,4 +11,9 @@ module AbsencesHelper
     html.html_safe
   end
 
+  def percentage_frequency(required_month, justified_month, unexcused_month)
+    percentage = sprintf("%1.2f", (required_month - (justified_month + unexcused_month)).to_f / required_month * 100)
+    percentage == "NaN" ? "--" : percentage
+  end
+
 end

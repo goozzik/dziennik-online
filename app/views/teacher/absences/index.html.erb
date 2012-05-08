@@ -38,7 +38,7 @@
       <% required_month = student.sumarize_required_absences(@absences[i]) %>
       <% justified_month = student.sumarize_justified_absences(@absences[i]) %>
       <% unexcused_month = student.sumarize_unexcused_absences(@absences[i]) %>
-      <td align="center"><b><%= sprintf("%1.2f", (required_month - (justified_month + unexcused_month)).to_f / required_month * 100) %></b></td>
+      <td align="center"><b><%= percentage_frequency(required_month, justified_month, unexcused_month) %></b></td>
       <td align="center"><b><%= justified_month %></b></td>
       <td align="center"><b><%= unexcused_month %></b></td>
     </tr>
