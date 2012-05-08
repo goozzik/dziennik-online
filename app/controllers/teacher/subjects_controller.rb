@@ -1,7 +1,8 @@
 # coding: utf-8
 class Teacher::SubjectsController < ApplicationController
 
-  before_filter :teacher_has_active_class?, :teacher_has_active_semester?, :only => [:index]
+  before_filter :teacher_has_active_class?, :teacher_has_active_semester?, :only => [:index, :show]
+  before_filter :teacher_has_students?, :only => [:show]
 
   def index
     @subjects = current_teacher.school_class.subjects

@@ -304,3 +304,13 @@ end
 When /^I delete document$/ do
   click_link("Usuń")
 end
+
+Given /^I have class with subject$/ do
+  step "I have class"
+  FactoryGirl.create(:subject, :school_class_id => SchoolClass.last.id)
+end
+
+Given /^I have class with subject and student$/ do
+  step "I have class with subject"
+  FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+end

@@ -34,9 +34,8 @@ Feature: Subjects
 
   Scenario: I create new description
     Given I am logged in as a teacher
-    When I create class
-    And I create subject
-    And I create description
+    And I have class with subject and student
+    When I create description
     Then I should see new description
 
 # TODO - not working selenium with session variables
@@ -66,3 +65,10 @@ Feature: Subjects
 #
 #  @selenium
 #  Scenario: I update semestry mark
+#
+
+  Scenario: I dont have students and I want go to subject show
+    Given I am logged in as a teacher
+    And I have class with subject
+    When I go to the teacher subject page
+    Then I should see "Najpierw dodaj uczniów"
