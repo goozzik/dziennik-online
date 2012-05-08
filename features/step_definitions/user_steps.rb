@@ -6,3 +6,7 @@ Given /^I am logged in as a teacher$/ do
   fill_in('Hasło', :with => 'user_password')
   click_button('Zaloguj')
 end
+
+When /^I am logging in$/ do
+  step "I am logged in as a teacher"
+end
