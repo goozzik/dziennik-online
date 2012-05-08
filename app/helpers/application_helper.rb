@@ -38,7 +38,7 @@ module ApplicationHelper
          '<li><a href="/teacher/absences">Frekwencja</a></li>' +
          '<li><a href="/users/edit">Ustawienia</a></li>' +
          '<li><a href="/teacher/school_classes">Ustawienia klas</a></li>' +
-         '<li class="last"><a href="/users/logout">Wyloguj</a></li>' +
+         '<li class="last"><a href="/users/sign_out" data-method="delete">Wyloguj</a></li>' +
        '</ul>
      </center>'
   end

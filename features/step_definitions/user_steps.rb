@@ -10,3 +10,7 @@ end
 When /^I am logging in$/ do
   step "I am logged in as a teacher"
 end
+
+When /^I am logging out$/ do
+  click_link("Wyloguj")
+end
