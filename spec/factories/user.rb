@@ -1,11 +1,8 @@
 FactoryGirl.define do
 
   factory :user do
-    username  'user1'
-    first_name 'Tomasz'
-    last_name  'Comasz'
-    password   'user_password'
-    password_confirmation 'user_password'
+    password 'test'
+    password_confirmation 'test'
 
     # Child of :user factory, since it's in the `factory :user` block
     factory :superadmin do
@@ -17,10 +14,16 @@ FactoryGirl.define do
     end
 
     factory :director do
+      username  'director'
+      first_name 'Dyrektoriusz'
+      last_name  'Dyrekcyjny'
       director true
     end
 
     factory :teacher do
+      username  'teacher'
+      first_name 'Nauczycieliusz'
+      last_name  'Testowy'
       teacher true
     end
 
