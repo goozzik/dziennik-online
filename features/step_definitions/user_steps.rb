@@ -2,8 +2,16 @@
 Given /^I am logged in as a teacher$/ do
   FactoryGirl.create(:teacher)
   visit('/users/sign_in')
-  fill_in('Login', :with => 'user1')
-  fill_in('Hasło', :with => 'user_password')
+  fill_in('Login', :with => 'teacher')
+  fill_in('Hasło', :with => 'test')
+  click_button('Zaloguj')
+end
+
+Given /^I am logged in as a director$/ do
+  FactoryGirl.create(:director)
+  visit('/users/sign_in')
+  fill_in('Login', :with => 'director')
+  fill_in('Hasło', :with => 'test')
   click_button('Zaloguj')
 end
 

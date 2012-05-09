@@ -9,3 +9,9 @@ Feature: Layout
     When I go to the home page
     Then I should see teacher navigation
     And I should see teacher icon navigation
+
+  Scenario: Go to index page when i am logged in as a director
+    Given I am logged in as a director
+    When I go to the home page
+    Then I should see director navigation
+    # TODO And I should see teacher icon navigation
