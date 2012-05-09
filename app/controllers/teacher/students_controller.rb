@@ -12,4 +12,10 @@ class Teacher::StudentsController < ApplicationController
     @student.save ? redirect_to(:controller => "teacher/students", :action => "index") : render(:action => "index")
   end
 
+  def destroy
+    student = current_teacher.school_class.students.find(params[:id])
+    student.destroy
+    redirect_to(:controller => "teacher/students", :action => "index")
+  end
+
 end

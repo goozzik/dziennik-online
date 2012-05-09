@@ -16,3 +16,9 @@ Feature: Students
     When I create class
     And I add student
     Then I should have student
+
+  Scenario: I delete Student
+    Given I am logged in as a teacher
+    And I have class with student
+    When I delete student
+    Then I should not see student

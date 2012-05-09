@@ -314,3 +314,17 @@ Given /^I have class with subject and student$/ do
   step "I have class with subject"
   FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
 end
+
+Given /^I have class with student$/ do
+  step "I have class"
+  FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+end
+
+When /^I delete student$/ do
+  visit('/teacher/students')
+  click_link("Usuń")
+end
+
+Then /^I should not see student$/ do
+  assert !page.has_content?("Jacek")
+end
