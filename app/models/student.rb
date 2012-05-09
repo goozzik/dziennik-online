@@ -3,6 +3,8 @@ class Student < User
   default_scope :conditions => ["student = ?", true]
   belongs_to :school_class
   has_many :absences, :dependent => :destroy
+  has_many :marks, :dependent => :destroy
+  has_many :semestral_marks, :destroy => :destroy
 
   attr_accessible :email, :student, :first_name, :last_name, :pesel, :street, :city, :zip_code, :province, :telephone, :individual, :boarding_school
 
