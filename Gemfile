@@ -35,6 +35,10 @@ group :test do
   gem 'pickle', '0.4.10'
 end
 
+group :development do
+  gem 'rails_best_practices'
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
