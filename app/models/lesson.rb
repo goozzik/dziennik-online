@@ -5,4 +5,8 @@ class Lesson < ActiveRecord::Base
 
   attr_accessible :subject_id, :number
 
+  def subject_name
+    subject.name
+  end
+
 end

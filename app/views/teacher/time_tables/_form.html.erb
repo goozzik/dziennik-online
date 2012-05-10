@@ -1,7 +1,7 @@
-<%= form_for @time_table, :url => teacher_time_tables_path do |f| %>
+<%= form_for time_table, :url => teacher_time_tables_path do |f| %>
   <div>
     <%= f.label :week_day, "Dzień" %>
-    <%= f.select :week_day, @days %>
+    <%= f.select :week_day, days %>
   </div>
 
   <% 0.upto(5).each do |number| %>
@@ -9,12 +9,12 @@
       <%= lesson.hidden_field :number, :value => number %>
       <div>
         <%= lesson.label :subject_id, "Lekcja #{number}" %>
-        <%= lesson.select :subject_id, @subjects, :include_blank => true %>
+        <%= lesson.select :subject_id, subjects, :include_blank => true %>
       </div>
     <% end %>
   <% end %>
 
-  <%= link_to_add_lesson("Dodaj kolejną lekcję", f, @subjects) %>
+  <%= link_to_add_lesson("Dodaj kolejną lekcję", f, subjects) %>
 
   <%= f.submit "Zapisz" %>
 <% end %>

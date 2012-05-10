@@ -10,22 +10,22 @@ DziennikOnline::Application.routes.draw do
   match 'director/marks/:school_class_id' => 'director/marks#index', :as => 'director_marks'
 
   namespace :teacher do
-    resources :school_classes
-    resources :semesters
-    resources :subjects
-    resources :descriptions
-    resources :students
-    resources :absences
-    resources :marks
-    resources :semestral_marks
-    resources :time_tables
-    resources :documents
+    resources :school_classes, :only => [:create, :destroy, :index]
+    resources :semesters, :only => [:create, :destroy]
+    resources :subjects, :only => [:show, :create, :index]
+    resources :descriptions, :only => [:create]
+    resources :students, :only => [:create, :destroy, :index]
+    resources :absences, :only => [:update, :index]
+    resources :marks, :only => [:update]
+    resources :semestral_marks, :only => [:update]
+    resources :time_tables, :only => [:new, :create, :destroy, :index]
+    resources :documents, :only => [:create, :destroy, :index]
   end
 
   namespace :director do
-    resources :absences
+    resources :absences, :only => [:index]
     resources :subjects
-    resources :marks
+    resources :marks, :only => [:index]
   end
 
   # The priority is based upon order of creation:

@@ -1,6 +1,6 @@
 <h2 class="title">Dodaj nowy plik dla klasy</h2>
 
-<%= form_for @document, :url => teacher_documents_path, :html => {:multipart => true} do |f| %>
+<%= form_for document, :url => teacher_documents_path, :html => {:multipart => true} do |f| %>
   <table>
     <tr>
       <td><%= f.label :name, 'Nazwa' %></td>
