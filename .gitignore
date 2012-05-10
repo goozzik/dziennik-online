@@ -19,3 +19,6 @@
 
 # Ignore development uploadtest files.
 /public/uploads
+
+# Ignore simplecov generated html files.
+/coverage

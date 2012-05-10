@@ -11,6 +11,7 @@ gem 'cancan', '1.6.7'
 gem 'chronic', '0.6.7'
 gem 'factory_girl_rails', '3.1.0'
 gem 'carrierwave', '0.6.2'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,12 +28,9 @@ group :test do
   gem 'cucumber-rails', '1.3.0', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner', '0.7.2'
-  gem "selenium-webdriver", "2.21.2"
-  gem 'selenium'
-  gem 'selenium-client'
-  gem 'thin'
   gem 'launchy'
   gem 'pickle', '0.4.10'
+  gem 'simplecov'
 end
 
 group :development do
