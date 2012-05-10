@@ -12,3 +12,12 @@ Then /^I should see classes absences table$/ do
   assert page.has_xpath?("//td/a[@href='/director/absences/general/#{SchoolClass.first.id}'][contains(text(), 'Pokaż')]")
   assert page.has_xpath?("//td/a[@href='/director/absences/#{SchoolClass.first.id}'][contains(text(), 'Pokaż')]")
 end
+
+Then /^I should see general absences$/ do
+  assert page.has_xpath?("//td[contains(text(), 'Jacek')]")
+  assert page.has_xpath?("//td[contains(text(), 'Placek')]")
+  assert page.has_xpath?("//td[contains(text(), '75.76')]")
+  assert page.has_xpath?("//td[contains(text(), '54')]")
+  assert page.has_xpath?("//td[contains(text(), '18')]")
+  assert page.has_xpath?("//td[contains(text(), '9')]")
+end

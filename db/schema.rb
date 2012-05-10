@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
     t.integer  "school_class_id"
+    t.integer  "semester_id"
     t.integer  "absence_report_id"
     t.date     "date"
     t.integer  "required"

@@ -15,4 +15,10 @@ class Director::AbsencesController < ApplicationController
     @next_month = Chronic.parse('monday next month', :now => @month)
   end
 
+  def general
+    school_class = current_director.school.school_classes.find(params[:school_class_id])
+    @students = school_class.students
+    @semester_id = school_class.teacher.semester_id
+  end
+
 end

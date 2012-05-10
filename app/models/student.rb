@@ -2,6 +2,7 @@ class Student < User
 
   default_scope :conditions => ["student = ?", true]
   belongs_to :school_class
+  belongs_to :teacher
   has_many :absences, :dependent => :destroy
   has_many :marks, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
@@ -39,6 +40,19 @@ class Student < User
     unexcused = 0
     absences.each { |absence| unexcused += absence.unexcused if absence && absence.unexcused }
     unexcused
+  end
+
+  def semester_absences(semester_id)
+    required = justified = unexcused = late = 0
+    absences = self.absences.find_all_by_semester_id(semester_id)
+    absences.each do |absence|
+      required += absence.required if absence.required
+      justified += absence.justified if absence.justified
+      unexcused += absence.unexcused if absence.unexcused
+      late += absence.late if absence.late
+    end
+    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
+    { :percentage => percentage == "NaN" ? "--" : percentage , :required => required, :justified => justified, :unexcused => unexcused, :late => late }
   end
 
   private

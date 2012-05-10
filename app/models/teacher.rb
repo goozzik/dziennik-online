@@ -4,6 +4,7 @@ class Teacher < User
 
   has_many :school_classes
   has_many :semesters
+  has_many :students
   attr_accessible :school_class_id, :semester_id
 
   def school_class

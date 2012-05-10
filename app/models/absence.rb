@@ -1,6 +1,7 @@
 class Absence < ActiveRecord::Base
 
   belongs_to :student
+  belongs_to :semester
   attr_accessible :date, :required, :justified, :unexcused, :late, :student_id
 
   before_create :inherit_from_student
@@ -30,6 +31,7 @@ class Absence < ActiveRecord::Base
 
     def inherit_from_student
       self.school_class_id = student.school_class_id
+      self.semester_id = student.teacher.semester_id
     end
 
 end
