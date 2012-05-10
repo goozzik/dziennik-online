@@ -47,6 +47,7 @@ Then /^I should have active semester and updated teacher semester_id$/ do
 end
 
 When /^I create semester$/ do
+  visit('/teacher/school_classes')
   click_button('Dodaj nowy semestr')
 end
 
@@ -56,6 +57,7 @@ Then /^first semester should be unactive and new one should be active$/ do
 end
 
 When /^I delete class$/ do
+  visit('/teacher/school_classes')
   click_link('Usuń')
 end
 
@@ -65,10 +67,11 @@ Then /^class and semester should be deleted$/ do
 end
 
 When /^I delete semester$/ do
+  visit('/teacher/school_classes')
   click_button('Usuń')
 end
 
-Then /^semester should be deleted$/ do
+Then /^this semester should not exist$/ do
   assert Semester.count == 0
 end
 
@@ -81,15 +84,6 @@ Then /^I should have not set up current semester and school class$/ do
   assert !Teacher.first.semester
 end
 
-When /^I create two classes$/ do
-  step "I create class"
-  fill_in('Klasa', :with => '4')
-  fill_in('Nazwa', :with => 'G')
-  fill_in('Profil', :with => 'Informatyk')
-  fill_in('Rocznik', :with => '2012')
-  click_button('Stwórz')
-end
-
 Then /^first class and semester should be deleted$/ do
   assert SchoolClass.count == 1
   assert Semester.count == 1
@@ -100,7 +94,7 @@ Then /^I should have set up current semester and school class$/ do
   assert Teacher.first.semester.active
 end
 
-Then /^first semester should be deleted$/ do
+Then /^this first semester should not exist$/ do
   assert Semester.count == 1
 end
 
@@ -109,6 +103,7 @@ Then /^I should have set up current semester$/ do
 end
 
 When /^I set first semester as active$/ do
+  visit('/teacher/school_classes')
   click_button("Ustaw")
 end
 
@@ -130,7 +125,7 @@ Then /^I should have subject$/ do
 end
 
 When /^I add student$/ do
-  step "I go to the teacher students index page"
+  visit('/teacher/students')
   fill_in('Imię', :with => 'Janusz')
   fill_in('Nazwisko', :with => 'Poncek')
   click_button("Dodaj")
@@ -143,7 +138,7 @@ Then /^I should have student$/ do
 end
 
 When /^I create description$/ do
-  visit('/teacher/subjects/' + Subject.last.id.to_s)
+  visit("/teacher/marks/#{Subject.last.id}")
   fill_in('Typ', :with => 'Kartkówka')
   fill_in('Opis', :with => 'Trygonometria')
   fill_in('Kolor', :with => 'zielony')
@@ -154,17 +149,6 @@ Then /^I should see new description$/ do
   assert page.has_content?("Kart")
 end
 
-Given /^I have class$/ do
-  FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-end
-
-Given /^I have class with: semester, subject, student, description$/ do
-  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-  subject = FactoryGirl.create(:subject, :school_class_id => school_class.id)
-  FactoryGirl.create(:student, :school_class_id => school_class.id)
-  FactoryGirl.create(:description, :subject_id => subject.id)
-end
-
 When /^I add mark$/ do
   visit('/teacher/subjects/' + Subject.last.id.to_s)
 end
@@ -173,32 +157,12 @@ Then /^I should see that student have mark "([^"]*)"$/ do |mark|
   step "I should see \"#{mark}\""
 end
 
-Given /^I have class with: semester, subject, student, description, mark$/ do
-  step "I have class with: semester, subject, student, description"
-  FactoryGirl.create(:mark, :semester_id => Semester.last.id, :description_id => Description.last.id, :student_id => Student.last.id, :subject_id => Subject.last.id)
-end
-
 When /^I update mark$/ do
   #TODO
 end
 
-Given /^I have class with: semester, subject, student, description and two marks$/ do
-  step "I have class with: semester, subject, student, description, mark"
-  FactoryGirl.create(:description, :subject_id => Subject.last.id)
-  FactoryGirl.create(:mark, :mark => 4, :semester_id => Semester.last.id, :description_id => Description.last.id, :student_id => Student.last.id, :subject_id => Subject.last.id)
-end
-
 Then /^I should see that student have average mark "([^"]*)"$/ do |mark|
   step "I should see \"#{mark}\""
-end
-
-Given /^I have abseneces for may$/ do
-  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-  student = FactoryGirl.create(:student, :school_class_id => school_class.id)
-  FactoryGirl.create(:absence, :student_id => student.id)
-  FactoryGirl.create(:absence, :date => "2012-05-14" ,:student_id => student.id)
-  FactoryGirl.create(:absence, :date => "2012-05-21" ,:student_id => student.id)
-  FactoryGirl.create(:absence, :date => "2012-05-28" ,:student_id => student.id)
 end
 
 Then /^I should see may absences$/ do
@@ -237,14 +201,6 @@ end
 Then /^I should see new time table$/ do
 end
 
-Given /^I have monday time table$/ do
-  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-  subject = FactoryGirl.create(:subject, :school_class_id => school_class.id)
-  time_table = FactoryGirl.create(:time_table, :school_class_id => school_class.id)
-  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 0)
-  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 1)
-end
-
 Then /^I should see monday time table$/ do
   assert page.has_content?("Poniedziałek")
   assert page.has_xpath?("//td[@class='lesson_number'][contains(text(), '0')]")
@@ -262,17 +218,6 @@ Then /^I should not see monday time table$/ do
   assert !page.has_xpath?("//td[@class='lesson_number'][contains(text(), '0')]")
   assert !page.has_xpath?("//td[@class='lesson_number'][contains(text(), '1')]")
   assert !page.has_xpath?("//td[@class='lesson_name'][contains(text(), 'Matematyka')]")
-end
-
-Given /^I have tuesday and monday time tables$/ do
-  school_class = FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-  subject = FactoryGirl.create(:subject, :school_class_id => school_class.id)
-  time_table = FactoryGirl.create(:time_table, :school_class_id => school_class.id, :week_day => 2)
-  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 0)
-  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 1)
-  time_table = FactoryGirl.create(:time_table, :school_class_id => school_class.id, :week_day => 1)
-  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 0)
-  FactoryGirl.create(:lesson, :time_table_id => time_table.id, :subject_id => subject.id, :number => 1)
 end
 
 Then /^I should see first monday and second tuesday time table$/ do
@@ -297,27 +242,11 @@ Then /^I should see that I have uploaded documents$/ do
 end
 
 Given /^I have document$/ do
-  step "I have class"
   step "I upload document"
 end
 
 When /^I delete document$/ do
   click_link("Usuń")
-end
-
-Given /^I have class with subject$/ do
-  step "I have class"
-  FactoryGirl.create(:subject, :school_class_id => SchoolClass.last.id)
-end
-
-Given /^I have class with subject and student$/ do
-  step "I have class with subject"
-  FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
-end
-
-Given /^I have class with student$/ do
-  step "I have class"
-  FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
 end
 
 When /^I delete student$/ do

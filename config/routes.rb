@@ -5,6 +5,7 @@ DziennikOnline::Application.routes.draw do
   devise_for :users
 
   match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
+  match 'teacher/marks/:subject_id' => 'teacher/marks#show', :as => 'teacher_marks'
   match 'director/absences/general/:school_class_id' => 'director/absences#general', :as => 'general_director_absences'
   match 'director/absences/:school_class_id' => 'director/absences#actual', :as => 'actual_director_absences'
   match 'director/marks/:school_class_id' => 'director/marks#index', :as => 'director_marks'
