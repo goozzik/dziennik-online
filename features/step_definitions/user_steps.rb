@@ -8,7 +8,8 @@ Given /^I am logged in as a teacher$/ do
 end
 
 Given /^I am logged in as a director$/ do
-  FactoryGirl.create(:director)
+  school = FactoryGirl.create(:school)
+  FactoryGirl.create(:director, :school_id => school.id)
   visit('/users/sign_in')
   fill_in('Login', :with => 'director')
   fill_in('Hasło', :with => 'test')

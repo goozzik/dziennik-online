@@ -5,5 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-FactoryGirl.create(:teacher)
-FactoryGirl.create(:director)
+school = FactoryGirl.create(:school)
+teacher = FactoryGirl.create(:teacher, :school_id => school.id)
+FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+FactoryGirl.create(:director, :school_id => school.id)

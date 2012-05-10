@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :individual
       t.boolean :boarding_school
       t.integer :school_class_id
+      t.integer :school_id
       t.integer :semester_id
       t.integer :teacher_id
       t.boolean :student
@@ -22,7 +23,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :admin
       t.boolean :superadmin
       t.boolean :director
-      t.boolean :deleted # I don't realy know why we need this?
+      t.boolean :deleted # I don't realy know why we need this? #goozzik
 
       t.timestamps
     end

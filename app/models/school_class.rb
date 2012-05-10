@@ -7,12 +7,12 @@ class SchoolClass < ActiveRecord::Base
   has_many :students, :dependent => :destroy, :conditions => ['student = ?', true]
   has_many :time_tables, :dependent => :destroy
   has_many :documents, :dependent => :destroy
-  attr_accessible :year, :name, :profile, :yearbook, :active
+  attr_accessible :year, :name, :profile, :yearbook, :active, :school_id
   default_scope :order => 'created_at ASC'
 
   validates_presence_of :year, :name, :profile, :yearbook
 
-  before_create :unactive_old_school_class, :set_active
+  before_create :unactive_old_school_class, :set_active, :inherit_from_teacher
   after_create :create_semester
 
   before_destroy :unset_teacher_school_class_id
@@ -56,6 +56,10 @@ class SchoolClass < ActiveRecord::Base
 
     def unset_teacher_school_class_id
       self.teacher.update_attributes(:school_class_id => nil) if self.active
+    end
+
+    def inherit_from_teacher
+      self.school_id = teacher.school_id
     end
 
 end

@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20120422182439) do
     t.boolean  "individual"
     t.boolean  "boarding_school"
     t.integer  "school_class_id"
+    t.integer  "school_id"
     t.integer  "semester_id"
     t.integer  "teacher_id"
     t.boolean  "student"

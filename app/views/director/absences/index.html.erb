@@ -1,0 +1,16 @@
+<h2 class="title">Aktywne klasy</h2>
+
+<table>
+  <tr>
+    <th>Klasa</th>
+    <th>Ogólna frekwencja</th>
+    <th>Bieżąca frekwencja</th>
+  </tr>
+  <% @school_classes.each do |school_class| %>
+    <tr>
+      <td><%= school_class.fullname %></td>
+      <td><%= link_to("Pokaż", general_director_absences_path(school_class)) %></td>
+      <td><%= link_to("Pokaż", actual_director_absences_path(school_class)) %></td>
+    </tr>
+  <% end %>
+</table>
