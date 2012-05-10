@@ -29,4 +29,12 @@ module AbsencesHelper
     html.html_safe
   end
 
+  def semesters_navigation(school_class, semesters)
+    html = ''
+    semesters.each do |semester|
+      html << link_to("Semestr #{semester.semester}", general_director_absences_path(school_class, :semester_id => semester.id))
+    end
+    html.html_safe
+  end
+
 end

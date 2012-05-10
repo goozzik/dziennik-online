@@ -21,3 +21,7 @@ Then /^I should see general absences$/ do
   assert page.has_xpath?("//td[contains(text(), '18')]")
   assert page.has_xpath?("//td[contains(text(), '9')]")
 end
+
+Then /^I should see semesters navigation$/ do
+  assert page.has_xpath?("//a[@href='/director/absences/general/#{SchoolClass.first.id}?semester_id=#{Semester.first.id}'][contains(text(), 'Semestr 1')]")
+end

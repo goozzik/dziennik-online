@@ -16,9 +16,10 @@ class Director::AbsencesController < ApplicationController
   end
 
   def general
-    school_class = current_director.school.school_classes.find(params[:school_class_id])
-    @students = school_class.students
-    @semester_id = school_class.teacher.semester_id
+    @school_class = current_director.school.school_classes.find(params[:school_class_id])
+    @semester_id = params[:semester_id].nil? ? @school_class.teacher.semester_id : params[:semester_id]
+    @students = @school_class.students
+    @semesters = @school_class.semesters
   end
 
 end

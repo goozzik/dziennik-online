@@ -48,3 +48,4 @@ Feature: Director absences
     And I am logged in as a director
     When I go to the director general absences page
     Then I should see general absences
+    And I should see semesters navigation
