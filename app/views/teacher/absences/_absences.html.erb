@@ -1,0 +1,46 @@
+<%= months_navigation(@previous_month, @next_month, user_type) %>
+
+<table id="month">
+  <tr>
+    <th colspan="2" rowspan="1"></th>
+    <% @weeks.each do |week|  %>
+      <th colspan='4'><%= week %></th>
+    <% end %>
+    <th>%</th>
+    <th>uspr</th>
+    <th>n.us</th>
+  </tr>
+
+  <tr>
+    <td class="name"><strong>Imię</strong></td>
+    <td class="lname"><strong>Nazwisko</strong></td>
+    <% @weeks.each do |week| %>
+      <td class="summary"><strong>obow</strong></td>
+      <td class="summary"><strong>uspr</strong></td>
+      <td class="summary"><strong>n.us</strong></td>
+      <td class="summary summary_border"><strong>spóź</strong></td>
+    <% end %>
+    <td class="summary"></td>
+    <td class="summary"></td>
+    <td class="summary"></td>
+  </tr>
+
+  <% @students.each_with_index do |student, i| %>
+    <tr>
+      <td><%= student.first_name %></td>
+      <td class="lname_value"><%= student.last_name %></td>
+      <% @weeks.each_with_index do |week, j| %>
+        <td class='absence' id='<%= "#{student.id}_#{week}_required" %>'><%= @absences[i][j].required if @absences[i][j] %></td>
+        <td class='absence' id='<%= "#{student.id}_#{week}_justified" %>'><%= @absences[i][j].justified if @absences[i][j] %></td>
+        <td class='absence' id='<%= "#{student.id}_#{week}_unexcused" %>'><%= @absences[i][j].unexcused if @absences[i][j] %></td>
+        <td class='absence absence_border' id='<%= "#{student.id}_#{week}_late" %>'><%= @absences[i][j].late if @absences[i][j] %></td>
+      <% end %>
+      <% required_month = student.sumarize_required_absences(@absences[i]) %>
+      <% justified_month = student.sumarize_justified_absences(@absences[i]) %>
+      <% unexcused_month = student.sumarize_unexcused_absences(@absences[i]) %>
+      <td align="center"><b><%= percentage_frequency(required_month, justified_month, unexcused_month) %></b></td>
+      <td align="center"><b><%= justified_month %></b></td>
+      <td align="center"><b><%= unexcused_month %></b></td>
+    </tr>
+  <% end %>
+</table>

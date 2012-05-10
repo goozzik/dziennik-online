@@ -75,4 +75,12 @@ module ApplicationHelper
     flash[:notice] if flash[:notice]
   end
 
+  def user_type
+    if current_user.teacher
+      'teacher'
+    elsif current_user.director
+      'director'
+    end
+  end
+
 end

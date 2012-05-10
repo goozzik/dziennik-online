@@ -202,13 +202,13 @@ Given /^I have abseneces for may$/ do
 end
 
 Then /^I should see may absences$/ do
-  step "I should see \"2012-05-07\""
+  assert page.has_content?("2012-05-07")
   assert page.has_xpath?("//td[@class='absence'][contains(text(), \"33\")]")
   assert page.has_xpath?("//td[@class='absence'][contains(text(), \"6\")]")
   assert page.has_xpath?("//td[@class='absence'][contains(text(), \"2\")]")
-  step "I should see \"75.76\""
-  step "I should see \"24\""
-  step "I should see \"8\""
+  assert page.has_content?("75.76")
+  assert page.has_content?("24")
+  assert page.has_content?("8")
 end
 
 When /^I follow link for next month$/ do

@@ -23,6 +23,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
     visit('/teacher/documents')
   when 'the director absences index page'
     visit('/director/absences')
+  when 'the director may absences index page'
+    visit('/director/absences/' + SchoolClass.first.id.to_s)
   else
     raise "No route given: " + page_name
   end

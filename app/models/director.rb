@@ -3,7 +3,6 @@ class Director < User
   default_scope :conditions => ["director = ?", true]
 
   has_many :school_classes
-  belongs_to :school
 
   attr_accessible :school_id
 

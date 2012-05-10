@@ -5,29 +5,29 @@ FactoryGirl.define do
     password_confirmation 'test'
 
     # Child of :user factory, since it's in the `factory :user` block
-    factory :superadmin do
+    factory :superadmin, :class => SuperAdmin do
       superadmin true
     end
 
-    factory :admin do
+    factory :admin, :class => Admin do
       admin true
     end
 
-    factory :director do
+    factory :director, :class => Director do
       username  'director'
       first_name 'Dyrektoriusz'
       last_name  'Dyrekcyjny'
       director true
     end
 
-    factory :teacher do
+    factory :teacher, :class => Teacher do
       username  'teacher'
       first_name 'Nauczycieliusz'
       last_name  'Testowy'
       teacher true
     end
 
-    factory :student do
+    factory :student, :class => Student do
       student true
       username 'student1'
       first_name 'Jacek'

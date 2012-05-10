@@ -5,11 +5,10 @@ Given /^I am logged in as a teacher$/ do
   fill_in('Login', :with => 'teacher')
   fill_in('Hasło', :with => 'test')
   click_button('Zaloguj')
+  assert page.has_content?("Zalogowano pomyślnie.")
 end
 
 Given /^I am logged in as a director$/ do
-  school = FactoryGirl.create(:school)
-  FactoryGirl.create(:director, :school_id => school.id)
   visit('/users/sign_in')
   fill_in('Login', :with => 'director')
   fill_in('Hasło', :with => 'test')

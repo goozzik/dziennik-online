@@ -52,7 +52,8 @@ class Student < User
     end
 
     def inherit_from_school_class
-      self.teacher_id = self.school_class.teacher_id
+      self.teacher_id = school_class.teacher_id
+      self.school_id = school_class.school_id
     end
 
 

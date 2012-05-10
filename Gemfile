@@ -32,6 +32,7 @@ group :test do
   gem 'selenium-client'
   gem 'thin'
   gem 'launchy'
+  gem 'pickle', '0.4.10'
 end
 
 gem 'jquery-rails'

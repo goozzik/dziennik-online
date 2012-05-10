@@ -7,13 +7,8 @@ Then /^I should see director navigation$/ do
   assert page.has_xpath?("//a[@href='/users/edit'][contains(text(), \"Ustawienia\")]")
 end
 
-Given /^I have example teachers with active classes$/ do
-  school = FactoryGirl.create(:school)
-  teacher1 = FactoryGirl.create(:teacher, :school_id => school.id)
-  teacher2 = FactoryGirl.create(:teacher, :username => 'teacher2', :school_id => school.id)
-  school_class1 = FactoryGirl.create(:school_class, :teacher_id => teacher1.id)
-  school_class2 = FactoryGirl.create(:school_class, :teacher_id => teacher2.id)
-end
-
-Then /^I should see classes table$/ do
+Then /^I should see classes absences table$/ do
+  assert page.has_xpath?("//td[contains(text(), '1 G 2011')]")
+  assert page.has_xpath?("//td/a[@href='/director/absences/general/#{SchoolClass.first.id}'][contains(text(), 'Pokaż')]")
+  assert page.has_xpath?("//td/a[@href='/director/absences/#{SchoolClass.first.id}'][contains(text(), 'Pokaż')]")
 end
