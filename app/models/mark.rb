@@ -2,8 +2,10 @@ class Mark < ActiveRecord::Base
 
   belongs_to :description
   belongs_to :semester
+  belongs_to :student
+  belongs_to :subject
 
-  attr_accessible :mark, :student_id, :description_id, :subject_id
+  attr_accessible :mark, :student_id, :description_id, :subject_id, :semester_id
 
   before_create :inherit_from_semester
 

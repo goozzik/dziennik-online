@@ -1,0 +1,30 @@
+<%= subjects_navigation(@school_class) %>
+
+<table>
+  <tr>
+    <th>l.p</th>
+    <th>Imię</th>
+    <th>Nazwisko</th>
+    <% @descriptions.each do |description| %>
+      <th title="<%= description.desc_type + ' - ' + description.description %>">
+        <%= truncate(description.desc_type, :length => 4, :omission => '') %>
+      </th>
+    <% end %>
+
+    <th title="Ocena semestralna">OS</th>
+    <th title="Średnia z podanych ocen">ŚR</th>
+  </tr>
+  <% @students.each_with_index do |student, i| %>
+    <tr>
+      <td><%= i+1 %></td>
+      <td><%= student.first_name %></td>
+      <td><%= student.last_name %></td>
+      <% @descriptions.each_with_index do |description, j| %>
+        <td><%= @marks[i][j].mark if @marks[i][j] %></td>
+      <% end %>
+      <td><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
+      <td><%= sprintf("%1.2f", student.average_from_subject(@subject.id, @semester.id)) %></td>
+    </tr>
+  <% end %>
+
+</table>

@@ -1,5 +1,6 @@
 <%= javascript_include_tag "jquery.fancybox-1.3.4.pack" %>
 <%= stylesheet_link_tag "jquery.fancybox-1.3.4" %>
+
 <h2 class="title"><%= image_tag("students_marks_32.png") %> Oceny - <%= @subject.name %></h2>
 
 <table class="marks">
@@ -33,7 +34,7 @@
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
       <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
       <td id="semestral_mark_<%= student.id %>" class="semestral_mark border_b"><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
-      <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id, current_teacher.semester_id)) %></td>
+      <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id, @semester_id)) %></td>
     </tr>
   <% end %>
 

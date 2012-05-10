@@ -7,6 +7,7 @@ DziennikOnline::Application.routes.draw do
   match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
   match 'director/absences/general/:school_class_id' => 'director/absences#general', :as => 'general_director_absences'
   match 'director/absences/:school_class_id' => 'director/absences#actual', :as => 'actual_director_absences'
+  match 'director/marks/:school_class_id' => 'director/marks#index', :as => 'director_marks'
 
   namespace :teacher do
     resources :school_classes
@@ -23,6 +24,8 @@ DziennikOnline::Application.routes.draw do
 
   namespace :director do
     resources :absences
+    resources :subjects
+    resources :marks
   end
 
   # The priority is based upon order of creation:

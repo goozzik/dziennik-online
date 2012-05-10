@@ -25,3 +25,12 @@ end
 Then /^I should see semesters navigation$/ do
   assert page.has_xpath?("//a[@href='/director/absences/general/#{SchoolClass.first.id}?semester_id=#{Semester.first.id}'][contains(text(), 'Semestr 1')]")
 end
+
+Then /^I should see mark "([^"]*)" and average mark "([^"]*)"$/ do |mark, avg|
+  assert page.has_xpath?("//td[contains(text(), '#{mark}')]")
+  assert page.has_xpath?("//td[contains(text(), '#{avg}')]")
+end
+
+Given /^created semester is loaded$/ do
+  find_model("semester: \"Semestr 1\"")
+end

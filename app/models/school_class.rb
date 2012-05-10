@@ -38,6 +38,10 @@ class SchoolClass < ActiveRecord::Base
     available.collect { |d| [d.last, d.first] }
   end
 
+  def semester
+    self.semesters.find_by_active(true)
+  end
+
   private
 
     def unactive_old_school_class

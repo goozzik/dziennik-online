@@ -21,6 +21,7 @@ class Teacher::SubjectsController < ApplicationController
     @description = Description.new
     @marks = Mark.find_all_by_students_and_descriptions(@students, @descriptions)
     @semestral_marks = SemestralMark.find_all_by_students_and_semester_id_and_subject_id(@students, current_teacher.semester_id, @subject.id)
+    @semester_id = current_teacher.semester_id
   end
 
 end
