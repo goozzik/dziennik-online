@@ -21,8 +21,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
     visit('/teacher/time_tables')
   when 'the teacher documents index page'
     visit('/teacher/documents')
-  when 'the director absences index page'
-    visit('/director/absences')
+  when 'the director school classes index page'
+    visit('/director/school_classes')
   when 'the director may absences page'
     visit("/director/absences/#{SchoolClass.first.id}")
   when 'the director general absences page'

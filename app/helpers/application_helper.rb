@@ -63,8 +63,7 @@ module ApplicationHelper
     '<center>
        <ul>
          <li class="first"><a href="/">Strona główna</a></li>' +
-         '<li><a href="/director/absences">Frekwencja</a></li>' +
-         '<li><a href="/director/subjects">Oceny</a></li>' +
+         '<li><a href="/director/school_classes">Klasy</a></li>' +
          '<li><a href="/users/edit">Ustawienia</a></li>' +
          '<li class="last"><a href="/users/sign_out" data-method="delete">Wyloguj</a></li>' +
        '</ul>

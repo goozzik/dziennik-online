@@ -27,6 +27,7 @@ DziennikOnline::Application.routes.draw do
     resources :absences, :only => [:index]
     resources :subjects
     resources :marks, :only => [:index]
+    resources :school_classes, :only => [:index]
   end
 
   # The priority is based upon order of creation:
