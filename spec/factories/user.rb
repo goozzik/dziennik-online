@@ -29,7 +29,7 @@ FactoryGirl.define do
 
     factory :student, :class => Student do
       student true
-      username 'student1'
+      username 'student'
       first_name 'Jacek'
       last_name 'Placek'
     end

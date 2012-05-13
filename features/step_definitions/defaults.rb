@@ -11,8 +11,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
     visit('/teacher/school_classes')
   when 'the teacher subjects index page'
     visit('/teacher/subjects')
-  when 'the teacher marks page'
-    visit("/teacher/marks/#{Subject.last.id}")
+  when 'the teacher subject page'
+    visit("/teacher/subjects/#{Subject.last.id}")
   when 'the teacher students index page'
     visit('/teacher/students')
   when 'the teacher absences may index page'
@@ -29,6 +29,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
     visit("/director/absences/general/#{SchoolClass.first.id}")
   when 'the director subjects index page'
     visit("/director/marks/#{SchoolClass.first.id}")
+  when 'the student marks index page'
+    visit("/student/subjects")
   else
     raise "No route given: " + page_name
   end

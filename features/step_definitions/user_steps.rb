@@ -13,6 +13,13 @@ Given /^I am logged in as a director$/ do
   click_button('Zaloguj')
 end
 
+Given /^I am logged in as a student$/ do
+  visit('/users/sign_in')
+  fill_in('Login', :with => 'student')
+  fill_in('Hasło', :with => 'test')
+  click_button('Zaloguj')
+end
+
 When /^I am logging in$/ do
   step "I am logged in as a teacher"
 end

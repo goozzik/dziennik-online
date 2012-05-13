@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     Director.find(current_user.id)
   end
 
+  def current_student
+    Student.find(current_user.id)
+  end
+
   private
 
     # Overwriting the sign_in redirect path method

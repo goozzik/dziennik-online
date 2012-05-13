@@ -7,5 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 school = FactoryGirl.create(:school)
 teacher = FactoryGirl.create(:teacher, :school_id => school.id)
-FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
 FactoryGirl.create(:director, :school_id => school.id)
+FactoryGirl.create(:student, :school_class_id => school_class.id)

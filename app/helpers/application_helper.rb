@@ -70,6 +70,19 @@ module ApplicationHelper
      </center>'
   end
 
+  def student_navigation
+    '<center>
+       <ul>
+         <li class="first"><a href="/">Strona główna</a></li>' +
+         '<li><a href="/student/marks">Oceny</a></li>' +
+         '<li><a href="/student/absences">Frekwencja</a></li>' +
+         '<li><a href="/student/time_tables">Plan lekcji</a></li>' +
+         '<li><a href="/users/edit">Ustawienia</a></li>' +
+         '<li class="last"><a href="/users/sign_out" data-method="delete">Wyloguj</a></li>' +
+       '</ul>
+     </center>'
+  end
+
   def flash_messages
     flash[:notice] if flash[:notice]
   end

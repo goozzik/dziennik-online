@@ -138,7 +138,7 @@ Then /^I should have student$/ do
 end
 
 When /^I create description$/ do
-  visit("/teacher/marks/#{Subject.last.id}")
+  visit("/teacher/subjects/#{Subject.last.id}")
   fill_in('Typ', :with => 'Kartkówka')
   fill_in('Opis', :with => 'Trygonometria')
   fill_in('Kolor', :with => 'zielony')

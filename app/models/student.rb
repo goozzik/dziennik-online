@@ -55,6 +55,10 @@ class Student < User
     { :percentage => percentage == "NaN" ? "--" : percentage , :required => required, :justified => justified, :unexcused => unexcused, :late => late }
   end
 
+  def subjects
+    school_class.subjects
+  end
+
   private
 
     def set_student
