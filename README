@@ -1,0 +1,27 @@
+Instalacja środowiska na systemie Windows 7 64bit
+
+1. Instalujemy http://rubyforge.org/frs/download.php/75465/rubyinstaller-1.9.3-p0.exe, należy zaznaczyć „Add ruby executables to your PATH” „Associate .rb and .rbw files with this ruby installation”
+2. Instalujemy (rozpakowujemy) https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe.
+3. Uruchamiamy „Start command prompt with ruby”
+4. W wierszu poleceń dostajemy się przez polecenie cd do katalogu projektu. W moim przypadku -> cd Documents/projects/dziennik-online
+5. W wierszu polecenie, który wcześniej włączyliśmy, odpalamy:
+    - cd C:\DevKit      // ścieżka którą wybraliśmy przy punkcie 2)
+    - ruby dk.rb init
+    - ruby dk.rb install
+6. Przechodzimy z powrotem do katalogu z projektem i odpalamy:
+    - cd C:\Users\goozzik\projects\dziennik-online
+    - "bundle install"
+7. Instalujemy postgresql http://www.postgresql.org
+8. W narzędziu pgAdmin, łączymy się z naszą bazą localhost. W zakładce "Login Roles" tworzymy użytkownika dziennik_online
+9. W wierszu poleceń odpalamy pokoleji
+    - rake db:create
+    - rake db:migrate
+    - rake db:seed
+    - rake db:test:prepare
+  Jeżeli coś jest nie tak, należy sprawdzić config/databate.yml - konfiguracja powinna być zgodna z naszymi ustawieniami postgres'a.
+10. Żeby sprawdzić czy wszystko jest dobrze odpalamy: 
+    - cucumber
+11. Odpalamy aplikacje
+    - rails s
+
+Jeżeli wszystko zostało poprawnie wykonane, włączamy przeglądarke i kierujemy się na adres aplikacji -> http://localhost:3000
