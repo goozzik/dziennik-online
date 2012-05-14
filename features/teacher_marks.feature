@@ -49,6 +49,7 @@ Feature: Marks
     And a description exists with subject: the subject
     And created semester is loaded
     And a mark exists with semester: the semester, description: the description, student: the student, subject: the subject
+    And another description exists with subject: the subject
     And another mark exists with semester: the semester, description: the description, student: the student, subject: the subject, mark: 4
     When I go to the teacher subject page
     Then I should see that student have average mark "2.50"

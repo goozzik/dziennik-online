@@ -7,17 +7,20 @@ Then /^I should see student navigation$/ do
   assert page.has_xpath?("//a[@href='/users/sign_out'][contains(text(), \"Wyloguj\")]")
 end
 
-Given /^another subject exists with school_class: the school class, name: Biologia$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^I should see my marks$/ do
+  assert page.has_xpath?("//td[contains(text(), \"4\")]")
+  assert page.has_xpath?("//td[contains(text(), \"1\")]")
 end
 
-When /^I am going to the student marks index page$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^I should see my absences$/ do
+  assert page.has_content?("2012-05-07")
+  assert page.has_content?("Maj")
+  assert page.has_xpath?("//td[contains(text(), \"33\")]")
+  assert page.has_xpath?("//td[contains(text(), \"6\")]")
+  assert page.has_xpath?("//td[contains(text(), \"2\")]")
 end
 
-Then /^I should see my subjects$/ do
-  subject1 = Subject.first
-  subject2 = Subject.last
-  assert page.has_xpath?("//a[@href='/student/subjects/#{subject1.id}']")
-  assert page.has_xpath?("//a[@href='/student/subjects/#{subject2.id}']")
+Then /^I should see information that i don't have any absences$/ do
+  assert page.has_content?("Wychowawca nie uzupełnił jeszcze frekwencji.")
 end
+

@@ -30,7 +30,9 @@ When /^(?:|I )go to (.+)$/ do |page_name|
   when 'the director subjects index page'
     visit("/director/marks/#{SchoolClass.first.id}")
   when 'the student marks index page'
-    visit("/student/subjects")
+    visit("/student/marks")
+  when 'the student absences index page'
+    visit("/student/absences")
   else
     raise "No route given: " + page_name
   end

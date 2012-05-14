@@ -1,0 +1,30 @@
+<% unless @absences.empty? %>
+  <table>
+    <tr>
+      <th>Tydzień</th>
+      <th>%</th>
+      <th>obow</th>
+      <th>uspr</th>
+      <th>n.us</th>
+      <th>spóź</th>
+    </tr>
+    <% @absences.each do |absence| %>
+      <% if absence.date.month != @month %>
+        <% @month = absence.date.month %>
+        <tr>
+          <td colspan="6"><%= I18n.t(absence.date.strftime("%B")) %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= absence.date %></td>
+        <td></td>
+        <td><%= absence.try(:required) %></td>
+        <td><%= absence.try(:justified) %></td>
+        <td><%= absence.try(:unexcused) %></td>
+        <td><%= absence.try(:late) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  Wychowawca nie uzupełnił jeszcze frekwencji.
+<% end %>

@@ -30,6 +30,7 @@ DziennikOnline::Application.routes.draw do
   end
 
   namespace :student do
+    resources :absences
     resources :marks
   end
 
