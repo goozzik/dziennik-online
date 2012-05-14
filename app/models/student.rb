@@ -59,6 +59,10 @@ class Student < User
     school_class.subjects
   end
 
+  def time_tables
+    school_class.time_tables
+  end
+
   private
 
     def set_student

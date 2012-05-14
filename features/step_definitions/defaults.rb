@@ -33,6 +33,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
     visit("/student/marks")
   when 'the student absences index page'
     visit("/student/absences")
+  when 'the student time tables index page'
+    visit("/student/time_tables")
   else
     raise "No route given: " + page_name
   end

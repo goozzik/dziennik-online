@@ -24,3 +24,14 @@ Then /^I should see information that i don't have any absences$/ do
   assert page.has_content?("Wychowawca nie uzupełnił jeszcze frekwencji.")
 end
 
+Then /^I should see my time tables$/ do
+  assert page.has_content?("Poniedziałek")
+  assert page.has_content?("Wtorek")
+  assert page.has_xpath?("//td[contains(text(), '0')]")
+  assert page.has_xpath?("//td[contains(text(), '1')]")
+  assert page.has_xpath?("//td[contains(text(), 'Biologia')]")
+end
+
+Then /^I should see information that there is no time tables now$/ do
+  assert page.has_content?("Wychowawca nie uzupełnił jeszcze planu lekcji.")
+end
