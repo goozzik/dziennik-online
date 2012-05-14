@@ -22,3 +22,6 @@
 
 # Ignore simplecov generated html files.
 /coverage
+
+# Ignore own database configuration.
+/config/database.yml

@@ -11,7 +11,8 @@ gem 'cancan', '1.6.7'
 gem 'chronic', '0.6.7'
 gem 'factory_girl_rails', '3.1.0'
 gem 'carrierwave', '0.6.2'
-gem 'thin'
+gem 'thin', '1.3.1'
+gem 'eventmachine', '1.0.0.beta.4.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
