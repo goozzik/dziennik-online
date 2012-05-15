@@ -57,11 +57,3 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
-
-# Force backtraces from Thin to output to STDERR
-# workaround for http://stackoverflow.com/questions/4627928/get-rails-exceptions-to-show-using-capybara-and-selenium
-module Thin::Logging
-  def log_error(e=$!)
-    STDERR.print "#{e}\n\t" + e.backtrace.join("\n\t")
-  end
-end
