@@ -1,8 +1,9 @@
 DziennikOnline::Application.routes.draw do
 
-  devise_for :teachers
-
-  devise_for :users
+  devise_for :users, :skip => [:registrations] do
+    get "/users/edit" => "devise/registrations#edit", :as => :edit_user_registration
+    put "/users" => "devise/registrations#update", :as => :user_registration
+  end
 
   match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
   match 'director/absences/general/:school_class_id' => 'director/absences#general', :as => 'general_director_absences'

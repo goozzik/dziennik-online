@@ -31,6 +31,7 @@ group :test do
   gem 'launchy'
   gem 'pickle', '0.4.10'
   gem 'simplecov'
+  gem 'steak'
 end
 
 group :development do
