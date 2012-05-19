@@ -270,3 +270,7 @@ th.document_created_at {
 table#documents {
   width: 100%;
 }
+
+div#notice {
+  color: green;
+}
