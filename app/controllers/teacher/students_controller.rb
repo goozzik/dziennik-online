@@ -18,4 +18,8 @@ class Teacher::StudentsController < ApplicationController
     redirect_to(:controller => "teacher/students", :action => "index")
   end
 
+  def show
+    @student = current_teacher.school_class.students.find(params[:id])
+  end
+
 end

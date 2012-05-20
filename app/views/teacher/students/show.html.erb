@@ -1,0 +1,50 @@
+<table>
+  <tr>
+    <td>Login</td>
+    <td><%= @student.username %></td>
+  </tr>
+  <tr>
+    <td>Imię</td>
+    <td><%= @student.first_name %></td>
+  </tr>
+  <tr>
+    <td>Nazwisko</td>
+    <td><%= @student.last_name %></td>
+  </tr>
+  <tr>
+    <td>Pesel</td>
+    <td><%= @student.pesel %></td>
+  </tr>
+  <tr>
+    <td>NIU</td>
+    <td><%= @student.niu %></td>
+  </tr>
+  <tr>
+    <td>Ulica</td>
+    <td><%= @student.street %></td>
+  </tr>
+  <tr>
+    <td>Miasto</td>
+    <td><%= @student.city %></td>
+  </tr>
+  <tr>
+    <td>Kod pocztowy</td>
+    <td><%= @student.zip_code %></td>
+  </tr>
+  <tr>
+    <td>Województwo</td>
+    <td><%= @student.province %></td>
+  </tr>
+  <tr>
+    <td>Telefon</td>
+    <td><%= @student.telephone %></td>
+  </tr>
+  <tr>
+    <td>Zajęcia indywidualne</td>
+    <td><%= @student.individual ? "Tak" : "Nie" %></td>
+  </tr>
+  <tr>
+    <td>Zamieszkuje w internacie</td>
+    <td><%= @student.boarding_school ? "Tak" : "Nie" %></td>
+  </tr>
+</table>

@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :username
       t.string :first_name
       t.string :last_name
-      t.integer :pesel
+      t.string :pesel
       t.integer :niu
       t.string :street
       t.string :city

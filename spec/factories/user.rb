@@ -1,3 +1,5 @@
+# coding: utf-8
+
 FactoryGirl.define do
 
   factory :user do
@@ -32,6 +34,13 @@ FactoryGirl.define do
       username 'student'
       first_name 'Jacek'
       last_name 'Placek'
+      pesel '93052334123'
+      niu '1'
+      street 'Słowackiego 3/3'
+      city 'Częstochowa'
+      zip_code '42-200'
+      province 'Ślaskie'
+      telephone '34233123'
     end
   end
 

@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(:version => 20120510174433) do
     t.string   "username"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "pesel"
+    t.string   "pesel"
     t.integer  "niu"
     t.string   "street"
     t.string   "city"
