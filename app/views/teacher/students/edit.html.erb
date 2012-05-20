@@ -1,0 +1,60 @@
+<%= form_for @student, :url => teacher_student_path do |f| %>
+  <table>
+    <tr>
+      <td>Login</td>
+      <td><%= @student.username %></td>
+    </tr>
+    <tr>
+      <td>Imię</td>
+      <td><%= f.text_field :first_name %></td>
+    </tr>
+    <tr>
+      <td>Nazwisko</td>
+      <td><%= f.text_field :last_name %></td>
+    </tr>
+    <tr>
+      <td>Pesel</td>
+      <td><%= f.text_field :pesel %></td>
+    </tr>
+    <tr>
+      <td>NIU</td>
+      <td><%= f.text_field :niu %></td>
+    </tr>
+    <tr>
+      <td>Ulica</td>
+      <td><%= f.text_field :street %></td>
+    </tr>
+    <tr>
+      <td>Miasto</td>
+      <td><%= f.text_field :city %></td>
+    </tr>
+    <tr>
+      <td>Kod pocztowy</td>
+      <td><%= f.text_field :zip_code %></td>
+    </tr>
+    <tr>
+      <td>Województwo</td>
+      <td><%= f.text_field :province %></td>
+    </tr>
+    <tr>
+      <td>Telefon</td>
+      <td><%= f.text_field :telephone %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td>Zajęcia indywidualne</td>
+      <td><%= f.check_box :individual %></td>
+    </tr>
+    <tr>
+      <td>Zamieszkuje w internacie</td>
+      <td><%= f.check_box :boarding_school %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit "Zapisz" %></td>
+    </tr>
+  </table>
+<% end %>

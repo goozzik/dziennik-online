@@ -22,4 +22,17 @@ class Teacher::StudentsController < ApplicationController
     @student = current_teacher.school_class.students.find(params[:id])
   end
 
+  def edit
+    @student = current_teacher.school_class.students.find(params[:id])
+  end
+
+  def update
+    @student = current_teacher.school_class.students.find(params[:id])
+    if @student.update_attributes(params[:student])
+      redirect_to :action => "index"
+    else
+      render :action => "index"
+    end
+  end
+
 end

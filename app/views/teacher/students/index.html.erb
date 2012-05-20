@@ -19,7 +19,7 @@
         <td class="border_b" style="padding-right:15px;"><%= student.niu %></td>
         <td class="border_b student_manage" style="padding-right:10px;">
           <%= link_to('Więcej', teacher_student_path(student)) %>
-          <%= link_to('Edytuj', teacher_student_path(student)) %>
+          <%= link_to('Edytuj', edit_teacher_student_path(student)) %>
           <%= link_to('Usuń', teacher_student_path(student), :method => :delete, :confirm => "Jesteś pewien?") %>
         </td>
       </tr>

@@ -39,7 +39,7 @@ FactoryGirl.define do
       street 'Słowackiego 3/3'
       city 'Częstochowa'
       zip_code '42-200'
-      province 'Ślaskie'
+      province 'Śląskie'
       telephone '34233123'
     end
   end

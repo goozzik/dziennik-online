@@ -7,7 +7,7 @@ class Student < User
   has_many :marks, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
 
-  attr_accessible :email, :student, :first_name, :last_name, :pesel, :street, :city, :zip_code, :province, :telephone, :individual, :boarding_school
+  attr_accessible :email, :student, :first_name, :last_name, :pesel, :street, :city, :zip_code, :province, :telephone, :individual, :boarding_school, :niu
 
   before_validation :set_student
   validate :is_student?
