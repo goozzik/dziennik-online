@@ -6,7 +6,6 @@
       <tr>
         <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
         <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
-        <td><%= link_to("Edytuj", "#") %></td>
         <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => "Jesteś pewien?") %></td>
       </tr>
     <% end %>
