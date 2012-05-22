@@ -1,5 +1,7 @@
 class Director::MarksController < ApplicationController
 
+  before_filter :authenticate_director!
+
   def index
     @school_class = current_director.school.school_classes.find(params[:school_class_id])
     @semester = @school_class.semester

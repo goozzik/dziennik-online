@@ -1,5 +1,6 @@
 class Teacher::AbsencesController < ApplicationController
 
+  before_filter :authenticate_teacher!
   before_filter :teacher_has_active_class?, :teacher_has_students?, :only => [:index]
 
   def index

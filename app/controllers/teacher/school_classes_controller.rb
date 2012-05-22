@@ -1,5 +1,7 @@
 class Teacher::SchoolClassesController < ApplicationController
 
+  before_filter :authenticate_teacher!
+
   def index
     @school_classes = current_teacher.school_classes
     @school_class = current_teacher.school_classes.new

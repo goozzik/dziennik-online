@@ -1,6 +1,7 @@
 # coding: utf-8
 class Teacher::SubjectsController < ApplicationController
 
+  before_filter :authenticate_teacher!
   before_filter :teacher_has_active_class?, :teacher_has_active_semester?, :only => [:index, :show]
   before_filter :teacher_has_students?, :only => [:show]
 

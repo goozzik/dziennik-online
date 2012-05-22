@@ -1,5 +1,6 @@
 class Director::SchoolClassesController < ApplicationController
 
+  before_filter :authenticate_director!
   before_filter :director_has_active_classes?, :only => [:index]
 
   def index

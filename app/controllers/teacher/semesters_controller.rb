@@ -1,5 +1,7 @@
 class Teacher::SemestersController < ApplicationController
 
+  before_filter :authenticate_teacher!
+
   def create
     @semester = current_teacher.school_classes.find(params[:semester][:school_class_id]).semesters.build(params[:semester])
     @semester.save ? redirect_to(:controller => "school_classes", :action => "index") : render(:action => "index")

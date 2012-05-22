@@ -1,5 +1,6 @@
 class Teacher::StudentsController < ApplicationController
 
+  before_filter :authenticate_teacher!
   before_filter :teacher_has_active_class?, :only => [:index]
 
   def index

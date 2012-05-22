@@ -52,4 +52,29 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def authenticate_superadmin!
+      authenticate_user!
+      redirect_to root_path unless current_user.superadmin
+    end
+
+    def authenticate_admin!
+      authenticate_user!
+      redirect_to root_path unless current_user.admin
+    end
+
+    def authenticate_director!
+      authenticate_user!
+      redirect_to root_path unless current_user.director
+    end
+
+    def authenticate_teacher!
+      authenticate_user!
+      redirect_to root_path unless current_user.teacher
+    end
+
+    def authenticate_student!
+      authenticate_user!
+      redirect_to root_path unless current_user.student
+    end
+
 end

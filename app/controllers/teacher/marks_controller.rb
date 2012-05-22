@@ -1,5 +1,7 @@
 class Teacher::MarksController < ApplicationController
 
+  before_filter :authenticate_teacher!
+
   def update
     mark = current_teacher.semester.marks.find_by_description_id_and_student_id(params[:mark][:description_id], params[:mark][:student_id])
     if mark
