@@ -10,22 +10,22 @@ feature 'Teacher students' do
       teacher = FactoryGirl.create(:teacher, :school_id => school.id)
       school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
       student = FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
-      login
+      login('teacher')
       click_link "Uczniowie"
     end
 
     scenario 'All user information' do
       click_link "Więcej"
-      assert page.has_content? "student"
-      assert page.has_content? "Jacek"
-      assert page.has_content? "Placek"
-      assert page.has_content? '93052334123'
-      assert page.has_content? '1'
-      assert page.has_content? 'Słowackiego 3/3'
-      assert page.has_content? 'Częstochowa'
-      assert page.has_content? '42-200'
-      assert page.has_content? 'Śląskie'
-      assert page.has_content? '34233123'
+      page.should have_content "student"
+      page.should have_content "Jacek"
+      page.should have_content "Placek"
+      page.should have_content '93052334123'
+      page.should have_content '1'
+      page.should have_content 'Słowackiego 3/3'
+      page.should have_content 'Częstochowa'
+      page.should have_content '42-200'
+      page.should have_content 'Śląskie'
+      page.should have_content '34233123'
     end
 
   end
@@ -36,7 +36,7 @@ feature 'Teacher students' do
       teacher = FactoryGirl.create(:teacher, :school_id => school.id)
       school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
       student = FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
-      login
+      login('teacher')
       click_link "Uczniowie"
     end
 
@@ -45,8 +45,8 @@ feature 'Teacher students' do
       fill_in "student_first_name", :with => 'Tomasz'
       fill_in "student_last_name", :with => 'Krawczyk'
       click_button "Zapisz"
-      assert page.has_content? "Tomasz"
-      assert page.has_content? "Krawczyk"
+      page.should have_content "Tomasz"
+      page.should have_content "Krawczyk"
     end
 
   end

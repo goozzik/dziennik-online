@@ -84,8 +84,8 @@ module ApplicationHelper
   end
 
   def flash_messages
-    "<div id='notice'>#{flash[:notice]}</div>".html_safe if flash[:notice]
-    "<div id='error'>#{flash[:error]}</div>".html_safe if flash[:error]
+    return "<div id='notice'>#{flash[:notice]}</div>".html_safe if flash[:notice]
+    return "<div id='error'>#{flash[:error]}</div>".html_safe if flash[:error]
   end
 
   def user_type

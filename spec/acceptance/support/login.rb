@@ -2,10 +2,10 @@
 
 module LoginHelpers
 
-  def login
+  def login(acc_type)
     visit root_path
     #page.should have_content "Zaloguj się"
-    fill_in "user_username", :with => "teacher"
+    fill_in "user_username", :with => acc_type
     fill_in "user_password", :with => "test"
     click_button "Zaloguj"
     page.should have_content "Zalogowano pomyślnie."

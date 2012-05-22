@@ -9,13 +9,6 @@ Feature: Director school classes
     When I go to the director school classes index page
     Then I should see classes absences table
 
-  Scenario: I go to absences index when there is no active class in school
-    Given a school exists
-    And a director exists with school: the school
-    And I am logged in as a director
-    When I go to the director school classes index page
-    Then I should see "Szkoła nie ma żadnych aktywnych klas."
-
   Scenario: I go to may absences
     Given a school exists
     And a teacher exists with school: the school
