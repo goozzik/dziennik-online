@@ -7,10 +7,10 @@ class SchoolClass < ActiveRecord::Base
   has_many :students, :dependent => :destroy, :conditions => ['student = ?', true]
   has_many :time_tables, :dependent => :destroy
   has_many :documents, :dependent => :destroy
-  attr_accessible :year, :name, :profile, :yearbook, :active, :school_id
+  attr_accessible :name, :profile, :yearbook, :active, :school_id
   default_scope :order => 'created_at ASC'
 
-  validates_presence_of :year, :name, :profile, :yearbook
+  validates_presence_of :name, :profile, :yearbook
 
   before_create :unactive_old_school_class, :set_active, :inherit_from_teacher
   after_create :create_semester
@@ -18,7 +18,7 @@ class SchoolClass < ActiveRecord::Base
   before_destroy :unset_teacher_school_class_id
 
   def fullname
-    [self.year, self.name, self.yearbook].join(' ')
+    [self.name, self.yearbook].join(' ')
   end
 
   def activate

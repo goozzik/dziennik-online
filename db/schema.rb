@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510174433) do
+ActiveRecord::Schema.define(:version => 20120522192009) do
 
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(:version => 20120510174433) do
     t.integer  "school_id"
     t.integer  "teacher_id"
     t.integer  "yearbook"
-    t.integer  "year"
     t.string   "profile"
     t.string   "name"
     t.boolean  "active"
