@@ -271,6 +271,14 @@ table#documents {
   width: 100%;
 }
 
-div#notice {
+div#flash_notice {
   color: green;
+}
+
+div#flash_error {
+  color: red;
+}
+
+div#flash_alert {
+  color: red;
 }
