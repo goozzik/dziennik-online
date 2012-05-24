@@ -2,21 +2,17 @@
 module ApplicationHelper
 
   def navigation
-    html = ''
-    html << "<div id='navigation'>"
     if current_user.student
-      html << student_navigation
+      student_navigation
     elsif current_user.teacher
-      html << teacher_navigation
+      teacher_navigation
     elsif current_user.admin
-      html << admin_navigation
+      admin_navigation
     elsif current_user.director
-      html << director_navigation
+      director_navigation
     elsif current_user.superadmin
-      html << superadmin_navigation
+      superadmin_navigation
     end
-    html << "</div>"
-    html.html_safe
   end
 
   def icon_navigation

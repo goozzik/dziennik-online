@@ -7,17 +7,37 @@
   <%= csrf_meta_tags %>
   </head>
   <body>
-    <div id="site">
-      <div id="logo">
-      </div>
       <% if user_signed_in? %>
-        <%= navigation %>
+        <div class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <a class="brand" href="#">Dziennik-online</a>
+            </div>
+          </div>
+        </div>
       <% end %>
-      <div id='container'>
-        <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
-        <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
-        <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
-        <%= yield %>
+      <div class="container">
+        <div class="content">
+          <% if flash[:error] %>
+            <div class="alert alert-error fade in">
+              <a class="close" data-dismiss="alert" href="#">x</a>
+              <%= flash[:error] %>
+            </div>
+          <% end %>
+          <% if flash[:alert] %>
+            <div class="alert fade in">
+              <a class="close" data-dismiss="alert" href="#">x</a>
+              <%= flash[:alert] %>
+            </div>
+          <% end %>
+          <% if flash[:notice] %>
+            <div class="alert alert-success fade in">
+              <a class="close" data-dismiss="alert" href="#">x</a>
+              <%= flash[:notice] %>
+            </div>
+          <% end %>
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>
