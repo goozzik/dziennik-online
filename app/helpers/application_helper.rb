@@ -21,8 +21,6 @@ module ApplicationHelper
     end
   end
 
-
-
   def teacher_navigation
      html = ""
      html << nav_link_to("Uczniowie", teacher_students_path)

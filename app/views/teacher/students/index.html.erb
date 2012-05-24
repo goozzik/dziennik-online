@@ -1,29 +1,34 @@
-<h2 class="title"><%= image_tag("students_32.png") %> Uczniowie</h2>
+<div class="page-header">
+  <h1>Uczniowie</h1>
+</div>
 
 <% unless @students.empty? %>
-  <table class="students">
+  <table class="table table-striped table-bordered table-condensed">
+
     <tr>
-      <th class="center students_top bg6">l.p</th>
-      <th class="center students_top bg6 first_name">Imię</th>
-      <th class="center students_top bg6 last_name">Nazwisko</th>
-      <th class="center students_top bg6">Login</th>
-      <th class="center students_top bg6">NIU</th>
-      <th class="center students_top bg6 student_manage">Zarządzaj</th>
+      <th>#</th>
+      <th>Imię</th>
+      <th>Nazwisko</th>
+      <th>Login</th>
+      <th>NIU</th>
+      <th>Zarządzaj</th>
     </tr>
+
     <% @students.each_with_index do |student, i| %>
       <tr>
-        <td class="right border_b" style="padding-right:10px;"><%= i+1 %></td>
-        <td class="border_b fisrt_name" style="padding-right:15px;"><%= student.first_name %></td>
-        <td class="border_b last_name" style="padding-right:15px;"><%= student.last_name %></td>
-        <td class="border_b" style="padding-right:15px;"><%= student.username %></td>
-        <td class="border_b" style="padding-right:15px;"><%= student.niu %></td>
-        <td class="border_b student_manage" style="padding-right:10px;">
+        <td><%= i+1 %></td>
+        <td><%= student.first_name %></td>
+        <td><%= student.last_name %></td>
+        <td><%= student.username %></td>
+        <td><%= student.niu %></td>
+        <td>
           <%= link_to('Więcej', teacher_student_path(student)) %>
           <%= link_to('Edytuj', edit_teacher_student_path(student)) %>
           <%= link_to('Usuń', teacher_student_path(student), :method => :delete, :confirm => "Jesteś pewien?") %>
         </td>
       </tr>
     <% end %>
+
   </table>
 <% else %>
   Nie masz żadnych uczniów. Możesz dodać ucznia poprzez poniższy formularz.
