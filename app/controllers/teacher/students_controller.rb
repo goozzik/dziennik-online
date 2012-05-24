@@ -10,7 +10,7 @@ class Teacher::StudentsController < ApplicationController
 
   def create
     @student = current_teacher.school_class.students.build(params[:student])
-    @student.save ? redirect_to(:controller => "teacher/students", :action => "index") : render(:action => "index")
+    @student.save ? redirect_to(:action => "index") : render(:action => "new")
   end
 
   def destroy

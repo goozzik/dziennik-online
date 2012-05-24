@@ -1,3 +1,4 @@
+# coding: utf-8
 class Student < User
 
   default_scope :conditions => ["student = ?", true]
@@ -11,6 +12,7 @@ class Student < User
 
   before_validation :set_student
   validate :is_student?
+  validates_presence_of :first_name, :last_name
 
   before_create :inherit_from_school_class
 
@@ -77,6 +79,5 @@ class Student < User
       self.teacher_id = school_class.teacher_id
       self.school_id = school_class.school_id
     end
-
 
 end

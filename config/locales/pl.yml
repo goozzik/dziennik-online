@@ -239,7 +239,17 @@ pl:
     attributes:
       user:
         password: "Hasło"
+      student:
+        first_name: "Imię"
+        last_name: "Nazwisko"
     errors:
+      models:
+        student:
+          attributes:
+            first_name:
+              blank: "jest wymagane"
+            last_name:
+              blank: "jest wymagane"
       template:
         header:
           one:    "%{model} nie został zachowany z powodu jednego błędu"

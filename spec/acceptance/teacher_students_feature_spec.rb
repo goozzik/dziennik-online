@@ -51,4 +51,27 @@ feature 'Teacher students' do
 
   end
 
+  context 'create' do
+    before do
+      school = FactoryGirl.create(:school)
+      teacher = FactoryGirl.create(:teacher, :school_id => school.id)
+      school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+      login('teacher')
+      click_link "Uczniowie"
+    end
+
+    scenario 'Validate empty fields' do
+      click_button "Dodaj"
+      page.should have_content "Imię jest wymagane"
+      page.should have_content "Nazwisko jest wymagane"
+    end
+
+    scenario 'Validate pesel' do
+      fill_in "student_pesel", :with => "123"
+      click_button "Dodaj"
+      page.should have_content "Pesel jest nieprawidłowy"
+    end
+
+  end
+
 end

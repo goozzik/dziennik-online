@@ -29,40 +29,4 @@
   Nie masz żadnych uczniów. Możesz dodać ucznia poprzez poniższy formularz.
 <% end %>
 
-<h2 class="title"><%= image_tag("student_add_32.png") %> Dodaj nowego ucznia do klasy</h2>
-<%= form_for @student, :url => teacher_students_path do |f| %>
-  <div><%= f.label :first_name, 'Imię' %><br />
-  <%= f.text_field :first_name %></div>
-
-  <div><%= f.label :last_name, 'Nazwisko' %><br />
-  <%= f.text_field :last_name %></div>
-
-  <div><%= f.label :pesel, 'Pesel' %><br />
-  <%= f.text_field :pesel %></div>
-
-  <div><%= f.label :niu, 'Numer ewidencyjny ucznia' %><br />
-  <%= f.text_field :pesel %></div>
-
-  <div><%= f.label :street, 'Ulica' %><br />
-  <%= f.text_field :street %></div>
-
-  <div><%= f.label :city, 'Miasto' %><br />
-  <%= f.text_field :city %></div>
-
-  <div><%= f.label :zip_code, 'Kod pocztowy' %><br />
-  <%= f.text_field :zip_code %></div>
-
-  <div><%= f.label :province, 'Województwo' %><br />
-  <%= f.text_field :province %></div>
-
-  <div><%= f.label :telephone, 'Telefon kontaktowy' %><br />
-  <%= f.text_field :telephone %></div>
-
-  <div><%= f.label :individual, 'Zajęcia indywidualne' %><br />
-  <%= f.check_box :individual %></div>
-
-  <div><%= f.label :boarding_school, 'Zamieszkuje w internacie' %><br />
-  <%= f.check_box :boarding_school %></div>
-
-  <div><%= f.submit "Dodaj" %></div>
-<% end %>
+<%= render 'form', :student => @student %>
