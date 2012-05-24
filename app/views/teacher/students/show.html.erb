@@ -1,7 +1,9 @@
-<table>
+<%= button_to "Wróć", teacher_students_path, :class => "btn btn-inverse" %>
+
+<table class="table table-bordered span6">
   <tr>
-    <td>Login</td>
-    <td><%= @student.username %></td>
+    <td class="span3">Login</td>
+    <td class="span3"><%= @student.username %></td>
   </tr>
   <tr>
     <td>Imię</td>
