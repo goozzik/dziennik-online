@@ -21,22 +21,20 @@ module ApplicationHelper
     end
   end
 
+
+
   def teacher_navigation
-    '<center>
-       <ul>
-         <li class="first"><a href="/">Strona główna</a></li>' +
-         '<li><a href="/teacher/students">Uczniowie</a></li>' +
-         '<li><a href="/teacher/subjects">Oceny</a></li>' +
-         '<li><a href="/teacher/documents">Dokumenty</a></li>' +
-         '<li><a href="/teacher/time_tables">Plan lekcji</a></li>' +
-         '<li><a href="/teacher/subject_teachers">Nauczyciele</a></li>' +
-         '<li><a href="">Raporty</a></li>' +
-         '<li><a href="/teacher/absences">Frekwencja</a></li>' +
-         '<li><a href="/users/edit">Ustawienia</a></li>' +
-         '<li><a href="/teacher/school_classes">Ustawienia klas</a></li>' +
-         '<li class="last"><a href="/users/sign_out" data-method="delete">Wyloguj</a></li>' +
-       '</ul>
-     </center>'
+     html = ""
+     html << nav_link_to("Uczniowie", teacher_students_path)
+     html << nav_link_to("Oceny", teacher_subjects_path)
+     html << nav_link_to("Dokumenty", teacher_documents_path)
+     html << nav_link_to("Plan lekcji", teacher_time_tables_path)
+     html << nav_link_to("Nauczyciele", "#")
+     html << nav_link_to("Raporty", "#")
+     html << nav_link_to("Frekwencja", teacher_absences_path)
+     html << nav_link_to("Ustawienia", edit_user_registration_path)
+     html << nav_link_to("Ustawienia klas", teacher_school_classes_path)
+     html.html_safe
   end
 
   def teacher_icon_navigation
@@ -87,4 +85,13 @@ module ApplicationHelper
     end
   end
 
+  def nav_link_to(name, path)
+    content_tag("li", link_to(name, path), :class => nav_link_html_class(path))
+  end
+
+  private
+
+    def nav_link_html_class(path)
+      request.env['PATH_INFO'] == path ? "active" : nil
+    end
 end
