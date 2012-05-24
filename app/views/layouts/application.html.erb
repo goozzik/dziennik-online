@@ -15,6 +15,11 @@
               <ul class="nav">
                 <%= navigation %>
               </ul>
+              <ul class="nav pull-right">
+                <%= nav_link_to("Ustawienia klas", teacher_school_classes_path) %>
+                <%= nav_link_to("Ustawienia", edit_user_registration_path) %>
+                <%= nav_link_to("Wyloguj", destroy_user_session_path) %>
+              </ul>
             </div>
           </div>
         </div>

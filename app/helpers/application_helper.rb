@@ -27,13 +27,11 @@ module ApplicationHelper
      html = ""
      html << nav_link_to("Uczniowie", teacher_students_path)
      html << nav_link_to("Oceny", teacher_subjects_path)
-     html << nav_link_to("Dokumenty", teacher_documents_path)
-     html << nav_link_to("Plan lekcji", teacher_time_tables_path)
-     html << nav_link_to("Nauczyciele", "#")
-     html << nav_link_to("Raporty", "#")
      html << nav_link_to("Frekwencja", teacher_absences_path)
-     html << nav_link_to("Ustawienia", edit_user_registration_path)
-     html << nav_link_to("Ustawienia klas", teacher_school_classes_path)
+     html << nav_link_to("Raporty", "#")
+     html << nav_link_to("Dokumenty", teacher_documents_path)
+     html << nav_link_to("Nauczyciele", "#")
+     html << nav_link_to("Plan lekcji", teacher_time_tables_path)
      html.html_safe
   end
 
