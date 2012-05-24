@@ -1,7 +1,3 @@
-<div class="page-header">
-  <h1>Dodaj nowego ucznia</h1>
-</div>
-
 <%= simple_form_for student, :url => teacher_students_path, :html => {:class => "form-horizontal"} do |f| %>
   <%= render "pages/form_errors", :object => student %>
 
@@ -19,7 +15,7 @@
   <%= f.input :boarding_school, :label => "Zamieszkuje w internacie" %>
 
   <div class="form-actions">
-    <%= f.button :submit, "Dodaj", :class => "btn btn-primary" %>
+    <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
   </div>
 
 <% end %>
