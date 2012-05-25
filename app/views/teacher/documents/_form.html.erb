@@ -1,21 +1,15 @@
-<h2 class="title">Dodaj nowy plik dla klasy</h2>
+<div class="page-header">
+  <h1>Dodaj nowy plik dla klasy</h1>
+</div>
 
-<%= form_for document, :url => teacher_documents_path, :html => {:multipart => true} do |f| %>
-  <table>
-    <tr>
-      <td><%= f.label :name, 'Nazwa' %></td>
-      <td><%= f.text_field :name %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :description, "Opis" %></td>
-      <td><%= f.text_field :description %></td>
-    </td>
-    <tr>
-      <td><%= f.label :document, "Wybierz plik" %></td>
-      <td><%= f.file_field :document %><td>
-    </tr>
-    <tr>
-      <td><%= f.submit "Wyślij" %></td>
-    </tr>
-  <table>
-<% end %>
+<div class="row">
+  <%= simple_form_for document, :url => teacher_documents_path, :html => {:multipart => true, :class => "well form-horizontal span4"} do |f| %>
+      <%= f.input :name, :label => 'Nazwa' %>
+      <%= f.input :description %>
+      <%= f.input :document, :label => "Wybierz plik" %>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Zapisz", :class => "brn btn-primary" %>
+      </div>
+  <% end %>
+</div>
