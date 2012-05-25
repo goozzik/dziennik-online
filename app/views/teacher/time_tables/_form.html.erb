@@ -1,23 +1,20 @@
-<%= form_for time_table, :url => teacher_time_tables_path do |f| %>
-  <div>
-    <%= f.label :week_day, "Dzień" %>
-    <%= f.select :week_day, days %>
-  </div>
+<div class="row">
+  <%= simple_form_for time_table, :url => teacher_time_tables_path, :html => {:class => "well form-horizontal span4"} do |f| %>
+    <%= f.input :week_day, :collection => days, :label => "Dzień" %>
 
-  <% 0.upto(5).each do |number| %>
-    <%= f.fields_for :lessons, Lesson.new do |lesson| %>
-      <%= lesson.hidden_field :number, :value => number %>
-      <div>
-        <%= lesson.label :subject_id, "Lekcja #{number}" %>
-        <%= lesson.select :subject_id, subjects, :include_blank => true %>
-      </div>
+    <% 0.upto(5).each do |number| %>
+      <%= f.simple_fields_for :lessons, Lesson.new do |lesson_form| %>
+        <%= lesson_form.hidden_field :number, :value => number %>
+        <%= lesson_form.input :subject_id, :collection => subjects, :label => "Lekcja #{number}" %>
+      <% end %>
     <% end %>
+
+    <div class="actions">
+      <%= link_to_add_lesson("Dodaj kolejną lekcję", f, subjects) %>
+      <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
+    </div>
   <% end %>
-
-  <%= link_to_add_lesson("Dodaj kolejną lekcję", f, subjects) %>
-
-  <%= f.submit "Zapisz" %>
-<% end %>
+</div>
 
 <script>
   lesson_count = 6;

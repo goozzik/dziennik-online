@@ -1,5 +1,2 @@
-<div>
-  <%= lessons_form.hidden_field :number, :value => 'new_lesson_number' %>
-  <%= lessons_form.label :subject_id, "Lekcja" %>
-  <%= lessons_form.select :subject_id, subjects, :include_blank => true %>
-</div>
+<%= lessons_form.hidden_field :number, :value => 'new_lesson_number' %>
+<%= lessons_form.input :subject_id, :collection => subjects, :label => "Lekcja" %>

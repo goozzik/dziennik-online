@@ -1,26 +1,28 @@
-<div id="time_tables">
+<div class="page-header">
+  <h1>Plan lekcji</h1>
+</div>
+
+<div class="row">
   <% if @time_tables.empty? %>
     Nie masz żadnych dni w planie lekcji.
   <% else %>
     <% @time_tables.each do |time_table| %>
-      <div class="time_table_day">
-        <table class="day" >
+      <table class="table table-bordered span3" >
+        <tr>
+          <th colspan='2'>
+            <%= time_table.week_day_name %>
+            <%= link_to("X", {:controller => 'teacher/time_tables', :action => 'destroy', :id => time_table.id}, :method => :delete, :confirm => "Jesteś pewien?", :style => 'color:red;float:right;') %>
+          </th>
+        </tr>
+        <% time_table.lessons.each do |lesson| %>
           <tr>
-            <th colspan='2'>
-              <%= time_table.week_day_name %>
-              <%= link_to("Usuń", {:controller => 'teacher/time_tables', :action => 'destroy', :id => time_table.id}, :method => :delete, :confirm => "Jesteś pewien?", :class => "delete_link") %>
-            </th>
+            <td style="width:15px;"><%= lesson.number %></td>
+            <td><%= lesson.subject_name %></td>
           </tr>
-          <% time_table.lessons.each do |lesson| %>
-            <tr>
-              <td class="lesson_number"><%= lesson.number %></td>
-              <td class="lesson_name"><%= lesson.subject_name %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
+        <% end %>
+      </table>
     <% end %>
   <% end %>
 </div>
 
-<%= button_to('Dodaj nowy dzień', new_teacher_time_table_path, :method => :get) %>
+<%= link_to('Dodaj nowy dzień', new_teacher_time_table_path, :class => "btn btn-primary") %>
