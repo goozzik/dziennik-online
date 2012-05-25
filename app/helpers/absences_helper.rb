@@ -1,20 +1,30 @@
 # coding: utf-8
 module AbsencesHelper
 
-  def months_navigation(prev_month, next_month, user_type)
-    html = ''
-    html << '<div class="navigation">'
-    if user_type == 'teacher'
-      html << link_to('<< Poprzedni miesiąc', teacher_absences_path(:date => prev_month.strftime('%Y-%m-%d')))
-      html << ' | '
-      html << link_to('Następny miesiąc >>', teacher_absences_path(:date => next_month.strftime('%Y-%m-%d')))
-    elsif  user_type == 'director'
-      html << link_to('<< Poprzedni miesiąc', actual_director_absences_path(:date => prev_month.strftime('%Y-%m-%d')))
-      html << ' | '
-      html << link_to('Następny miesiąc >>', actual_director_absences_path(:date => next_month.strftime('%Y-%m-%d')))
-    end
-    html << '</div>'
+  def months_navigation(previous_month, next_month, user_type)
+    html = "<ul class='pager'>"
+    html << previous_link(previous_month)
+    html << next_link(next_month)
+    html << "</ul>"
     html.html_safe
+  end
+
+  def previous_link(previous_month)
+    case user_type
+    when 'teacher'
+      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, teacher_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
+    when 'director'
+      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, actual_director_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
+    end
+  end
+
+  def next_link(next_month)
+    case user_type
+    when 'teacher'
+      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, teacher_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
+    when 'director'
+      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, actual_directio_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "previous")
+    end
   end
 
   def percentage_frequency(required_month, justified_month, unexcused_month)
