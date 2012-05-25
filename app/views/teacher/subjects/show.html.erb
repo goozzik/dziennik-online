@@ -1,71 +1,50 @@
-<%= javascript_include_tag "jquery.fancybox-1.3.4.pack" %>
-<%= stylesheet_link_tag "jquery.fancybox-1.3.4" %>
+<div class="page-header">
+  <h1>Oceny - <%= @subject.name %></h1>
+</div>
 
-<h2 class="title"><%= image_tag("students_marks_32.png") %> Oceny - <%= @subject.name %></h2>
-
-<table class="marks">
+<table class="table table-striped table-bordered table-condensed">
   <tr>
-    <th class="left title_mark bg6" style="padding-left:8px;" width="25px">l.p</th>
-    <th class="center title_mark_name bg6" width="100px">Imię</th>
-    <th class="center title_mark bg6" style="padding-left:10px;" width="100px">Nazwisko</th>
+    <th style="width:15px;">#</th>
+    <th style="width:100px;">Imię</th>
+    <th style="width:100px;">Nazwisko</th>
+
     <% @descriptions.each do |description| %>
-      <th class="title_mark bg4">
-        <span class="title_of_mark" title="<center><%= description.desc_type + ' - ' + description.description %><br/><small>Kliknij aby usunąć</small></center>">
-          <span onclick="windowYesNo(\"/teacher/descriptions/<%= description.id %>\")" style="cursor:pointer;"><%= truncate(description.desc_type, :length => 4, :omission => '') %></span>
+      <th style="width:30px;">
+        <span class="title_of_mark" title="<%= description.desc_type + ' - ' + description.description %>">
+          <%= link_to truncate(description.desc_type, :length => 4, :omission => ''), teacher_description_path(description), :method => :delete, :confirm => "Jesteś pewien?" %>
         </span>
       </th>
     <% end %>
 
-    <th class="center title_mark bg6"></th>
-    <th class="center title_mark bg6" width="30px">
-      <a id="new_description_link" href="#new_description"><%= image_tag("plus.gif", :class => "title_of_mark", :title => "Dodaj nowy typ oceny", :style => "cursor:pointer;vertical-align: middle;") %></a>
+    <th>
+      <%= render 'description_form', :subject => @subject %>
+      <a data-toggle="modal" href="#new_description"><%= image_tag("plus.gif", :title => "Dodaj nowy typ oceny") %></a>
     </th>
-    <th class="center title_mark bg6"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
-    <th class="center title_mark bg6"><%= image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen") %></th>
+    <th style="width:20px;"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
+    <th style="width:20px;"><%= image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen") %></th>
   </tr>
   <% @students.each_with_index do |student, i| %>
     <tr>
-      <td class="right border_b student_record" style="padding-right:5px;"><%= i+1 %></td>
-      <td class="left border_b student_record" width="100px"><%= student.first_name %></td>
-      <td class="left border_b student_record>" style="padding-left:10px;border-right:1px solid #eee;" width="100px"><%= student.last_name %></td>
+      <td><%= i+1 %></td>
+      <td><%= student.first_name %></td>
+      <td><%= student.last_name %></td>
       <% @descriptions.each_with_index do |description, j| %>
         <td id="<%= "#{student.id}_#{description.id}" %>" class="mark"><%= @marks[i][j].mark if @marks[i][j] %></td>
       <% end %>
-      <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
-      <td style="border:none;border-left:1px solid #eee;border-right:1px solid #eee;background:none"></td>
+      <td></td>
       <td id="semestral_mark_<%= student.id %>" class="semestral_mark border_b"><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
       <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id, @semester_id)) %></td>
     </tr>
   <% end %>
-
 </table>
 
-<div style="display: none;">
-  <div id="new_description">
-    <h2 class="title"><% image_tag('marks_type.png') %> Dodaj nowy typ oceny</h2>
-    <%= form_for @description, :url => teacher_descriptions_path do |f| %>
-      <%= f.hidden_field :subject_id, :value => @subject.id %>
-      <div><%= f.label :desc_type, 'Typ' %><br />
-      <%= f.text_field :desc_type %></div>
-
-      <div><%= f.label :description, 'Opis' %><br />
-      <%= f.text_field :description %></div>
-
-      <div><%= f.label :colour, 'Kolor' %><br />
-      <%= f.text_field :colour %></div>
-
-      <div><%= f.submit "Stwórz" %></div>
-    <% end %>
-    </table>
-  </div>
-</div>
 
 <script>
   $(document).ready(function() {
-    $("#new_description_link").fancybox({
-        'titlePosition' : 'inside',
-        'overlayColor'  : '#000',
-        'overlayOpacity': 0.5
+    $.ajaxSetup({
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content'));
+      }
     });
 
     var parsed_id;

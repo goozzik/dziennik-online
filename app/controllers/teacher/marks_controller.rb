@@ -10,7 +10,7 @@ class Teacher::MarksController < ApplicationController
       mark = current_teacher.semester.marks.build(params[:mark])
       mark.save
     end
-    redirect_to teacjer_subjects_path
+    redirect_to teacher_subjects_path
   end
 
 end

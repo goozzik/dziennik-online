@@ -11,3 +11,9 @@
  *= require_self
  *= require_tree .
 */
+
+#mark_active, #semestral_mark_active {
+  width:15px;
+  height:10px;
+  margin:0;
+}

@@ -1,23 +1,30 @@
-<h2 class="title"><%= image_tag("subjects_32.png") %> Przedmioty</h2>
+<div class="page-header">
+  <h1>Przedmioty</h1>
+</div>
 
 <% unless @subjects.empty? %>
-  <table>
-    <% @subjects.each do |subject| %>
-      <tr>
-        <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
-        <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
-        <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => "Jesteś pewien?") %></td>
-      </tr>
-    <% end %>
-  </table>
+  <div class="row">
+    <table class="table table-bordered span6">
+      <% @subjects.each do |subject| %>
+        <tr>
+          <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
+          <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
+          <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => "Jesteś pewien?") %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 <% else %>
   Nie masz żadnych przedmiotów. Możesz dodać przedmiot poprzez poniższy formularz.
 <% end %>
 
-<h2 class="title"><%= image_tag("subjects_add_32.png") %> Dodaj nowy przedmiot</h2>
-<%= form_for @subject, :url => teacher_subjects_path do |f| %>
-  <span><%= f.label :name, 'Nazwa' %>
-  <%= f.text_field :name %></span>
+<div class="page-header">
+  <h1>Dodaj nowy przedmiot</h1>
+</div>
 
-  <span><%= f.submit "Stwórz" %></span>
-<% end %>
+<div class="row">
+  <%= simple_form_for @subject, :url => teacher_subjects_path, :html => {:class => "well form-inline span4"} do |f| %>
+    <%= f.input_field :name, :placeholder => "Nazwa przedmiotu" %>
+    <%= f.button :submit, "Zapisz" %></span>
+  <% end %>
+</div>

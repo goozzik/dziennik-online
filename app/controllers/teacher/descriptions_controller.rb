@@ -7,4 +7,11 @@ class Teacher::DescriptionsController < ApplicationController
     @description.save ? redirect_to(:back) : render(:action => "new")
   end
 
+  def destroy
+    description = current_teacher.semester.descriptions.find(params[:id])
+    subject_id = description.subject_id
+    description.destroy
+    redirect_to(:controller => "teacher/subject", :action => "show", :subject_id => subject_id)
+  end
+
 end

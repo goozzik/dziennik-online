@@ -1,0 +1,20 @@
+<div class="modal hide fade" id="new_description">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <h3>Dodaj nowy typ oceny</h2>
+  </div>
+  <div class="modal-body">
+    <%= simple_form_for @description, :url => teacher_descriptions_path, :html => {:class => "well form-horizontal"} do |f| %>
+
+      <%= f.hidden_field :subject_id, :value => subject.id %>
+      <%= f.input :desc_type, :label => "Typ" %>
+      <%= f.input :description, :label => "Opis" %>
+      <%= f.input :colour, :label => "Kolor" %>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

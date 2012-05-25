@@ -1,21 +1,22 @@
-<%= simple_form_for student, :url => teacher_students_path, :html => {:class => "form-horizontal"} do |f| %>
-  <%= render "pages/form_errors", :object => student %>
+<div class="row">
+  <%= simple_form_for student, :url => teacher_students_path, :html => {:class => "well form-horizontal span4"} do |f| %>
+    <%= render "pages/form_errors", :object => student %>
 
-  <%= f.input :first_name, :label => "Imię" %>
-  <%= f.input :last_name, :label => "Nawisko" %>
-  <%= f.input :pesel, :label => "Pesel" %>
-  <%= f.input :niu, :label => "Numer ewidencyjny ucznia" %>
-  <%= f.input :city, :label => "Miasto" %>
-  <%= f.input :street, :label => "Ulica" %>
-  <%= f.input :zip_code, :label => "Kod pocztowy" %>
-  <%= f.input :province, :label => "Województwo" %>
-  <%= f.input :telephone, :label => "Telefon" %>
-  <%= f.input :individual, :label => "Zajęcia indywidualne" %>
-  <%= f.input :individual, :label => "Zajęcia indywidualne" %>
-  <%= f.input :boarding_school, :label => "Zamieszkuje w internacie" %>
+    <%= f.input :first_name, :label => "Imię" %>
+    <%= f.input :last_name, :label => "Nawisko" %>
+    <%= f.input :pesel, :label => "Pesel" %>
+    <%= f.input :niu, :label => "Numer ewidencyjny ucznia" %>
+    <%= f.input :city, :label => "Miasto" %>
+    <%= f.input :street, :label => "Ulica" %>
+    <%= f.input :zip_code, :label => "Kod pocztowy" %>
+    <%= f.input :province, :label => "Województwo" %>
+    <%= f.input :telephone, :label => "Telefon" %>
+    <%= f.input :individual, :label => "Zajęcia indywidualne" %>
+    <%= f.input :boarding_school, :label => "Zamieszkuje w internacie" %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
+    </div>
 
-<% end %>
+  <% end %>
+</div>

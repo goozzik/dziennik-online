@@ -14,7 +14,7 @@ DziennikOnline::Application.routes.draw do
     resources :school_classes, :only => [:create, :destroy, :index]
     resources :semesters, :only => [:create, :destroy]
     resources :subjects, :only => [:show, :create, :index]
-    resources :descriptions, :only => [:create]
+    resources :descriptions, :only => [:create, :destroy]
     resources :students
     resources :absences, :only => [:update, :index]
     resources :marks, :only => [:update]
