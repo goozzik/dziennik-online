@@ -25,6 +25,6 @@
 <div class="row">
   <%= simple_form_for @subject, :url => teacher_subjects_path, :html => {:class => "well form-inline span4"} do |f| %>
     <%= f.input_field :name, :placeholder => "Nazwa przedmiotu" %>
-    <%= f.button :submit, "Zapisz" %></span>
+    <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %></span>
   <% end %>
 </div>
