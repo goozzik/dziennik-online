@@ -3,7 +3,7 @@
 </div>
 
 <% unless @students.empty? %>
-  <table class="table table-striped table-bordered table-condensed">
+  <table class="table table-striped table-bordered">
 
     <tr>
       <th>#</th>
@@ -11,7 +11,7 @@
       <th>Nazwisko</th>
       <th>Login</th>
       <th>NIU</th>
-      <th>Zarządzaj</th>
+      <th style="width:120px;"></th>
     </tr>
 
     <% @students.each_with_index do |student, i| %>

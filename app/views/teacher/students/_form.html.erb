@@ -1,5 +1,5 @@
 <div class="row">
-  <%= simple_form_for student, :url => teacher_students_path, :html => {:class => "well form-horizontal span4"} do |f| %>
+  <%= simple_form_for student, :url => teacher_students_path, :html => {:class => "well form-horizontal span5"} do |f| %>
     <%= render "pages/form_errors", :object => student %>
 
     <%= f.input :first_name, :label => "Imię" %>
@@ -16,6 +16,8 @@
 
     <div class="form-actions">
       <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
+      <%= link_to "Anuluj", teacher_students_path, :class => "btn btn-inverse" %>
+
     </div>
 
   <% end %>
