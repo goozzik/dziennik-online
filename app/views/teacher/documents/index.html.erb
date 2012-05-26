@@ -1,15 +1,15 @@
-<div class="page-header">
-  <h1>Dokumenty</h1>
-</div>
+<%= page_header "Dokumenty" %>
 
 <% unless @documents.empty? %>
   <table class="table table-bordered table-striped">
+
     <tr>
       <th>Nazwa pliku</th>
       <th style="width:500px;">Opis</th>
       <th>Data dodania</th>
       <th colspan="2"></th>
     </tr>
+
     <% @documents.each do |document| %>
       <tr>
         <td><%= document.name %></td>
@@ -19,9 +19,10 @@
         <%= link_to("Usuń", teacher_document_path(document), :method => :delete, :confirm => "Jesteś pewien?") %></td>
       </tr>
     <% end %>
+
   </table>
 <% else %>
-  Ta klasa nie ma żadnych plików. Możesz dodać plik poprzez poniższy formularz.
+  <%= alert_box "Ta klasa nie ma żadnych plików!", "Możesz dodać plik poprzez poniższy formularz." %>
 <% end %>
 
 <%= render 'form', :document => @document %>
