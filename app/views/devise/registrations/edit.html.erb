@@ -1,19 +1,18 @@
-<h2>Ustawienia konta</h2>
+<div class="page-header">
+  <h1>Ustawienia konta</h1>
+</div>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="row">
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "well form-horizontal span4"}) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div><%= f.label :email, "Email" %><br />
-  <%= f.email_field :email %></div>
+    <%= f.input :email, :label => "Email" %>
+    <%= f.input :password, :label => "Hasło", :hint => "pozostaw puste jeśli nie chcesz go zmieniać" %>
+    <%= f.input :password_confirmation, :label => "Powtórz hasło" %>
+    <%= f.input :current_password, :label => "Aktualne hasło", :hint => "potrzebujmy twojego aktualnego hasła, aby potwierdzić twoje zmiany" %>
 
-  <div><%= f.label :password, "Hasło" %> <i>(pozostaw puste jeśli nie chcesz go zmieniać)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation, "Powtórz hasło" %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password, "Aktualne hasło" %> <i>(potrzebujmy twojego aktualnego hasła, aby potwierdzić twoje zmiany)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Zapisz" %></div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
