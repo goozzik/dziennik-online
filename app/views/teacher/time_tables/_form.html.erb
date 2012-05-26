@@ -1,5 +1,5 @@
 <div class="row">
-  <%= simple_form_for time_table, :url => teacher_time_tables_path, :html => {:class => "well form-horizontal span4"} do |f| %>
+  <%= simple_form_for time_table, :url => teacher_time_tables_path, :html => {:class => "well form-horizontal span5"} do |f| %>
     <%= f.input :week_day, :collection => days, :label => "Dzień" %>
 
     <% 0.upto(5).each do |number| %>
