@@ -8,16 +8,15 @@
       <th>Nazwa pliku</th>
       <th style="width:500px;">Opis</th>
       <th>Data dodania</th>
-      <th></th>
-      <th></th>
+      <th colspan="2"></th>
     </tr>
     <% @documents.each do |document| %>
       <tr>
         <td><%= document.name %></td>
         <td><%= document.description %></td>
         <td><%= document.created_at %></td>
-        <td><%= link_to("Pobierz", document.document.url) %></td>
-        <td><%= link_to("Usuń", teacher_document_path(document), :method => :delete, :confirm => "Jesteś pewien?") %></td>
+        <td><%= link_to("Pobierz", document.document.url) %>
+        <%= link_to("Usuń", teacher_document_path(document), :method => :delete, :confirm => "Jesteś pewien?") %></td>
       </tr>
     <% end %>
   </table>
