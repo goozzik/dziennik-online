@@ -23,13 +23,13 @@ module ApplicationHelper
 
   def teacher_navigation
      html = ""
-     html << nav_link_to("Uczniowie", teacher_students_path)
      html << nav_link_to("Oceny", teacher_subjects_path)
      html << nav_link_to("Frekwencja", teacher_absences_path)
-     html << nav_link_to("Raporty", "#")
      html << nav_link_to("Dokumenty", teacher_documents_path)
-     html << nav_link_to("Nauczyciele", "#")
      html << nav_link_to("Plan lekcji", teacher_time_tables_path)
+     #html << nav_link_to("Raporty", "#")
+     html << nav_link_to("Uczniowie", teacher_students_path)
+     html << nav_link_to("Nauczyciele", "#")
      html.html_safe
   end
 

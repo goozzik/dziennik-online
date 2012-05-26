@@ -3,17 +3,15 @@
 </div>
 
 <% unless @subjects.empty? %>
-  <div class="row">
-    <table class="table table-bordered span6">
-      <% @subjects.each do |subject| %>
-        <tr>
-          <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
-          <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
-          <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => "Jesteś pewien?") %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
+  <table class="table table-bordered">
+    <% @subjects.each do |subject| %>
+      <tr>
+        <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
+        <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
+        <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => "Jesteś pewien?") %></td>
+      </tr>
+    <% end %>
+  </table>
 <% else %>
   Nie masz żadnych przedmiotów. Możesz dodać przedmiot poprzez poniższy formularz.
 <% end %>
