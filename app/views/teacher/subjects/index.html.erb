@@ -1,6 +1,4 @@
-<div class="page-header">
-  <h1>Przedmioty</h1>
-</div>
+<%= page_header "Przedmioty" %>
 
 <% unless @subjects.empty? %>
   <table class="table table-bordered">
@@ -13,16 +11,9 @@
     <% end %>
   </table>
 <% else %>
-  Nie masz żadnych przedmiotów. Możesz dodać przedmiot poprzez poniższy formularz.
+  <%= alert_box "Klasa nie ma przedmiotów!", "Możesz dodać przedmiot poprzez poniższy formularz." %>
 <% end %>
 
-<div class="page-header">
-  <h1>Dodaj nowy przedmiot</h1>
-</div>
+<%= page_header "Dodaj nowy przedmiot" %>
 
-<div class="row">
-  <%= simple_form_for @subject, :url => teacher_subjects_path, :html => {:class => "well form-inline span4"} do |f| %>
-    <%= f.input_field :name, :placeholder => "Nazwa przedmiotu" %>
-    <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %></span>
-  <% end %>
-</div>
+<%= render "form", :subject => @subject %>

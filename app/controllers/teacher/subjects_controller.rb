@@ -7,23 +7,28 @@ class Teacher::SubjectsController < ApplicationController
 
 
   def index
-    @subjects = current_teacher.school_class.subjects
+    @subjects = current_teacher.school_class_subjects
     @subject = Subject.new
   end
 
   def create
-    @subject = current_teacher.school_class.subjects.build(params[:subject])
-    @subject.save ? redirect_to(:controller => "teacher/subjects", :action => "index") : render(:action => "index")
+    subject = current_teacher.school_class_subjects.build(params[:subject])
+    subject.save ? redirect_to(:action => "index") : render(:action => "new")
   end
 
   def show
-    @subject = current_teacher.school_class.subjects.find(params[:id])
-    @descriptions = current_teacher.semester.descriptions.where('subject_id = ' + params[:id])
-    @students = current_teacher.school_class.students
+    @subject = current_teacher.school_class_subjects.find(params[:id])
+    @descriptions = current_teacher.semester_descriptions.where('subject_id = ' + params[:id])
+    @students = current_teacher.school_class_students
     @description = Description.new
     @marks = Mark.find_all_by_students_and_descriptions(@students, @descriptions)
     @semestral_marks = SemestralMark.find_all_by_students_and_semester_id_and_subject_id(@students, current_teacher.semester_id, @subject.id)
     @semester_id = current_teacher.semester_id
+  end
+
+  def destroy
+    subject = current_teacher.school_class_subjects.find(params[:id])
+    redirect_to teacher_subjects_path if subject.destroy
   end
 
 end

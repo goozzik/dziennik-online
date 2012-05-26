@@ -23,4 +23,16 @@ class Teacher < User
     end
   end
 
+  def school_class_subjects
+    school_class.subjects
+  end
+
+  def school_class_students
+    school_class.students
+  end
+
+  def semester_descriptions
+    semester.descriptions
+  end
+
 end
