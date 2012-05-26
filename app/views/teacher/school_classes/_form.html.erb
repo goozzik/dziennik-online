@@ -1,0 +1,12 @@
+<div class="row">
+  <%= simple_form_for school_class, :url => teacher_school_classes_path, :html => {:class => "well form-horizontal span5"} do |f| %>
+    <%= f.input :name, :label => "Nazwa" %>
+    <%= f.input :profile, :label => "Profil" %>
+    <%= f.input :yearbook, :label => "Rocznik" %>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
+      <%= link_to "Anuluj", teacher_school_classes_path, :class => "btn btn-inverse" %>
+    </div>
+  <% end %>
+</div>

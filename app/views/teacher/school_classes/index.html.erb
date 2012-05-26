@@ -1,62 +1,46 @@
-<div class="page-header">
-  <h1>Ustawienia klas</h1>
-</div>
+<%= page_header("Ustawienia klas") %>
 
 <% unless @school_classes.empty? %>
-  <div class="alert alert-block">
-    <a class="close" data-dismiss="alert" href="#">×</a>
-    <h4 class="alert-heading">Klasy i semestry</h4>
-    Żeby ustawić semestr jako aktywny należy kliknąć na jego nazwę.
-  </div>
-  <% @school_classes.each_with_index do |school_class, i| %>
-    <% if (i+1) % 3 == 1 %>
-      <div class="row">
-    <% end %>
-    <table class="table table-bordered span4">
-      <tr>
-        <td>
-          <%= school_class.fullname %>
-          <%= link_to("Usuń", {:controller => 'teacher/school_classes', :action => 'destroy', :id => school_class.id}, :method => :delete, :confirm => "Jesteś pewien?", :style => "float:right;color:red;") %>
-        </td>
-      </tr>
 
-      <% school_class.semesters.each do |semester| %>
+  <%= render 'school_classes_info' %>
+
+  <% @school_classes.each_with_index do |school_class, i| %>
+
+    <%= row_3(i) %>
+
+    <div class="span4">
+      <table class="table table-bordered">
         <tr>
           <td>
-            <%= link_to("Semestr #{semester_status_info(semester)}", {:controller => 'teacher/semesters', :action => 'activate', :id => semester.id}) %>
-            <%= link_to("Usuń", {:controller => 'teacher/semesters', :action => 'destroy', :id => semester.id}, :method => :delete, :confirm => "Jesteś pewien?", :style => "float:right;color:red;") %>
+            <%= school_class.fullname %>
+            <%= link_to("Usuń", teacher_school_class_path(school_class), :method => :delete, :confirm => "Jesteś pewien?", :style => "float:right;color:red;") %>
           </td>
         </tr>
-      <% end %>
 
-      <tr>
-        <td>
-          <%= form_for @semester, :url => {:controller => 'teacher/semesters', :action => 'create'} do |f|%>
-            <%= f.hidden_field :school_class_id, :value => school_class.id %>
-            <%= f.submit "Dodaj nowy semestr", :class => "btn btn-primary" %>
-          <% end %>
-        </td>
-      </tr>
-    </table>
-    <% if (i+1) % 3 == 0 %>
-      </div>
-    <% end %>
+        <% school_class.semesters.each do |semester| %>
+          <tr>
+            <td>
+              <%= link_to("Semestr #{semester_status_info(semester)}", {:controller => 'teacher/semesters', :action => 'activate', :id => semester.id}) %>
+              <%= link_to("Usuń", {:controller => 'teacher/semesters', :action => 'destroy', :id => semester.id}, :method => :delete, :confirm => "Jesteś pewien?", :style => "float:right;color:red;") %>
+            </td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td>
+            <%= render "new_semester", :school_class => school_class %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <%= end_row_3(i, @school_classes.count) %>
+
   <% end %>
+<% else %>
+  <%= alert_box("Nie masz klas!", "Możesz dodać klasę poprzez poniższy formularz.") %>
 <% end %>
 
+<%= page_header("Dodaj nową klasę") %>
 
-<div class="page-header">
-  <h1>Dodaj nową klasę</h1>
-</div>
-
-<div class="row">
-  <%= simple_form_for @school_class, :url => teacher_school_classes_path, :html => {:class => "well form-horizontal span4"} do |f| %>
-    <%= f.input :name, :label => "Nazwa" %>
-    <%= f.input :profile, :label => "Profil" %>
-    <%= f.input :yearbook, :label => "Rocznik" %>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
-    </div>
-  <% end %>
-</div>
+<%= render 'form', :school_class => @school_class %>

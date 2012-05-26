@@ -1,0 +1,4 @@
+<%= form_for Semester.new, :url => {:controller => 'teacher/semesters', :action => 'create'} do |f|%>
+  <%= f.hidden_field :school_class_id, :value => school_class.id %>
+  <%= f.submit "Dodaj nowy semestr", :class => "btn btn-primary" %>
+<% end %>
