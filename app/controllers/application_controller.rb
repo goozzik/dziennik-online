@@ -26,29 +26,29 @@ class ApplicationController < ActionController::Base
 
     def teacher_has_active_class?
       unless current_teacher.school_class
-        flash[:notice] = "Najpierw dodaj klasę."
-        redirect_to(:controller => "teacher/school_classes", :action => "index")
+        flash[:alert] = "Najpierw dodaj klasę."
+        redirect_to teacher_school_classes_path
       end
     end
 
     def teacher_has_active_semester?
       unless current_teacher.semester
-        flash[:notice] = "Najpierw dodaj semestr."
-        redirect_to(:controller => "teacher/school_classes", :action => "index")
+        flash[:alert] = "Najpierw dodaj semestr."
+        redirect_to teacher_school_classes_path
       end
     end
 
     def teacher_has_students?
       if current_teacher.school_class.students.empty?
-        flash[:notice] = "Najpierw dodaj uczniów."
-        redirect_to(:controller => "teacher/students", :action => "index")
+        flash[:alert] = "Najpierw dodaj uczniów."
+        redirect_to teacher_students_path
       end
     end
 
     def director_has_active_classes?
       if current_director.active_school_classes.empty?
         flash[:notice] = "Szkoła nie posiada aktywnych klas."
-        redirect_to(root_path)
+        redirect_to root_path
       end
     end
 

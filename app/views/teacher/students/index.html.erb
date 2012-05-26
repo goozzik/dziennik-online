@@ -1,6 +1,4 @@
-<div class="page-header">
-  <h1>Uczniowie</h1>
-</div>
+<%= page_header "Uczniowie" %>
 
 <% unless @students.empty? %>
   <table class="table table-striped table-bordered">
@@ -22,20 +20,18 @@
         <td><%= student.username %></td>
         <td><%= student.niu %></td>
         <td>
-          <%= link_to('Więcej', teacher_student_path(student)) %>
-          <%= link_to('Edytuj', edit_teacher_student_path(student)) %>
-          <%= link_to('Usuń', teacher_student_path(student), :method => :delete, :confirm => "Jesteś pewien?") %>
+          <%= link_to 'Więcej', teacher_student_path(student) %>
+          <%= link_to 'Edytuj', edit_teacher_student_path(student) %>
+          <%= link_to 'Usuń', teacher_student_path(student), :method => :delete, :confirm => "Jesteś pewien?", :class => "danger" %>
         </td>
       </tr>
     <% end %>
 
   </table>
 <% else %>
-  Nie masz żadnych uczniów. Możesz dodać ucznia poprzez poniższy formularz.
+  <%= alert_box "Nie masz uczniów w klasie!", "Możesz dodać ucznia poprzez poniższy formularz." %>
 <% end %>
 
-<div class="page-header">
-  <h1>Dodaj nowego ucznia</h1>
-</div>
+<%= page_header "Dodaj nowego ucznia" %>
 
 <%= render 'form', :student => @student %>
