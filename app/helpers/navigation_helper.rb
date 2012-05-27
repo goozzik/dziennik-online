@@ -23,7 +23,7 @@ module NavigationHelper
   end
 
   def nav_link_to(name, path)
-    content_tag("li", link_to(name, path, :method => :delete), :class => nav_link_html_class(path))
+    content_tag("li", link_to(name, path), :class => nav_link_html_class(path))
   end
 
   def teacher_navigation
