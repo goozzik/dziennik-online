@@ -1,39 +1,38 @@
 class Teacher::StudentsController < ApplicationController
 
   before_filter :authenticate_teacher!
-  before_filter :teacher_has_active_class?, :only => [:index]
+  before_filter :teacher_has_active_class?
 
   def index
-    @students = current_teacher.school_class.students
-    @student = Student.new
-  end
-
-  def create
-    @student = current_teacher.school_class.students.build(params[:student])
-    @student.save ? redirect_to(:action => "index") : render(:action => "new")
-  end
-
-  def destroy
-    student = current_teacher.school_class.students.find(params[:id])
-    student.destroy
-    redirect_to(:controller => "teacher/students", :action => "index")
+    @student = current_teacher.school_class_students.new
+    @students = current_teacher.school_class_students
   end
 
   def show
-    @student = current_teacher.school_class.students.find(params[:id])
+    @student = current_teacher.school_class_students.find(params[:id])
+  end
+
+  def new
+    @student = current_teacher.school_class_students.new
   end
 
   def edit
-    @student = current_teacher.school_class.students.find(params[:id])
+    @student = current_teacher.school_class_students.find(params[:id])
+  end
+
+  def create
+    @student = current_teacher.school_class_students.build(params[:student])
+    @student.save ? redirect_to(:action => "index") : render(:action => "new")
   end
 
   def update
-    @student = current_teacher.school_class.students.find(params[:id])
-    if @student.update_attributes(params[:student])
-      redirect_to :action => "index"
-    else
-      render :action => "index"
-    end
+    @student = current_teacher.school_class_students.find(params[:id])
+    @student.update_attributes(params[:student]) ? redirect_to(:action => "index") : render(:action => "edit")
+  end
+
+  def destroy
+    student = current_teacher.school_class_students.find(params[:id])
+    redirect_to(:action => "index") if student.destroy
   end
 
 end

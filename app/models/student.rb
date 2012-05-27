@@ -8,9 +8,9 @@ class Student < User
   has_many :marks, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
 
-  attr_accessible :email, :student, :first_name, :last_name, :pesel, :street, :city, :zip_code, :province, :telephone, :individual, :boarding_school, :niu
+  attr_accessible :email, :student, :first_name, :last_name, :pesel, :street, :city, :zip_code, :province, :telephone, :individual, :boarding_school, :niu, :password
 
-  before_validation :set_student
+  before_validation :set_student, :generate_username_and_password
   validate :is_student?
   validates_presence_of :first_name, :last_name
 
@@ -78,6 +78,15 @@ class Student < User
     def inherit_from_school_class
       self.teacher_id = school_class.teacher_id
       self.school_id = school_class.school_id
+    end
+
+    def generate_username_and_password
+      username = ""
+      begin
+        username = rand(36**10).to_s(36)
+      end unless User.find_by_username(username)
+      self.username = username
+      self.password = username
     end
 
 end
