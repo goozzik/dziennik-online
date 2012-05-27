@@ -35,4 +35,13 @@ class Teacher::StudentsController < ApplicationController
     redirect_to(:action => "index") if student.destroy
   end
 
+  def new_password
+    @student = current_teacher.school_class_students.find(params[:id])
+  end
+
+  def update_password
+    @student = current_teacher.school_class_students.find(params[:id])
+    @student.update_password(params[:student]) ? redirect_to(:action => "index") : render(:action => "new_password")
+  end
+
 end

@@ -9,7 +9,7 @@
       <th>Nazwisko</th>
       <th>Login</th>
       <th>NIU</th>
-      <th style="width:120px;"></th>
+      <th style="width:200px;"></th>
     </tr>
 
     <% @students.each_with_index do |student, i| %>
@@ -22,6 +22,7 @@
         <td>
           <%= link_to 'Więcej', teacher_student_path(student) %>
           <%= link_to 'Edytuj', edit_teacher_student_path(student) %>
+          <%= link_to "Zmień hasło", new_password_teacher_student_path(student.id) %>
           <%= link_to 'Usuń', teacher_student_path(student), :method => :delete, :confirm => "Jesteś pewien?", :class => "danger" %>
         </td>
       </tr>
