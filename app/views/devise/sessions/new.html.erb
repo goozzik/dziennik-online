@@ -1,14 +1,14 @@
-<div id='login_box'>
-  <h2 class="title">Zaloguj się</h2>
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div><%= f.label :username, 'Login' %><br />
-    <%= f.text_field :username %></div>
+<%= page_header "Zaloguj się" %>
 
-    <div><%= f.label :password, 'Hasło' %><br />
-    <%= f.password_field :password %></div>
+<div class="row">
+  <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "span5"}) do |f| %>
+    <%= f.input :username, :label => "Login" %>
+    <%= f.input :password, :label => "Hasło" %>
 
-    <div><%= f.submit "Zaloguj" %></div>
+    <%= render "links" %>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Zaloguj" %>
+    </div>
   <% end %>
-
-  <%= render "links" %>
 </div>
