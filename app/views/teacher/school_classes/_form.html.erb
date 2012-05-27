@@ -1,8 +1,8 @@
 <div class="row">
   <%= simple_form_for school_class, :url => teacher_school_classes_path, :html => {:class => "well form-horizontal span5"} do |f| %>
-    <%= f.input :name, :label => "Nazwa" %>
-    <%= f.input :profile, :label => "Profil" %>
-    <%= f.input :yearbook, :label => "Rocznik" %>
+    <%= f.input :name, :label => "Nazwa", :placeholder => "G" %>
+    <%= f.input :profile, :label => "Profil", :placeholder => "Informatyk" %>
+    <%= f.input :yearbook, :label => "Rocznik", :input_html => {:value => 2013} %>
 
     <div class="form-actions">
       <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
