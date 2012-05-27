@@ -25,7 +25,7 @@
     <% end %>
 
     <th>
-      <%= render 'description_form', :subject => @subject %>
+      <%= render 'description_form', :description => @description, :subject => @subject %>
       <a data-toggle="modal" href="#new_description"><%= image_tag("plus.gif", :title => "Dodaj nowy typ oceny") %></a>
     </th>
     <th style="width:20px;"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
