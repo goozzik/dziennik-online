@@ -73,4 +73,49 @@ feature 'Teacher students' do
 
   end
 
+  context "update_password" do
+    before do
+      school = FactoryGirl.create(:school)
+      teacher = FactoryGirl.create(:teacher, :school_id => school.id)
+      school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+      student = FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+      login('teacher')
+      click_link "Uczniowie"
+      click_link "Zmień hasło"
+    end
+
+    scenario "Validate teacher password presence" do
+      click_button "Zapisz"
+      page.should have_content "nie może być puste"
+    end
+
+    scenario "Validate teacher password" do
+      fill_in "student_current_password", :with => "wrongpassword"
+      click_button "Zapisz"
+      page.should have_content "błędne hasło"
+    end
+
+    scenario "Validate new password presence" do
+      fill_in "student_current_password", :with => "test"
+      click_button "Zapisz"
+      page.should have_content "nie może być puste"
+    end
+
+    scenario "Validate password length" do
+      fill_in "student_current_password", :with => "test"
+      fill_in "student_password", :with => "test"
+      click_button "Zapisz"
+      page.should have_content "za krótkie"
+    end
+
+    scenario "Validate password confirmation" do
+      fill_in "student_current_password", :with => "test"
+      fill_in "student_password", :with => "test123"
+      fill_in "student_password_confirmation", :with => "test124"
+      click_button "Zapisz"
+      page.should have_content "potwierdzenie hasła nie zgadza się"
+    end
+
+  end
+
 end
