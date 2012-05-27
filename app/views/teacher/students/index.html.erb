@@ -1,6 +1,13 @@
-<%= info_box "Lista uczniów", "Możesz również otworzyć listę uczniów w formacie #{link_to "PDF", "/teacher/students.pdf"}, co pozwoli ci na wydrukowanie kartki z danymi do logowania dla rodziców.", link_to(image_tag("filetype_pdf.png") + "Pokaż listę w PDF", "/teacher/students.pdf") %>
+<%= page_header "Uczniowie" %>
 
 <% unless @students.empty? %>
+
+  <%= info_box "Lista uczniów",
+    "Możesz również otworzyć listę uczniów w formacie #{link_to "PDF", "/teacher/students.pdf"}, " +
+    "co pozwoli ci na wydrukowanie kartki z danymi do logowania dla rodziców.",
+    link_to(image_tag("filetype_pdf.png") + "Pokaż listę w PDF", "/teacher/students.pdf")
+  %>
+
   <table class="table table-striped table-bordered">
 
     <tr>

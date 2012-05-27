@@ -43,4 +43,8 @@ class Teacher < User
     school_class.available_time_table_days
   end
 
+  def school_class_messages
+    school_class.messages
+  end
+
 end
