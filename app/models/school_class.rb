@@ -22,9 +22,11 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def activate
-    SchoolClass.deactivate(self.teacher_id)
-    self.update_attributes(:active => true)
-    self.teacher.update_attributes(:school_class_id => self.id)
+    unless active
+      SchoolClass.deactivate(self.teacher_id)
+      self.update_attributes(:active => true)
+      self.teacher.update_attributes(:school_class_id => self.id)
+    end
   end
 
   def self.deactivate(teacher_id)

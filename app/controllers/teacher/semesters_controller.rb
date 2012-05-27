@@ -14,8 +14,8 @@ class Teacher::SemestersController < ApplicationController
   end
 
   def activate
-    @semester = current_teacher.semesters.find(params[:id])
-    @semester.activate
+    semester = current_teacher.semesters.find(params[:id])
+    semester.activate
     redirect_to(:controller => "school_classes", :action => "index")
   end
 

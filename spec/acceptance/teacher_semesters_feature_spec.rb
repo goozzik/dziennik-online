@@ -43,6 +43,14 @@ feature 'Teacher semesters' do
       page.should have_content 'Semestr 1 - aktualnie wybrany'
     end
 
+    scenario "Set semester as active when it is already active" do
+      click_link 'Ustawienia klas'
+      click_link 'Semestr 1 - aktualnie wybrany'
+      assert Teacher.first.semester_id == Semester.find_by_active(true).id
+      assert Semester.last.active
+      page.should have_content 'Semestr 1 - aktualnie wybrany'
+    end
+
   end
 
 end

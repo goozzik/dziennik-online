@@ -15,10 +15,12 @@ class Semester < ActiveRecord::Base
   before_destroy :unset_teacher_semester_id
 
   def activate
-    Semester.deactivate(self.teacher_id)
-    self.update_attributes(:active => true)
-    self.teacher.update_attributes(:semester_id => self.id)
-    self.school_class.activate if self.school_class != self.teacher.school_class
+    unless active
+      Semester.deactivate(self.teacher_id)
+      self.update_attributes(:active => true)
+      self.teacher.update_attributes(:semester_id => self.id)
+      self.school_class.activate
+    end
   end
 
   def self.deactivate(teacher_id)
