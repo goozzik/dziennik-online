@@ -5,7 +5,7 @@ module TimeTablesHelper
     fields = f.fields_for(:lessons, new_object, :child_index => "new_#{:lessons}") do |lesson|
       render(partial_lesson_path, :lessons_form => lesson, :subjects => subjects)
     end
-    link_to_function(name, "add_fields(this, \"#{:lessons}\", \"#{escape_javascript(fields)}\")", :class => "btn")
+    link_to_function(name, "add_fields(this, \"#{:lessons}\", \"#{escape_javascript(fields)}\")", :class => "btn", :style => "margin-left:160px;")
   end
 
   private

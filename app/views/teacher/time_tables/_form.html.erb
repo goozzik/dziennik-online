@@ -9,9 +9,11 @@
       <% end %>
     <% end %>
 
-    <div class="actions">
-      <%= link_to_add_lesson("Dodaj kolejną lekcję", f, subjects) %>
+    <%= link_to_add_lesson "Dodaj kolejną lekcję", f, subjects %>
+
+    <div class="form-actions">
       <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %>
+      <%= link_to "Anuluj", teacher_time_tables_path, :class => "btn btn-inverse" %>
     </div>
   <% end %>
 </div>
