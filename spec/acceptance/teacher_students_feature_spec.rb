@@ -61,14 +61,13 @@ feature 'Teacher students' do
     end
 
     scenario 'Validate empty fields' do
-      click_button "Dodaj"
-      page.should have_content "Imię jest wymagane"
-      page.should have_content "Nazwisko jest wymagane"
+      click_button "Zapisz"
+      page.should have_content "jest wymagane"
     end
 
     scenario 'Validate pesel' do
       fill_in "student_pesel", :with => "123"
-      click_button "Dodaj"
+      click_button "Zapisz"
       page.should have_content "Pesel jest nieprawidłowy"
     end
 

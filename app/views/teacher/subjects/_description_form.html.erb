@@ -4,7 +4,7 @@
     <h3>Dodaj nowy typ oceny</h2>
   </div>
   <div class="modal-body">
-    <%= simple_form_for @description, :url => teacher_descriptions_path, :html => {:class => "well form-horizontal"} do |f| %>
+    <%= simple_form_for [:teacher, description], :html => {:class => "well form-horizontal"} do |f| %>
 
       <%= f.hidden_field :subject_id, :value => subject.id %>
       <%= f.input :desc_type, :label => "Typ" %>

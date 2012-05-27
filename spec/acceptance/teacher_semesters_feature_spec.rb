@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature 'Teacher school classes' do
+feature 'Teacher semesters' do
 
   context 'delete' do
     before do
@@ -12,7 +12,7 @@ feature 'Teacher school classes' do
 
     scenario 'Delete active semester' do
       click_link 'Ustawienia klas'
-      click_button 'Usuń'
+      find(:xpath, "//table/tr[2]/td/a[contains(text(), 'Usuń')]").click
       assert Semester.count == 0
       assert !Teacher.first.semester
     end
@@ -20,7 +20,7 @@ feature 'Teacher school classes' do
     scenario 'Delete not active semester' do
       FactoryGirl.create(:semester, :school_class_id => SchoolClass.last.id)
       click_link 'Ustawienia klas'
-      click_button 'Usuń'
+      find(:xpath, "//table/tr[2]/td/a[contains(text(), 'Usuń')]").click
       assert Semester.count == 1
       assert Teacher.first.semester
     end
@@ -37,7 +37,7 @@ feature 'Teacher school classes' do
     scenario 'Set semester as active when another is active' do
       FactoryGirl.create(:semester, :school_class_id => SchoolClass.last.id)
       click_link 'Ustawienia klas'
-      click_button 'Ustaw'
+      click_link 'Semestr 1'
       assert Teacher.first.semester_id == Semester.find_by_active(true).id
       assert !Semester.last.active
       page.should have_content 'Semestr 1 - aktualnie wybrany'

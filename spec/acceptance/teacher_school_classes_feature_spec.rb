@@ -13,7 +13,7 @@ feature 'Teacher school classes' do
       click_link 'Ustawienia klas'
       page.should have_content 'Dodaj nową klasę'
       page.should have_xpath '//form[@action="/teacher/school_classes"]'
-      page.should have_xpath '//input[@value="Stwórz"]'
+      page.should have_xpath '//input[@value="Zapisz"]'
     end
 
   end
@@ -29,7 +29,7 @@ feature 'Teacher school classes' do
       fill_in 'Nazwa', :with => 'G'
       fill_in 'Profil', :with => 'Informatyk'
       fill_in 'Rocznik', :with => '2013'
-      click_button 'Stwórz'
+      click_button 'Zapisz'
       school_class = SchoolClass.first(:conditions => ['name = ? AND profile = ? AND yearbook = ?', 'G', 'Informatyk', '2013'])
       assert Teacher.last.school_class == school_class
       assert school_class.active

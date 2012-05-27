@@ -1,5 +1,5 @@
 <div class="row">
-  <%= simple_form_for student, :url => teacher_students_path, :html => {:class => "well form-horizontal span5"} do |f| %>
+  <%= simple_form_for [:teacher, student], :html => {:class => "well form-horizontal span5"} do |f| %>
 
     <%= f.input :first_name, :label => "Imię" %>
     <%= f.input :last_name, :label => "Nawisko" %>

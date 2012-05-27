@@ -1,16 +1,6 @@
-<div class="page-header">
-  <h1>Frekwencja - <%= "#{I18n.t(@month.strftime("%B"))} #{@month.year}" %></h1>
-</div>
-<div class="alert alert-info">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <div class="row">
-    <div class="span6">
-      <h4 class="alert-heading">Frekwencja</h4>
-      Żeby dodać frekwencję należy kliknąć na odpowiednie miejsce w tabeli.
-    </div>
-    <%= image_tag("teacher_absences_info_1.png", :style => "margin:0;", :class => "span5") %>
-  </div>
-</div>
+<%= page_header "Frekwencja - #{I18n.t(@month.strftime("%B"))} #{@month.year}" %>
+
+<%= info_box "Frekwencja", "Żeby dodać frekwencję należy kliknąć na odpowiednie miejsce w tabeli.", "teacher_absences_info_1.png" %>
 
 <%= render 'absences', :previous_month => @previous_month, :next_month => @next_month, :weeks => @weeks, :students => @students, :absences => @absences %>
 

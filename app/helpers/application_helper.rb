@@ -35,4 +35,17 @@ module ApplicationHelper
     </div>".html_safe
   end
 
+  def info_box(header, text, image = nil)
+    "<div class='alert alert-info'>
+      <a class='close' data-dismiss='alert' href='#'>×</a>
+      <div class='row'>
+        <div class='span6'>
+          <h4 class='alert-heading'>#{header}</h4>
+          #{text}
+        </div>
+        #{image_tag(image, :class => "span5") if image}
+      </div>
+    </div>".html_safe
+  end
+
 end

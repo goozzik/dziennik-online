@@ -35,4 +35,12 @@ class Teacher < User
     semester.descriptions
   end
 
+  def school_class_time_tables
+    school_class.time_tables
+  end
+
+  def school_class_available_time_table_days
+    school_class.available_time_table_days
+  end
+
 end
