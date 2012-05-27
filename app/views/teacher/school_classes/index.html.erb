@@ -2,7 +2,7 @@
 
 <% unless @school_classes.empty? %>
 
-  <%= info_box "Klasy i semestry", "Żeby ustawić semestr jako aktywny należy kliknąć na jego nazwę.", "teacher_school_classes_info_1.png" %>
+  <%= info_box "Klasy i semestry", "Żeby ustawić semestr jako aktywny należy kliknąć na jego nazwę.", image_tag("teacher_school_classes_info_1.png") %>
 
   <% @school_classes.each_with_index do |school_class, i| %>
 
