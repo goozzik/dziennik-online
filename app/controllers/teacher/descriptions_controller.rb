@@ -9,9 +9,8 @@ class Teacher::DescriptionsController < ApplicationController
 
   def destroy
     description = current_teacher.semester.descriptions.find(params[:id])
-    subject_id = description.subject_id
-    description.destroy
-    redirect_to(:controller => "teacher/subject", :action => "show", :subject_id => subject_id)
+    subject = description.subject
+    redirect_to teacher_subject_path(subject) if description.destroy
   end
 
 end

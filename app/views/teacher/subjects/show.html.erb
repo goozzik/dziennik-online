@@ -1,16 +1,9 @@
 <%= page_header "Oceny - #{@subject.name}" %>
 
+<%= info_box "Oceny", "Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_subjects_info_1.png", :style => "margin:0;", :class => "span5") %>
+
 <table class="table table-striped table-bordered table-condensed">
-  <div class="alert alert-info">
-    <a class="close" data-dismiss="alert" href="#">×</a>
-    <div class="row">
-      <div class="span6">
-        <h4 class="alert-heading">Oceny</h4>
-        Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli.
-      </div>
-      <%= image_tag("teacher_subjects_info_1.png", :style => "margin:0;", :class => "span5") %>
-    </div>
-  </div>
+
   <tr>
     <th style="width:15px;">#</th>
     <th style="width:100px;">Imię</th>
@@ -18,9 +11,7 @@
 
     <% @descriptions.each do |description| %>
       <th style="width:30px;">
-        <span class="title_of_mark" title="<%= description.desc_type + ' - ' + description.description %>">
-          <%= link_to truncate(description.desc_type, :length => 4, :omission => ''), teacher_description_path(description), :method => :delete, :confirm => "Jesteś pewien?" %>
-        </span>
+        <%= link_to_delete_description(description) %>
       </th>
     <% end %>
 
@@ -53,6 +44,8 @@
         xhr.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content'));
       }
     });
+
+    $(".description").popover();
 
     var parsed_id;
 
