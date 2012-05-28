@@ -7,8 +7,9 @@ class Teacher::SubjectsController < ApplicationController
 
 
   def index
-    @subjects = current_teacher.school_class_subjects
     @subject = Subject.new
+    @subjects = current_teacher.school_class_subjects
+    @subject_templates = current_teacher.school_class.available_subject_templates
   end
 
   def create

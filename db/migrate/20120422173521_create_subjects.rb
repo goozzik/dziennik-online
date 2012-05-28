@@ -2,10 +2,8 @@ class CreateSubjects < ActiveRecord::Migration
 
   def up
     create_table :subjects do |t|
-      t.integer :school_id
-      t.integer :teacher_id
       t.integer :school_class_id
-      t.string :name
+      t.integer :subject_template_id
       t.boolean :deleted # For what is it?
 
       t.timestamps

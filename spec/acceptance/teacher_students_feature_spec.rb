@@ -6,17 +6,16 @@ feature 'Teacher students' do
 
   context 'show' do
     before do
-      school = FactoryGirl.create(:school)
-      teacher = FactoryGirl.create(:teacher, :school_id => school.id)
-      school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
-      student = FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+      FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
       login('teacher')
       click_link "Uczniowie"
     end
 
-    scenario 'All user information' do
+    scenario 'user information' do
       click_link "Więcej"
-      page.should have_content "student"
       page.should have_content "Jacek"
       page.should have_content "Placek"
       page.should have_content '93052334123'
@@ -30,17 +29,17 @@ feature 'Teacher students' do
 
   end
 
-  context 'edit' do
+  context 'update' do
     before do
-      school = FactoryGirl.create(:school)
-      teacher = FactoryGirl.create(:teacher, :school_id => school.id)
-      school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
-      student = FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+      FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
       login('teacher')
       click_link "Uczniowie"
     end
 
-    scenario 'Update student info' do
+    scenario 'with valid attributes' do
       click_link "Edytuj"
       fill_in "student_first_name", :with => 'Tomasz'
       fill_in "student_last_name", :with => 'Krawczyk'
@@ -53,19 +52,19 @@ feature 'Teacher students' do
 
   context 'create' do
     before do
-      school = FactoryGirl.create(:school)
-      teacher = FactoryGirl.create(:teacher, :school_id => school.id)
-      school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       login('teacher')
       click_link "Uczniowie"
     end
 
-    scenario 'Validate empty fields' do
+    scenario 'validate empty fields' do
       click_button "Zapisz"
       page.should have_content "jest wymagane"
     end
 
-    scenario 'Validate pesel' do
+    scenario 'validate pesel' do
       fill_in "student_pesel", :with => "123"
       click_button "Zapisz"
       page.should have_content "Pesel jest nieprawidłowy"
@@ -75,40 +74,40 @@ feature 'Teacher students' do
 
   context "update_password" do
     before do
-      school = FactoryGirl.create(:school)
-      teacher = FactoryGirl.create(:teacher, :school_id => school.id)
-      school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
-      student = FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+      FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
       login('teacher')
       click_link "Uczniowie"
       click_link "Zmień hasło"
     end
 
-    scenario "Validate teacher password presence" do
+    scenario "validate teacher password presence" do
       click_button "Zapisz"
       page.should have_content "nie może być puste"
     end
 
-    scenario "Validate teacher password" do
+    scenario "validate teacher password" do
       fill_in "student_current_password", :with => "wrongpassword"
       click_button "Zapisz"
       page.should have_content "błędne hasło"
     end
 
-    scenario "Validate new password presence" do
+    scenario "validate new password presence" do
       fill_in "student_current_password", :with => "test"
       click_button "Zapisz"
       page.should have_content "nie może być puste"
     end
 
-    scenario "Validate password length" do
+    scenario "validate password length" do
       fill_in "student_current_password", :with => "test"
       fill_in "student_password", :with => "test"
       click_button "Zapisz"
       page.should have_content "za krótkie"
     end
 
-    scenario "Validate password confirmation" do
+    scenario "validate password confirmation" do
       fill_in "student_current_password", :with => "test"
       fill_in "student_password", :with => "test123"
       fill_in "student_password_confirmation", :with => "test124"

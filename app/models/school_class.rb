@@ -45,6 +45,10 @@ class SchoolClass < ActiveRecord::Base
     self.semesters.find_by_active(true)
   end
 
+  def available_subject_templates
+    SubjectTemplate.all.delete_if { |template| subjects.find_by_subject_template_id(template) }
+  end
+
   private
 
     def unactive_old_school_class

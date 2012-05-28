@@ -1,6 +1,8 @@
 <div class="row">
-  <%= simple_form_for subject, :url => teacher_subjects_path, :html => {:class => "well form-inline span4"} do |f| %>
-    <%= f.input_field :name, :placeholder => "Nazwa przedmiotu" %>
-    <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %></span>
+  <%= simple_form_for [:teacher, subject], :html => {:class => "well form-horizontal span5"} do |f| %>
+    <%= f.input :subject_template_id, :collection => subject_templates, :label => "Przedmiot" %>
+    <div class="form-actions">
+      <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %></span>
+    </div>
   <% end %>
 </div>

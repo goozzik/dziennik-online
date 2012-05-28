@@ -162,18 +162,22 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
   add_index "semestral_marks", ["semester_id"], :name => "index_semestral_marks_on_semester_id"
   add_index "semestral_marks", ["subject_id"], :name => "index_semestral_marks_on_subject_id"
 
-  create_table "subjects", :force => true do |t|
-    t.integer  "school_id"
-    t.integer  "teacher_id"
-    t.integer  "school_class_id"
+  create_table "subject_templates", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "subjects", :force => true do |t|
+    t.integer  "school_class_id"
+    t.integer  "subject_template_id"
     t.boolean  "deleted"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "subjects", ["school_class_id"], :name => "index_subjects_on_school_class_id"
-  add_index "subjects", ["school_id"], :name => "index_subjects_on_school_id"
+  add_index "subjects", ["subject_template_id"], :name => "index_subjects_on_subject_template_id"
 
   create_table "time_tables", :force => true do |t|
     t.integer  "school_class_id"

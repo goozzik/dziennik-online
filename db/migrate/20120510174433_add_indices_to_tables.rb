@@ -22,8 +22,8 @@ class AddIndicesToTables < ActiveRecord::Migration
     add_index :semestral_marks, :school_class_id
     add_index :semestral_marks, :semester_id
     add_index :semestral_marks, :subject_id
-    add_index :subjects, :school_id
     add_index :subjects, :school_class_id
+    add_index :subjects, :subject_template_id
     add_index :time_tables, :school_class_id
     add_index :users, :school_class_id
     add_index :users, :school_id
