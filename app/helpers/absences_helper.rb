@@ -23,7 +23,7 @@ module AbsencesHelper
     when 'teacher'
       content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, teacher_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
     when 'director'
-      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, actual_directio_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "previous")
+      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, actual_director_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
     end
   end
 
@@ -39,11 +39,12 @@ module AbsencesHelper
     html.html_safe
   end
 
-  def semesters_navigation(school_class, semesters)
-    html = ''
+  def director_semesters_navigation(school_class, semesters)
+    html = "<ul class='nav nav-tabs'>"
     semesters.each do |semester|
-      html << link_to("Semestr #{semester.semester}", general_director_absences_path(school_class, :semester_id => semester.id))
+      html << nav_link_to("Semestr #{semester.semester}", general_director_absences_path(school_class, semester))
     end
+    html << "</ul>"
     html.html_safe
   end
 

@@ -1,7 +1,7 @@
 class Director::AbsencesController < ApplicationController
 
   before_filter :authenticate_director!
-  before_filter :director_has_active_classes?, :only => [:actual, :general]
+  before_filter :director_has_active_classes?
 
   def actual
     @month = Chronic.parse('monday this month', :now => (params[:date].nil? ? Time.now : Time.parse(params[:date])))

@@ -1,9 +1,7 @@
-<h2 class="title">Frekwencja aktywnych klas</h2>
+<%= page_header "Frekwencja aktywnych klas" %>
 
-<% if @school_classes.empty? %>
-  Szkoła nie posiada aktywnych klas.
-<% else %>
-  <table>
+<% unless @school_classes.empty? %>
+  <table class="table table-bordered">
     <tr>
       <th>Klasa</th>
       <th>Ogólna frekwencja</th>
@@ -13,10 +11,12 @@
     <% @school_classes.each do |school_class| %>
       <tr>
         <td><%= school_class.fullname %></td>
-        <td><%= link_to("Pokaż", general_director_absences_path(school_class)) %></td>
+        <td><%= link_to("Pokaż", general_director_absences_path(school_class, school_class.semester)) %></td>
         <td><%= link_to("Pokaż", actual_director_absences_path(school_class)) %></td>
-        <td><%= link_to("Pokaż", director_marks_path(school_class)) %></td>
+        <td><%= link_to("Pokaż", director_marks_path(school_class, school_class.subjects.first)) %></td>
       </tr>
     <% end %>
   </table>
+<% else %>
+  <%= alert_box "Szkoła nie ma aktywnych klas!", "Poczekaj aż, nauczyciele dodadzą klasy." %>
 <% end %>

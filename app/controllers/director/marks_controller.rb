@@ -5,11 +5,7 @@ class Director::MarksController < ApplicationController
   def index
     @school_class = current_director.school.school_classes.find(params[:school_class_id])
     @semester = @school_class.semester
-    @subject = if params[:subject_id].nil?
-      @school_class.subjects.first
-    else
-      @school_class.subjects.find(params[:subject_id])
-    end
+    @subject = @school_class.subjects.find(params[:subject_id])
     @students = @school_class.students
     @descriptions = @subject.descriptions.find_all_by_semester_id(@semester.id)
     @marks = Mark.find_all_by_students_and_descriptions(@students, @descriptions)

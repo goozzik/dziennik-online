@@ -1,11 +1,12 @@
 # coding: utf-8
 module MarksHelper
 
-  def subjects_navigation(school_class)
-    html = ''
+  def director_subjects_navigation(school_class)
+    html = "<ul class='nav nav-tabs'>"
     school_class.subjects.each do |subject|
-      html << link_to(subject.name, director_marks_path(school_class, :subject_id => subject.id))
+      html << nav_link_to(subject.name, director_marks_path(school_class, subject))
     end
+    html << "</ul>"
     html.html_safe
   end
 
