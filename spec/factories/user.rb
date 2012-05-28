@@ -8,10 +8,12 @@ FactoryGirl.define do
 
     # Child of :user factory, since it's in the `factory :user` block
     factory :superadmin, :class => SuperAdmin do
+      username 'superadmin'
       superadmin true
     end
 
     factory :admin, :class => Admin do
+      username 'admin'
       admin true
     end
 

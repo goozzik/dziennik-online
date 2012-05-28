@@ -17,9 +17,7 @@
                 <%= navigation %>
               </ul>
               <ul class="nav pull-right">
-                <%= nav_link_to("Ustawienia klas", teacher_school_classes_path) %>
-                <%= nav_link_to("Ustawienia", edit_user_registration_path) %>
-                <%= content_tag("li", link_to("Wyloguj", destroy_user_session_path, :method => :delete)) %>
+                <%= account_dropdown_navigation %>
               </ul>
             </div>
           </div>

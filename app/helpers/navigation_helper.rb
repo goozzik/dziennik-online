@@ -79,6 +79,18 @@ module NavigationHelper
      </center>'
   end
 
+  def account_dropdown_navigation
+    html = "<li class='dropdown'>"
+    html << link_to("Konto <b class='caret'></b>".html_safe, "#", :class => "dropdown-toggle", "data-toggle" => "dropdown")
+    html << "<ul class='dropdown-menu'>"
+    html << nav_link_to("Ustawienia klas", teacher_school_classes_path) if user_type == "teacher"
+    html << nav_link_to("Ustawienia konta", edit_user_registration_path)
+    html << content_tag("li", link_to("Wyloguj", destroy_user_session_path, :method => :delete))
+    html << "</ul>"
+    html << "</li>"
+    html.html_safe
+  end
+
   private
 
     def nav_link_html_class(path)
