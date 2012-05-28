@@ -24,6 +24,14 @@ feature 'Teacher subjects' do
       page.should have_content "Kwadraty"
     end
 
+    scenario "description plus button popover info", :js => true do
+      click_link "Pokaż oceny"
+      page.execute_script('$("#add_description").trigger("mouseover")')
+      page.should have_xpath "//div[@class='popover fade right in']"
+      page.should have_content "Dodaj nowy typ oceny"
+      page.should have_content "Kliknij aby dodać nową ocenę dla klasy."
+    end
+
   end
 
 end

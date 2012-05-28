@@ -20,4 +20,14 @@ module MarksHelper
            )
   end
 
+  def add_description_button
+    link_to(image_tag("plus.gif"),
+            "#new_description",
+            :id => "add_description",
+            "data-toggle" => "modal",
+            "data-original-title" => "Dodaj nowy typ oceny",
+            "data-content" => "Kliknij aby dodać nową ocenę dla klasy."
+           )
+  end
+
 end

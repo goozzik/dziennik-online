@@ -17,7 +17,7 @@
 
     <th>
       <%= render 'description_form', :description => @description, :subject => @subject %>
-      <a data-toggle="modal" href="#new_description"><%= image_tag("plus.gif", :title => "Dodaj nowy typ oceny") %></a>
+      <%= add_description_button %>
     </th>
     <th style="width:20px;"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
     <th style="width:20px;"><%= image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen") %></th>
@@ -46,6 +46,7 @@
     });
 
     $(".description").popover();
+    $("#add_description").popover();
 
     var parsed_id;
 
