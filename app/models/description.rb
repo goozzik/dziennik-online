@@ -2,16 +2,21 @@ class Description < ActiveRecord::Base
 
   belongs_to :semester
   belongs_to :subject
+
   has_many :marks, :dependent => :destroy
 
   attr_accessible :subject_id, :semester_id, :desc_type, :description, :colour
 
-  before_create :inherit_from_subject
+  before_create :set_semester_id
+
+  def subject_school_class_semester
+    subject.school_class_semester
+  end
 
   private
 
-    def inherit_from_subject
-      self.semester_id = self.subject.school_class.teacher.semester_id
+    def set_semester_id
+      self.semester_id = subject_school_class_semester.id
     end
 
 end

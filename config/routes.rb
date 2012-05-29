@@ -5,7 +5,9 @@ DziennikOnline::Application.routes.draw do
     put "/users" => "devise/registrations#update", :as => :user_registration
   end
 
-  match 'teacher/semesters/activate/:id' => 'teacher/semesters#activate'
+  get "admin/semesters/activate/:id" => "admin/semesters#activate", :as => "set_semester_as_active"
+  get "teacher/school_classes/activate/:id" => "teacher/school_classes#activate", :as => "set_school_class_as_active"
+  get "teacher/semesters/activate/:id" => "teacher/semesters#activate", :as => "set_school_class_semester"
 
   match 'director/absences/general/:school_class_id/semester/:semester_id' => 'director/absences#general', :as => 'general_director_absences'
   match 'director/absences/:school_class_id' => 'director/absences#actual', :as => 'actual_director_absences'
@@ -39,6 +41,11 @@ DziennikOnline::Application.routes.draw do
     resources :absences
     resources :marks
     resources :time_tables
+  end
+
+  namespace :admin do
+    resource :school, :only => [:show]
+    resources :semesters
   end
 
   # The priority is based upon order of creation:

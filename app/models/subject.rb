@@ -16,4 +16,8 @@ class Subject < ActiveRecord::Base
     subject_template.name
   end
 
+  def school_class_semester
+    school_class.semester
+  end
+
 end

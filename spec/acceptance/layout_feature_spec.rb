@@ -21,7 +21,9 @@ feature "layout" do
 
     context "student" do
       before do
-        FactoryGirl.create(:teacher)
+        FactoryGirl.create(:school)
+        FactoryGirl.create(:semester, :school_id => School.last.id)
+        FactoryGirl.create(:teacher, :school_id => School.last.id)
         FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
         FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
         login "student"

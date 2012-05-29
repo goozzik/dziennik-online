@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     Student.find(current_user.id)
   end
 
+  def current_admin
+    Admin.find(current_user.id)
+  end
+
   private
 
     # Overwriting the sign_in redirect path method
@@ -39,8 +43,8 @@ class ApplicationController < ActionController::Base
     end
 
     def teacher_has_active_semester?
-      unless current_teacher.semester
-        flash[:alert] = "Najpierw dodaj semestr."
+      unless current_teacher.school_class_semester
+        flash[:alert] = "Najpierw ustaw semestr."
         redirect_to teacher_school_classes_path
       end
     end

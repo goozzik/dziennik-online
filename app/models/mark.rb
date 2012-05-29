@@ -7,8 +7,6 @@ class Mark < ActiveRecord::Base
 
   attr_accessible :mark, :student_id, :description_id, :subject_id, :semester_id
 
-  before_create :inherit_from_semester
-
   def self.find_all_by_students_and_descriptions(students, descriptions)
     marks = []
     students.each_with_index do |student, i|
@@ -19,11 +17,5 @@ class Mark < ActiveRecord::Base
     end
     marks
   end
-
-  private
-
-    def inherit_from_semester
-      school_class_id = semester.school_class_id
-    end
 
 end

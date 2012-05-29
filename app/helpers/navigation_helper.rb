@@ -33,8 +33,13 @@ module NavigationHelper
   end
 
   def director_navigation
+     html = nav_link_to("Klasy", director_school_classes_path)
+     html.html_safe
+  end
+
+  def admin_navigation
      html = ""
-     html << nav_link_to("Klasy", director_school_classes_path)
+     html << nav_link_to("Ustawienia szkoły", admin_school_path)
      html.html_safe
   end
 

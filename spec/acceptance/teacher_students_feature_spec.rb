@@ -7,6 +7,7 @@ feature 'Teacher students' do
   context 'show' do
     before do
       FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
       FactoryGirl.create(:teacher, :school_id => School.last.id)
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
@@ -32,6 +33,7 @@ feature 'Teacher students' do
   context 'update' do
     before do
       FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
       FactoryGirl.create(:teacher, :school_id => School.last.id)
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
@@ -53,6 +55,7 @@ feature 'Teacher students' do
   context 'create' do
     before do
       FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
       FactoryGirl.create(:teacher, :school_id => School.last.id)
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       login('teacher')
@@ -75,6 +78,7 @@ feature 'Teacher students' do
   context "update_password" do
     before do
       FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
       FactoryGirl.create(:teacher, :school_id => School.last.id)
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)

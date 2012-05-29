@@ -5,8 +5,10 @@ feature 'Teacher messages' do
 
   context "index" do
     before do
-      teacher = FactoryGirl.create(:teacher)
-      FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       login('teacher')
     end
 
@@ -26,8 +28,10 @@ feature 'Teacher messages' do
 
   context "create" do
     before do
-      teacher = FactoryGirl.create(:teacher)
-      FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       login('teacher')
       click_link "Wiadomości"
     end
@@ -55,10 +59,12 @@ feature 'Teacher messages' do
 
   context "update" do
     before do
-      teacher = FactoryGirl.create(:teacher)
-      school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       login('teacher')
-      FactoryGirl.create(:message, :school_class_id => school_class.id)
+      FactoryGirl.create(:message, :school_class_id => SchoolClass.last.id)
       click_link "Wiadomości"
       click_link "Edytuj"
     end
@@ -79,10 +85,12 @@ feature 'Teacher messages' do
 
   context "destroy" do
     before do
-      FactoryGirl.create(:teacher)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      login('teacher')
       FactoryGirl.create(:message, :school_class_id => SchoolClass.last.id)
+      login('teacher')
     end
 
     scenario "when there are two messages" do

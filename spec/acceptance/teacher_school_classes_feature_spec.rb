@@ -5,11 +5,13 @@ feature 'Teacher school classes' do
 
   context 'index' do
     before do
-      FactoryGirl.create(:teacher)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
       login('teacher')
     end
 
-    scenario 'Index' do
+    scenario 'form' do
       click_link 'Ustawienia klas'
       page.should have_content 'Dodaj nową klasę'
       page.should have_xpath '//form[@action="/teacher/school_classes"]'
@@ -20,45 +22,36 @@ feature 'Teacher school classes' do
 
   context 'create' do
     before do
-      FactoryGirl.create(:teacher)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
       login('teacher')
     end
 
-    scenario 'Create class' do
+    scenario 'with valid attributes' do
       click_link 'Ustawienia klas'
       fill_in 'Nazwa', :with => 'G'
       fill_in 'Profil', :with => 'Informatyk'
       fill_in 'Rocznik', :with => '2013'
       click_button 'Zapisz'
-      school_class = SchoolClass.first(:conditions => ['name = ? AND profile = ? AND yearbook = ?', 'G', 'Informatyk', '2013'])
-      assert Teacher.last.school_class == school_class
-      assert school_class.active
-      semester = Semester.first(:conditions => ['school_class_id = ?', school_class.id])
-      assert Teacher.last.semester == semester
-      assert semester.active
-      page.should have_content 'G 2013'
-      page.should have_content 'Semestr 1 - aktualnie wybrany'
-    end
-
-    scenario 'Create semester when I have class' do
-      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      click_link 'Ustawienia klas'
-      click_button 'Dodaj nowy semestr'
-      assert !Semester.first.active
-      assert Semester.last.active
-      page.should have_content 'Semestr 2'
+      assert SchoolClass.last.active
+      assert SchoolClass.last.semester == School.last.semester
+      page.should have_content '2013 G Informatyk'
+      page.should have_content '2011/2012 Semestr 1 - aktualnie wybrany'
     end
 
   end
 
   context 'delete' do
     before do
-      teacher = FactoryGirl.create(:teacher)
-      FactoryGirl.create(:school_class, :teacher_id => teacher.id)
+      FactoryGirl.create(:school)
+      FactoryGirl.create(:semester, :school_id => School.last.id)
+      FactoryGirl.create(:teacher, :school_id => School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       login('teacher')
     end
 
-    scenario 'Delete active school class' do
+    scenario 'active school class' do
       click_link 'Ustawienia klas'
       click_link 'Usuń'
       assert SchoolClass.count == 0
@@ -67,7 +60,7 @@ feature 'Teacher school classes' do
       assert !Teacher.first.semester
     end
 
-    scenario 'Delete not active school class' do
+    scenario 'not active school class' do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       click_link 'Ustawienia klas'
       click_link 'Usuń'

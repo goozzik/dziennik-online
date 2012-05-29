@@ -19,12 +19,12 @@ class Teacher::SubjectsController < ApplicationController
 
   def show
     @subject = current_teacher.school_class_subjects.find(params[:id])
-    @descriptions = current_teacher.semester_descriptions.where('subject_id = ' + params[:id])
+    @descriptions = current_teacher.school_class_semester_descriptions.find_all_by_subject_id(params[:id])
     @students = current_teacher.school_class_students
     @description = Description.new
     @marks = Mark.find_all_by_students_and_descriptions(@students, @descriptions)
     @semestral_marks = SemestralMark.find_all_by_students_and_semester_id_and_subject_id(@students, current_teacher.semester_id, @subject.id)
-    @semester_id = current_teacher.semester_id
+    @semester_id = current_teacher.school_class_semester.id
   end
 
   def destroy

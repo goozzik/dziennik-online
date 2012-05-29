@@ -117,12 +117,13 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
   create_table "school_classes", :force => true do |t|
     t.integer  "school_id"
     t.integer  "teacher_id"
+    t.integer  "semester_id"
     t.integer  "yearbook"
     t.string   "profile"
     t.string   "name"
     t.boolean  "active"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "school_classes", ["school_id"], :name => "index_school_classes_on_school_id"
@@ -138,15 +139,16 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
   add_index "schools", ["user_id"], :name => "index_schools_on_user_id"
 
   create_table "semesters", :force => true do |t|
-    t.integer  "school_class_id"
+    t.integer  "school_id"
     t.integer  "semester"
-    t.integer  "teacher_id"
+    t.integer  "start_year"
+    t.integer  "end_year"
     t.boolean  "active"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "semesters", ["school_class_id"], :name => "index_semesters_on_school_class_id"
+  add_index "semesters", ["school_id"], :name => "index_semesters_on_school_id"
 
   create_table "semestral_marks", :force => true do |t|
     t.integer  "student_id"

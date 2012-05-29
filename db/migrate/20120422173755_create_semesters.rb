@@ -2,9 +2,10 @@ class CreateSemesters < ActiveRecord::Migration
 
   def up
     create_table :semesters do |t|
-      t.integer :school_class_id
+      t.integer :school_id
       t.integer :semester
-      t.integer :teacher_id
+      t.integer :start_year
+      t.integer :end_year
       t.boolean :active
 
       t.timestamps

@@ -4,6 +4,7 @@ class CreateSchoolClasses < ActiveRecord::Migration
     create_table :school_classes do |t|
       t.integer :school_id
       t.integer :teacher_id
+      t.integer :semester_id
       t.integer :yearbook
       t.integer :year
       t.string :profile

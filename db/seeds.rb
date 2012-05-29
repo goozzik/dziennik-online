@@ -20,6 +20,8 @@ SubjectTemplate.create([{:name => "Administracja sieci"}, {:name => "Aplikajce b
                 {:name => "Wiedza o kulturze"}, {:name => "Wiedza o społeczeństwie"}])
 
 school = FactoryGirl.create(:school)
+semester = FactoryGirl.create(:semester, :school_id => school.id)
+admin = FactoryGirl.create(:admin, :school_id => school.id)
 teacher = FactoryGirl.create(:teacher, :school_id => school.id)
 school_class = FactoryGirl.create(:school_class, :teacher_id => teacher.id)
 director = FactoryGirl.create(:director, :school_id => school.id)
