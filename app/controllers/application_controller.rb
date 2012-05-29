@@ -30,14 +30,14 @@ class ApplicationController < ActionController::Base
 
     def teacher_has_active_class?
       unless current_teacher.school_class
-        flash[:alert] = "Najpierw dodaj klasę."
+        flash[:alert] = "Najpierw dodaj klasę!"
         redirect_to teacher_school_classes_path
       end
     end
 
     def teacher_school_class_has_subjects?
       if current_teacher.school_class_subjects.empty?
-        flash[:alert] = "Najpierw dodaj przedmioty."
+        flash[:alert] = "Najpierw dodaj przedmioty!"
         redirect_to teacher_subjects_path
       end
     end
@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
 
     def teacher_has_students?
       if current_teacher.school_class.students.empty?
-        flash[:alert] = "Najpierw dodaj uczniów."
+        flash[:alert] = "Najpierw dodaj uczniów!"
         redirect_to teacher_students_path
       end
     end

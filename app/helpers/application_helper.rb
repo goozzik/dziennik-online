@@ -28,7 +28,7 @@ module ApplicationHelper
   end
 
   def alert_box(header, text)
-    "<div class='alert'>
+    "<div class='alert fade in'>
       <button class='close' data-dismiss='alert'>×</button>
       <h4 class='alert-heading'>#{header}</h4>
       #{text}
@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def info_box(header, text, more = nil)
-    "<div class='alert alert-info'>
+    "<div class='alert alert-info fade in'>
       <a class='close' data-dismiss='alert' href='#'>×</a>
       <div class='row'>
         <div class='span6'>

@@ -19,7 +19,7 @@ DziennikOnline::Application.routes.draw do
   namespace :teacher do
     resources :school_classes, :only => [:create, :destroy, :index]
     resources :semesters, :only => [:create, :destroy]
-    resources :subjects, :only => [:show, :create, :index, :destroy]
+    resources :subjects
     resources :descriptions, :only => [:create, :destroy]
     resources :students
     resources :absences, :only => [:update, :index]

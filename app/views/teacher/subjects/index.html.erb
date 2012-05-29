@@ -6,12 +6,12 @@
       <tr>
         <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
         <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
-        <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => "Jesteś pewien?") %></td>
+        <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => t("delete_subject_question", :subject => subject.name)) %></td>
       </tr>
     <% end %>
   </table>
 <% else %>
-  <%= alert_box "Klasa nie ma przedmiotów!", "Możesz dodać przedmiot poprzez poniższy formularz." %>
+  <%= info_box "Klasa nie ma przedmiotów.", "Możesz dodać przedmiot poprzez poniższy formularz." %>
 <% end %>
 
 <%= page_header "Dodaj nowy przedmiot" %>

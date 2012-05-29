@@ -16,14 +16,33 @@ class Student < User
 
   before_create :inherit_from_school_class, :generate_username_and_password
 
-  def average_from_subject(subject_id, semester_id)
-    marks = Mark.find_all_by_student_id_and_subject_id_and_semester_id(self.id, subject_id, semester_id).collect { |mark| mark.mark.to_f }
+  def average_from_subject(subject_id)
+    average_from_marks(marks_by_descriptions_by_subject_id(subject_id))
+  end
+
+  def average_from_marks(marks)
     unless marks.empty?
       sum = marks.inject { |sum, element| sum + element }
       sum / marks.count
     else
       0.0
     end
+  end
+
+  def marks_by_descriptions_by_subject_id(subject_id)
+    marks = []
+    descriptions_by_subject_id(subject_id).each do |description|
+      marks += description.marks.find_all_by_student_id(id).collect { |mark| mark.mark.to_f }
+    end
+    marks
+  end
+
+  def descriptions_by_subject_id(subject_id)
+    teacher_school_class_semester_descriptions.find_all_by_subject_id(subject_id)
+  end
+
+  def teacher_school_class_semester_descriptions
+    teacher.school_class_semester_descriptions
   end
 
   def sumarize_required_absences(absences)

@@ -5,7 +5,11 @@ class Teacher::DescriptionsController < ApplicationController
   def create
     subject = current_teacher.school_class_subjects.find(params[:description][:subject_id])
     @description = subject.descriptions.build(params[:description])
-    @description.save ? redirect_to(:back) : render(:action => "new")
+    if @description.save
+      redirect_to :back
+    else
+      redirect_to :back
+    end
   end
 
   def destroy

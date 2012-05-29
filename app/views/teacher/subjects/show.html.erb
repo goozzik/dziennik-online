@@ -31,8 +31,8 @@
         <td id="<%= "#{student.id}_#{description.id}" %>" class="mark"><%= @marks[i][j].mark if @marks[i][j] %></td>
       <% end %>
       <td></td>
-      <td id="semestral_mark_<%= student.id %>" class="semestral_mark border_b"><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
-      <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id, @semester_id)) %></td>
+      <td id="semestral_mark_<%= student.id %>" class="semestral_mark"><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
+      <td class="mark_average"><%= sprintf("%1.2f", student.average_from_subject(@subject.id)) %></td>
     </tr>
   <% end %>
 </table>
@@ -71,7 +71,7 @@
       data = 'mark[mark]=' + mark +
       '&mark[student_id]=' + parsed_id[0] +
       '&mark[description_id]=' + parsed_id[1] +
-      '&mark[subject_id]=' + <%= @subject.id %>
+      '&subject_id=' + <%= @subject.id %>
       $.ajax({
         type: 'PUT',
         url: '/teacher/marks/update',

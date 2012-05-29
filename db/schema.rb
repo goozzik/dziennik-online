@@ -80,19 +80,14 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
 
   create_table "marks", :force => true do |t|
     t.integer  "student_id"
-    t.integer  "school_class_id"
-    t.integer  "semester_id"
-    t.integer  "subject_id"
     t.integer  "description_id"
     t.string   "mark"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "marks", ["description_id"], :name => "index_marks_on_description_id"
-  add_index "marks", ["school_class_id"], :name => "index_marks_on_school_class_id"
-  add_index "marks", ["semester_id"], :name => "index_marks_on_semester_id"
-  add_index "marks", ["subject_id"], :name => "index_marks_on_subject_id"
+  add_index "marks", ["student_id"], :name => "index_marks_on_student_id"
 
   create_table "messages", :force => true do |t|
     t.integer  "school_class_id"
@@ -152,15 +147,13 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
 
   create_table "semestral_marks", :force => true do |t|
     t.integer  "student_id"
-    t.integer  "school_class_id"
     t.integer  "semester_id"
     t.integer  "subject_id"
     t.integer  "mark"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "semestral_marks", ["school_class_id"], :name => "index_semestral_marks_on_school_class_id"
   add_index "semestral_marks", ["semester_id"], :name => "index_semestral_marks_on_semester_id"
   add_index "semestral_marks", ["subject_id"], :name => "index_semestral_marks_on_subject_id"
 

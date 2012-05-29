@@ -1,13 +1,16 @@
 class SemestralMark < ActiveRecord::Base
 
   belongs_to :student
-  belongs_to :school_class
   belongs_to :semester
   belongs_to :subject
 
-  attr_accessible :mark, :student_id, :subject_id
+  attr_accessible :mark, :student_id, :subject_id, :semester_id
 
-  before_create :inherit_from_semester
+  validates :mark, :presence => true
+  validates :student_id, :presence => true
+  validates :subject_id, :presence => true
+
+  before_create :set_semester_id
 
   def self.find_all_by_students_and_semester_id_and_subject_id(students, semester_id, subject_id)
     semestral_marks = []
@@ -17,10 +20,18 @@ class SemestralMark < ActiveRecord::Base
     semestral_marks
   end
 
+  def student_teacher_school_class_semester
+    student_teacher.school_class_semester
+  end
+
+  def student_teacher
+    student.teacher
+  end
+
   private
 
-    def inherit_from_semester
-      self.school_class_id = semester.school_class_id
+    def set_semester_id
+      self.semester_id = student_teacher_school_class_semester.id
     end
 
 end

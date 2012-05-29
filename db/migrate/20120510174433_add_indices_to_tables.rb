@@ -10,16 +10,13 @@ class AddIndicesToTables < ActiveRecord::Migration
     add_index :documents, :semester_id
     add_index :lessons, :subject_id
     add_index :lessons, :time_table_id
-    add_index :marks, :school_class_id
-    add_index :marks, :semester_id
-    add_index :marks, :subject_id
+    add_index :marks, :student_id
     add_index :marks, :description_id
     add_index :notes, :user_id
     add_index :notes, :school_class_id
     add_index :school_classes, :school_id
     add_index :schools, :user_id
     add_index :semesters, :school_id
-    add_index :semestral_marks, :school_class_id
     add_index :semestral_marks, :semester_id
     add_index :semestral_marks, :subject_id
     add_index :subjects, :school_class_id

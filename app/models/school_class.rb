@@ -76,6 +76,10 @@ class SchoolClass < ActiveRecord::Base
     semester.marks
   end
 
+  def semester_semestral_marks
+    semester.semestral_marks
+  end
+
   private
 
     def deactivate_old_school_class

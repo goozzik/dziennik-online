@@ -61,4 +61,12 @@ class Teacher < User
     school_class.semester_marks
   end
 
+  def school_class_available_subject_templates
+    school_class.available_subject_templates
+  end
+
+  def school_class_semester_semestral_marks
+    school_class.semester_semestral_marks
+  end
+
 end

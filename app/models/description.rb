@@ -9,6 +9,9 @@ class Description < ActiveRecord::Base
 
   before_create :set_semester_id
 
+  validates :desc_type, :presence => true
+  validates :description, :presence => true
+
   def subject_school_class_semester
     subject.school_class_semester
   end

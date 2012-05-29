@@ -32,9 +32,9 @@
             </div>
           <% end %>
           <% if flash[:alert] %>
-            <div class="alert alert-info fade in">
+            <div class="alert fade in">
               <a class="close" data-dismiss="alert" href="#">x</a>
-              <%= flash[:alert] %>
+              <h4 class='alert-heading'><%= flash[:alert] %></h4>
             </div>
           <% end %>
           <% if flash[:notice] %>

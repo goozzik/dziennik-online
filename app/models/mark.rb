@@ -1,11 +1,9 @@
 class Mark < ActiveRecord::Base
 
   belongs_to :description
-  belongs_to :semester
   belongs_to :student
-  belongs_to :subject
 
-  attr_accessible :mark, :student_id, :description_id, :subject_id, :semester_id
+  attr_accessible :mark, :student_id, :description_id
 
   def self.find_all_by_students_and_descriptions(students, descriptions)
     marks = []
