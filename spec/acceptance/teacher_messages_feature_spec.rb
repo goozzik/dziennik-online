@@ -21,7 +21,7 @@ feature 'Teacher messages' do
 
     scenario "there are no messages for class" do
       click_link "Wiadomości"
-      page.should have_content "Ta klasa nie ma wiadomośći!"
+      assert_info_box "Ta klasa nie ma wiadomośći."
     end
 
   end
@@ -103,7 +103,7 @@ feature 'Teacher messages' do
     scenario "when there is one message" do
       click_link "Wiadomości"
       click_link "Usuń"
-      page.should have_content "Ta klasa nie ma wiadomośći!"
+      assert_info_box "Ta klasa nie ma wiadomośći."
     end
 
   end

@@ -4,12 +4,12 @@ class Teacher::MessagesController < ApplicationController
   before_filter :teacher_has_active_class?
 
   def index
-    @message = current_teacher.school_class_messages.new
+    @message = Message.new
     @messages = current_teacher.school_class_messages
   end
 
   def new
-    @message = current_teacher.school_class_messages.new
+    @message = Message.new
   end
 
   def edit
