@@ -22,7 +22,9 @@
 
   </table>
 <% else %>
-  <%= alert_box "Ta klasa nie ma żadnych plików!", "Możesz dodać plik poprzez poniższy formularz." %>
+  <%= info_box "Klasa nie ma dokumentów.", "Możesz dodać dokument poprzez poniższy formularz." %>
 <% end %>
+
+<%= page_header "Dodaj nowy plik dla klasy" %>
 
 <%= render 'form', :document => @document %>

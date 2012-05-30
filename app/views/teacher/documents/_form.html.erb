@@ -1,5 +1,3 @@
-<%= page_header "Dodaj nowy plik dla klasy" %>
-
 <div class="row">
   <%= simple_form_for document, :url => teacher_documents_path, :html => {:multipart => true, :class => "well form-horizontal span5"} do |f| %>
 
@@ -9,6 +7,7 @@
 
       <div class="form-actions">
         <%= f.button :submit, "Zapisz", :class => "brn btn-primary" %>
+        <%= link_to "Anuluj", teacher_documents_path, :class => "btn btn-inverse" %>
       </div>
 
   <% end %>

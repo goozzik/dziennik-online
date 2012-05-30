@@ -7,7 +7,6 @@ class AddIndicesToTables < ActiveRecord::Migration
     add_index :descriptions, :subject_id
     add_index :descriptions, :semester_id
     add_index :documents, :school_class_id
-    add_index :documents, :semester_id
     add_index :lessons, :subject_id
     add_index :lessons, :time_table_id
     add_index :marks, :student_id

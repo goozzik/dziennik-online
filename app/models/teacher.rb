@@ -69,4 +69,8 @@ class Teacher < User
     school_class.semester_semestral_marks
   end
 
+  def school_class_documents
+    school_class.documents
+  end
+
 end

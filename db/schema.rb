@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
 
   create_table "documents", :force => true do |t|
     t.integer  "school_class_id"
-    t.integer  "semester_id"
     t.string   "name"
     t.string   "description"
     t.string   "document"
@@ -65,7 +64,6 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
   end
 
   add_index "documents", ["school_class_id"], :name => "index_documents_on_school_class_id"
-  add_index "documents", ["semester_id"], :name => "index_documents_on_semester_id"
 
   create_table "lessons", :force => true do |t|
     t.integer  "subject_id"
