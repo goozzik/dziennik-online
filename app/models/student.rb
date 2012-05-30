@@ -2,19 +2,22 @@
 class Student < User
 
   default_scope :conditions => ["student = ?", true], :order => 'last_name ASC'
+
   belongs_to :school_class
   belongs_to :teacher
+
   has_many :absences, :dependent => :destroy
   has_many :marks, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
 
-  attr_accessible :email, :student, :first_name, :last_name, :pesel, :street, :city, :zip_code, :province, :telephone, :individual, :boarding_school, :niu
+  attr_accessible :email, :student, :first_name, :last_name,
+                  :pesel, :street, :city, :zip_code, :province,
+                  :telephone, :individual, :boarding_school, :niu
 
-  before_validation :set_student
-  validate :is_student?
+  validate :validate_student
   validates_presence_of :first_name, :last_name
 
-  before_create :inherit_from_school_class, :generate_username_and_password
+  before_create :set_teacher_id, :set_school_id, :set_student, :generate_username_and_password
 
   def average_from_subject(subject_id)
     average_from_marks(marks_by_descriptions_by_subject_id(subject_id))
@@ -65,7 +68,7 @@ class Student < User
 
   def semester_absences(semester_id)
     required = justified = unexcused = late = 0
-    absences = self.absences.find_all_by_semester_id(semester_id)
+    absences = absences.find_all_by_semester_id(semester_id)
     absences.each do |absence|
       required += absence.required if absence.required
       justified += absence.justified if absence.justified
@@ -73,7 +76,12 @@ class Student < User
       late += absence.late if absence.late
     end
     percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
-    { :percentage => percentage == "NaN" ? "--" : percentage , :required => required, :justified => justified, :unexcused => unexcused, :late => late }
+    { :percentage => percentage == "NaN" ? "--" : percentage,
+      :required => required,
+      :justified => justified,
+      :unexcused => unexcused,
+      :late => late
+    }
   end
 
   def subjects
@@ -92,24 +100,25 @@ class Student < User
     teacher.school_class_semester
   end
 
-
   private
 
     def set_student
       self.student = true
     end
 
-    def is_student?
-      self.student
+    def set_teacher_id
+      self.teacher_id = school_class.teacher_id
     end
 
-    def inherit_from_school_class
-      self.teacher_id = school_class.teacher_id
+    def set_school_id
       self.school_id = school_class.school_id
     end
 
+    def validate_student
+      self.student
+    end
+
     def generate_username_and_password
-      username = ""
       begin
         username = rand(36**10).to_s(36)
       end unless User.find_by_username(username)

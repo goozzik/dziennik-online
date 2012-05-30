@@ -4,16 +4,12 @@ class Teacher::StudentsController < ApplicationController
   before_filter :teacher_has_active_class?
 
   def index
-    @student = current_teacher.school_class_students.new
+    @student = Student.new
     @students = current_teacher.school_class_students
   end
 
   def show
     @student = current_teacher.school_class_students.find(params[:id])
-  end
-
-  def new
-    @student = current_teacher.school_class_students.new
   end
 
   def edit
