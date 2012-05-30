@@ -3,10 +3,15 @@
 class TimeTable < ActiveRecord::Base
 
   default_scope :order => 'week_day ASC'
+
   belongs_to :school_class
+
   has_many :lessons, :dependent => :destroy
 
   attr_accessible :week_day, :lessons_attributes
+
+  validates :week_day, :presence => true
+
   accepts_nested_attributes_for :lessons, :reject_if => lambda { |lesson| lesson[:subject_id].blank? }, :allow_destroy => true
 
   def week_day_name
@@ -27,5 +32,7 @@ class TimeTable < ActiveRecord::Base
       'Sobota'
     end
   end
+
+  private
 
 end
