@@ -88,6 +88,10 @@ class Student < User
     update_attribute(:password, params[:password]) if verify_teacher_current_password(params) && validate_teacher_new_password(params)
   end
 
+  def teacher_school_class_semester
+    teacher.school_class_semester
+  end
+
 
   private
 

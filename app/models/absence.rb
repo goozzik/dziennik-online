@@ -2,9 +2,10 @@ class Absence < ActiveRecord::Base
 
   belongs_to :student
   belongs_to :semester
-  attr_accessible :date, :required, :justified, :unexcused, :late, :student_id
 
-  before_create :inherit_from_student
+  attr_accessible :date, :required, :justified, :unexcused, :late, :student_id, :semester_id
+
+  before_create :set_semester_id
 
   def self.get_weeks_from_month(date)
     weeks = []
@@ -27,11 +28,14 @@ class Absence < ActiveRecord::Base
     absences
   end
 
+  def student_teacher_school_class_semester
+    student.teacher_school_class_semester
+  end
+
   private
 
-    def inherit_from_student
-      self.school_class_id = student.school_class_id
-      self.semester_id = student.teacher.semester_id
+    def set_semester_id
+      self.semester_id = student_teacher_school_class_semester
     end
 
 end

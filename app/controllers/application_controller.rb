@@ -49,8 +49,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def teacher_has_students?
-      if current_teacher.school_class.students.empty?
+    def school_class_has_students?
+      if current_teacher.school_class_students.empty?
         flash[:alert] = "Najpierw dodaj uczniów!"
         redirect_to teacher_students_path
       end
