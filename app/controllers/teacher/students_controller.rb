@@ -40,4 +40,9 @@ class Teacher::StudentsController < ApplicationController
     @student.update_password(params[:student]) ? redirect_to(:action => "index") : render(:action => "new_password")
   end
 
+  def meeting_cards
+    @students = current_teacher.school_class_students
+    @subjects = current_teacher.school_class_subjects
+  end
+
 end

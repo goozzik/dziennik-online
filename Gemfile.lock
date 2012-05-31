@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/prawnpdf/prawn
+  revision: 65bcf4003ca05fc11247c9a41208e81a24361ca4
+  branch: master
+  specs:
+    prawn (1.0.0.rc1)
+      pdf-reader (>= 0.9.0)
+      ttfunk (~> 1.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -123,9 +132,6 @@ GEM
       cucumber (>= 0.8)
       rake
     polyglot (0.3.3)
-    prawn (0.12.0)
-      pdf-reader (>= 0.9.0)
-      ttfunk (~> 1.0.2)
     prawn_rails (0.0.8)
       prawn (>= 0.11.1)
       rails (>= 3.0.0)
@@ -245,6 +251,7 @@ DEPENDENCIES
   launchy
   pg (= 0.13.2)
   pickle (= 0.4.10)
+  prawn!
   prawn_rails
   rails (= 3.2.3)
   rails_best_practices

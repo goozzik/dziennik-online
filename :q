@@ -165,18 +165,8 @@ class Student < User
     count
   end
 
-  def list_current_marks_by_subject_id(subject_id)
-    marks.find_all_by_semester_id_and_subject_id(school_class.semester_id, subject_id).collect {|mark| mark.mark}.join(', ')
-  end
-
-  def current_absences
-    absences = self.absences.find_all_by_semester_id(school_class.semester_id)
-    @absences ||= {
-      :required => absences.map(&:required).delete_if {|a| a.nil?}.inject(0, &:+),
-      :justified => absences.map(&:justified).delete_if {|a| a.nil?}.inject(0, &:+),
-      :unexcused => absences.map(&:unexcused).delete_if {|a| a.nil?}.inject(0, &:+),
-      :late => absences.map(&:late).delete_if {|a| a.nil?}.inject(0, &:+)
-    }
+  def marks_by_subject(subject)
+    marks.where(["subject_id = ? AND semester_id = ?])
   end
 
   private

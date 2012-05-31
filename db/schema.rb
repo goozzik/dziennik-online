@@ -77,7 +77,9 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
   add_index "lessons", ["time_table_id"], :name => "index_lessons_on_time_table_id"
 
   create_table "marks", :force => true do |t|
+    t.integer  "semester_id"
     t.integer  "student_id"
+    t.integer  "subject_id"
     t.integer  "description_id"
     t.string   "mark"
     t.datetime "created_at",     :null => false

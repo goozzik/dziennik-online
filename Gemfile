@@ -14,6 +14,7 @@ gem 'carrierwave', '0.6.2'
 gem 'heroku'
 gem "twitter-bootstrap-rails"
 gem "simple_form"
+gem "prawn", git: "git://github.com/prawnpdf/prawn", branch: "master"
 gem "prawn_rails"
 
 # Gems used only for assets and not required

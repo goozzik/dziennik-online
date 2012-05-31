@@ -5,6 +5,7 @@ class Semester < ActiveRecord::Base
   has_many :absences, :dependent => :destroy
   has_many :descriptions, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
+  has_many :marks, :dependent => :destroy
 
   attr_accessible :start_year, :end_year, :semester, :active
   #default_scope :order => 'created_at ASC'

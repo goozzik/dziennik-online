@@ -1,15 +1,24 @@
 <%= page_header "Przedmioty" %>
 
 <% unless @subjects.empty? %>
-  <table class="table table-bordered">
-    <% @subjects.each do |subject| %>
-      <tr>
-        <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
-        <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
-        <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => t("delete_subject_question", :subject => subject.name)) %></td>
-      </tr>
-    <% end %>
-  </table>
+  <%= info_box "Kartki z ocenami i frekwencją",
+    "Możesz wydrukować karteczki z ocenami i frekwencją kożystając z pliku PDF.",
+    link_to(image_tag("filetype_pdf.png") + "Kartki z ocenami",
+      meeting_cards_teacher_students_path + ".pdf")
+  %>
+  <div class="row">
+    <div class="span6">
+      <table class="table table-bordered">
+        <% @subjects.each do |subject| %>
+          <tr>
+            <td><%= link_to(subject.name, teacher_subject_path(subject)) %></td>
+            <td><%= link_to("Pokaż oceny", teacher_subject_path(subject)) %></td>
+            <td><%= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => t("delete_subject_question", :subject => subject.name), :class => "danger") %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
 <% else %>
   <%= info_box "Klasa nie ma przedmiotów.", "Możesz dodać przedmiot poprzez poniższy formularz." %>
 <% end %>

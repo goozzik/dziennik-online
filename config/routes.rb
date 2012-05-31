@@ -15,6 +15,7 @@ DziennikOnline::Application.routes.draw do
 
   get "teacher/students/:id/new_password" => "teacher/students#new_password", :as => "new_password_teacher_student"
   put "teacher/students/:id/password" => "teacher/students#update_password", :as => "password_teacher_student"
+  get "teacher/students/meeting_cards" => "teacher/students#meeting_cards", :as => "meeting_cards_teacher_students"
 
   namespace :teacher do
     resources :school_classes, :only => [:create, :destroy, :index]
