@@ -24,10 +24,10 @@ feature 'Teacher documents feature' do
 
     scenario "when there is document" do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      FactoryGirl.create(:document, :school_class_id => Teacher.last.id)
+      FactoryGirl.create(:document, :school_class_id => Teacher.last.id, :document => "dokument.doc")
       click_link "Dokumenty"
       page.should have_content "test_dokument"
-      page.should have_content  "testowy dokument"
+      page.should have_content "testowy dokument"
     end
 
     context "create" do

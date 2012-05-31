@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def teacher_has_active_semester?
+    def school_class_has_active_semester?
       unless current_teacher.school_class_semester
         flash[:alert] = "Najpierw ustaw semestr."
         redirect_to teacher_school_classes_path

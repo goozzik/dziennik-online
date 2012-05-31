@@ -1,7 +1,7 @@
 class Teacher::AbsencesController < ApplicationController
 
   before_filter :authenticate_teacher!
-  before_filter :teacher_has_active_class?, :school_class_has_students?
+  before_filter :teacher_has_active_class?, :school_class_has_active_semester?, :school_class_has_students?
 
   def index
     @month = Chronic.parse('monday this month', :now => (params[:date].nil? ? Time.now : Time.parse(params[:date])))

@@ -4,12 +4,8 @@ class Teacher::SchoolClassesController < ApplicationController
 
   def index
     @active_school_class = current_teacher.school_class
-    @school_class = current_teacher.school_classes.new
+    @school_class = SchoolClass.new
     @school_classes = current_teacher.school_classes
-  end
-
-  def new
-    @school_class = current_teacher.school_classes.new
   end
 
   def create

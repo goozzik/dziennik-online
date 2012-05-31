@@ -2,8 +2,8 @@
 class Teacher::SubjectsController < ApplicationController
 
   before_filter :authenticate_teacher!
-  before_filter :teacher_has_active_class?, :teacher_has_active_semester?, :only => [:index, :show, :new]
-  before_filter :teacher_has_students?, :only => [:show]
+  before_filter :teacher_has_active_class?, :school_class_has_active_semester?
+  before_filter :school_class_has_students?, :only => [:show]
 
   def index
     @subject = current_teacher.school_class_subjects.new
