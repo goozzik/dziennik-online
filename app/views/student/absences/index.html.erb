@@ -1,23 +1,23 @@
+<%= page_header "Frekwencja ucznia #{@student.first_name} #{@student.last_name}" %>
+
 <% unless @absences.empty? %>
-  <table>
+  <table class="table table-bordered">
     <tr>
       <th>Tydzień</th>
-      <th>%</th>
-      <th>obow</th>
-      <th>uspr</th>
-      <th>n.us</th>
-      <th>spóź</th>
+      <th>obowązkowe</th>
+      <th>usprawiedliwione</th>
+      <th>nie usprawiedliwione</th>
+      <th>spóźnienia</th>
     </tr>
     <% @absences.each do |absence| %>
       <% if absence.date.month != @month %>
         <% @month = absence.date.month %>
         <tr>
-          <td colspan="6"><%= I18n.t(absence.date.strftime("%B")) %></td>
+          <th colspan="6" style="text-align:center;"><%= I18n.t(absence.date.strftime("%B")) %></td>
         </tr>
       <% end %>
       <tr>
         <td><%= absence.date %></td>
-        <td></td>
         <td><%= absence.try(:required) %></td>
         <td><%= absence.try(:justified) %></td>
         <td><%= absence.try(:unexcused) %></td>
@@ -26,5 +26,5 @@
     <% end %>
   </table>
 <% else %>
-  Wychowawca nie uzupełnił jeszcze frekwencji.
+  <%= alert_box "Wychowawca nie uzupełnił jeszcze frekwencji.", "" %>
 <% end %>

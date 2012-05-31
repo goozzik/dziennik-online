@@ -100,6 +100,10 @@ class Student < User
     teacher.school_class_semester
   end
 
+  def school_class_semester
+    school_class.semester
+  end
+
   private
 
     def set_student

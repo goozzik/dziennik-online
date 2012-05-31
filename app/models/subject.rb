@@ -20,4 +20,8 @@ class Subject < ActiveRecord::Base
     school_class.semester
   end
 
+  def descriptions_by_current_semester
+    descriptions.where(["semester_id = ?", school_class.semester_id])
+  end
+
 end

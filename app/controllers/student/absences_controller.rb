@@ -3,9 +3,8 @@ class Student::AbsencesController < ApplicationController
   before_filter :authenticate_student!
 
   def index
-    @month = 0
     @student = current_student
-    @absences = current_student.absences
+    @absences = current_student.absences.where(["semester_id = ?", current_student.school_class_semester.id])
   end
 
 end

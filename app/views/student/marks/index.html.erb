@@ -1,10 +1,31 @@
-<table class="table table-bordered table-condensed">
+<%= page_header "Oceny" %>
+
+<% unless @subjects.empty? %>
   <% @subjects.each do |subject| %>
-    <tr>
-      <td><%= subject.name %></td>
-      <% subject.descriptions.each do |description| %>
-        <td><%= description.marks.find_by_student_id(@student).try(:mark) %></td>
-      <% end %>
-    </tr>
+    <h3><%= subject.name %></h3>
+    <% unless subject.descriptions_by_current_semester.empty? %>
+      <div class="row">
+        <div class="span6">
+          <table class="table table-bordered table-condensed">
+            <tr>
+              <th style="width:150px">Typ oceny</th>
+              <th>Opis</th>
+              <th style="width:50px;">Ocena</th>
+            </tr>
+            <% subject.descriptions_by_current_semester.each do |description| %>
+              <tr>
+                <td><%= description.desc_type %></td>
+                <td><%= description.description %></td>
+                <td><%= description.marks.find_by_student_id(@student).try(:mark) %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    <% else %>
+      <%= info_box "Wychowawca nie uzupełnił jeszcze ocen z tego przedmiotu.", "" %>
+    <% end %>
   <% end %>
-</table>
+<% else %>
+  <%= info_box "Wychowawca nie uzupełnił jeszcze listy przedmiotów.", "" %>
+<% end %>
