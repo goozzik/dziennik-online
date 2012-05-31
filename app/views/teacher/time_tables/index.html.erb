@@ -1,33 +1,7 @@
 <%= page_header "Plan lekcji" %>
 
 <% unless @time_tables.empty? %>
-  <% @time_tables.each_with_index do |time_table, i| %>
-
-    <%= row_3(i) %>
-
-    <div class="span4">
-      <table class="table table-bordered">
-
-        <tr>
-          <th colspan='2'>
-            <%= time_table.week_day_name %>
-            <%= link_to "Usuń", teacher_time_table_path(time_table), :method => :delete, :confirm => "Jesteś pewien?", :style => 'float:right;', :class => "danger" %>
-          </th>
-        </tr>
-
-        <% time_table.lessons.each do |lesson| %>
-          <tr>
-            <td style="width:15px;"><%= lesson.number %></td>
-            <td><%= lesson.subject_name %></td>
-          </tr>
-        <% end %>
-
-      </table>
-    </div>
-
-    <%= end_row_3(i, @time_tables.count) %>
-
-  <% end %>
+  <%= render "time_tables", :time_tables => @time_tables %>
 <% else %>
   <%= info_box "Klasa nie ma planu lekcji.", "Możesz dodać plan lekcji poprzez poniższy formularz." %>
 <% end %>

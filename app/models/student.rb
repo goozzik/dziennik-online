@@ -104,6 +104,10 @@ class Student < User
     school_class.semester
   end
 
+  def messages
+    school_class.messages
+  end
+
   private
 
     def set_student

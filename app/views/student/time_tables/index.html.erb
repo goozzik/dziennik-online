@@ -1,19 +1,5 @@
 <% unless @time_tables.empty? %>
-  <% @time_tables.each do |time_table| %>
-    <table>
-      <tr>
-        <th colspan='2'>
-          <%= time_table.week_day_name %>
-        </th>
-      </tr>
-      <% time_table.lessons.each do |lesson| %>
-        <tr>
-          <td><%= lesson.number %></td>
-          <td><%= lesson.subject_name %></td>
-        </tr>
-      <% end %>
-    </table>
-  <% end %>
+  <%= render "teacher/time_tables/time_tables", :time_tables => @time_tables %>
 <% else %>
-  Wychowawca nie uzupełnił jeszcze planu lekcji.
+  <%= info_box "Wychowawca nie uzupełnił jeszcze planu lekcji.", "" %>
 <% end %>

@@ -41,6 +41,7 @@ DziennikOnline::Application.routes.draw do
     resources :absences
     resources :marks
     resources :time_tables
+    resources :messages
   end
 
   namespace :admin do

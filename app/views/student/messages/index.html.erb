@@ -1,0 +1,11 @@
+<%= page_header "Wiadomości" %>
+
+<% unless @messages.empty? %>
+  <% @messages.each do |message| %>
+    <h3><%= message.title %><h3>
+    <h6>Wysłano <%= message.created_at %>
+    <p class="well"><%= message.body %></p>
+  <% end %>
+<% else %>
+  <%= info_box "Klasa nie ma wiadomośći.", "" %>
+<% end %>
