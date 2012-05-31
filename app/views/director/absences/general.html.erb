@@ -15,7 +15,7 @@
     <tr>
       <td><%= student.first_name %></td>
       <td><%= student.last_name %></td>
-      <%= semester_absences(student, @semester_id) %>
+      <%= student_semester_absences(student, @semester_id) %>
     </tr>
   <% end %>
 

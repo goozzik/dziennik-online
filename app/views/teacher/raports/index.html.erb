@@ -1,0 +1,57 @@
+<%= page_header "Raporty" %>
+
+<% @semesters.each do |semester| %>
+
+  <h2><%= semester.fullname %></h2>
+  <table class="table table-bordered table-condensed">
+    <tr>
+      <th rowspan="2">#</th>
+      <th rowspan="2">Imię</th>
+      <th rowspan="2">Nazwisko</th>
+      <th colspan="5">Frekwencja</th>
+      <th colspan="8">Oceny</th>
+    </tr>
+    <tr>
+      <th style="width:85px;">%</th>
+      <th>ob</th>
+      <th>us</th>
+      <th>nu</th>
+      <th>sp</th>
+      <th>Średnia</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>nkl</th>
+    </tr>
+    <% @students.each_with_index do |student,i | %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= student.first_name %></td>
+        <td><%= student.last_name %></td>
+        <%= student_semester_absences(student, semester.id) %>
+        <td><%= student.semester_average(semester.id) %></td>
+        <td><%= student.count_semestral_marks(1) %></td>
+        <td><%= student.count_semestral_marks(2) %></td>
+        <td><%= student.count_semestral_marks(3) %></td>
+        <td><%= student.count_semestral_marks(4) %></td>
+        <td><%= student.count_semestral_marks(5) %></td>
+        <td><%= student.count_semestral_marks(6) %></td>
+        <td><%= student.count_semestral_marks('nkl') %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <th colspan="3">Razem</td>
+      <%= school_class_semester_absences(@school_class, semester.id) %>
+      <td><%= @school_class.semester_average(semester.id) %></td>
+      <td><%= @school_class.count_semestral_marks(1) %></td>
+      <td><%= @school_class.count_semestral_marks(2) %></td>
+      <td><%= @school_class.count_semestral_marks(3) %></td>
+      <td><%= @school_class.count_semestral_marks(4) %></td>
+      <td><%= @school_class.count_semestral_marks(5) %></td>
+      <td><%= @school_class.count_semestral_marks(6) %></td>
+      <td><%= @school_class.count_semestral_marks('nkl') %></td>
+  </table>
+<% end %>

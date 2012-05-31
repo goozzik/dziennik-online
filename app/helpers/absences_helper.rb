@@ -32,9 +32,16 @@ module AbsencesHelper
     percentage == "NaN" ? "--" : percentage
   end
 
-  def semester_absences(student, semester_id)
+  def student_semester_absences(student, semester_id)
     html = ''
     absences = student.semester_absences(semester_id)
+    absences.each { |key, count| html << "<td>#{count}</td>" }
+    html.html_safe
+  end
+
+  def school_class_semester_absences(school_class, semester_id)
+    html = ''
+    absences = school_class.semester_absences(semester_id)
     absences.each { |key, count| html << "<td>#{count}</td>" }
     html.html_safe
   end

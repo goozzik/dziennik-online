@@ -28,6 +28,7 @@ DziennikOnline::Application.routes.draw do
     resources :semestral_marks, :only => [:update]
     resources :time_tables, :only => [:new, :create, :destroy, :index]
     resources :documents, :only => [:create, :destroy, :index]
+    resources :raports
   end
 
   namespace :director do

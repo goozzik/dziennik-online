@@ -21,6 +21,10 @@ class Teacher < User
     school.semesters
   end
 
+  def school_class_semesters
+    school_class.semesters
+  end
+
   def school_class_subjects
     school_class.subjects
   end

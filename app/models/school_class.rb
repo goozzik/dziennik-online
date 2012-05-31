@@ -80,6 +80,45 @@ class SchoolClass < ActiveRecord::Base
     semester.semestral_marks
   end
 
+  def semesters
+    school.semesters.find(:all, :conditions => ["end_year <= ?", yearbook])
+  end
+
+  def semester_absences(semester_id)
+    required = justified = unexcused = late = 0
+    students.each do |student|
+      absences = student.absences.find_all_by_semester_id(semester_id)
+      absences.each do |absence|
+        required += absence.required if absence.required
+        justified += absence.justified if absence.justified
+        unexcused += absence.unexcused if absence.unexcused
+        late += absence.late if absence.late
+      end
+    end
+    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
+    { :percentage => percentage == "NaN" ? "--" : percentage,
+      :required => required,
+      :justified => justified,
+      :unexcused => unexcused,
+      :late => late
+    }
+  end
+
+  def semester_average(semester_id)
+    averages = 0
+    students.each do |student|
+      average = student.semester_average(semester_id)
+      averages += average if average
+    end
+    averages / students.count
+  end
+
+  def count_semestral_marks(mark)
+    count = 0
+    students.each { |student| count += student.semestral_marks.find_all_by_mark(mark).count }
+    count
+  end
+
   private
 
     def deactivate_old_school_class

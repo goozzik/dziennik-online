@@ -68,7 +68,7 @@ class Student < User
 
   def semester_absences(semester_id)
     required = justified = unexcused = late = 0
-    absences = absences.find_all_by_semester_id(semester_id)
+    absences = self.absences.find_all_by_semester_id(semester_id)
     absences.each do |absence|
       required += absence.required if absence.required
       justified += absence.justified if absence.justified
@@ -106,6 +106,19 @@ class Student < User
 
   def messages
     school_class.messages
+  end
+
+  def semester_average(semester_id)
+    _semestral_marks = semestral_marks.find_all_by_semester_id(semester_id)
+    unless _semestral_marks.empty?
+      sum = 0
+      _semestral_marks.each { |s| sum += s.mark }
+      (sum / _semestral_marks.count).to_f
+    end
+  end
+
+  def count_semestral_marks(mark)
+    semestral_marks.find_all_by_mark(mark).count
   end
 
   private
