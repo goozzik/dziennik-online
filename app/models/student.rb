@@ -84,6 +84,28 @@ class Student < User
     }
   end
 
+  def year_absences(year)
+    required = justified = unexcused = late = 0
+    semesters = school_class.school.semesters.find_all_by_end_year(year)
+    absences = []
+    semesters.each do |semester|
+      absences += self.absences.find_all_by_semester_id(semester.id)
+    end
+    absences.each do |absence|
+      required += absence.required if absence.required
+      justified += absence.justified if absence.justified
+      unexcused += absence.unexcused if absence.unexcused
+      late += absence.late if absence.late
+    end
+    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
+    { :percentage => percentage == "NaN" ? "--" : percentage,
+      :required => required,
+      :justified => justified,
+      :unexcused => unexcused,
+      :late => late
+    }
+  end
+
   def subjects
     school_class.subjects
   end
@@ -117,8 +139,30 @@ class Student < User
     end
   end
 
-  def count_semestral_marks(mark)
-    semestral_marks.find_all_by_mark(mark).count
+  def year_average(year)
+    semesters = school_class.school.semesters.find_all_by_end_year(year)
+    _semestral_marks = []
+    semesters.each do |semester|
+      _semestral_marks += semestral_marks.find_all_by_semester_id(semester_id)
+    end
+    unless _semestral_marks.empty?
+      sum = 0
+      _semestral_marks.each { |s| sum += s.mark }
+      (sum / _semestral_marks.count).to_f
+    end
+  end
+
+  def count_semestral_marks(mark, semester_id)
+    semestral_marks.find_all_by_mark_and_semester_id(mark, semester_id).count
+  end
+
+  def count_year_marks(mark, year)
+    semesters = school_class.school.semesters.find_all_by_end_year(year)
+    count = 0
+    semesters.each do |semester|
+      count += semestral_marks.find_all_by_mark_and_semester_id(mark, semester.id).count
+    end
+    count
   end
 
   private

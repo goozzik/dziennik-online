@@ -13,8 +13,6 @@ class Semester < ActiveRecord::Base
   validates :end_year, :presence => true
   validates :semester, :presence => true
 
-  before_destroy :unset_teacher_semester_id
-
   def activate
     unless active
       school.deactivate_semester
@@ -31,13 +29,11 @@ class Semester < ActiveRecord::Base
   end
 
   def fullname
-    "#{start_year}/#{end_year} Semestr #{semester}"
+    years + " Semestr #{semester}"
   end
 
-  private
-
-    def unset_teacher_semester_id
-      self.teacher.update_attributes(:semester_id => nil) if self.active
-    end
+  def years
+    "#{start_year}/#{end_year}"
+  end
 
 end

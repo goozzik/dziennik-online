@@ -104,6 +104,29 @@ class SchoolClass < ActiveRecord::Base
     }
   end
 
+  def year_absences(year)
+    required = justified = unexcused = late = 0
+    semesters = school.semesters.find_all_by_end_year(year)
+    semesters.each do |semester|
+      students.each do |student|
+        absences = student.absences.find_all_by_semester_id(semester.id)
+        absences.each do |absence|
+          required += absence.required if absence.required
+          justified += absence.justified if absence.justified
+          unexcused += absence.unexcused if absence.unexcused
+          late += absence.late if absence.late
+        end
+      end
+    end
+    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
+    { :percentage => percentage == "NaN" ? "--" : percentage,
+      :required => required,
+      :justified => justified,
+      :unexcused => unexcused,
+      :late => late
+    }
+  end
+
   def semester_average(semester_id)
     averages = 0
     students.each do |student|
@@ -113,9 +136,30 @@ class SchoolClass < ActiveRecord::Base
     averages / students.count
   end
 
-  def count_semestral_marks(mark)
+  def year_average(year)
+    semesters = school.semesters.find_all_by_end_year(year)
+    averages = 0
+    semesters.each do |semester|
+      students.each do |student|
+        average = student.semester_average(semester_id)
+        averages += average if average
+      end
+    end
+    averages / students.count
+  end
+
+  def count_semestral_marks(mark, semester_id)
     count = 0
-    students.each { |student| count += student.semestral_marks.find_all_by_mark(mark).count }
+    students.each { |student| count += student.semestral_marks.find_all_by_mark_and_semester_id(mark, semester_id).count }
+    count
+  end
+
+  def count_year_marks(mark, year)
+    semesters = school.semesters.find_all_by_end_year(year)
+    count = 0
+    semesters.each do |semester|
+      students.each { |student| count += student.semestral_marks.find_all_by_mark_and_semester_id(mark, semester_id).count }
+    end
     count
   end
 

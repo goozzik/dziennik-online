@@ -39,9 +39,23 @@ module AbsencesHelper
     html.html_safe
   end
 
+  def student_year_absences(student, year)
+    html = ''
+    absences = student.year_absences(year)
+    absences.each { |key, count| html << "<td>#{count}</td>" }
+    html.html_safe
+  end
+
   def school_class_semester_absences(school_class, semester_id)
     html = ''
     absences = school_class.semester_absences(semester_id)
+    absences.each { |key, count| html << "<td>#{count}</td>" }
+    html.html_safe
+  end
+
+  def school_class_year_absences(school_class, year)
+    html = ''
+    absences = school_class.year_absences(year)
     absences.each { |key, count| html << "<td>#{count}</td>" }
     html.html_safe
   end
