@@ -28,14 +28,10 @@ class Absence < ActiveRecord::Base
     absences
   end
 
-  def student_teacher_school_class_semester
-    student.teacher_school_class_semester
-  end
-
   private
 
     def set_semester_id
-      self.semester_id = student_teacher_school_class_semester
+      self.semester_id = student.teacher_school_class_semester.id
     end
 
 end
