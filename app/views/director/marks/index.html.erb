@@ -23,7 +23,7 @@
         <td><%= @marks[i][j].mark if @marks[i][j] %></td>
       <% end %>
       <td><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
-      <td><%= sprintf("%1.2f", student.average_from_subject(@subject.id, @semester.id)) %></td>
+      <td><%= sprintf("%1.2f", student.current_average_from_subject(@subject.id)) %></td>
     </tr>
   <% end %>
 

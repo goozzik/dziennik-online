@@ -19,25 +19,12 @@ class Student < User
 
   before_create :set_teacher_id, :set_school_id, :set_student, :generate_username_and_password
 
-  def average_from_subject(subject_id)
-    average_from_marks(marks_by_descriptions_by_subject_id(subject_id))
+  def current_average_from_subject(subject_id)
+    average_from_marks(marks.find_all_by_semester_id_and_subject_id(school_class.semester_id, subject_id))
   end
 
   def average_from_marks(marks)
-    unless marks.empty?
-      sum = marks.inject { |sum, element| sum + element }
-      sum / marks.count
-    else
-      0.0
-    end
-  end
-
-  def marks_by_descriptions_by_subject_id(subject_id)
-    marks = []
-    descriptions_by_subject_id(subject_id).each do |description|
-      marks += description.marks.find_all_by_student_id(id).collect { |mark| mark.mark.to_f }
-    end
-    marks
+    marks.empty? ? 0.0 : marks.collect{|m| m.mark.to_i}.inject{|sum, element| sum.to_i + element.to_i} / marks.count
   end
 
   def descriptions_by_subject_id(subject_id)
