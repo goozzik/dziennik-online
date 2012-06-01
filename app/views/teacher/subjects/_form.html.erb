@@ -1,9 +1,0 @@
-<div class="row">
-  <%= simple_form_for [:teacher, subject], :html => {:class => "well form-horizontal span5"} do |f| %>
-    <%= f.input :subject_template_id, :collection => subject_templates, :label => "Przedmiot" %>
-    <div class="form-actions">
-      <%= f.button :submit, "Zapisz", :class => "btn btn-primary" %></span>
-      <%= link_to "Anuluj", teacher_subjects_path, :class => "btn btn-inverse" %>
-    </div>
-  <% end %>
-</div>
