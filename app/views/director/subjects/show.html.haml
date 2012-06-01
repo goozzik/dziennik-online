@@ -1,0 +1,30 @@
+.btn-group
+  %button.btn Wybierz przedmiot
+  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+    %span.caret
+  %ul.dropdown-menu
+    - @subjects.each do |subject|
+      = nav_link_to(subject.name, director_school_class_subject_path(@school_class, subject))
+= page_header "Oceny - " + @subject.name
+%table.table.table-bordered.table-condensed.table-striped
+  %tr
+    %th.ordinal #
+    %th.first_name Imię
+    %th.last_name Nazwisko
+    - unless @descriptions.empty?
+      - @descriptions.each do |description|
+        %th.description{:title => description.desc_type + ' - ' + description.description}
+          = truncate(description.desc_type, :length => 4, :omission => '')
+    - else
+    %th
+    %th.semestral_mark{:title => "Ocena semestralna"} OS
+    %th.average{:title => "Średnia z podanych ocen"} ŚR
+  - @students.each_with_index do |student, i|
+    %tr
+      %td= i+1
+      %td= student.first_name
+      %td= student.last_name
+      - @descriptions.current.each do |description|
+        %td= description.marks.find_by_student_id(student).try(:mark)
+      %td= student.semestral_marks.current.find_by_subject_id(@subject)
+      %td= sprintf("%1.2f", student.current_average_from_subject(@subject.id))

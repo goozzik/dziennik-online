@@ -4,6 +4,8 @@ class SemestralMark < ActiveRecord::Base
   belongs_to :semester
   belongs_to :subject
 
+  scope :current, joins(:semester).where(["semesters.active = ?", true])
+
   attr_accessible :mark, :student_id, :subject_id, :semester_id
 
   validates :mark, :presence => true

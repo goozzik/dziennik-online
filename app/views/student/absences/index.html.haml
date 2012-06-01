@@ -1,0 +1,25 @@
+= page_header "Frekwencja ucznia #{@student.first_name} #{@student.last_name}"
+- unless @absences.empty?
+  .row
+    .span6
+      %table.table.table-bordered.table-condensed
+        %tr
+          %th{:style => "width:70px"} Tydzień
+          %th ob
+          %th us
+          %th nu
+          %th sp
+        - @absences.each do |absence|
+          - if absence.date.month != @month
+            - @month = absence.date.month
+            %tr
+              %th{:colspan => "5", :style => "text-align:center;"}
+                = I18n.t(absence.date.strftime("%B"))
+          %tr
+            %td= absence.date
+            %td= absence.try(:required)
+            %td= absence.try(:justified)
+            %td= absence.try(:unexcused)
+            %td= absence.try(:late)
+- else
+  = info_box "Wychowawca nie uzupełnił jeszcze frekwencji.", ""

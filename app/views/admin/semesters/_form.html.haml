@@ -1,0 +1,8 @@
+.row
+  = simple_form_for [:admin, semester], :html => {:class => "well form-horizontal span5"} do |f|
+    = f.input :start_year, :label => "Rok rozpoczęcia", :placeholder => "2012"
+    = f.input :end_year, :label => "Rok zakończenia", :placeholder => "2013"
+    = f.input :semester, :label => "Semestr", :placeholder => "1"
+    .form-actions
+      = f.button :submit, "Zapisz", :class => "btn btn-primary"
+      = link_to "Anuluj", admin_school_path, :class => "btn btn-inverse"

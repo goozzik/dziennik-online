@@ -13,7 +13,11 @@
         <td><%= school_class.fullname %></td>
         <td><%= link_to("Pokaż", general_director_absences_path(school_class, school_class.semester)) %></td>
         <td><%= link_to("Pokaż", actual_director_absences_path(school_class)) %></td>
-        <td><%= link_to("Pokaż", director_marks_path(school_class, school_class.subjects.first)) %></td>
+        <td>
+          <% unless school_class.subjects.empty? %>
+            <%= link_to("Pokaż", director_school_class_subject_path(school_class.id, school_class.subjects.last.id)) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>

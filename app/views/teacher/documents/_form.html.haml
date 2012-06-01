@@ -1,0 +1,8 @@
+.row
+  = simple_form_for document, :url => teacher_documents_path, :html => {:multipart => true, :class => "well form-horizontal span5"} do |f|
+    = f.input :name, :label => 'Nazwa'
+    = f.input :description, :label => "Opis"
+    = f.input :document, :label => "Wybierz plik"
+    .form-actions
+      = f.button :submit, "Zapisz", :class => "brn btn-primary"
+      = link_to "Anuluj", teacher_documents_path, :class => "btn btn-inverse"

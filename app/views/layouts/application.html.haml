@@ -1,0 +1,34 @@
+!!!
+%html
+  %head
+    %title Dziennik-online
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tag
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+  %body
+    - if user_signed_in?
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            %a.brand{:href => "/"} Dziennik-online
+            %ul.nav
+              = navigation
+            %ul.nav.pull-right
+              = account_dropdown_navigation
+    .container
+      = yield :head
+      .content
+        - if flash[:error]
+          .alert.alert-error.fade.in
+            %a.close{"data-dismiss" => "alert", :href => "#"} x
+            = flash[:error]
+        - if flash[:alert]
+          .alert.fade.in
+            %a.close{"data-dismiss" => "alert", :href => "#"} x
+            %h4.alert-heading= flash[:alert]
+        - if flash[:notice]
+          .alert.alert-success.fade.in
+            %a.close{"data-dismiss" => "alert", :href => "#"} x
+            = flash[:notice]
+        = yield

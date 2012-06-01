@@ -1,0 +1,22 @@
+= page_header "Ustawienia szkoły"
+- unless @semesters.empty?
+  %table.table.table-striped.table-bordered
+    %tr
+      %th #
+      %th Semestr
+      %th Rok
+      %th{:style => "width:200px;"}
+    - @semesters.each_with_index do |semester, i|
+      %tr
+        %td= i+1
+        %td= semester.semester
+        %td= "#{semester.start_year}/#{semester.end_year}"
+        %td
+          - if semester.active
+            Semestr jest aktywny
+          - else
+            = link_to "Ustaw jako aktywny", set_semester_as_active_path(semester)
+- else
+  = alert_box "Szkoła nie ma ustawionego semestru!", "Możesz dodać semestr poprzez poniższy formularz."
+= page_header "Dodaj nowy semestr"
+= render 'admin/semesters/form', :semester => @semester

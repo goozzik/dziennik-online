@@ -1,0 +1,8 @@
+= page_header "Zaloguj się"
+.row
+  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "span5"}) do |f|
+    = f.input :username, :label => "Login"
+    = f.input :password, :label => "Hasło"
+    = render "links"
+    .form-actions
+      = f.button :submit, "Zaloguj"

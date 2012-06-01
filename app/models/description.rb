@@ -2,6 +2,8 @@ class Description < ActiveRecord::Base
 
   default_scope :order => 'created_at ASC'
 
+  scope :current, joins(:semester).where(["semesters.active = ?", true])
+
   belongs_to :semester
   belongs_to :subject
 

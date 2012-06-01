@@ -1,0 +1,44 @@
+%table.table.table-striped.table-bordered.table-condensed
+  %tr
+    %th{:colspan => "2", :rowspan => "1"}
+    - weeks.each do |week|
+      %th{:colspan => "4"}= week
+    %th %
+    %th us
+    %th nu
+  %tr
+    %td{:style => "width:100px;"}
+      %strong Imię
+    %td{:style => "width:100px;"}
+      %strong Nazwisko
+    - weeks.each do |week|
+      %td
+        %strong ob
+      %td
+        %strong us
+      %td
+        %strong nu
+      %td
+        %strong sp
+    %td
+    %td
+    %td
+  - students.each_with_index do |student, i|
+    %tr
+      %td= student.first_name
+      %td= student.last_name
+      - weeks.each_with_index do |week, j|
+        %td.absence{:id => "#{student.id}_#{week}_required"}= absences[i][j].required if absences[i][j]
+        %td.absence{:id => "#{student.id}_#{week}_justified"}= absences[i][j].justified if absences[i][j]
+        %td.absence{:id => "#{student.id}_#{week}_unexcused"}= absences[i][j].unexcused if absences[i][j]
+        %td.absence.absence_border{:id => "#{student.id}_#{week}_late"}= absences[i][j].late if absences[i][j]
+      - required_month = student.sumarize_required_absences(absences[i])
+      - justified_month = student.sumarize_justified_absences(absences[i])
+      - unexcused_month = student.sumarize_unexcused_absences(absences[i])
+      %td
+        %b= percentage_frequency(required_month, justified_month, unexcused_month)
+      %td
+        %b= justified_month
+      %td
+        %b= unexcused_month
+= months_navigation(previous_month, next_month, user_type)

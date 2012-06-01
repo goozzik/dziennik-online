@@ -16,6 +16,9 @@ gem "twitter-bootstrap-rails"
 gem "simple_form"
 gem "prawn", git: "git://github.com/prawnpdf/prawn", branch: "master"
 gem "prawn_rails"
+gem "ruby_parser"
+gem "hpricot"
+gem "haml"
 
 # Gems used only for assets and not required
 # in production environments by default.

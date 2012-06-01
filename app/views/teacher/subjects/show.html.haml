@@ -1,43 +1,30 @@
-<%= page_header "Oceny - #{@subject.name}" %>
-
-<%= info_box "Oceny", "Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_subjects_info_1.png", :style => "margin:0;", :class => "span5") %>
-
-<table class="table table-striped table-bordered table-condensed">
-
-  <tr>
-    <th style="width:15px;">#</th>
-    <th style="width:100px;">Imię</th>
-    <th style="width:100px;">Nazwisko</th>
-
-    <% @descriptions.each do |description| %>
-      <th style="width:30px;">
-        <%= link_to_delete_description(description) %>
-      </th>
-    <% end %>
-
-    <th>
-      <%= render 'description_form', :description => @description, :subject => @subject %>
-      <%= add_description_button %>
-    </th>
-    <th style="width:20px;"><span class="title_of_mark" title="Ocena semestralna">OS</span></th>
-    <th style="width:20px;"><%= image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen") %></th>
-  </tr>
-  <% @students.each_with_index do |student, i| %>
-    <tr>
-      <td><%= i+1 %></td>
-      <td><%= student.first_name %></td>
-      <td><%= student.last_name %></td>
-      <% @descriptions.each_with_index do |description, j| %>
-        <td id="<%= "#{student.id}_#{description.id}" %>" class="mark"><%= @marks[i][j].mark if @marks[i][j] %></td>
-      <% end %>
-      <td></td>
-      <td id="semestral_mark_<%= student.id %>" class="semestral_mark"><%= @semestral_marks[i].mark if @semestral_marks[i] %></td>
-      <td class="mark_average"><%= sprintf("%1.2f", student.current_average_from_subject(@subject.id)) %></td>
-    </tr>
-  <% end %>
-</table>
-
-<script>
+= page_header "Oceny - #{@subject.name}"
+= info_box "Oceny", "Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_subjects_info_1.png", :style => "margin:0;", :class => "span5")
+%table.table.table-striped.table-bordered.table-condensed
+  %tr
+    %th{:style => "width:15px;"} #
+    %th{:style => "width:100px;"} Imię
+    %th{:style => "width:100px;"} Nazwisko
+    - @descriptions.each do |description|
+      %th{:style => "width:30px;"}
+        = link_to_delete_description(description)
+    %th
+      = render 'description_form', :description => @description, :subject => @subject
+      = add_description_button
+    %th{:style => "width:20px;"}
+      %span.title_of_mark{:title => "Ocena semestralna"} OS
+    %th{:style => "width:20px;"}= image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen")
+  - @students.each_with_index do |student, i|
+    %tr
+      %td= i+1
+      %td= student.first_name
+      %td= student.last_name
+      - @descriptions.each_with_index do |description, j|
+        %td.mark{:id => "#{student.id}_#{description.id}"}= @marks[i][j].mark if @marks[i][j]
+      %td
+      %td.semestral_mark{:id => "semestral_mark_#{student.id}"}= @semestral_marks[i].mark if @semestral_marks[i]
+      %td.mark_average= sprintf("%1.2f", student.current_average_from_subject(@subject.id))
+:javascript
   $(document).ready(function() {
     $.ajaxSetup({
       beforeSend: function(xhr) {
@@ -71,7 +58,7 @@
       data = 'mark[mark]=' + mark +
       '&mark[student_id]=' + parsed_id[0] +
       '&mark[description_id]=' + parsed_id[1] +
-      '&subject_id=' + <%= @subject.id %>
+      '&subject_id=' + #{@subject.id}
       $.ajax({
         type: 'PUT',
         url: '/teacher/marks/update',
@@ -102,7 +89,7 @@
       }*/
       var data = 'semestral_mark[mark]=' + mark +
       '&semestral_mark[student_id]=' + parsed_id2[2] +
-      '&semestral_mark[subject_id]=' + <%= @subject.id %>
+      '&semestral_mark[subject_id]=' + #{@subject.id}
       $.ajax({
         type: 'PUT',
         url: '/teacher/semestral_marks/update',
@@ -111,4 +98,3 @@
       $(this).replaceWith(mark);
     });
   });
-</script>

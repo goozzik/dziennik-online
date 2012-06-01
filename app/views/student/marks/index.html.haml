@@ -1,0 +1,21 @@
+= page_header "Oceny"
+- unless @subjects.empty?
+  - @subjects.each do |subject|
+    %h3= subject.name
+    - unless subject.descriptions_by_current_semester.empty?
+      .row
+        .span6
+          %table.table.table-bordered.table-condensed
+            %tr
+              %th{:style => "width:150px"} Typ oceny
+              %th Opis
+              %th{:style => "width:50px;"} Ocena
+            - subject.descriptions_by_current_semester.each do |description|
+              %tr
+                %td= description.desc_type
+                %td= description.description
+                %td= description.marks.find_by_student_id(@student).try(:mark)
+    - else
+      = info_box "Wychowawca nie uzupełnił jeszcze ocen z tego przedmiotu.", ""
+- else
+  = info_box "Wychowawca nie uzupełnił jeszcze listy przedmiotów.", ""

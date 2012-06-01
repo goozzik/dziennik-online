@@ -1,0 +1,14 @@
+- time_tables.each_with_index do |time_table, i|
+  = row_3(i)
+  .span4
+    %table.table.table-bordered
+      %tr
+        %th{:colspan => "2"}
+          = time_table.week_day_name
+          - if current_user.teacher
+            = link_to "Usuń", teacher_time_table_path(time_table), :method => :delete, :confirm => "Jesteś pewien?", :style => 'float:right;', :class => "danger"
+      - time_table.lessons.each do |lesson|
+        %tr
+          %td{:style => "width:15px;"}= lesson.number
+          %td= lesson.subject_name
+  = end_row_3(i, @time_tables.count)

@@ -1,0 +1,18 @@
+= page_header "Aktywne klasy"
+- unless @school_classes.empty?
+  %table.table.table-bordered
+    %tr
+      %th Klasa
+      %th Ogólna frekwencja
+      %th Bieżąca frekwencja
+      %th Oceny
+    - @school_classes.each do |school_class|
+      %tr
+        %td= school_class.fullname
+        %td= link_to("Pokaż", general_director_absences_path(school_class, school_class.semester))
+        %td= link_to("Pokaż", actual_director_absences_path(school_class))
+        %td
+          - unless school_class.subjects.empty?
+            = link_to("Pokaż", director_school_class_subject_path(school_class.id, school_class.subjects.last.id))
+- else
+  = alert_box "Szkoła nie posiada aktywnych klas!", "Poczekaj aż, nauczyciele dodadzą klasy."

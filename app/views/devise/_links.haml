@@ -1,0 +1,6 @@
+- if devise_mapping.recoverable? && controller_name != 'passwords'
+  = link_to "Zapomniałeś hasło?", new_password_path(resource_name)
+  %br/
+- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
+  = link_to "Nie dostałeś instrukcji odblokowania?", new_unlock_path(resource_name)
+  %br/

@@ -2,6 +2,7 @@
 
 <table class="table table-bordered">
   <tr>
+    <th style="width: 15px;">#</th>
     <th>Imię</th>
     <th>Nazwisko</th>
     <th>%</th>
@@ -11,8 +12,9 @@
     <th>Spóźnienia</th>
   </tr>
 
-  <% @students.each do |student| %>
+  <% @students.each_with_index do |student, i| %>
     <tr>
+      <td><%= i+1 %></td>
       <td><%= student.first_name %></td>
       <td><%= student.last_name %></td>
       <%= student_semester_absences(student, @semester_id) %>

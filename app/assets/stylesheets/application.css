@@ -21,3 +21,19 @@
 .danger {
   color: red;
 }
+
+.first_name, .last_name {
+  width:100px;
+}
+
+.ordinal {
+  width:15px;
+}
+
+.semestral_mark, .average {
+  width:20px;
+}
+
+.description {
+  width:30px;
+}

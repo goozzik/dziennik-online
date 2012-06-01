@@ -1,0 +1,38 @@
+= page_header("Ustawienia klas")
+- if @active_school_class
+  .hero-unit
+    %h1= @active_school_class.fullname
+    %p
+      Semestr: #{@active_school_class.semester.fullname}
+    .btn-group
+      = semester_dropdown_button
+      %ul.dropdown-menu
+        - @active_school_class.school_semesters.each do |semester|
+          = semester_dropdown_link(semester, @active_school_class)
+    %p
+- else
+- unless @school_classes.empty?
+  %h2 Klasy
+  %table.table.table-bordered.table-striped
+    %tr
+      %th #
+      %th Rocznik
+      %th Klasa
+      %th Profil
+      %th{:style => "width:160px;"}
+    - @school_classes.each_with_index do |school_class, i|
+      %tr
+        %td= i+1
+        %td= school_class.yearbook
+        %td= school_class.name
+        %td= school_class.profile
+        %td
+          - if school_class.active
+            Aktywna klasa
+          - else
+            = link_to "Ustaw jako aktywną", set_school_class_as_active_path(school_class)
+          = link_to("Usuń", teacher_school_class_path(school_class), :method => :delete, :confirm => "Jesteś pewien?", :style => "float:right;color:red;")
+- else
+  = info_box("Nie masz klas.", "Możesz dodać klasę poprzez poniższy formularz.")
+= page_header("Dodaj nową klasę")
+= render 'form', :school_class => @school_class

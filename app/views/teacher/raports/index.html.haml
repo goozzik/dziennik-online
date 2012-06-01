@@ -1,0 +1,100 @@
+= page_header "Raporty"
+- @semesters.each do |semester|
+  %h2= semester.fullname
+  %table.table.table-bordered.table-condensed
+    %tr
+      %th{:rowspan => "2"} #
+      %th{:rowspan => "2"} Imię
+      %th{:rowspan => "2"} Nazwisko
+      %th{:colspan => "5"} Frekwencja
+      %th{:colspan => "8"} Oceny
+    %tr
+      %th{:style => "width:85px;"} %
+      %th ob
+      %th us
+      %th nu
+      %th sp
+      %th Średnia
+      %th 1
+      %th 2
+      %th 3
+      %th 4
+      %th 5
+      %th 6
+      %th nkl
+    - @students.each_with_index do |student,i |
+      %tr
+        %td= i+1
+        %td= student.first_name
+        %td= student.last_name
+        = student_semester_absences(student, semester.id)
+        %td= student.semester_average(semester.id)
+        %td= student.count_semestral_marks(1, semester.id)
+        %td= student.count_semestral_marks(2, semester.id)
+        %td= student.count_semestral_marks(3, semester.id)
+        %td= student.count_semestral_marks(4, semester.id)
+        %td= student.count_semestral_marks(5, semester.id)
+        %td= student.count_semestral_marks(6, semester.id)
+        %td= student.count_semestral_marks('nkl', semester.id)
+    %tr
+      %th{:colspan => "3"}
+        Razem
+        = school_class_semester_absences(@school_class, semester.id)
+      %td= @school_class.semester_average(semester.id)
+      %td= @school_class.count_semestral_marks(1, semester.id)
+      %td= @school_class.count_semestral_marks(2, semester.id)
+      %td= @school_class.count_semestral_marks(3, semester.id)
+      %td= @school_class.count_semestral_marks(4, semester.id)
+      %td= @school_class.count_semestral_marks(5, semester.id)
+      %td= @school_class.count_semestral_marks(6, semester.id)
+      %td= @school_class.count_semestral_marks('nkl', semester.id)
+  - if semester.semester == 2
+    %h2
+      Podsumowanie roku szkolnego #{semester.years}
+    %table.table.table-bordered.table-condensed
+      %tr
+        %th{:rowspan => "2"} #
+        %th{:rowspan => "2"} Imię
+        %th{:rowspan => "2"} Nazwisko
+        %th{:colspan => "5"} Frekwencja
+        %th{:colspan => "8"} Oceny
+      %tr
+        %th{:style => "width:85px;"} %
+        %th ob
+        %th us
+        %th nu
+        %th sp
+        %th Średnia
+        %th 1
+        %th 2
+        %th 3
+        %th 4
+        %th 5
+        %th 6
+        %th nkl
+      - @students.each_with_index do |student,i |
+        %tr
+          %td= i+1
+          %td= student.first_name
+          %td= student.last_name
+          = student_year_absences(student, semester.end_year)
+          %td= student.year_average(semester.end_year)
+          %td= student.count_year_marks(1, semester.end_year)
+          %td= student.count_year_marks(2, semester.end_year)
+          %td= student.count_year_marks(3, semester.end_year)
+          %td= student.count_year_marks(4, semester.end_year)
+          %td= student.count_year_marks(5, semester.end_year)
+          %td= student.count_year_marks(6, semester.end_year)
+          %td= student.count_year_marks('nkl', semester.end_year)
+      %tr
+        %th{:colspan => "3"}
+          Razem
+          = school_class_year_absences(@school_class, semester.end_year)
+        %td= @school_class.year_average(semester.end_year)
+        %td= @school_class.count_year_marks(1, semester.end_year)
+        %td= @school_class.count_year_marks(2, semester.end_year)
+        %td= @school_class.count_year_marks(3, semester.end_year)
+        %td= @school_class.count_year_marks(4, semester.end_year)
+        %td= @school_class.count_year_marks(5, semester.end_year)
+        %td= @school_class.count_year_marks(6, semester.end_year)
+        %td= @school_class.count_year_marks('nkl', semester.end_year)

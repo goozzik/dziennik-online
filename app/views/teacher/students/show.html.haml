@@ -1,0 +1,42 @@
+= button_to "Wróć", teacher_students_path, :class => "btn btn-inverse", :method => :get
+= page_header "Informacje o uczniu"
+%table.table.table-bordered
+  %tr
+    %td.span3 Login
+    %td.span3= @student.username
+  %tr
+    %td Imię
+    %td= @student.first_name
+  %tr
+    %td Nazwisko
+    %td= @student.last_name
+  %tr
+    %td Pesel
+    %td= @student.pesel
+  %tr
+    %td NIU
+    %td= @student.niu
+  %tr
+    %td Ulica
+    %td= @student.street
+  %tr
+    %td Miasto
+    %td= @student.city
+  %tr
+    %td Kod pocztowy
+    %td= @student.zip_code
+  %tr
+    %td Województwo
+    %td= @student.province
+  %tr
+    %td Telefon
+    %td= @student.telephone
+  %tr
+    %td Email
+    %td= @student.email
+  %tr
+    %td Zajęcia indywidualne
+    %td= @student.individual ? "Tak" : "Nie"
+  %tr
+    %td Zamieszkuje w internacie
+    %td= @student.boarding_school ? "Tak" : "Nie"

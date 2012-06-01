@@ -1,0 +1,20 @@
+= page_header "Dokumenty"
+- unless @documents.empty?
+  %table.table.table-bordered.table-striped
+    %tr
+      %th Nazwa pliku
+      %th{:style => "width:500px;"} Opis
+      %th Data dodania
+      %th{:colspan => "2"}
+    - @documents.each do |document|
+      %tr
+        %td= document.name
+        %td= document.description
+        %td= document.created_at
+        %td
+          = link_to("Pobierz", document.document.url)
+          = link_to("Usuń", teacher_document_path(document), :method => :delete, :confirm => "Jesteś pewien?")
+- else
+  = info_box "Klasa nie ma dokumentów.", "Możesz dodać dokument poprzez poniższy formularz."
+= page_header "Dodaj nowy plik dla klasy"
+= render 'form', :document => @document

@@ -3,6 +3,8 @@ class SchoolClass < ActiveRecord::Base
 
   default_scope :order => 'yearbook DESC'
 
+  scope :active, where(:active => true)
+
   belongs_to :school
   belongs_to :teacher
 

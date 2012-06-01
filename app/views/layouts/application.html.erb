@@ -24,6 +24,7 @@
         </div>
       <% end %>
       <div class="container">
+        <%= yield :head %>
         <div class="content">
           <% if flash[:error] %>
             <div class="alert alert-error fade in">

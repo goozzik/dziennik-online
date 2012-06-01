@@ -1,0 +1,25 @@
+.row
+  = simple_form_for time_table, :url => teacher_time_tables_path, :html => {:class => "well form-horizontal span5"} do |f|
+    = f.input :week_day, :collection => days, :label => "Dzień"
+    - 0.upto(5).each do |number|
+      = f.simple_fields_for :lessons, Lesson.new do |lesson_form|
+        = lesson_form.hidden_field :number, :value => number
+        = lesson_form.input :subject_id, :collection => subjects, :label => "Lekcja #{number}"
+    = link_to_add_lesson "Dodaj kolejną lekcję", f, subjects
+    .form-actions
+      = f.button :submit, "Zapisz", :class => "btn btn-primary"
+      = link_to "Anuluj", teacher_time_tables_path, :class => "btn btn-inverse"
+:javascript
+  lesson_count = 6;
+
+  function add_fields(link, association, content) {
+    new_id = new Date().getTime();
+    regexp = new RegExp("new_" + association, "g")
+    content = content.replace(regexp, new_id);
+    regexp = new RegExp("Lekcja", "g")
+    content = content.replace(regexp, "Lekcja " + lesson_count)
+    regexp = new RegExp("new_lesson_number", "g")
+    content = content.replace(regexp, lesson_count)
+    $(link).before(content);
+    lesson_count++;
+  }

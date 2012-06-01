@@ -1,0 +1,36 @@
+= page_header "Frekwencja - #{I18n.t(@month.strftime("%B"))} #{@month.year}"
+= info_box "Frekwencja", "Żeby dodać frekwencję należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_absences_info_1.png")
+= render 'absences', :previous_month => @previous_month, :next_month => @next_month, :weeks => @weeks, :students => @students, :absences => @absences
+:javascript
+  $(function() {
+    $.ajaxSetup({
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content'));
+      }
+    });
+    var parsed_id;
+
+    $('.absence').live('click', function() {
+      clone = $(this).clone();
+      parsed_id = $(this).attr('id').split('_');
+      old_absence = clone.text();
+      clone.text('');
+      clone.append('<input id="absence_active" type="text" value="' + old_absence + '">');
+      $(this).replaceWith(clone);
+      $('#' + clone.attr('id')).children().focus();
+    });
+
+    $('#absence_active').live('blur', function() {
+      value = $(this).val();
+      data = 'absence[student_id]=' + parsed_id[0] +
+      '&absence[date]=' + parsed_id[1] +
+      '&absence[' + parsed_id[2] + ']=' + value;
+      $.ajax({
+        type: 'PUT',
+        url: '/teacher/absences/update',
+        data: data,
+      });
+      $(this).replaceWith(value);
+    });
+
+  });

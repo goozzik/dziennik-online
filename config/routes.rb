@@ -11,7 +11,6 @@ DziennikOnline::Application.routes.draw do
 
   match 'director/absences/general/:school_class_id/semester/:semester_id' => 'director/absences#general', :as => 'general_director_absences'
   match 'director/absences/:school_class_id' => 'director/absences#actual', :as => 'actual_director_absences'
-  match 'director/marks/school_class/:school_class_id/subject/:subject_id' => 'director/marks#index', :as => 'director_marks'
 
   get "teacher/students/:id/new_password" => "teacher/students#new_password", :as => "new_password_teacher_student"
   put "teacher/students/:id/password" => "teacher/students#update_password", :as => "password_teacher_student"
@@ -34,9 +33,9 @@ DziennikOnline::Application.routes.draw do
 
   namespace :director do
     resources :absences, :only => [:index]
-    resources :subjects
-    resources :marks, :only => [:index]
-    resources :school_classes, :only => [:index]
+    resources :school_classes, :only => [:index] do
+      resources :subjects, :only => [:show]
+    end
   end
 
   namespace :student do
