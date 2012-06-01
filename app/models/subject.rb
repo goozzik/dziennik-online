@@ -8,6 +8,8 @@ class Subject < ActiveRecord::Base
   has_many :descriptions, :dependent => :destroy
   has_many :marks, :dependent => :destroy
 
+  scope :with_description, joins(:descriptions)
+
   attr_accessible :school_class_id, :subject_template_id
 
   validates :school_class_id, :presence => true

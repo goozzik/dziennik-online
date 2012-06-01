@@ -7,6 +7,8 @@ class Mark < ActiveRecord::Base
 
   attr_accessible :mark, :student_id, :description_id, :subject_id
 
+  scope :current, joins(:semester).where(["semesters.active = ?", true])
+
   before_create :set_subject_id, :set_semester_id
 
   def self.find_all_by_students_and_descriptions(students, descriptions)

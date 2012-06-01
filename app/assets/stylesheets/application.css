@@ -26,8 +26,12 @@
   width:100px;
 }
 
+.class_name {
+  width:35%;
+}
+
 .ordinal {
-  width:15px;
+  width:5%;
 }
 
 .semestral_mark, .average {

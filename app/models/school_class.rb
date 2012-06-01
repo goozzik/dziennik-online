@@ -30,8 +30,10 @@ class SchoolClass < ActiveRecord::Base
                5 => 'Piątek',
                6 => 'Sobota'}
 
+  #add column period!
   def fullname
-    [yearbook, name, profile].join(' ')
+    year = 4 - (yearbook - Time.now.year)
+    "#{year >= 4 ? 4 : year } #{name} #{profile} #{yearbook}"
   end
 
   def activate
