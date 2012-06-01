@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
     end
 
     def director_has_active_classes?
-      if current_director.active_school_classes.empty?
+      if current_director.school_classes.active.empty?
         flash[:notice] = "Szkoła nie posiada aktywnych klas."
         redirect_to root_path
       end

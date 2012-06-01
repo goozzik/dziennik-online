@@ -11,7 +11,7 @@
       %tr
         %td= i+1
         %td= school_class.fullname
-        %td= link_to("Pokaż", general_director_absences_path(school_class, school_class.semester))
+        %td= link_to("Pokaż", director_school_class_semester_absences_path(school_class, school_class.semester))
         %td= link_to("Pokaż", actual_director_absences_path(school_class))
         %td
           - unless school_class.subjects.empty?

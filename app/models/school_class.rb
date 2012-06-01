@@ -56,16 +56,12 @@ class SchoolClass < ActiveRecord::Base
     SubjectTemplate.all.delete_if { |template| subjects.find_by_subject_template_id(template) }
   end
 
-  def school_semesters
-    school.semesters.where(["end_year <= ?", yearbook])
-  end
-
   def teacher_school_class
     teacher.school_class
   end
 
   def semester
-    school_semesters.find_by_id(semester_id)
+    semesters.find_by_id(semester_id)
   end
 
   def school_semester
@@ -84,8 +80,12 @@ class SchoolClass < ActiveRecord::Base
     semester.semestral_marks
   end
 
+  def school_semesters
+    school.semesters
+  end
+
   def semesters
-    school.semesters.find(:all, :conditions => ["end_year <= ?", yearbook])
+    school_semesters.before_year(yearbook)
   end
 
   def semester_absences(semester_id)

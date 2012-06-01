@@ -60,13 +60,4 @@ module AbsencesHelper
     html.html_safe
   end
 
-  def director_semesters_navigation(school_class, semesters)
-    html = "<ul class='nav nav-tabs'>"
-    semesters.each do |semester|
-      html << nav_link_to("Semestr #{semester.semester}", general_director_absences_path(school_class, semester))
-    end
-    html << "</ul>"
-    html.html_safe
-  end
-
 end
