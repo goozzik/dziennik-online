@@ -4,11 +4,13 @@
     %span.caret
   %ul.dropdown-menu
     - @subjects.each do |subject|
-      = nav_link_to(subject.name, director_school_class_subject_path(@school_class, subject))
-= page_header "Oceny - " + @subject.name
+      = nav_link_to(subject.name, director_school_class_subject_path(@school_class, :id => subject.id))
+
+= page_header "Oceny klasy #{@school_class.name}", @subject.name
+
 %table.table.table-bordered.table-condensed.table-striped
   %tr
-    %th.ordinal #
+    %th{style:"width:3%"} #
     %th.first_name Imię
     %th.last_name Nazwisko
     - @descriptions.each do |description|

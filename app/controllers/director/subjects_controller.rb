@@ -2,29 +2,23 @@
 class Director::SubjectsController < ApplicationController
 
   before_filter :authenticate_director!
-  before_filter :school_class_has_students?, :subject_has_descriptions?
+  before_filter :director_school_class_has_students?, :director_school_class_has_subjects?
 
   def show
-    @subjects = @school_class.subjects
-    @students = @school_class.students
+    if params[:id]
+      @subject = @school_class.subjects.find(params[:id])
+    else
+      @subject = @school_class.subjects.first
+    end
+    @descriptions = @subject.descriptions
   end
 
   private
 
-    def school_class_has_students?
-      @school_class = current_director.school_classes.find(params[:school_class_id]) 
-      @students = @school_class.students
-      if @students.empty?
-        flash[:alert] = "Wychowawca klasy nie dodał jeszcze uczniów."
-        redirect_to director_school_classes_path
-      end
-    end
-
-    def subject_has_descriptions?
-      @subject = @school_class.subjects.find(params[:id])
-      @descriptions = @subject.descriptions.current
-      if @descriptions.empty?
-        flash[:alert] = "Wychowawca klasy nie dodał jeszcze ocen dla tego przedmiotu."
+    def director_school_class_has_subjects?
+      @subjects = @school_class.subjects
+      if @subjects.empty?
+        flash[:alert] = "Wychowawca klasy nie dodał jeszcze przedmiotów."
         redirect_to :back
       end
     end

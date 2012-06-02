@@ -1,21 +1,17 @@
 = page_header "Aktywne klasy"
 
 - unless @school_classes.empty?
-  %table.table.table-bordered.table-condensed
-    %tr
-      %th{style:"width:3%"} #
-      %th Klasa
-      %th{style:"width:20%"} Ogólna frekwencja
-      %th{style:"width:20%"} Bieżąca frekwencja
-      %th{style:"width:20%"} Oceny
-    - @school_classes.each_with_index do |school_class, i|
-      %tr
-        %td= i+1
-        %td= school_class.fullname
-        %td= link_to("Pokaż", director_school_class_semester_absences_path(school_class, school_class.semester))
-        %td= link_to("Pokaż", actual_director_absences_path(school_class))
-        %td
-          - unless school_class.subjects.empty?
-            = link_to("Pokaż", director_school_class_subject_path(school_class, school_class.subjects.with_description.first))
+  .row
+    .span6
+      %table.table.table-bordered
+        %tr
+          %th{style:"width:50%"} Klasa
+          %th
+        - @school_classes.each do |school_class|
+          %tr
+            %td= school_class.fullname
+            %td
+              = link_to("Bieżąca frekwencja", director_school_class_absences_path(school_class), class:"btn btn-mini")
+              = link_to("Bieżące oceny", director_school_class_subject_path(school_class), class:"btn btn-mini")
 - else
   = info_box "Szkoła nie ma aktywnych klas.", "Poczekaj aż, nauczyciele dodadzą klasy."

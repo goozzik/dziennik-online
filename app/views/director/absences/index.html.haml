@@ -1,25 +1,3 @@
-.btn-group
-  %button.btn Wybierz semestr
-  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-    %span.caret
-  %ul.dropdown-menu
-    - @semesters.each do |semester|
-      = nav_link_to(semester.fullname, director_school_class_semester_absences_path(@school_class, semester))
-= page_header "Frekwencja - #{@school_class.fullname}"
-%h2= @semester.fullname
-%table.table.table-bordered.table-condensed
-  %tr
-    %th.ordinal #
-    %th.first_name Imię
-    %th.last_name Nazwisko
-    %th{style:"width:13%"} %
-    %th{style:"width:13%"} Obowiązkowe
-    %th{style:"width:13%"} Usprawiedliwione
-    %th{style:"width:13%"} Nieusprawiedliwione
-    %th{style:"width:13%"} Spóźnienia
-  - @students.each_with_index do |student, i|
-    %tr
-      %td= i+1
-      %td= student.first_name
-      %td= student.last_name
-      = student_semester_absences(student, @semester_id)
+= page_header "Frekwencja klasy #{@school_class.name}", "#{I18n.t(@month.strftime("%B"))} #{@month.year}"
+
+= render 'teacher/absences/absences', :previous_month => @previous_month, :next_month => @next_month, :weeks => @weeks, :students => @students, :absences => @absences

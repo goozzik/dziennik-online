@@ -14,7 +14,7 @@ module AbsencesHelper
     when 'teacher'
       content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, teacher_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
     when 'director'
-      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, actual_director_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
+      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, director_school_class_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
     end
   end
 
@@ -23,7 +23,7 @@ module AbsencesHelper
     when 'teacher'
       content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, teacher_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
     when 'director'
-      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, actual_director_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
+      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, director_school_class_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
     end
   end
 

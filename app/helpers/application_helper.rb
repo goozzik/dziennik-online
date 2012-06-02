@@ -15,8 +15,8 @@ module ApplicationHelper
     end
   end
 
-  def page_header(text)
-    "<div class='page-header'><h1>#{text}</h1></div>".html_safe
+  def page_header(text, small = nil)
+    "<div class='page-header'><h1>#{text} <small>#{small if small}</small></h2></div>".html_safe
   end
 
   def row_3(count)

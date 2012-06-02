@@ -37,28 +37,6 @@ class Student < User
     }
   end
 
-  def year_absences(year)
-    required = justified = unexcused = late = 0
-    semesters = school_class.school.semesters.find_all_by_end_year(year)
-    absences = []
-    semesters.each do |semester|
-      absences += self.absences.find_all_by_semester_id(semester.id)
-    end
-    absences.each do |absence|
-      required += absence.required if absence.required
-      justified += absence.justified if absence.justified
-      unexcused += absence.unexcused if absence.unexcused
-      late += absence.late if absence.late
-    end
-    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
-    { :percentage => percentage == "NaN" ? "--" : percentage,
-      :required => required,
-      :justified => justified,
-      :unexcused => unexcused,
-      :late => late
-    }
-  end
-
   def update_password(params)
     update_attribute(:password, params[:password]) if verify_teacher_current_password(params) && validate_teacher_new_password(params)
   end

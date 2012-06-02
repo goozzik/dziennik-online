@@ -65,6 +65,15 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def director_school_class_has_students?
+      @school_class = current_director.school_classes.find(params[:school_class_id])
+      @students = @school_class.students
+      if @students.empty?
+        flash[:alert] = "Wychowawca klasy nie dodał jeszcze uczniów."
+        redirect_to :back
+      end
+    end
+
     def authenticate_superadmin!
       authenticate_user!
       redirect_to root_path unless current_user.superadmin
