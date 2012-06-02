@@ -13,68 +13,8 @@ class Teacher < User
     end
   end
 
-  def school_class_semester
-    school_class.semester
-  end
-
-  def school_semesters
-    school.semesters
-  end
-
-  def school_class_semesters
-    school_class.semesters
-  end
-
-  def school_class_subjects
-    school_class.subjects
-  end
-
-  def school_class_students
-    school_class.students
-  end
-
-  def school_class_semester_descriptions
-    school_class_semester.descriptions
-  end
-
-  def school_class_time_tables
-    school_class.time_tables
-  end
-
-  def school_class_available_time_table_days
-    school_class.available_time_table_days
-  end
-
-  def school_class_messages
-    school_class.messages
-  end
-
-  def school_school_classes
-    school.school_classes
-  end
-
   def deactivate_school_class
     school_class.deactivate if school_class
-  end
-
-  def school_class_activate_semester(semester)
-    school_class.activate_semester(semester)
-  end
-
-  def school_class_semester_marks
-    school_class.semester_marks
-  end
-
-  def school_class_available_subject_templates
-    school_class.available_subject_templates
-  end
-
-  def school_class_semester_semestral_marks
-    school_class.semester_semestral_marks
-  end
-
-  def school_class_documents
-    school_class.documents
   end
 
 end

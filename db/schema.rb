@@ -149,9 +149,10 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
     t.integer  "student_id"
     t.integer  "semester_id"
     t.integer  "subject_id"
+    t.integer  "school_class_id"
     t.integer  "mark"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "semestral_marks", ["semester_id"], :name => "index_semestral_marks_on_semester_id"

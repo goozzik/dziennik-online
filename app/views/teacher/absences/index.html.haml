@@ -1,6 +1,9 @@
 = page_header "Frekwencja - #{I18n.t(@month.strftime("%B"))} #{@month.year}"
+
 = info_box "Frekwencja", "Żeby dodać frekwencję należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_absences_info_1.png")
-= render 'absences', :previous_month => @previous_month, :next_month => @next_month, :weeks => @weeks, :students => @students, :absences => @absences
+
+= render 'absences', :previous_month => @previous_month, :next_month => @next_month, :weeks => @weeks, :students => @students
+
 :javascript
   $(function() {
     $.ajaxSetup({

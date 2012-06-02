@@ -3,6 +3,7 @@ class SemestralMark < ActiveRecord::Base
   belongs_to :student
   belongs_to :semester
   belongs_to :subject
+  belongs_to :school_class
 
   scope :current, joins(:semester).where(["semesters.active = ?", true])
 
@@ -12,7 +13,7 @@ class SemestralMark < ActiveRecord::Base
   validates :student_id, :presence => true
   validates :subject_id, :presence => true
 
-  before_create :set_semester_id
+  before_create :set_semester_id, :set_school_class_id
 
   def self.find_all_by_students_and_semester_id_and_subject_id(students, semester_id, subject_id)
     semestral_marks = []
@@ -34,6 +35,10 @@ class SemestralMark < ActiveRecord::Base
 
     def set_semester_id
       self.semester_id = student_teacher_school_class_semester.id
+    end
+
+    def set_school_class_id
+      self.school_class_id = student.school_class_id
     end
 
 end

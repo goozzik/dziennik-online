@@ -5,6 +5,7 @@ class CreateSemestralMarks < ActiveRecord::Migration
       t.integer :student_id
       t.integer :semester_id
       t.integer :subject_id
+      t.integer :school_class_id
       t.integer :mark
 
       t.timestamps

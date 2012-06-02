@@ -14,6 +14,7 @@ class SchoolClass < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   has_many :messages, :dependent => :destroy
   has_many :absences, :dependent => :destroy
+  has_many :semester_marks, :dependent => :destroy
 
   attr_accessible :letter, :profile, :yearbook, :active
 
@@ -134,12 +135,8 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def semester_average(semester_id)
-    averages = 0
-    students.each do |student|
-      average = student.semester_average(semester_id)
-      averages += average if average
-    end
-    averages / students.count
+    semestral_marks = semestral_marks.find_all_by_semester_id(semester_id)
+    (semestral_marks.map(&:mark).inject(:+) / semestral_marks.count).to_f unless semestral_marks.empty?
   end
 
   def year_average(year)
