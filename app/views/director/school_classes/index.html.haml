@@ -1,9 +1,10 @@
 = page_header "Aktywne klasy"
+
 - unless @school_classes.empty?
   %table.table.table-bordered.table-condensed
     %tr
-      %th.ordinal #
-      %th.class_name Klasa
+      %th{style:"width:3%"} #
+      %th Klasa
       %th{style:"width:20%"} Ogólna frekwencja
       %th{style:"width:20%"} Bieżąca frekwencja
       %th{style:"width:20%"} Oceny
@@ -17,4 +18,4 @@
           - unless school_class.subjects.empty?
             = link_to("Pokaż", director_school_class_subject_path(school_class, school_class.subjects.with_description.first))
 - else
-  = alert_box "Szkoła nie posiada aktywnych klas!", "Poczekaj aż, nauczyciele dodadzą klasy."
+  = info_box "Szkoła nie ma aktywnych klas.", "Poczekaj aż, nauczyciele dodadzą klasy."

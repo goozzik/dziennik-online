@@ -8,7 +8,7 @@ class CreateSchoolClasses < ActiveRecord::Migration
       t.integer :yearbook
       t.integer :year
       t.string :profile
-      t.string :name
+      t.string :letter
       t.boolean :active
 
       t.timestamps

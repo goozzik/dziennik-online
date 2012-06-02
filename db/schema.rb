@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
     t.integer  "semester_id"
     t.integer  "yearbook"
     t.string   "profile"
-    t.string   "name"
+    t.string   "letter"
     t.boolean  "active"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

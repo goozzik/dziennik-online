@@ -1,9 +1,9 @@
 # coding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature 'Director school classes' do
+feature "Director absences" do
 
-  context 'index' do
+  context "index" do
     before do
       FactoryGirl.create(:school)
       FactoryGirl.create(:semester, :school_id => School.last.id)

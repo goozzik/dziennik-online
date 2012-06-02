@@ -15,12 +15,11 @@ class SchoolClass < ActiveRecord::Base
   has_many :messages, :dependent => :destroy
   has_many :absences, :dependent => :destroy
 
-  attr_accessible :name, :profile, :yearbook, :active, :school_id
+  attr_accessible :letter, :profile, :yearbook, :active
 
-  validates_presence_of :name, :profile, :yearbook
+  validates_presence_of :letter, :profile, :yearbook
 
   before_create :deactivate_old_school_class, :set_active, :set_school_id, :set_semester_id
-
   before_destroy :unset_teacher_school_class_id
 
   WEEK_DAYS = {0 => 'Niedziela',
@@ -42,7 +41,11 @@ class SchoolClass < ActiveRecord::Base
 
   #add column period!
   def fullname
-    "#{grade} #{name} #{profile} #{yearbook}"
+    "#{grade} #{letter} #{profile} #{yearbook}"
+  end
+
+  def name
+    "#{grade} #{letter}"
   end
 
   def activate

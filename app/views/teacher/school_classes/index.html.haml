@@ -17,14 +17,14 @@
     %tr
       %th #
       %th Rocznik
-      %th Klasa
+      %th Litera
       %th Profil
       %th{:style => "width:160px;"}
     - @school_classes.each_with_index do |school_class, i|
       %tr
         %td= i+1
         %td= school_class.yearbook
-        %td= school_class.name
+        %td= school_class.letter
         %td= school_class.profile
         %td
           - if school_class.active

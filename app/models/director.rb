@@ -6,6 +6,8 @@ class Director < User
 
   attr_accessible :school_id
 
-  delegate :school_classes, :to => :school
+  def school_classes
+    school.school_classes.active
+  end
 
 end
