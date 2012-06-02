@@ -13,6 +13,7 @@ class SchoolClass < ActiveRecord::Base
   has_many :time_tables, :dependent => :destroy
   has_many :documents, :dependent => :destroy
   has_many :messages, :dependent => :destroy
+  has_many :absences, :dependent => :destroy
 
   attr_accessible :name, :profile, :yearbook, :active, :school_id
 
@@ -30,10 +31,18 @@ class SchoolClass < ActiveRecord::Base
                5 => 'Piątek',
                6 => 'Sobota'}
 
+  def absences_by_current_school_semester
+    semester_absences(school_semester)
+  end
+
+  def grade
+    grade = 4 - (yearbook - Time.now.year)
+    grade >= 4 ? 4 : grade
+  end
+
   #add column period!
   def fullname
-    year = 4 - (yearbook - Time.now.year)
-    "#{year >= 4 ? 4 : year } #{name} #{profile} #{yearbook}"
+    "#{grade} #{name} #{profile} #{yearbook}"
   end
 
   def activate
@@ -88,23 +97,13 @@ class SchoolClass < ActiveRecord::Base
     school_semesters.before_year(yearbook)
   end
 
-  def semester_absences(semester_id)
-    required = justified = unexcused = late = 0
-    students.each do |student|
-      absences = student.absences.find_all_by_semester_id(semester_id)
-      absences.each do |absence|
-        required += absence.required if absence.required
-        justified += absence.justified if absence.justified
-        unexcused += absence.unexcused if absence.unexcused
-        late += absence.late if absence.late
-      end
-    end
-    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
-    { :percentage => percentage == "NaN" ? "--" : percentage,
-      :required => required,
-      :justified => justified,
-      :unexcused => unexcused,
-      :late => late
+  def semester_absences(semester)
+    absences = self.absences.find_all_by_semester_id(semester)
+    @absences ||= {
+      :required => absences.map(&:required).delete_if {|a| a.nil?}.inject(0, &:+),
+      :justified => absences.map(&:justified).delete_if {|a| a.nil?}.inject(0, &:+),
+      :unexcused => absences.map(&:unexcused).delete_if {|a| a.nil?}.inject(0, &:+),
+      :late => absences.map(&:late).delete_if {|a| a.nil?}.inject(0, &:+)
     }
   end
 
@@ -165,6 +164,10 @@ class SchoolClass < ActiveRecord::Base
       students.each { |student| count += student.semestral_marks.find_all_by_mark_and_semester_id(mark, semester_id).count }
     end
     count
+  end
+
+  def self.grade(grade)
+    all.delete_if {|school_class| school_class.grade != grade}
   end
 
   private

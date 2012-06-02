@@ -1,7 +1,7 @@
 class Director::AbsencesController < ApplicationController
 
   before_filter :authenticate_director!
-  before_filter :director_has_active_classes?
+  before_filter :director_has_active_school_classes?
 
   def index
     @school_class = current_director.school_classes.find(params[:school_class_id])

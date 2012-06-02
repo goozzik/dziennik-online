@@ -1,0 +1,30 @@
+%table.table.table-bordered.table-condensed
+  %tr
+    %th{style:"width:5%"} Klasa
+    %th{style:"width:19%"} %
+    %th{style:"width:19%"} Obowiązkowe
+    %th{style:"width:19%"} Usprawiedliwione
+    %th{style:"width:19%"} Nieusprawiedliwione
+    %th{style:"width:19%"} Spóźnienia
+  - required = justified = unexcused = late = 0
+  - school_classes.each do |school_class|
+    - absences = school_class.absences_by_current_school_semester
+    - required += absences[:required]
+    - justified += absences[:justified]
+    - unexcused += absences[:unexcused]
+    - late += absences[:late]
+
+    %tr
+      %td= "#{school_class.grade} #{school_class.name}"
+      %td= Absence.percentage(absences[:required], absences[:justified], absences[:unexcused])
+      %td= absences[:required]
+      %td= absences[:justified]
+      %td= absences[:unexcused]
+      %td= absences[:late]
+  %tr
+    %th Razem
+    %th= Absence.percentage(required, justified, unexcused)
+    %th= required
+    %th= justified
+    %th= unexcused
+    %th= late

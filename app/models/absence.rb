@@ -2,10 +2,11 @@ class Absence < ActiveRecord::Base
 
   belongs_to :student
   belongs_to :semester
+  belongs_to :school_class
 
   attr_accessible :date, :required, :justified, :unexcused, :late, :student_id, :semester_id
 
-  before_create :set_semester_id
+  before_create :set_semester_id, :set_school_class_id
 
   def self.get_weeks_from_month(date)
     weeks = []
@@ -28,10 +29,18 @@ class Absence < ActiveRecord::Base
     absences
   end
 
+  def self.percentage(required, justified, unexcused)
+    sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
+  end
+
   private
 
     def set_semester_id
       self.semester_id = student.teacher_school_class_semester.id
+    end
+
+    def set_school_class_id
+      self.school_class_id = student.school_class_id
     end
 
 end

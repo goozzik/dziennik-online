@@ -34,6 +34,7 @@ module NavigationHelper
 
   def director_navigation
      html = nav_link_to("Klasy", director_school_classes_path)
+     html << nav_link_to("Raporty", director_reports_path)
      html.html_safe
   end
 
