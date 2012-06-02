@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  helper_method :current_teacher, :current_director, :current_student, :current_admin
+
   def current_teacher
     Teacher.find(current_user.id)
   end

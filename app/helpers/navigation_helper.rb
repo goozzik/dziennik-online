@@ -40,7 +40,7 @@ module NavigationHelper
               </a>
               <ul class='dropdown-menu'>"
     html << nav_link_to("Raport frekwencji klas", director_reports_semestral_path)
-    html << nav_link_to("Raporty klas", director_school_class_report_path(2))
+    html << nav_link_to("Raporty klas", director_school_class_report_path(current_director.school_classes.first))
     html << "</ul></li>"
     html.html_safe
   end

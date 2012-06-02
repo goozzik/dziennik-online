@@ -14,7 +14,7 @@
     - unexcused += absences[:unexcused]
     - late += absences[:late]
     %tr
-      %td= "#{school_class.grade} #{school_class.name}"
+      %td= "#{school_class.name}"
       %td= absence_percentage(absences[:required], absences[:justified], absences[:unexcused])
       %td= absences[:required]
       %td= absences[:justified]

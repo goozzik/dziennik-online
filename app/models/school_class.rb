@@ -36,7 +36,7 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def absences_by_current_school_semester
-    semester_absences(school_semester)
+    semester_absences(school.semester)
   end
 
   def grade

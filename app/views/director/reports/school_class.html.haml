@@ -6,6 +6,6 @@
     - @school_classes.each do |school_class|
       = nav_link_to(school_class.fullname, director_school_class_report_path(@school_class))
 
-= page_header "Raporty nauczania klasy " + @school_class.fullname
+= page_header "Raport nauczania klasy #{@school_class.fullname}"
 
-= render "teacher/raports/report", :school_class => @school_class, :semesters => @school_class.semesters, :students => @school_class.students
+= render "teacher/reports/report", :school_class => @school_class, :semesters => @school_class.semesters, :students => @school_class.students
