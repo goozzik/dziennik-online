@@ -65,9 +65,8 @@ feature 'Teacher absences feature' do
         fill_in "absence_active", :with => "33"
         sleep(1)
         find(:css, "#absence_active").native.send_key(:tab)
-        sleep(5)
-        page.should have_content "33"
-        assert Absence.find_by_student_id_and_semester_id_and_date_and_required(Student.last.id, Semester.last.id, date, 33)
+        reload_page
+        page.should have_xpath "//td[@class='absence'][contains(text(), '33')]"
       end
 
     end
@@ -87,10 +86,8 @@ feature 'Teacher absences feature' do
         fill_in "absence_active", :with => "20"
         sleep(1)
         find(:css, "#absence_active").native.send_key(:tab)
-        sleep(5)
-        page.should have_content "20"
-        assert Absence.find_by_student_id_and_semester_id_and_date_and_required(Student.last.id, Semester.last.id, @date, 20)
-        assert_nil Absence.find_by_student_id_and_semester_id_and_date_and_required(Student.last.id, Semester.last.id, @date, 30)
+        reload_page
+        page.should have_xpath "//td[@class='absence'][contains(text(), '20')]"
       end
 
     end

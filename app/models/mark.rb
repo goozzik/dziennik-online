@@ -11,15 +11,8 @@ class Mark < ActiveRecord::Base
 
   before_create :set_subject_id, :set_semester_id
 
-  def self.find_all_by_students_and_descriptions(students, descriptions)
-    marks = []
-    students.each_with_index do |student, i|
-      marks[i] = []
-      descriptions.each_with_index do |description, j|
-        marks[i][j] = Mark.find_by_student_id_and_description_id(student.id, description.id)
-      end
-    end
-    marks
+  def self.average_from_marks(marks)
+    sprintf("%1.2f", marks.empty? ? 0.0 : marks.collect { |m| m.mark.to_i }.inject(:+).to_f / marks.count)
   end
 
   private

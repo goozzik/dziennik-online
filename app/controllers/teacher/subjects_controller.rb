@@ -6,28 +6,26 @@ class Teacher::SubjectsController < ApplicationController
   before_filter :school_class_has_students?, :only => [:show]
 
   def index
-    @subject = current_teacher.school_class_subjects.new
-    @subjects = current_teacher.school_class_subjects
-    @subject_templates = current_teacher.school_class_available_subject_templates
+    @subject = Subject.new
+    @subjects = current_teacher.school_class.subjects
+    @subject_templates = current_teacher.school_class.available_subject_templates
   end
 
   def show
     @description = Description.new
-    @subject = current_teacher.school_class_subjects.find(params[:id])
-    @descriptions = current_teacher.school_class_semester_descriptions.find_all_by_subject_id(@subject.id)
-    @students = current_teacher.school_class_students
-    @marks = Mark.find_all_by_students_and_descriptions(@students, @descriptions)
-    @semestral_marks = SemestralMark.find_all_by_students_and_semester_id_and_subject_id(@students, current_teacher.school_class_semester.id, @subject.id)
+    @subject = current_teacher.school_class.subjects.find(params[:id])
+    @descriptions = current_teacher.school_class.semester.descriptions.find_all_by_subject_id(@subject.id)
+    @students = current_teacher.school_class.students
   end
 
   def create
-    @subject_templates = current_teacher.school_class_available_subject_templates
-    @subject = current_teacher.school_class_subjects.build(params[:subject])
+    @subject_templates = current_teacher.school_class.available_subject_templates
+    @subject = current_teacher.school_class.subjects.build(params[:subject])
     @subject.save ? redirect_to(:action => "index") : render(:action => "new")
   end
 
   def destroy
-    subject = current_teacher.school_class_subjects.find(params[:id])
+    subject = current_teacher.school_class.subjects.find(params[:id])
     redirect_to teacher_subjects_path if subject.destroy
   end
 

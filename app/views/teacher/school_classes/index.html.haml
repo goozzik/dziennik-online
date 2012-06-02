@@ -7,7 +7,7 @@
     .btn-group
       = semester_dropdown_button
       %ul.dropdown-menu
-        - @active_school_class.school_semesters.each do |semester|
+        - @active_school_class.school.semesters.each do |semester|
           = semester_dropdown_link(semester, @active_school_class)
     %p
 - else

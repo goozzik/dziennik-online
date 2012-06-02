@@ -1,29 +1,34 @@
 = page_header "Oceny - #{@subject.name}"
-= info_box "Oceny", "Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_subjects_info_1.png", :style => "margin:0;", :class => "span5")
-%table.table.table-striped.table-bordered.table-condensed
+
+= info_box "Oceny",
+  "Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli.",
+  image_tag("teacher_subjects_info_1.png", style:"margin:0", class:"span5")
+
+%table.table.table-bordered.table-condensed
   %tr
-    %th{:style => "width:15px;"} #
-    %th{:style => "width:100px;"} Imię
-    %th{:style => "width:100px;"} Nazwisko
+    %th{style:"width:3%"} #
+    %th{style:"width:11%"} Imię
+    %th{style:"width:11%"} Nazwisko
     - @descriptions.each do |description|
-      %th{:style => "width:30px;"}
-        = link_to_delete_description(description)
+      %th{style:"width:30px;"}= link_to_delete_description(description)
     %th
-      = render 'description_form', :description => @description, :subject => @subject
+      = render 'description_form', description:@description, subject:@subject
       = add_description_button
-    %th{:style => "width:20px;"}
-      %span.title_of_mark{:title => "Ocena semestralna"} OS
-    %th{:style => "width:20px;"}= image_tag("average_ico.png", :class => "title_of_mark", :title => "Średnia z podanych ocen")
+    %th{style:"width:20px;", title:"Ocena semestralna"} OS
+    %th{style:"width:20px;"}= image_tag("average_ico.png", class:"title_of_mark", title:"Średnia z podanych ocen")
   - @students.each_with_index do |student, i|
     %tr
       %td= i+1
       %td= student.first_name
       %td= student.last_name
-      - @descriptions.each_with_index do |description, j|
-        %td.mark{:id => "#{student.id}_#{description.id}"}= @marks[i][j].mark if @marks[i][j]
+      - @descriptions.each do |description|
+        %td.mark{id:"#{student.id}_#{description.id}"}
+          = student.marks.find_by_description_id(description).try(:mark)
       %td
-      %td.semestral_mark{:id => "semestral_mark_#{student.id}"}= @semestral_marks[i].mark if @semestral_marks[i]
-      %td.mark_average= sprintf("%1.2f", student.current_average_from_subject(@subject.id))
+      %td.semestral_mark{:id => "semestral_mark_#{student.id}"}
+        = student.semestral_marks.current.find_by_subject_id(@subject).try(:mark)
+      %td.mark_average= student.current_average_from_subject(@subject.id)
+
 :javascript
   $(document).ready(function() {
     $.ajaxSetup({

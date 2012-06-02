@@ -5,7 +5,7 @@ class Teacher::MessagesController < ApplicationController
 
   def index
     @message = Message.new
-    @messages = current_teacher.school_class_messages
+    @messages = current_teacher.school_class.messages
   end
 
   def new
@@ -13,21 +13,21 @@ class Teacher::MessagesController < ApplicationController
   end
 
   def edit
-    @message = current_teacher.school_class_messages.find(params[:id])
+    @message = current_teacher.school_class.messages.find(params[:id])
   end
 
   def create
-    @message = current_teacher.school_class_messages.build(params[:message])
+    @message = current_teacher.school_class.messages.build(params[:message])
     @message.save ? redirect_to(:action => "index") : render(:new)
   end
 
   def update
-    @message = current_teacher.school_class_messages.find(params[:id])
+    @message = current_teacher.school_class.messages.find(params[:id])
     @message.update_attributes(params[:message]) ? redirect_to(:action => "index") : render(:edit)
   end
 
   def destroy
-    message = current_teacher.school_class_messages.find(params[:id])
+    message = current_teacher.school_class.messages.find(params[:id])
     redirect_to(:action => "index") if message.destroy
   end
 

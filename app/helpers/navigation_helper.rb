@@ -23,7 +23,7 @@ module NavigationHelper
   def teacher_navigation
      html = nav_link_to("Oceny", teacher_subjects_path)
      html << nav_link_to("Frekwencja", teacher_absences_path)
-     html << nav_link_to("Raporty", teacher_raports_path)
+     html << nav_link_to("Raporty", teacher_reports_path)
      html << nav_link_to("Wiadomości", teacher_messages_path)
      html << nav_link_to("Dokumenty", teacher_documents_path)
      html << nav_link_to("Plan lekcji", teacher_time_tables_path)

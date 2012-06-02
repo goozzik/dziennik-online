@@ -16,14 +16,10 @@ class Description < ActiveRecord::Base
   validates :desc_type, :presence => true
   validates :description, :presence => true
 
-  def subject_school_class_semester
-    subject.school_class_semester
-  end
-
   private
 
     def set_semester_id
-      self.semester_id = subject_school_class_semester.id
+      self.semester_id = subject.school_class.semester_id
     end
 
 end

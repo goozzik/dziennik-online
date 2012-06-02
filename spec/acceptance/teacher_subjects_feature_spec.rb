@@ -119,16 +119,15 @@ feature "Teacher subjects" do
         end
 
         scenario "with valid attributes" do
-          wait_until(10) do
-            fill_in "description_desc_type", :with => "Sprawdzian"
-            fill_in "description_description", :with => "Dodawanie"
-            click_button "Zapisz"
-          end
+          sleep(3)
+          fill_in "description_desc_type", :with => "Sprawdzian"
+          fill_in "description_description", :with => "Dodawanie"
+          click_button "Zapisz"
           page.should have_content "Spra"
         end
 
         scenario "with empty fields" do
-          sleep(1)
+          sleep(3)
           click_button "Zapisz"
           page.should_not have_content "Spra"
         end
@@ -152,25 +151,23 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "5"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          #wait_until(10) {assert Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "5")}
-          wait_until {page.should have_content "5"}
-          #page.should have_xpath "//td[@class='mark'][contains(text(), '5')]"
+          reload_page
+          page.should have_xpath "//td[@class='mark'][contains(text(), '5')]"
         end
 
         scenario "with too high mark" do
           fill_in "mark_active", :with => "7"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          wait_until {page.should have_content "6"}
-          #assert Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "6")
+          page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
         scenario "with too low mark" do
           fill_in "mark_active", :with => "0"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          wait_until {page.should have_content "1"}
-          #assert Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "1")
+          reload_page
+          page.should have_xpath "//td[@class='mark'][contains(text(), '1')]"
         end
 
       end
@@ -186,27 +183,23 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "3"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          #wait_until(10) {assert Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "3")}
-          #assert_nil Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "6")
-          wait_until {page.should have_content "3"}
-          #page.should have_xpath "//td[@class='mark'][contains(text(), '3')]"
+          reload_page
+          page.should have_xpath "//td[@class='mark'][contains(text(), '3')]"
         end
 
         scenario "with too high mark" do
           fill_in "mark_active", :with => "7"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          wait_until {page.should have_content "6"}
-          #assert Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "6")
+          page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
         scenario "with too low mark" do
           fill_in "mark_active", :with => "0"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          wait_until {page.should have_content "1"}
-          #assert Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "1")
-          #assert !Mark.find_by_student_id_and_description_id_and_mark(Student.last.id, Description.last.id, "6")
+          reload_page
+          page.should have_xpath "//td[@class='mark'][contains(text(), '1')]"
         end
 
       end
@@ -248,8 +241,8 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "5"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          wait_until(10) {assert SemestralMark.find_by_student_id_and_subject_id_and_semester_id_and_mark(Student.last.id, Subject.last.id, Semester.last.id, 5)}
-          page.should have_content "5"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 
         #TODO story #174
@@ -267,9 +260,8 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "3"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          wait_until(10) {assert SemestralMark.find_by_student_id_and_subject_id_and_semester_id_and_mark(Student.last.id, Subject.last.id, Semester.last.id, 3)}
-          assert_nil SemestralMark.find_by_student_id_and_subject_id_and_semester_id_and_mark(Student.last.id, Subject.last.id, Semester.last.id, 5)
-          page.should have_content "3"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '3')]"
         end
 
         #TODO story #174

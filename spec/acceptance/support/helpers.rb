@@ -15,6 +15,10 @@ module HelperMethods
     page.should have_xpath "//div[@class='page-header']/h1[contains(text(), '#{header}')]"
   end
 
+  def reload_page
+    visit(current_path)
+  end
+
 end
 
 RSpec.configuration.include HelperMethods, :type => :acceptance

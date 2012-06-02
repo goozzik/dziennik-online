@@ -1,9 +1,10 @@
 = page_header "Przedmioty"
+
 - unless @subjects.empty?
-  = info_box "Kartki z ocenami i frekwencją",                                     |
-    "Możesz wydrukować karteczki z ocenami i frekwencją kożystając z pliku PDF.", |
-    link_to(image_tag("filetype_pdf.png") + "Kartki z ocenami",                   |
-    meeting_cards_teacher_students_path + ".pdf")                                 |
+  = info_box "Kartki z ocenami i frekwencją",
+    "Możesz wydrukować karteczki z ocenami i frekwencją kożystając z pliku PDF.",
+    link_to(image_tag("filetype_pdf.png") + "Kartki z ocenami",
+    meeting_cards_teacher_students_path + ".pdf")
   .row
     .span6
       %table.table.table-bordered
@@ -11,8 +12,11 @@
           %tr
             %td= link_to(subject.name, teacher_subject_path(subject))
             %td= link_to("Pokaż oceny", teacher_subject_path(subject))
-            %td= link_to("Usuń", teacher_subject_path(subject.id), :method => :delete, :confirm => t("delete_subject_question", :subject => subject.name), :class => "danger")
+            %td= link_to("Usuń", teacher_subject_path(subject.id), method:"delete",
+              confirm:t("delete_subject_question", subject:subject.name), class:"danger")
 - else
   = info_box "Klasa nie ma przedmiotów.", "Możesz dodać przedmiot poprzez poniższy formularz."
+
 = page_header "Dodaj nowy przedmiot"
+
 = render "form", :subject => @subject, :subject_templates => @subject_templates

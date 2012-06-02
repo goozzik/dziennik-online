@@ -20,7 +20,7 @@ feature 'Teacher school classes' do
     scenario "when there is school class" do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       click_link 'Ustawienia klas'
-      page.should have_xpath "//h1[contains(text(), '2013 G Informatyk')]"
+      page.should have_xpath "//h1[contains(text(), '3 G Informatyk 2013')]"
       page.should have_xpath "//p[contains(text(), 'Semestr: 2011/2012 Semestr 1')]"
       page.should have_xpath "//a[contains(text(), 'Wybierz semestr ')]"
       page.should have_xpath "//li[@class='active']/a[@href='/teacher/semesters/activate/#{Semester.last.id}']"
@@ -30,11 +30,11 @@ feature 'Teacher school classes' do
 
       scenario 'with valid attributes' do
         click_link 'Ustawienia klas'
-        fill_in 'Nazwa', :with => 'G'
+        fill_in 'Litera', :with => 'G'
         fill_in 'Profil', :with => 'Informatyk'
         fill_in 'Rocznik', :with => '2013'
         click_button 'Zapisz'
-        page.should have_xpath "//h1[contains(text(), '2013 G Informatyk')]"
+        page.should have_xpath "//h1[contains(text(), '3 G Informatyk 2013')]"
         page.should have_xpath "//li[@class='active']/a[@href='/teacher/semesters/activate/#{Semester.last.id}']"
       end
 
@@ -77,7 +77,7 @@ feature 'Teacher school classes' do
 
       scenario "older school class" do
         click_link "Ustaw jako aktywną"
-        page.should have_xpath "//h1[contains(text(), '2013 G Ochrona Środowiska')]"
+        page.should have_xpath "//h1[contains(text(), '3 G Ochrona Środowiska 2013')]"
       end
 
     end

@@ -7,7 +7,6 @@ class Director::SubjectsController < ApplicationController
   def show
     @subjects = @school_class.subjects
     @students = @school_class.students
-    #@semestral_marks = SemestralMark.find_all_by_students_and_semester_id_and_subject_id(@students, @semester.id, @subject.id)
   end
 
   private

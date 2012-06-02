@@ -14,7 +14,7 @@ class SchoolClass < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   has_many :messages, :dependent => :destroy
   has_many :absences, :dependent => :destroy
-  has_many :semester_marks, :dependent => :destroy
+  has_many :semestral_marks, :dependent => :destroy
 
   attr_accessible :letter, :profile, :yearbook, :active
 
@@ -30,6 +30,10 @@ class SchoolClass < ActiveRecord::Base
                4 => 'Czwartek',
                5 => 'Piątek',
                6 => 'Sobota'}
+
+  def self.grade(grade)
+    all.delete_if {|school_class| school_class.grade != grade}
+  end
 
   def absences_by_current_school_semester
     semester_absences(school_semester)
@@ -69,36 +73,16 @@ class SchoolClass < ActiveRecord::Base
     SubjectTemplate.all.delete_if { |template| subjects.find_by_subject_template_id(template) }
   end
 
-  def teacher_school_class
-    teacher.school_class
-  end
-
   def semester
     semesters.find_by_id(semester_id)
-  end
-
-  def school_semester
-    school.semester
   end
 
   def activate_semester(semester)
     update_attribute(:semester_id, semester.id)
   end
 
-  def semester_marks
-    semester.marks
-  end
-
-  def semester_semestral_marks
-    semester.semestral_marks
-  end
-
-  def school_semesters
-    school.semesters
-  end
-
   def semesters
-    school_semesters.before_year(yearbook)
+    school.semesters.before_year(yearbook)
   end
 
   def semester_absences(semester)
@@ -134,9 +118,9 @@ class SchoolClass < ActiveRecord::Base
     }
   end
 
-  def semester_average(semester_id)
-    semestral_marks = semestral_marks.find_all_by_semester_id(semester_id)
-    (semestral_marks.map(&:mark).inject(:+) / semestral_marks.count).to_f unless semestral_marks.empty?
+  def semester_average(semester)
+    marks = semestral_marks.find_all_by_semester_id(semester)
+    (marks.map(&:mark).inject(:+) / marks.count).to_f unless marks.empty?
   end
 
   def year_average(year)
@@ -166,10 +150,6 @@ class SchoolClass < ActiveRecord::Base
     count
   end
 
-  def self.grade(grade)
-    all.delete_if {|school_class| school_class.grade != grade}
-  end
-
   private
 
     def deactivate_old_school_class
@@ -185,7 +165,7 @@ class SchoolClass < ActiveRecord::Base
     end
 
     def set_semester_id
-      self.semester_id = school_semester.id
+      self.semester_id = school.semester.id
     end
 
     def unset_teacher_school_class_id
