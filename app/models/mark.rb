@@ -1,4 +1,9 @@
+# coding: utf-8
 class Mark < ActiveRecord::Base
+
+  AVAILABLE_MARKS = %w{1 1+ 2 2- 2+ 3 3- 3+ 4 4- 4+ 5 5- 5+ 6 6- 6+}
+
+  scope :current, joins(:semester).where(["semesters.active = ?", true])
 
   belongs_to :description
   belongs_to :semester
@@ -7,7 +12,7 @@ class Mark < ActiveRecord::Base
 
   attr_accessible :mark, :student_id, :description_id, :subject_id
 
-  scope :current, joins(:semester).where(["semesters.active = ?", true])
+  validate :validate_mark_format
 
   before_create :set_subject_id, :set_semester_id
 
@@ -16,6 +21,13 @@ class Mark < ActiveRecord::Base
   end
 
   private
+
+    def validate_mark_format
+      unless AVAILABLE_MARKS.include?(mark)
+        errors.add(:mark, "nie prawidłowa ocena")
+        return false
+      end
+    end
 
     def set_subject_id
       self.subject_id = description.subject_id

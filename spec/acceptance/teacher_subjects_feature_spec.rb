@@ -159,7 +159,8 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "7"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
+          reload_page
+          page.should have_xpath "//td[@class='mark'][contains(text(), '')]"
         end
 
         scenario "with too low mark" do
@@ -167,7 +168,7 @@ feature "Teacher subjects" do
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
           reload_page
-          page.should have_xpath "//td[@class='mark'][contains(text(), '1')]"
+          page.should have_xpath "//td[@class='mark'][contains(text(), '')]"
         end
 
       end
@@ -191,6 +192,7 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "7"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
+          reload_page
           page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
@@ -199,7 +201,7 @@ feature "Teacher subjects" do
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
           reload_page
-          page.should have_xpath "//td[@class='mark'][contains(text(), '1')]"
+          page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
       end
@@ -291,7 +293,6 @@ feature "Teacher subjects" do
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
           reload_page
-          save_and_open_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 
