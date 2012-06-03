@@ -1,7 +1,7 @@
 .row
   = simple_form_for [:teacher, message], :html => {:multipart => true, :class => "well form-horizontal span5"} do |f|
     = f.input :title, :label => "Tytuł"
-    = f.input :body, :label => "Wiadomość"
+    = f.input :body, :label => "Wiadomość", input_html: { rows:10 }
     .form-actions
       = f.button :submit, "Zapisz", :class => "brn btn-primary"
       = link_to "Anuluj", teacher_messages_path, :class => "btn btn-inverse"

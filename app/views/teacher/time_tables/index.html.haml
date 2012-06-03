@@ -3,5 +3,5 @@
   = render "time_tables", :time_tables => @time_tables
 - else
   = info_box "Klasa nie ma planu lekcji.", "Możesz dodać plan lekcji poprzez poniższy formularz."
-= page_header "Dodaj dzień do planu lekcji"
+= second_page_header "Dodaj dzień do planu lekcji"
 = render "form", :time_table => @time_table, :days => @days, :subjects => @subjects

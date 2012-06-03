@@ -6,7 +6,7 @@
         %th{:colspan => "2"}
           = time_table.week_day_name
           - if current_user.teacher
-            = link_to "Usuń", teacher_time_table_path(time_table), :method => :delete, :confirm => "Jesteś pewien?", :style => 'float:right;', :class => "danger"
+            = link_to "Usuń", teacher_time_table_path(time_table), :method => :delete, :confirm => "Jesteś pewien?", :class => "btn btn-mini btn-danger danger"
       - time_table.lessons.each do |lesson|
         %tr
           %td{:style => "width:15px;"}= lesson.number

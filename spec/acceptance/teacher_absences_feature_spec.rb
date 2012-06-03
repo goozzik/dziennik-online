@@ -40,14 +40,16 @@ feature 'Teacher absences feature' do
         month = Chronic.parse('monday this month')
         next_month = Chronic.parse('monday next month', :now => month)
         find(:xpath, "//a[@href='/teacher/absences?date=#{next_month.strftime("%Y-%m-%d")}']").click
-        page.should have_content "Frekwencja - #{I18n.t(next_month.strftime("%B"))} #{next_month.year}"
+        page.should have_content "Frekwencja"
+        page.should have_content "#{I18n.t(next_month.strftime("%B"))} #{next_month.year}"
       end
 
       scenario "follow previous month link" do
         month = Chronic.parse('monday this month')
         previous_month = Chronic.parse('monday last month', :now => month)
         find(:xpath, "//a[@href='/teacher/absences?date=#{previous_month.strftime("%Y-%m-%d")}']").click
-        page.should have_content "Frekwencja - #{I18n.t(previous_month.strftime("%B"))} #{previous_month.year}"
+        page.should have_content "Frekwencja"
+        page.should have_content "#{I18n.t(previous_month.strftime("%B"))} #{previous_month.year}"
       end
     end
 

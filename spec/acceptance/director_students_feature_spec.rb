@@ -62,14 +62,14 @@ feature "Director students" do
       end
 
       scenario "and no student with resit exam" do
-        FactoryGirl.create(:semestral_mark, subject_id:Subject.last.id, student_id:Student.last.id, mark:2)
+        FactoryGirl.create(:semestral_mark, subject_id:Subject.last.id, student_id:Student.last.id, mark:"2")
         click_link "do egzaminów poprawkowych"
         page.should have_xpath "//h2[contains(text(), 'Matematyka')]"
         assert_info_box "Brak uczniów do egzaminów poprawkowych."
       end
 
       scenario "and student with resit exam" do
-        FactoryGirl.create(:semestral_mark, subject_id:Subject.last.id, student_id:Student.last.id, mark:1)
+        FactoryGirl.create(:semestral_mark, subject_id:Subject.last.id, student_id:Student.last.id, mark:"1")
         click_link "do egzaminów poprawkowych"
         page.should have_xpath "//h2[contains(text(), 'Matematyka')]"
         page.should have_content "Jacek"
@@ -105,7 +105,7 @@ feature "Director students" do
       end
 
       scenario "and no student with classification exam" do
-        FactoryGirl.create(:semestral_mark, subject_id:Subject.last.id, student_id:Student.last.id, mark:2)
+        FactoryGirl.create(:semestral_mark, subject_id:Subject.last.id, student_id:Student.last.id, mark:"2")
         click_link "do egzaminów klasyfikacyjnych"
         page.should have_xpath "//h2[contains(text(), 'Matematyka')]"
         assert_info_box "Brak uczniów do egzaminów klasyfikacyjnych."

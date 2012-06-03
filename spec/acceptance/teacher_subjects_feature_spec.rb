@@ -48,7 +48,8 @@ feature "Teacher subjects" do
         scenario "when there is student in school class" do
           FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
           click_link "Pokaż oceny"
-          page.should have_content "Oceny - Matematyka"
+          page.should have_content "Oceny"
+          page.should have_content "Matematyka"
         end
 
       end

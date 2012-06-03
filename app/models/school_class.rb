@@ -55,7 +55,7 @@ class SchoolClass < ActiveRecord::Base
     school.semesters.find_by_id(semester_id)
   end
 
-  def availables_semesters
+  def available_semesters
     school.semesters.before_year(yearbook)
   end
 

@@ -10,13 +10,14 @@
       %table.table.table-bordered
         - @subjects.each do |subject|
           %tr
-            %td= link_to(subject.name, teacher_subject_path(subject))
-            %td= link_to("Pokaż oceny", teacher_subject_path(subject))
-            %td= link_to("Usuń", teacher_subject_path(subject.id), method:"delete",
-              confirm:t("delete_subject_question", subject:subject.name), class:"danger")
+            %td= subject.name
+            %td
+              = link_to("Pokaż oceny", teacher_subject_path(subject), class:"btn btn-mini")
+              = link_to("Usuń", teacher_subject_path(subject.id), method:"delete",
+              confirm:t("delete_subject_question", subject:subject.name), class:"btn btn-mini btn-danger danger")
 - else
   = info_box "Klasa nie ma przedmiotów.", "Możesz dodać przedmiot poprzez poniższy formularz."
 
-= page_header "Dodaj nowy przedmiot"
+= second_page_header "Dodaj nowy przedmiot"
 
 = render "form", :subject => @subject, :subject_templates => @subject_templates
