@@ -47,9 +47,22 @@ module NavigationHelper
     html.html_safe
   end
 
+  def director_students_dropdown
+    html = "<li class='dropdown'>
+              <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+                Uczniowie
+                <b class='caret'></b>
+              </a>
+              <ul class='dropdown-menu'>"
+    html << nav_link_to("z najwyższą średnią", director_students_top_path)
+    html << "</ul></li>"
+    html.html_safe
+  end
+
   def director_navigation
      html = nav_link_to("Klasy", director_school_classes_path)
      html << director_reports_dropdown
+     html << director_students_dropdown
      html.html_safe
   end
 

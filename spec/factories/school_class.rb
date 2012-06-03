@@ -4,6 +4,7 @@ FactoryGirl.define do
     yearbook '2013'
     profile 'Informatyk'
     letter 'G'
+    period 4
   end
 
 end

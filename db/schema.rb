@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120527125103) do
+ActiveRecord::Schema.define(:version => 20120602211048) do
 
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
 
   add_index "absences", ["school_class_id"], :name => "index_absences_on_school_class_id"
   add_index "absences", ["semester_id"], :name => "index_absences_on_semester_id"
+
+  create_table "average_semestral_marks", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "semester_id"
+    t.float    "average"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "bells", :force => true do |t|
     t.integer  "school_id"
@@ -114,6 +122,8 @@ ActiveRecord::Schema.define(:version => 20120527125103) do
     t.integer  "teacher_id"
     t.integer  "semester_id"
     t.integer  "yearbook"
+    t.integer  "grade"
+    t.integer  "period"
     t.string   "profile"
     t.string   "letter"
     t.boolean  "active"

@@ -14,6 +14,7 @@ class SemestralMark < ActiveRecord::Base
   validates :subject_id, :presence => true
 
   before_create :set_school_class_id, :set_semester_id
+  after_save :update_semestral_average_mark
 
   private
 
@@ -23,6 +24,10 @@ class SemestralMark < ActiveRecord::Base
 
     def set_semester_id
       self.semester_id = school_class.semester_id
+    end
+
+    def update_semestral_average_mark
+      AverageSemestralMark.find_or_create_by_student_id_and_semester_id(student_id, semester_id).update_average
     end
 
 end

@@ -9,18 +9,18 @@ class SchoolClass < ActiveRecord::Base
   belongs_to :teacher
 
   has_many :subjects, :dependent => :destroy
-  has_many :students, :dependent => :destroy, :conditions => ['student = ?', true]
+  has_many :students, :dependent => :destroy, :conditions => ['student = ?', true], :order => "last_name ASC"
   has_many :time_tables, :dependent => :destroy
   has_many :documents, :dependent => :destroy
   has_many :messages, :dependent => :destroy
   has_many :absences, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
 
-  attr_accessible :letter, :profile, :yearbook, :active
+  attr_accessible :letter, :profile, :yearbook, :period, :grade, :semester_id
 
-  validates_presence_of :letter, :profile, :yearbook
+  validates_presence_of :letter, :profile, :yearbook, :period
 
-  before_create :deactivate_old_school_class, :set_active, :set_school_id, :set_semester_id
+  before_create :deactivate_old_school_class, :set_active, :set_school_id, :set_semester_id, :set_grade
   before_destroy :unset_teacher_school_class_id
 
   WEEK_DAYS = {0 => 'Niedziela',
@@ -31,38 +31,16 @@ class SchoolClass < ActiveRecord::Base
                5 => 'Piątek',
                6 => 'Sobota'}
 
-  def self.grade(grade)
-    all.delete_if {|school_class| school_class.grade != grade}
-  end
-
   def absences_by_current_school_semester
     semester_absences(school.semester)
   end
 
-  def grade
-    grade = 4 - (yearbook - Time.now.year)
-    grade >= 4 ? 4 : grade
-  end
-
-  #add column period!
   def fullname
     "#{grade} #{letter} #{profile} #{yearbook}"
   end
 
   def name
     "#{grade} #{letter}"
-  end
-
-  def activate
-    unless active
-      teacher.deactivate_school_class
-      update_attribute(:active, true)
-      teacher.update_attribute(:school_class_id, id)
-    end
-  end
-
-  def deactivate
-    update_attribute(:active, false)
   end
 
   def available_time_table_days
@@ -74,14 +52,10 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def semester
-    semesters.find_by_id(semester_id)
+    school.semesters.find_by_id(semester_id)
   end
 
-  def activate_semester(semester)
-    update_attribute(:semester_id, semester.id)
-  end
-
-  def semesters
+  def availables_semesters
     school.semesters.before_year(yearbook)
   end
 
@@ -150,6 +124,27 @@ class SchoolClass < ActiveRecord::Base
     count
   end
 
+  def activate
+    unless active
+      teacher.deactivate_school_class
+      update_attribute(:active, true)
+      teacher.update_attribute(:school_class_id, id)
+    end
+  end
+
+  def deactivate
+    update_attribute(:active, false)
+  end
+
+  def activate_semester(semester)
+    update_attributes(semester_id:semester.id, grade:check_for_new_grade)
+  end
+
+  def check_for_new_grade
+    _grade = calculate_grade
+    _grade != grade ? _grade : grade
+  end
+
   private
 
     def deactivate_old_school_class
@@ -166,6 +161,15 @@ class SchoolClass < ActiveRecord::Base
 
     def set_semester_id
       self.semester_id = school.semester.id
+    end
+
+    def calculate_grade
+      _grade = period - (yearbook - Time.now.year)
+     _grade >= period ? period : _grade
+    end
+
+    def set_grade
+      self.grade = calculate_grade
     end
 
     def unset_teacher_school_class_id

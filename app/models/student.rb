@@ -1,7 +1,12 @@
 # coding: utf-8
 class Student < User
 
-  default_scope :conditions => ["student = ?", true], :order => 'last_name ASC'
+  default_scope :conditions => ["student = ?", true]
+
+  scope :first_grade_active, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 1, true])
+  scope :second_grade_active, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 2, true])
+  scope :third_grade_active, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 3, true])
+  scope :fourth_grade_active, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 4, true])
 
   belongs_to :school_class
   belongs_to :teacher
@@ -9,6 +14,7 @@ class Student < User
   has_many :absences, :dependent => :destroy
   has_many :marks, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
+  has_many :average_semestral_marks, :dependent => :destroy
 
   attr_accessible :email, :student, :first_name, :last_name,
                   :pesel, :street, :city, :zip_code, :province,
@@ -18,6 +24,10 @@ class Student < User
   validates_presence_of :first_name, :last_name
 
   before_create :set_teacher_id, :set_school_id, :set_student, :generate_username_and_password
+
+  def current_average
+    average_semestral_marks.find_by_semester_id(school.semester.id)
+  end
 
   def current_average_from_subject(subject)
     Mark.average_from_marks(marks.current.find_all_by_subject_id(subject))
@@ -37,8 +47,8 @@ class Student < User
     }
   end
 
-  def update_password(params)
-    update_attribute(:password, params[:password]) if verify_teacher_current_password(params) && validate_teacher_new_password(params)
+  def current_absences
+    semester_absences(school_class.semester_id)
   end
 
   def semester_average(semester)
@@ -54,14 +64,8 @@ class Student < User
     marks.find_all_by_semester_id_and_subject_id(school_class.semester_id, subject_id).collect {|mark| mark.mark}.join(', ')
   end
 
-  def current_absences
-    absences = self.absences.find_all_by_semester_id(school_class.semester_id)
-    @absences ||= {
-      :required => absences.map(&:required).delete_if {|a| a.nil?}.inject(0, &:+),
-      :justified => absences.map(&:justified).delete_if {|a| a.nil?}.inject(0, &:+),
-      :unexcused => absences.map(&:unexcused).delete_if {|a| a.nil?}.inject(0, &:+),
-      :late => absences.map(&:late).delete_if {|a| a.nil?}.inject(0, &:+)
-    }
+  def update_password(params)
+    update_attribute(:password, params[:password]) if verify_teacher_current_password(params) && validate_teacher_new_password(params)
   end
 
   private
