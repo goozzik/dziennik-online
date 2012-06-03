@@ -13,7 +13,7 @@ feature "Director absences" do
 
     scenario 'there is no active school class in school' do
       click_link "Klasy"
-      page.should have_content "Szkoła nie posiada aktywnych klas!"
+      assert_info_box "Szkoła nie ma aktywnych klas."
     end
 
   end

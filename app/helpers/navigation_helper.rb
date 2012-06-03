@@ -56,6 +56,7 @@ module NavigationHelper
               <ul class='dropdown-menu'>"
     html << nav_link_to("z najwyższą średnią", director_students_top_path)
     html << nav_link_to("do egzaminów poprawkowych", director_students_resit_path)
+    html << nav_link_to("do egzaminów klasyfikacyjnych", director_students_classification_path)
     html << "</ul></li>"
     html.html_safe
   end

@@ -30,7 +30,15 @@ class School < ActiveRecord::Base
 
   def resit_students_by_subject_template(subject_template)
     subjects = subject_template.subjects.joins(:school_class).where(["school_classes.school_id = ?", id])
-    _students = SemestralMark.where(["subject_id IN (?) AND semester_id = ? AND mark = 1", subjects.collect(&:id), semester.id]).collect(&:student)
+    SemestralMark.where(["subject_id IN (?) AND semester_id = ? AND mark = '1'", subjects_by_subject_template(subject_template).collect(&:id), semester.id]).collect(&:student)
+  end
+
+  def classification_students_by_subject_template(subject_template)
+    SemestralMark.where(["subject_id IN (?) AND semester_id = ? AND mark = 'nkl'", subjects_by_subject_template(subject_template).collect(&:id), semester.id]).collect(&:student)
+  end
+
+  def subjects_by_subject_template(subject_template)
+    subject_template.subjects.joins(:school_class).where(["school_classes.school_id = ?", id])
   end
 
   def subject_templates

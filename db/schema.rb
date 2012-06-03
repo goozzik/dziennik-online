@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
     t.integer  "semester_id"
     t.integer  "subject_id"
     t.integer  "school_class_id"
-    t.integer  "mark"
+    t.string   "mark"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
