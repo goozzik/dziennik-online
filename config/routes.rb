@@ -37,6 +37,7 @@ DziennikOnline::Application.routes.draw do
       get "subject" => "subjects#show", :as => "subject"
     end
     get "students/top" => "students#top", :as => "students_top"
+    get "students/resit" => "students#resit", :as => "students_resit"
   end
 
 

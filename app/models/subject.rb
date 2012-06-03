@@ -7,6 +7,7 @@ class Subject < ActiveRecord::Base
   has_many :lessons, :dependent => :destroy
   has_many :descriptions, :dependent => :destroy
   has_many :marks, :dependent => :destroy
+  has_many :semestral_marks, :dependent => :destroy
 
   attr_accessible :school_class_id, :subject_template_id
 
