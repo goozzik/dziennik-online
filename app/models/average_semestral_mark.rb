@@ -7,7 +7,7 @@ class AverageSemestralMark < ActiveRecord::Base
 
   def update_average
     marks = SemestralMark.find_all_by_student_id_and_semester_id(student, semester)
-    update_attribute(:average, marks.map(&:mark).inject(:+).to_f / marks.count)
+    update_attribute(:average, marks.map(&:mark).collect(&:to_i).inject(:+).to_f / marks.count)
   end
 
 end

@@ -245,7 +245,21 @@ feature "Teacher subjects" do
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 
-        #TODO story #174
+        scenario "with to high mark" do
+          fill_in "semestral_mark_active", :with => "7"
+          sleep(1)
+          find(:css, "#semestral_mark_active").native.send_key(:tab)
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
+        end
+
+        scenario "with to low mark" do
+          fill_in "semestral_mark_active", :with => "0"
+          sleep(1)
+          find(:css, "#semestral_mark_active").native.send_key(:tab)
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
+        end
 
       end
 
@@ -264,7 +278,22 @@ feature "Teacher subjects" do
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '3')]"
         end
 
-        #TODO story #174
+        scenario "with to high mark" do
+          fill_in "semestral_mark_active", :with => "7"
+          sleep(1)
+          find(:css, "#semestral_mark_active").native.send_key(:tab)
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
+        end
+
+        scenario "with to low mark" do
+          fill_in "semestral_mark_active", :with => "0"
+          sleep(1)
+          find(:css, "#semestral_mark_active").native.send_key(:tab)
+          reload_page
+          save_and_open_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
+        end
 
       end
 
