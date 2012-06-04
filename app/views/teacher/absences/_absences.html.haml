@@ -26,14 +26,18 @@
       - weeks.each do |week|
         - absence = student.absences.find_by_date(week)
         - if absence
-          - school_class_required += student_required += absence.required if absence.required
-          - school_class_justified += student_justified += absence.justified if absence.justified
-          - school_class_unexcused += student_unexcused += absence.unexcused if absence.unexcused
-          - school_class_late += student_late += absence.late if absence.late
+          - student_required += absence.required if absence.required
+          - student_justified += absence.justified if absence.justified
+          - student_unexcused += absence.unexcused if absence.unexcused
+          - student_late += absence.late if absence.late
         %td.absence{:id => "#{student.id}_#{week}_required"}= absence.try(:required)
         %td.absence{:id => "#{student.id}_#{week}_justified"}= absence.try(:justified)
         %td.absence{:id => "#{student.id}_#{week}_unexcused"}= absence.try(:unexcused)
         %td.absence{:id => "#{student.id}_#{week}_late"}= absence.try(:late)
+      - school_class_required += student_required
+      - school_class_justified += student_justified
+      - school_class_unexcused += student_unexcused
+      - school_class_late += student_late
       %td= absence_percentage(student_required, student_justified, student_unexcused)
       %td= student_required
       %td= student_justified

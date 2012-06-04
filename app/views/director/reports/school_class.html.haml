@@ -4,7 +4,7 @@
     %span.caret
   %ul.dropdown-menu
     - @school_classes.each do |school_class|
-      = nav_link_to(school_class.fullname, director_school_class_report_path(@school_class))
+      = nav_link_to(school_class.fullname, director_school_class_report_path(school_class))
 
 = page_header "Raport nauczania klasy #{@school_class.fullname}"
 
