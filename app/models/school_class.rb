@@ -93,8 +93,8 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def semester_average(semester)
-    marks = semestral_marks.find_all_by_semester_id(semester)
-    (marks.map(&:mark).inject(:+) / marks.count).to_f unless marks.empty?
+    averages = AverageSemestralMark.where(["student_id in (?) AND semester_id = ?", students.collect(&:id), semester.id])
+    averages.map(&:average).inject(:+) / averages.count unless averages.empty?
   end
 
   def year_average(year)

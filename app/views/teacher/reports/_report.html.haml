@@ -37,9 +37,9 @@
         %td= absences[:justified]
         %td= absences[:unexcused]
         %td= absences[:late]
-        %td= student.semester_average(semester)
+        %td= student.average_semestral_marks.find_by_semester_id(semester).try(:average)
         - 1.upto(6).each do |i|
-          - count = student.count_semestral_marks(i, semester.id)
+          - count = student.count_semestral_marks(i.to_s, semester.id)
           - marks[i] =+ count
           %td= count
         %td
