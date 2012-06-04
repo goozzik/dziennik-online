@@ -152,7 +152,6 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "5"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='mark'][contains(text(), '5')]"
         end
 
@@ -160,7 +159,6 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "7"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='mark'][contains(text(), '')]"
         end
 
@@ -168,7 +166,6 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "0"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='mark'][contains(text(), '')]"
         end
 
@@ -185,7 +182,6 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "3"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='mark'][contains(text(), '3')]"
         end
 
@@ -193,7 +189,6 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "7"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
@@ -201,7 +196,6 @@ feature "Teacher subjects" do
           fill_in "mark_active", :with => "0"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
@@ -244,7 +238,6 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "5"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 
@@ -252,7 +245,6 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "7"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
         end
 
@@ -260,7 +252,6 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "0"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
         end
 
@@ -277,7 +268,6 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "3"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '3')]"
         end
 
@@ -285,7 +275,6 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "7"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 
@@ -293,7 +282,6 @@ feature "Teacher subjects" do
           fill_in "semestral_mark_active", :with => "0"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
-          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 

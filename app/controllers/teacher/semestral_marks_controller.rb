@@ -7,7 +7,20 @@ class Teacher::SemestralMarksController < ApplicationController
     subject = current_teacher.school_class.subjects.find(params[:semestral_mark][:subject_id])
     student = current_teacher.school_class.students.find(params[:semestral_mark][:student_id])
     semestral_mark = current_teacher.school_class.semester.semestral_marks.first(:conditions => ['subject_id = ? AND student_id = ?', subject.id, student.id])
-    semestral_mark ? semestral_mark.update_attributes(params[:semestral_mark]) : SemestralMark.create(params[:semestral_mark])
+    if semestral_mark
+      old_mark = semestral_mark.mark
+      if semestral_mark.update_attributes(params[:semestral_mark])
+        render js: "$('#semestral_mark_#{params[:semestral_mark][:student_id]}').html('#{semestral_mark.mark}');"
+      else
+        render js: "$('#semestral_mark_#{params[:semestral_mark][:student_id]}').html('#{old_mark}');"
+      end
+    else
+      if SemestralMark.create(params[:semestral_mark])
+        render js: "$('#semestral_mark_#{params[:semestral_mark][:student_id]}').html('#{params[:semestral_mark][:mark]}');"
+      else
+        render js: "$('#semestral_mark_#{params[:semestral_mark][:student_id]}').html('');"
+      end
+    end
   end
 
 end

@@ -22,7 +22,7 @@
       %td= student.first_name
       %td= student.last_name
       - @descriptions.each do |description|
-        %td.mark{id:"#{student.id}_#{description.id}"}
+        %td.mark{id:"mark_#{student.id}_#{description.id}"}
           = student.marks.find_by_description_id(description).try(:mark)
       %td
       %td.semestral_mark{:id => "semestral_mark_#{student.id}"}
@@ -54,22 +54,15 @@
 
     $('#mark_active').live('blur', function() {
       mark = $(this).val();
-      /* TODO */
-      /*if (mark.match(/-/)) {
-
-      } else if (mark.match(/+/)) {
-
-      }*/
       data = 'mark[mark]=' + mark +
-      '&mark[student_id]=' + parsed_id[0] +
-      '&mark[description_id]=' + parsed_id[1] +
-      '&subject_id=' + #{@subject.id}
+      '&mark[student_id]=' + parsed_id[1] +
+      '&mark[description_id]=' + parsed_id[2] +
+      '&mark[subject_id]=' + #{@subject.id}
       $.ajax({
         type: 'PUT',
-        url: '/teacher/marks/update',
+        url: '/teacher/marks',
         data: data,
       });
-      $(this).replaceWith(mark);
     });
 
     var parsed_id2;
@@ -86,20 +79,13 @@
 
     $('#semestral_mark_active').live('blur', function() {
       mark = $(this).val();
-      /* TODO */
-      /*if (mark.match(/-/)) {
-
-      } else if (mark.match(/+/)) {
-
-      }*/
       var data = 'semestral_mark[mark]=' + mark +
       '&semestral_mark[student_id]=' + parsed_id2[2] +
       '&semestral_mark[subject_id]=' + #{@subject.id}
       $.ajax({
         type: 'PUT',
-        url: '/teacher/semestral_marks/update',
+        url: '/teacher/semestral_marks',
         data: data,
       });
-      $(this).replaceWith(mark);
     });
   });

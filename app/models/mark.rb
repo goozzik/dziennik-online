@@ -14,7 +14,7 @@ class Mark < ActiveRecord::Base
 
   validate :validate_mark_format
 
-  before_create :set_subject_id, :set_semester_id
+  before_create :set_semester_id
 
   def self.average_from_marks(marks)
     sprintf("%1.2f", marks.empty? ? 0.0 : marks.collect { |m| m.mark.to_i }.inject(:+).to_f / marks.count)
@@ -27,10 +27,6 @@ class Mark < ActiveRecord::Base
         errors.add(:mark, "nie prawidłowa ocena")
         return false
       end
-    end
-
-    def set_subject_id
-      self.subject_id = description.subject_id
     end
 
     def set_semester_id
