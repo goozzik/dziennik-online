@@ -33,6 +33,4 @@ class TimeTable < ActiveRecord::Base
     end
   end
 
-  private
-
 end

@@ -24,19 +24,33 @@ feature 'Teacher documents feature' do
 
     scenario "when there is document" do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      FactoryGirl.create(:document, :school_class_id => Teacher.last.id, :document => "dokument.doc")
+      FactoryGirl.create(:document, document:"dokument.doc", for_teachers:"0", user_id:Teacher.last.id, user_type:"User")
+      click_link "Dokumenty"
+      page.should have_content "test_dokument"
+      page.should have_content "testowy dokument"
+    end
+
+    scenario "when there is document for teachers" do
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+      FactoryGirl.create(:document, document:"dokument.doc", for_teachers:"1", user_id:Teacher.last.id)
       click_link "Dokumenty"
       page.should have_content "test_dokument"
       page.should have_content "testowy dokument"
     end
 
     context "create" do
-      #
+
+      scenario "for teachers in school" do
+        FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+        click_link "Dokumenty"
+      end
+
     end
 
     context "download" do
       #
     end
+
 
   end
 

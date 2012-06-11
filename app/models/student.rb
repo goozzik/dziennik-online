@@ -1,7 +1,7 @@
 # coding: utf-8
 class Student < User
 
-  default_scope :conditions => ["student = ?", true]
+  default_scope :conditions => ["role = ?", "student"]
 
   scope :first_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 1, true])
   scope :second_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 2, true])
@@ -20,10 +20,9 @@ class Student < User
                   :pesel, :street, :city, :zip_code, :province,
                   :telephone, :individual, :boarding_school, :niu
 
-  validate :validate_student
   validates_presence_of :first_name, :last_name
 
-  before_create :set_teacher_id, :set_school_id, :set_student, :generate_username_and_password
+  before_validation :set_role, :set_teacher_id, :set_school_id, :generate_username_and_password
 
   def self.bests_by_semester_id(semester_id)
     joins(:average_semestral_marks).where(["average_semestral_marks.semester_id = ?", semester_id]).order("average_semestral_marks.average DESC").limit(4)
@@ -74,20 +73,12 @@ class Student < User
 
   private
 
-    def set_student
-      self.student = true
-    end
-
     def set_teacher_id
       self.teacher_id = school_class.teacher_id
     end
 
     def set_school_id
       self.school_id = school_class.school_id
-    end
-
-    def validate_student
-      self.student
     end
 
     def generate_username_and_password
@@ -127,6 +118,10 @@ class Student < User
         return false
       end
       return true
+    end
+
+    def set_role
+      self.role = "student"
     end
 
 end

@@ -209,15 +209,15 @@ feature "Teacher subjects" do
         end
 
         scenario "when there is one mark" do
-          FactoryGirl.create(:mark, :description_id => Description.last.id, :student_id => Student.last.id, :mark => "6")
+          FactoryGirl.create(:mark, subject_id:Subject.last.id, :description_id => Description.last.id, :student_id => Student.last.id, :mark => "6")
           visit "/teacher/subjects/#{Subject.last.id}"
           page.should have_xpath "//td[@class='mark_average'][contains(text(), '6.00')]"
         end
 
         scenario "when there are two marks" do
-          FactoryGirl.create(:mark, :description_id => Description.last.id, :student_id => Student.last.id, :mark => "6")
+          FactoryGirl.create(:mark, subject_id:Subject.last.id, :description_id => Description.last.id, :student_id => Student.last.id, :mark => "6")
           FactoryGirl.create(:description, :subject_id => Subject.last.id, :description => "Walce")
-          FactoryGirl.create(:mark, :description_id => Description.last.id, :student_id => Student.last.id, :mark => "3")
+          FactoryGirl.create(:mark, subject_id:Subject.last.id, :description_id => Description.last.id, :student_id => Student.last.id, :mark => "3")
           visit "/teacher/subjects/#{Subject.last.id}"
           page.should have_xpath "//td[@class='mark_average'][contains(text(), '4.50')]"
         end

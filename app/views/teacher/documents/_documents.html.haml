@@ -1,0 +1,15 @@
+%table.table.table-bordered
+  %tr
+    %th Nazwa pliku
+    %th{:style => "width:450px;"} Opis
+    %th Data dodania
+    %th{:colspan => "2"}
+  - documents.each do |document|
+    %tr
+      %td= document.name
+      %td= document.description
+      %td= document.created_at
+      %td
+        = link_to("Pobierz", document.document.url, class:"btn btn-mini")
+        - if can? :manage, document
+          = link_to("Usuń", teacher_document_path(document), method:"delete", confirm:"Jesteś pewien?", class:"btn btn-mini btn-danger danger")

@@ -64,9 +64,12 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
 
   create_table "documents", :force => true do |t|
     t.integer  "school_class_id"
+    t.integer  "school_id"
     t.string   "name"
     t.string   "description"
     t.string   "document"
+    t.integer  "user_id"
+    t.string   "user_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -211,11 +214,7 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
     t.integer  "school_id"
     t.integer  "semester_id"
     t.integer  "teacher_id"
-    t.boolean  "student"
-    t.boolean  "teacher"
-    t.boolean  "admin"
-    t.boolean  "superadmin"
-    t.boolean  "director"
+    t.string   "role"
     t.boolean  "deleted"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false

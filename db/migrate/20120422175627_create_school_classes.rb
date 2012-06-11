@@ -6,7 +6,6 @@ class CreateSchoolClasses < ActiveRecord::Migration
       t.integer :teacher_id
       t.integer :semester_id
       t.integer :yearbook
-      t.integer :year
       t.integer :grade
       t.integer :period
       t.string :profile

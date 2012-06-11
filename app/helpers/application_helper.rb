@@ -1,20 +1,6 @@
 # coding: utf-8
 module ApplicationHelper
 
-  def user_type
-    if current_user.student
-      'student'
-    elsif current_user.teacher
-      'teacher'
-    elsif current_user.admin
-      'admin'
-    elsif current_user.director
-      'director'
-    elsif current_user.superadmin
-      'superadmin'
-    end
-  end
-
   def page_header(text, small = nil)
     "<div class='page-header'><h1>#{text} <small>#{small if small}</small></h1></div>".html_safe
   end

@@ -3,15 +3,16 @@
 module NavigationHelper
 
   def navigation
-    if current_user.student
+    case current_user.role
+    when 'student'
       student_navigation
-    elsif current_user.teacher
+    when 'teacher'
       teacher_navigation
-    elsif current_user.admin
+    when 'admin'
       admin_navigation
-    elsif current_user.director
+    when 'director'
       director_navigation
-    elsif current_user.superadmin
+    when 'superadmin'
       superadmin_navigation
     end
   end
@@ -65,6 +66,7 @@ module NavigationHelper
      html = nav_link_to("Klasy", director_school_classes_path)
      html << director_reports_dropdown
      html << director_students_dropdown
+     html << nav_link_to("Dokumenty", director_documents_path)
      html.html_safe
   end
 
@@ -85,7 +87,7 @@ module NavigationHelper
     html = "<li class='dropdown'>"
     html << link_to("Konto <b class='caret'></b>".html_safe, "#", :class => "dropdown-toggle", "data-toggle" => "dropdown")
     html << "<ul class='dropdown-menu'>"
-    html << nav_link_to("Ustawienia klas", teacher_school_classes_path) if user_type == "teacher"
+    html << nav_link_to("Ustawienia klas", teacher_school_classes_path) if current_user.role == "teacher"
     html << nav_link_to("Ustawienia konta", edit_user_registration_path)
     html << content_tag("li", link_to("Wyloguj", destroy_user_session_path, :method => :delete))
     html << "</ul>"

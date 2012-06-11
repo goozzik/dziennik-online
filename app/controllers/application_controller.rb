@@ -76,27 +76,27 @@ class ApplicationController < ActionController::Base
 
     def authenticate_superadmin!
       authenticate_user!
-      redirect_to root_path unless current_user.superadmin
+      redirect_to root_path unless current_user.superadmin?
     end
 
     def authenticate_admin!
       authenticate_user!
-      redirect_to root_path unless current_user.admin
+      redirect_to root_path unless current_user.admin?
     end
 
     def authenticate_director!
       authenticate_user!
-      redirect_to root_path unless current_user.director
+      redirect_to root_path unless current_user.director?
     end
 
     def authenticate_teacher!
       authenticate_user!
-      redirect_to root_path unless current_user.teacher
+      redirect_to root_path unless current_user.teacher?
     end
 
     def authenticate_student!
       authenticate_user!
-      redirect_to root_path unless current_user.student
+      redirect_to root_path unless current_user.student?
     end
 
 end

@@ -9,9 +9,9 @@ class SchoolClass < ActiveRecord::Base
   belongs_to :teacher
 
   has_many :subjects, :dependent => :destroy
-  has_many :students, :dependent => :destroy, :conditions => ['student = ?', true], :order => "last_name ASC"
+  has_many :students, :dependent => :destroy, :order => "last_name ASC"
   has_many :time_tables, :dependent => :destroy
-  has_many :documents, :dependent => :destroy
+  has_many :documents, :dependent => :destroy, :conditions => ["school_class_id IS NOT NULL"]
   has_many :messages, :dependent => :destroy
   has_many :absences, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy

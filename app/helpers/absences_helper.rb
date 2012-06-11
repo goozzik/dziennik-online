@@ -1,7 +1,7 @@
 # coding: utf-8
 module AbsencesHelper
 
-  def months_navigation(previous_month, next_month, user_type)
+  def months_navigation(previous_month, next_month)
     html = "<ul class='pager'>"
     html << previous_link(previous_month)
     html << next_link(next_month)
@@ -10,7 +10,7 @@ module AbsencesHelper
   end
 
   def previous_link(previous_month)
-    case user_type
+    case current_user.role
     when 'teacher'
       content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, teacher_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
     when 'director'
@@ -19,7 +19,7 @@ module AbsencesHelper
   end
 
   def next_link(next_month)
-    case user_type
+    case current_user.role
     when 'teacher'
       content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, teacher_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
     when 'director'

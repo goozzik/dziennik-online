@@ -18,11 +18,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :school_id
       t.integer :semester_id
       t.integer :teacher_id
-      t.boolean :student
-      t.boolean :teacher
-      t.boolean :admin
-      t.boolean :superadmin
-      t.boolean :director
+      t.string :role
       t.boolean :deleted # I don't realy know why we need this? #goozzik
 
       t.timestamps
