@@ -38,4 +38,8 @@ module ApplicationHelper
     </div>".html_safe
   end
 
+  def delete_link_content
+    "<i class='icon-trash icon-white'></i> Usuń".html_safe
+  end
+
 end

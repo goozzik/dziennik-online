@@ -6,7 +6,7 @@
       %th Nazwa pliku
       %th{:style => "width:450px;"} Opis
       %th Data dodania
-      %th{:colspan => "2"}
+      %th{style:"width:105px;"}
     - @documents.each do |document|
       %tr
         %td= document.name
@@ -14,7 +14,7 @@
         %td= document.created_at
         %td
           = link_to("Pobierz", document.document.url, class:"btn btn-mini")
-          = link_to("Usuń", director_document_path(document), method:"delete", confirm:"Jesteś pewien?", class:"btn btn-mini btn-danger danger")
+          = link_to(delete_link_content, director_document_path(document), method:"delete", confirm:"Jesteś pewien?", class:"btn btn-mini btn-danger danger")
 - else
   = info_box "Szkoła nie ma dokumentów.", "Możesz dodać dokument poprzez poniższy formularz."
 

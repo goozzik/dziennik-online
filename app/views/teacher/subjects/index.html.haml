@@ -10,11 +10,11 @@
       %table.table.table-bordered
         - @subjects.each do |subject|
           %tr
-            %td= subject.name
-            %td
+            %th= subject.name
+            %td{style: "width:131px;"}
               = link_to("Pokaż oceny", teacher_subject_path(subject), class:"btn btn-mini")
-              = link_to("Usuń", teacher_subject_path(subject.id), method:"delete",
-              confirm:t("delete_subject_question", subject:subject.name), class:"btn btn-mini btn-danger danger")
+              = link_to(delete_link_content, teacher_subject_path(subject.id), method:"delete",
+              confirm:t("delete_subject_question", subject:subject.name), class:"btn btn-mini btn-danger")
 - else
   = info_box "Klasa nie ma przedmiotów.", "Możesz dodać przedmiot poprzez poniższy formularz."
 
