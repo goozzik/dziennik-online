@@ -15,14 +15,14 @@ feature 'User' do
     scenario "password" do
       fill_in 'user_password', :with => 'test123'
       fill_in 'user_password_confirmation', :with => 'test123'
-      fill_in 'user_current_password', :with => 'test'
+      fill_in 'user_current_password', :with => Teacher.last.username
       click_button 'Zapisz'
       page.should have_content "Konto zostało pomyślnie zaktualizowane."
     end
 
     scenario "email" do
       fill_in 'user_email', :with => 'user@example.com'
-      fill_in 'user_current_password', :with => 'test'
+      fill_in 'user_current_password', :with => Teacher.last.username
       click_button 'Zapisz'
       page.should have_content "Konto zostało pomyślnie zaktualizowane."
     end

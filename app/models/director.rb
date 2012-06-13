@@ -6,8 +6,6 @@ class Director < User
 
   has_many :documents, :as => :user, :foreign_key => "user_id"
 
-  attr_accessible :school_id
-
   before_validation :set_role
 
   def school_classes
@@ -18,6 +16,7 @@ class Director < User
 
     def set_role
       self.role = "director"
+      self.user_role = "dyrektor"
     end
 
 

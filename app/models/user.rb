@@ -8,10 +8,14 @@ class User < ActiveRecord::Base
 
   belongs_to :school
 
-  attr_accessible :email, :username, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :username, :password, :password_confirmation, :remember_me, :user_role
   attr_protected :role
+  attr_accessor :user_role
 
-  validates_presence_of :role, :on => :create
+  before_validation :generate_username_and_password, :on => :create
+
+  validates_presence_of :first_name, :last_name
+  validates_presence_of :user_role, :on => :create
   validate :validate_role_format, :on => :create
 
   def role?(base_role)
@@ -44,6 +48,16 @@ class User < ActiveRecord::Base
       unless ROLES.include?(role)
         errors.add(:role, "nie prawidłowa rola")
         return false
+      end
+    end
+
+    def generate_username_and_password
+      if role != "superadmin"
+        begin
+          random_string = rand(36**10).to_s(36)
+        end unless User.find_by_username(random_string)
+        self.username = random_string
+        self.password = random_string
       end
     end
 

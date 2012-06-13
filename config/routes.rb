@@ -1,5 +1,11 @@
 DziennikOnline::Application.routes.draw do
 
+  namespace :admin do
+    resource :school, :only => [:show]
+    resources :semesters
+    resources :users
+  end
+
   devise_for :users, :skip => [:registrations] do
     get "/users/edit" => "devise/registrations#edit", :as => :edit_user_registration
     put "/users" => "devise/registrations#update", :as => :user_registration
@@ -48,11 +54,6 @@ DziennikOnline::Application.routes.draw do
     resources :marks
     resources :time_tables
     resources :messages
-  end
-
-  namespace :admin do
-    resource :school, :only => [:show]
-    resources :semesters
   end
 
   # The priority is based upon order of creation:

@@ -1,0 +1,23 @@
+= page_header "Użytkownicy"
+
+%h2 Nauczyciele
+- unless @teachers.empty?
+  = render "users", users: @teachers
+- else
+  = info_box "Szkoła nie posiada nauczycieli.", ""
+
+%h2 Dyrektorzy
+- unless @directors.empty?
+  = render "users", users: @directors
+- else
+  = info_box "Szkoła nie posiada dyrektorów.", ""
+
+%h2 Administratorzy 
+- unless @admins.empty?
+  = render "users", users: @admins
+- else
+  = info_box "Jesteś jedynym administratorem szkoły.", ""
+
+= page_header "Dodaj nowego użytkownika"
+
+= render "form", :user => @user

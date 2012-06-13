@@ -1,0 +1,15 @@
+%table.table.table-bordered
+  %tr
+    %th{style:"width:3%"} #
+    %th{style:"width:30%"} Imię
+    %th{style:"width:30%"} Nazwisko
+    %th Login
+    %th
+  - users.each_with_index do |user, i|
+    %tr
+      %td= i+1
+      %td= user.first_name
+      %td= user.last_name
+      %td= user.username
+      %td
+        = link_to delete_link_content, admin_user_path(user), method:"delete", confirm:"Jesteś pewien?", class:"btn btn-mini btn-danger"

@@ -71,7 +71,8 @@ module NavigationHelper
   end
 
   def admin_navigation
-     html = nav_link_to("Ustawienia szkoły", admin_school_path)
+     html = nav_link_to("Użytkownicy", admin_users_path)
+     html << nav_link_to("Ustawienia szkoły", admin_school_path)
      html.html_safe
   end
 

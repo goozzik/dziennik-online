@@ -12,7 +12,8 @@ FactoryGirl.define do
     end
 
     factory :admin, :class => Admin do
-      username 'admin'
+      first_name 'Admin'
+      last_name  'instrator'
     end
 
     factory :director, :class => Director do

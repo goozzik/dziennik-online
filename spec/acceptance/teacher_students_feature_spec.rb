@@ -114,20 +114,20 @@ feature 'Teacher students' do
       end
 
       scenario "validate new password presence" do
-        fill_in "student_current_password", :with => "test"
+        fill_in "student_current_password", :with => Teacher.last.username
         click_button "Zapisz"
         page.should have_content "nie może być puste"
       end
 
       scenario "validate password length" do
-        fill_in "student_current_password", :with => "test"
+        fill_in "student_current_password", :with => Teacher.last.username
         fill_in "student_password", :with => "test"
         click_button "Zapisz"
         page.should have_content "za krótkie"
       end
 
       scenario "validate password confirmation" do
-        fill_in "student_current_password", :with => "test"
+        fill_in "student_current_password", :with => Teacher.last.username
         fill_in "student_password", :with => "test123"
         fill_in "student_password_confirmation", :with => "test124"
         click_button "Zapisz"

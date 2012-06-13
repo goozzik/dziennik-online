@@ -24,6 +24,7 @@ class Teacher < User
 
     def set_role
       self.role = "teacher"
+      self.user_role = "nauczyciel"
     end
 
 end

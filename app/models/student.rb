@@ -20,9 +20,7 @@ class Student < User
                   :pesel, :street, :city, :zip_code, :province,
                   :telephone, :individual, :boarding_school, :niu
 
-  validates_presence_of :first_name, :last_name
-
-  before_validation :set_role, :set_teacher_id, :set_school_id, :generate_username_and_password
+  before_validation :set_role, :set_teacher_id, :set_school_id
 
   def self.bests_by_semester_id(semester_id)
     joins(:average_semestral_marks).where(["average_semestral_marks.semester_id = ?", semester_id]).order("average_semestral_marks.average DESC").limit(4)
@@ -81,14 +79,6 @@ class Student < User
       self.school_id = school_class.school_id
     end
 
-    def generate_username_and_password
-      begin
-        username = rand(36**10).to_s(36)
-      end unless User.find_by_username(username)
-      self.username = username
-      self.password = username
-    end
-
     def verify_teacher_current_password(params)
       unless params[:current_password].empty?
         unless teacher.valid_password?(params[:current_password])
@@ -122,6 +112,7 @@ class Student < User
 
     def set_role
       self.role = "student"
+      self.user_role = "uczeń"
     end
 
 end
