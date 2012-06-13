@@ -12,6 +12,12 @@ module HelperMethods
     page.should have_xpath "//h4[@class='alert-heading'][contains(text(), '#{info}')]"
   end
 
+  def assert_error_box(error)
+    page.should have_xpath "//div[@class='alert alert-error fade in']"
+    page.should have_xpath "//h4[@class='alert-heading'][contains(text(), '#{error}')]"
+  end
+
+
   def assert_page_header(header)
     page.should have_xpath "//div[@class='page-header']/h1[contains(text(), '#{header}')]"
   end

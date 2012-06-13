@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :username, :password, :password_confirmation, :remember_me, :user_role
   attr_protected :role
   attr_accessor :user_role
+  attr_accessor :current_password
 
   before_validation :generate_username_and_password, :on => :create
 
@@ -42,6 +43,10 @@ class User < ActiveRecord::Base
     role?("student")
   end
 
+  def update_password(params)
+    update_attribute(:password, params[:password]) if validate_new_password(params)
+  end
+
   private
 
     def validate_role_format
@@ -59,6 +64,34 @@ class User < ActiveRecord::Base
         self.username = random_string
         self.password = random_string
       end
+    end
+
+    def validate_new_password(params)
+      validate_new_password_presence(params[:password]) && validate_new_password_length(params[:password]) && validate_new_password_confirmation(params)
+    end
+
+    def validate_new_password_presence(param)
+      if param.empty?
+        errors.add(:password, "nie może być puste")
+        return false
+      end
+      true
+    end
+
+    def validate_new_password_length(param)
+      if param.length < 6
+        errors.add(:password, "za krótkie")
+        return false
+      end
+      true
+    end
+
+    def validate_new_password_confirmation(params)
+      if params[:password] != params[:password_confirmation]
+        errors.add(:password_confirmation, "potwierdzenie hasła nie zgadza się")
+        return false
+      end
+      true
     end
 
 end

@@ -3,6 +3,7 @@ class Admin::UsersController < ApplicationController
 
   before_filter :authenticate_admin!
   before_filter :role_filter, :only => [:create]
+  before_filter :check_current_password, :only => [:update_password]
 
   def index
     @user = User.new
@@ -27,8 +28,16 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     user = User.find_by_id_and_school_id(params[:id], current_admin.school_id)
-    user.destroy
-    redirect_to admin_users_path
+    redirect_to admin_users_path if user.destroy
+  end
+
+  def new_password
+    @user = User.find_by_id_and_school_id(params[:id], current_admin.school_id)
+  end
+
+  def update_password
+    @user = User.find_by_id_and_school_id(params[:id], current_admin.school_id)
+    @user.update_password(params[:user]) ? redirect_to(:action => "index") : render(:action => "new_password")
   end
 
   private 
@@ -36,9 +45,16 @@ class Admin::UsersController < ApplicationController
     def role_filter
       unless params[:user][:user_role].empty?
         unless Admin::AVAILABLE_ROLES.include?(params[:user][:user_role])
-          flash[:alert] = "Błąd!"
+          flash[:error] = "Nieprawidłowy typ!"
           redirect_to :back
         end
+      end
+    end
+
+    def check_current_password
+      unless current_admin.valid_password?(params[:user][:current_password])
+        flash[:error] = "Nieprawidłowe hasło!"
+        redirect_to :back
       end
     end
 

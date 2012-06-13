@@ -82,8 +82,43 @@ feature "Admin accounts" do
       FactoryGirl.create(:teacher, :school_id => School.last.id)
       click_link "Użytkownicy"
       find(:xpath, "//table[1]//a[@data-method='delete']").click
-      save_and_open_page
       assert_info_box "Szkoła nie posiada nauczycieli."
+    end
+
+    context "update_password" do
+      before do
+        FactoryGirl.create(:teacher, :school_id => School.last.id)
+        click_link "Użytkownicy"
+        click_link "Zmień hasło"
+      end
+
+      scenario "validate admin password" do
+        fill_in "user_current_password", :with => "wrongpassword"
+        click_button "Zapisz"
+        assert_error_box "Nieprawidłowe hasło!"
+      end
+
+      scenario "validate new password presence" do
+        fill_in "user_current_password", :with => Admin.last.username
+        click_button "Zapisz"
+        page.should have_content "nie może być puste"
+      end
+
+      scenario "validate password length" do
+        fill_in "user_current_password", :with => Admin.last.username
+        fill_in "user_password", :with => "test"
+        click_button "Zapisz"
+        page.should have_content "za krótkie"
+      end
+
+      scenario "validate password confirmation" do
+        fill_in "user_current_password", :with => Admin.last.username
+        fill_in "user_password", :with => "test123"
+        fill_in "user_password_confirmation", :with => "test124"
+        click_button "Zapisz"
+        page.should have_content "potwierdzenie hasła nie zgadza się"
+      end
+
     end
 
   end

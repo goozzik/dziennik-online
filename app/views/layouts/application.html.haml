@@ -22,7 +22,7 @@
         - if flash[:error]
           .alert.alert-error.fade.in
             %a.close{"data-dismiss" => "alert", :href => "#"} x
-            = flash[:error]
+            %h4.alert-heading= flash[:error]
         - if flash[:alert]
           .alert.fade.in
             %a.close{"data-dismiss" => "alert", :href => "#"} x
@@ -30,5 +30,5 @@
         - if flash[:notice]
           .alert.alert-success.fade.in
             %a.close{"data-dismiss" => "alert", :href => "#"} x
-            = flash[:notice]
+            %h4.alert-heading= flash[:notice]
         = yield
