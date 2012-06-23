@@ -4,7 +4,7 @@ module LoginHelpers
 
   def login(acc_type)
     visit root_path
-    #page.should have_content "Zaloguj się"
+    page.should have_content "Zaloguj się"
     user = case acc_type
       when "student"
         Student.last
