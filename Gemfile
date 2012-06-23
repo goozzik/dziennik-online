@@ -19,6 +19,7 @@ gem "prawn_rails"
 gem "ruby_parser"
 gem "hpricot"
 gem "jquery-rails"
+gem "haml"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,7 +41,6 @@ end
 
 group :development do
   gem "rails_best_practices"
-  gem "haml"
 end
 
 # To use ActiveModel has_secure_password
