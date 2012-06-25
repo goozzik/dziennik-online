@@ -7,6 +7,12 @@ class Admin::SemestersController < ApplicationController
     @semester.save ? redirect_to(:controller => "schools", :action => "show") : render(:action => "new")
   end
 
+  def destroy
+    semester = current_admin.school.semesters.find(params[:id])
+    semester.destroy
+    redirect_to(:controller => "schools", :action => "show")
+  end
+
   def activate
     semester = current_admin.school.semesters.find(params[:id])
     semester.activate

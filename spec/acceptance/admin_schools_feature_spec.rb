@@ -22,83 +22,92 @@ feature "Admin school" do
       page.should have_xpath "//a[@class='btn btn-mini disabled']"
     end
 
-    context "create" do
-      before do
-        click_link "Ustawienia szkoły" 
-      end
-
-      context "with valid attributes" do
+    context "semester" do
+      context "create" do
         before do
-          fill_in "semester_start_year", with: "2012"
-          fill_in "semester_end_year", with: "2013"
-          select "1", from: "semester_semester"
+          click_link "Ustawienia szkoły" 
         end
 
-        scenario "when there is one semester already" do
-          FactoryGirl.create(:semester, school_id: School.last.id)
-          click_button "Zapisz"
-          page.should have_content "2012/2013"
-          page.should have_xpath "//a[@class='btn btn-mini ']"
+        context "with valid attributes" do
+          before do
+            fill_in "semester_start_year", with: "2012"
+            fill_in "semester_end_year", with: "2013"
+            select "1", from: "semester_semester"
+          end
+
+          scenario "when there is one semester already" do
+            FactoryGirl.create(:semester, school_id: School.last.id)
+            click_button "Zapisz"
+            page.should have_content "2012/2013"
+            page.should have_xpath "//a[@class='btn btn-mini ']"
+          end
+
+          scenario "when there is no semester yet" do
+            click_button "Zapisz"
+            page.should have_content "2012/2013"
+            page.should have_xpath "//a[@class='btn btn-mini disabled']"
+          end
         end
 
-        scenario "when there is no semester yet" do
-          click_button "Zapisz"
-          page.should have_content "2012/2013"
-          page.should have_xpath "//a[@class='btn btn-mini disabled']"
+        context "validate" do
+
+          scenario "when empty start year field" do
+            fill_in "semester_end_year", with: "2013"
+            select "1", from: "semester_semester"
+            click_button "Zapisz"
+            page.should have_content "nie może być puste"
+          end
+
+          scenario "when empty end year field" do
+            fill_in "semester_start_year", with: "2012"
+            select "1", from: "semester_semester"
+            click_button "Zapisz"
+            page.should have_content "nie może być puste"
+          end
+
+          scenario "when empty semester field" do
+            fill_in "semester_start_year", with: "2012"
+            fill_in "semester_end_year", with: "2013"
+            click_button "Zapisz"
+            page.should have_content "nie może być puste"
+          end
+
+          scenario "when end year is earlier than start year" do
+            fill_in "semester_start_year", with: "2013"
+            fill_in "semester_end_year", with: "2012"
+            select "1", from: "semester_semester"
+            click_button "Zapisz"
+            page.should have_content "musi być późniejszy niż rok rozpoczęcia"
+          end
+
+          scenario "when difference between start and end year is more than year" do
+            fill_in "semester_start_year", with: "2011"
+            fill_in "semester_end_year", with: "2013"
+            select "1", from: "semester_semester"
+            click_button "Zapisz"
+            page.should have_content "zbyt duża rożnica"
+          end
         end
+
+        scenario "cancel" do
+          click_link "Anuluj"
+          page.should have_content "Ustawienia szkoły"
+        end
+
       end
 
-      context "validate" do
-
-        scenario "when empty start year field" do
-          fill_in "semester_end_year", with: "2013"
-          select "1", from: "semester_semester"
-          click_button "Zapisz"
-          page.should have_content "nie może być puste"
-        end
-
-        scenario "when empty end year field" do
-          fill_in "semester_start_year", with: "2012"
-          select "1", from: "semester_semester"
-          click_button "Zapisz"
-          page.should have_content "nie może być puste"
-        end
-
-        scenario "when empty semester field" do
-          fill_in "semester_start_year", with: "2012"
-          fill_in "semester_end_year", with: "2013"
-          click_button "Zapisz"
-          page.should have_content "nie może być puste"
-        end
-
-        scenario "when end year is earlier than start year" do
-          fill_in "semester_start_year", with: "2013"
-          fill_in "semester_end_year", with: "2012"
-          select "1", from: "semester_semester"
-          click_button "Zapisz"
-          page.should have_content "musi być późniejszy niż rok rozpoczęcia"
-        end
-
-        scenario "when difference between start and end year is more than year" do
-          fill_in "semester_start_year", with: "2011"
-          fill_in "semester_end_year", with: "2013"
-          select "1", from: "semester_semester"
-          click_button "Zapisz"
-          page.should have_content "zbyt duża rożnica"
-        end
+      scenario "delete" do
+        FactoryGirl.create(:semester, school_id: School.last.id)
+        click_link "Ustawienia szkoły" 
+        click_link "Usuń"
+        assert_alert_box "Szkoła nie ma ustawionego semestru!"
       end
 
-      scenario "cancel" do
-        click_link "Anuluj"
-        page.should have_content "Ustawienia szkoły"
-      end
+      #context "activate" do
+      #end
 
     end
 
-    #context "activate" do
-    #end
-
   end
-
 
 end
