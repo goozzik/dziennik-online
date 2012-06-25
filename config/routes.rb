@@ -1,16 +1,16 @@
 DziennikOnline::Application.routes.draw do
 
+  devise_for :users, :skip => [:registrations] do
+    get "/users/edit" => "devise/registrations#edit", :as => :edit_user_registration
+    put "/users" => "devise/registrations#update", :as => :user_registration
+  end
+
   namespace :admin do
     resource :school, :only => [:show]
     resources :semesters
     get "users/:id/new_password" => "users#new_password", :as => "user_new_password"
     put "users/:id/update_password" => "users#update_password", :as => "user_update_password"
     resources :users
-  end
-
-  devise_for :users, :skip => [:registrations] do
-    get "/users/edit" => "devise/registrations#edit", :as => :edit_user_registration
-    put "/users" => "devise/registrations#update", :as => :user_registration
   end
 
   get "admin/semesters/activate/:id" => "admin/semesters#activate", :as => "set_semester_as_active"

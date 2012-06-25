@@ -2,8 +2,8 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :authenticate_admin!
-  before_filter :role_filter, :only => [:create]
   before_filter :check_current_password, :only => [:update_password]
+  before_filter :set_user_school_id, :only => [:create]
 
   def index
     @user = User.new
@@ -12,18 +12,18 @@ class Admin::UsersController < ApplicationController
     @directors = current_admin.school.directors
   end
 
+  def edit
+    @user = User.find_by_id_and_school_id(params[:id], current_admin.school_id)
+  end
+
   def create
-    case params[:user][:user_role]
-      when "nauczyciel"
-        @user = current_admin.school.teachers.build(params[:user])
-      when "dyrektor"
-        @user = current_admin.school.directors.build(params[:user])
-      when "administrator"
-        @user = current_admin.school.admins.build(params[:user])
-      else
-        @user = User.new(params[:user])
-    end
-    @user.save ? redirect_to(admin_users_path) : render("new")
+    @user = User.new(params[:user])
+    @user.save_with_role ? redirect_to(admin_users_path) : render("new")
+  end
+
+  def update
+    @user = User.find_by_id_and_school_id(params[:id], current_admin.school_id)
+    @user.update_attributes(params[:user]) ? redirect_to(admin_users_path) : render("edit")
   end
 
   def destroy
@@ -42,20 +42,15 @@ class Admin::UsersController < ApplicationController
 
   private 
 
-    def role_filter
-      unless params[:user][:user_role].empty?
-        unless Admin::AVAILABLE_ROLES.include?(params[:user][:user_role])
-          flash[:error] = "Nieprawidłowy typ!"
-          redirect_to :back
-        end
-      end
-    end
-
     def check_current_password
       unless current_admin.valid_password?(params[:user][:current_password])
         flash[:error] = "Nieprawidłowe hasło!"
         redirect_to :back
       end
+    end
+
+    def set_user_school_id
+      params[:user][:school_id] = current_admin.school_id
     end
 
 end

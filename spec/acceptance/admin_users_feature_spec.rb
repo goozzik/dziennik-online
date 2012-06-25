@@ -73,7 +73,7 @@ feature "Admin accounts" do
         fill_in "user_first_name", :with => "James"
         fill_in "user_last_name", :with => "James"
         click_button "Zapisz"
-        page.should have_content "nie może być puste"
+        page.should have_content "nieprawidłowa rola"
       end
 
     end
@@ -119,6 +119,39 @@ feature "Admin accounts" do
         page.should have_content "potwierdzenie hasła nie zgadza się"
       end
 
+    end
+
+    context "update" do
+      before do
+        FactoryGirl.create(:teacher, :school_id => School.last.id)
+        click_link "Użytkownicy"
+        click_link "Edytuj"
+      end
+
+      scenario "with valid attributes" do
+        fill_in "user_first_name", :with => "Jackob"
+        fill_in "user_last_name", :with => "James"
+        click_button "Zapisz"
+        page.should have_content "Jackob"
+      end
+
+      scenario "with blank first name" do
+        fill_in "user_first_name", :with => ""
+        click_button "Zapisz"
+        page.should have_content "nie może być puste"
+      end
+
+      scenario "with blank last name" do
+        fill_in "user_last_name", :with => ""
+        click_button "Zapisz"
+        page.should have_content "nie może być puste"
+      end
+
+      scenario "with blank login" do
+        fill_in "user_username", :with => ""
+        click_button "Zapisz"
+        page.should have_content "nie może być puste"
+      end
     end
 
   end

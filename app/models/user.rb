@@ -10,12 +10,12 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :username, :password, :password_confirmation, :remember_me, :user_role
   attr_protected :role
-  attr_accessor :user_role
-  attr_accessor :current_password
+
+  attr_accessor :user_role, :current_password
 
   before_validation :generate_username_and_password, :on => :create
 
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :first_name, :last_name, :username
   validates_presence_of :user_role, :on => :create
   validate :validate_role_format, :on => :create
 
@@ -47,11 +47,26 @@ class User < ActiveRecord::Base
     update_attribute(:password, params[:password]) if validate_new_password(params)
   end
 
+  def save_with_role
+    case user_role
+    when "nauczyciel"
+      self.role = "teacher"
+    when "administrator"
+      self.role = "admin"
+    when "dyrektor"
+      self.role = "director"
+    else
+      errors.add(:user_role, "nieprawidłowa rola")
+      return false
+    end
+    save
+  end
+
   private
 
     def validate_role_format
       unless ROLES.include?(role)
-        errors.add(:role, "nie prawidłowa rola")
+        errors.add(:role, "nieprawidłowa rola")
         return false
       end
     end
