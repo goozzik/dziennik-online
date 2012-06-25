@@ -1,3 +1,4 @@
+# coding: utf-8
 class Semester < ActiveRecord::Base
 
   belongs_to :school
@@ -10,14 +11,17 @@ class Semester < ActiveRecord::Base
   attr_accessible :start_year, :end_year, :semester, :active
   #default_scope :order => 'created_at ASC'
 
+  before_create :set_active_if_first
+
   validates :start_year, :presence => true
   validates :end_year, :presence => true
   validates :semester, :presence => true
+  validate :validate_end_year_is_later, :validate_difference_between_years
 
   def activate
     unless active
       school.deactivate_semester
-      update_attributes(:active => true)
+      update_attribute(:active, true)
     end
   end
 
@@ -40,5 +44,27 @@ class Semester < ActiveRecord::Base
   def self.before_year(year)
     where(["end_year <= ?", year])
   end
+
+  private
+
+    def set_active_if_first
+      self.active = true if school.semesters.count == 0
+    end
+
+    def validate_end_year_is_later
+      if start_year && end_year && start_year > end_year
+        errors.add(:end_year, "musi być późniejszy niż rok rozpoczęcia") 
+        return false
+      end
+      true
+    end
+
+    def validate_difference_between_years
+      if start_year && end_year && end_year - start_year > 1
+        errors.add(:end_year, "zbyt duża rożnica") 
+        return false
+      end
+      true
+    end
 
 end

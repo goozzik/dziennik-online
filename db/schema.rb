@@ -151,9 +151,9 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
     t.integer  "semester"
     t.integer  "start_year"
     t.integer  "end_year"
-    t.boolean  "active"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "active",     :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "semesters", ["school_id"], :name => "index_semesters_on_school_id"
