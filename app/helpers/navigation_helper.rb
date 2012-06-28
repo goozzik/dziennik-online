@@ -79,6 +79,7 @@ module NavigationHelper
   def student_navigation
     html = nav_link_to("Oceny", student_marks_path)
     html << nav_link_to("Frekwencja", student_absences_path)
+    html << nav_link_to("Raporty", student_reports_path)
     html << nav_link_to("Wiadomości", student_messages_path)
     html << nav_link_to("Plan lekcji", student_time_tables_path)
     html.html_safe
