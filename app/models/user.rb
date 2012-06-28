@@ -19,28 +19,24 @@ class User < ActiveRecord::Base
   validates_presence_of :user_role, :on => :create
   validate :validate_role_format, :on => :create
 
-  def role?(base_role)
-    ROLES.index(base_role.to_s) <= ROLES.index(role)
-  end
-
   def superadmin?
-    role?("superadmin")
+    role == "superadmin"
   end
 
   def admin?
-    role?("admin")
+    role == "admin"
   end
 
   def teacher?
-    role?("teacher")
+    role == "teacher"
   end
 
   def director?
-    role?("director")
+    role == "director"
   end
 
   def student?
-    role?("student")
+    role == "student"
   end
 
   def update_password(params)

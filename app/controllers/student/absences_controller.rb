@@ -4,7 +4,7 @@ class Student::AbsencesController < ApplicationController
 
   def index
     @student = current_student
-    @absences = current_student.absences.where(["semester_id = ?", current_student.school_class_semester.id])
+    @absences = current_student.absences.where(["semester_id = ?", current_student.school_class.semester_id])
   end
 
 end

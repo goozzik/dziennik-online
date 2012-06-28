@@ -52,7 +52,7 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def semester
-    school.semesters.find_by_id(semester_id)
+    school.semesters.find(semester_id)
   end
 
   def available_semesters
