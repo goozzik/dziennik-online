@@ -27,11 +27,6 @@ module AbsencesHelper
     end
   end
 
-  def absence_percentage(required, justified, unexcused)
-    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
-    percentage == "NaN" ? "--" : percentage
-  end
-
   def school_class_semester_absences(school_class, semester_id)
     html = ''
     absences = school_class.semester_absences(semester_id)

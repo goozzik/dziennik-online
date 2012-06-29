@@ -46,4 +46,8 @@ class School < ActiveRecord::Base
     SubjectTemplate.joins(:subjects).where(["subjects.school_class_id IN (?)", school_classes.active.collect(&:id)]).uniq
   end
 
+  def current_year_semesters
+    Time.now.month > 9 ? semesters.find_all_by_start_year(Time.now.year) : semesters.find_all_by_end_year(Time.now.year)
+  end
+
 end

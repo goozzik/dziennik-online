@@ -39,13 +39,7 @@ class Student < User
   end
 
   def semester_absences(semester)
-    absences = self.absences.find_all_by_semester_id(semester)
-    {
-      :required => absences.map(&:required).delete_if {|a| a.nil?}.inject(0, &:+),
-      :justified => absences.map(&:justified).delete_if {|a| a.nil?}.inject(0, &:+),
-      :unexcused => absences.map(&:unexcused).delete_if {|a| a.nil?}.inject(0, &:+),
-      :late => absences.map(&:late).delete_if {|a| a.nil?}.inject(0, &:+)
-    }
+    SemesterAbsence.new(self, semester)
   end
 
   def current_absences
@@ -58,7 +52,7 @@ class Student < User
   end
 
   def count_semestral_marks(mark, semester)
-    semestral_marks.find_all_by_mark_and_semester_id(mark, semester).count
+    semestral_marks.find_all_by_mark_and_semester_id(mark.to_s, semester).count
   end
 
   def list_current_marks_by_subject_id(subject_id)
@@ -67,6 +61,14 @@ class Student < User
 
   def update_password(params)
     update_attribute(:password, params[:password]) if verify_teacher_current_password(params) && validate_teacher_new_password(params)
+  end
+
+  def semesters
+    school.current_year_semesters
+  end
+
+  def average_semestral_mark_for_semester(semester)
+    average_semestral_marks.find_by_semester_id(semester).try(:average) || "--"
   end
 
   private

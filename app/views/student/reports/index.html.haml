@@ -1,0 +1,33 @@
+= page_header "Raporty"
+
+- current_student.semesters.each do |semester|
+  %h2= semester.fullname
+  %table.table.table-bordered
+    %tr
+      %th{colspan:"5"} Frekwencja
+      %th{colspan:"8"} Oceny
+    %tr
+      %th{style:"width:7%"} %
+      %th{style:"width:7%"} ob
+      %th{style:"width:7%"} us
+      %th{style:"width:7%"} nu
+      %th{style:"width:7%"} sp
+      %th{style:"width:5%"} Średnia
+      %th{style:"width:5%"} 1
+      %th{style:"width:5%"} 2
+      %th{style:"width:5%"} 3
+      %th{style:"width:5%"} 4
+      %th{style:"width:5%"} 5
+      %th{style:"width:5%"} 6
+      %th nkl
+    - semester_absences = current_student.semester_absences(semester)
+    %tr
+      %td= semester_absences.percentage
+      %td= semester_absences.required
+      %td= semester_absences.justified
+      %td= semester_absences.unexcused
+      %td= semester_absences.late
+      %td= current_student.average_semestral_mark_for_semester(semester)
+      - 1.upto(6).each do |i|
+        %td= current_student.count_semestral_marks(i, semester)
+      %td= current_student.count_semestral_marks("nkl", semester)

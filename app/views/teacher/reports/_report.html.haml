@@ -22,9 +22,8 @@
       %th{style:"width:5%"} 6
       %th nkl
     - required = justified = unexcused = late = 0
-    - marks = [0,0,0,0,0,0]
     - students.each_with_index do |student, i|
-      - absences = student.semester_absences(semester)
+      - semester_absences = student.semester_absences(semester)
       - required += absences[:required]
       - justified += absences[:justified]
       - unexcused += absences[:unexcused]
