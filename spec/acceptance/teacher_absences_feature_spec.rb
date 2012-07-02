@@ -13,19 +13,20 @@ feature 'Teacher absences feature' do
 
     scenario "info when school class is not set" do
       click_link "Frekwencja"
-      assert_alert_box("Najpierw dodaj klasę!")
+      assert_alert_box("Najpierw dodaj klasę.")
     end
 
     scenario "info when school class have no students" do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       click_link "Frekwencja"
-      assert_alert_box("Najpierw dodaj uczniów!")
+      assert_alert_box("Najpierw dodaj uczniów.")
     end
 
     scenario "info about how to add absences" do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
       click_link "Frekwencja"
+      save_and_open_page
       assert_info_box("Frekwencja")
     end
 

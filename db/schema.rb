@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
 
   create_table "average_semestral_marks", :force => true do |t|
     t.integer  "student_id"
+    t.integer  "school_class_id"
     t.integer  "semester_id"
     t.float    "average"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "bells", :force => true do |t|

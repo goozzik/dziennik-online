@@ -14,7 +14,7 @@ feature "Teacher subjects" do
 
     scenario "info when school class is not set" do
       click_link "Oceny"
-      assert_alert_box("Najpierw dodaj klasę!")
+      assert_alert_box("Najpierw dodaj klasę.")
     end
 
     scenario "info when school class have not subjects" do
@@ -41,7 +41,7 @@ feature "Teacher subjects" do
 
         scenario "when there is no student in school class" do
           click_link "Pokaż oceny"
-          page.should have_content "Najpierw dodaj uczniów!"
+          page.should have_content "Najpierw dodaj uczniów."
           assert current_path == teacher_students_path
         end
 

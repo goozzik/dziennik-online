@@ -3,6 +3,7 @@ class CreateAverageSemestralMarks < ActiveRecord::Migration
   def up
     create_table :average_semestral_marks do |t|
       t.integer :student_id
+      t.integer :school_class_id
       t.integer :semester_id
       t.float :average
 

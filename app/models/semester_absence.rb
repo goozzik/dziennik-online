@@ -2,8 +2,8 @@ class SemesterAbsence
 
   attr_reader :absences
 
-  def initialize(student, semester)
-    @absences = student.absences.find_all_by_semester_id(semester)
+  def initialize(resource, semester)
+    @absences = resource.absences.find_all_by_semester_id(semester)
   end
 
   def required

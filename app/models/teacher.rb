@@ -3,21 +3,30 @@ class Teacher < User
   default_scope :conditions => ["role = ?", "teacher"]
 
   has_many :school_classes, :dependent => :destroy
+  has_one :school_class, :conditions => ["active = ?", true]
   has_many :students, :dependent => :destroy
   has_many :documents, :as => :user, :foreign_key => "user_id"
 
   before_validation :set_role
 
-  def school_class
-    if school_class = school_classes.find_by_active(true)
-      school_class
-    else
-      return nil
-    end
-  end
+  delegate :average_semestral_mark_for_semester,
+           :count_semestral_marks,
+           :semester_absences,
+           :semester,
+           :semester_fullname,
+           :available_semesters, :to => :school_class
+  delegate :current_year_semesters, :to => :school
 
   def deactivate_school_class
     school_class.deactivate if school_class
+  end
+
+  def school_class_students
+    school_class.students
+  end
+
+  def school_class_fullname
+    school_class.fullname
   end
 
   private

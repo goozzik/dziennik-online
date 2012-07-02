@@ -15,6 +15,7 @@ class SchoolClass < ActiveRecord::Base
   has_many :messages, :dependent => :destroy
   has_many :absences, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
+  has_many :average_semestral_marks, :dependent => :destroy
 
   attr_accessible :letter, :profile, :yearbook, :period, :grade, :semester_id
 
@@ -52,7 +53,7 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def semester
-    school.semesters.find(semester_id)
+    school.semesters.find_by_id(semester_id)
   end
 
   def available_semesters
@@ -60,13 +61,7 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def semester_absences(semester)
-    absences = self.absences.find_all_by_semester_id(semester)
-    @absences ||= {
-      :required => absences.map(&:required).delete_if {|a| a.nil?}.inject(0, &:+),
-      :justified => absences.map(&:justified).delete_if {|a| a.nil?}.inject(0, &:+),
-      :unexcused => absences.map(&:unexcused).delete_if {|a| a.nil?}.inject(0, &:+),
-      :late => absences.map(&:late).delete_if {|a| a.nil?}.inject(0, &:+)
-    }
+    SemesterAbsence.new(self, semester)
   end
 
   def year_absences(year)
@@ -94,7 +89,6 @@ class SchoolClass < ActiveRecord::Base
 
   def semester_average(semester)
     averages = AverageSemestralMark.where(["student_id in (?) AND semester_id = ?", students.collect(&:id), semester.id])
-    averages.map(&:average).inject(:+) / averages.count unless averages.empty?
   end
 
   def year_average(year)
@@ -109,9 +103,9 @@ class SchoolClass < ActiveRecord::Base
     averages / students.count
   end
 
-  def count_semestral_marks(mark, semester_id)
+  def count_semestral_marks(mark, semester)
     count = 0
-    students.each { |student| count += student.semestral_marks.find_all_by_mark_and_semester_id(mark, semester_id).count }
+    students.each { |student| count += student.semestral_marks.find_all_by_mark_and_semester_id(mark.to_s, semester).count }
     count
   end
 
@@ -143,6 +137,19 @@ class SchoolClass < ActiveRecord::Base
   def check_for_new_grade
     _grade = calculate_grade
     _grade != grade ? _grade : grade
+  end
+
+  def average_semestral_mark_for_semester(semester)
+    averages = average_semestral_marks.find_all_by_semester_id(semester)
+    averages.empty? ? "--" : averages.map(&:average).inject(:+) / averages.count 
+  end
+
+  def semester_fullname
+    semester.fullname
+  end
+
+  def school_semesters
+    school.semesters
   end
 
   private

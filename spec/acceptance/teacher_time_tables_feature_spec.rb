@@ -14,13 +14,13 @@ feature 'Teacher time tables' do
 
     scenario "info when school class is not set" do
       click_link "Dokumenty"
-      assert_alert_box("Najpierw dodaj klasę!")
+      assert_alert_box("Najpierw dodaj klasę.")
     end
 
     scenario "when there is no subjects for school class" do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       click_link "Plan lekcji"
-      assert_alert_box "Najpierw dodaj przedmioty!"
+      assert_alert_box "Najpierw dodaj przedmioty."
     end
 
     scenario "when there is no time tables" do

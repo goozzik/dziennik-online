@@ -3,8 +3,6 @@ class Teacher::SchoolClassesController < ApplicationController
   before_filter :authenticate_teacher!
 
   def index
-    @active_school_class = current_teacher.school_class
-    @school_class = SchoolClass.new
     @school_classes = current_teacher.school_classes
   end
 

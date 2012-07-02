@@ -29,4 +29,6 @@ feature "Student time tables" do
       page.should have_content "Matematyka"
     end
 
+  end
+
 end

@@ -13,7 +13,7 @@ feature 'Teacher documents feature' do
 
     scenario "info when school class is not set" do
       click_link "Dokumenty"
-      assert_alert_box("Najpierw dodaj klasę!")
+      assert_alert_box("Najpierw dodaj klasę.")
     end
 
     scenario "when there is no documents" do

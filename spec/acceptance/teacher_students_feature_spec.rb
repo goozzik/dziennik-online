@@ -14,7 +14,7 @@ feature 'Teacher students' do
 
     scenario "info when school class is not set" do
       click_link "Uczniowie"
-      assert_alert_box("Najpierw dodaj klasę!")
+      assert_alert_box("Najpierw dodaj klasę.")
     end
 
     scenario "info when school class have no students" do

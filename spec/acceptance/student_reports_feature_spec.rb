@@ -30,7 +30,6 @@ feature "Student reports" do
         FactoryGirl.create(:semestral_mark, student_id:Student.last.id, subject_id:Subject.last.id, mark:mark.to_s)
       end
       click_link "Raporty"
-      save_and_open_page
       page.should have_xpath "//tr[3]/td[1][contains(text(), '33.33')]"
       page.should have_xpath "//tr[3]/td[2][contains(text(), '90')]"
       page.should have_xpath "//tr[3]/td[3][contains(text(), '60')]"
@@ -46,9 +45,8 @@ feature "Student reports" do
       page.should have_xpath "//tr[3]/td[13][contains(text(), '0')]"
     end
 
-    scenario "when there is not data" do
+    scenario "when there is no data" do
       click_link "Raporty"
-      save_and_open_page
       page.should have_xpath "//tr[3]/td[1][contains(text(), '--')]"
       page.should have_xpath "//tr[3]/td[2][contains(text(), '0')]"
       page.should have_xpath "//tr[3]/td[3][contains(text(), '0')]"
