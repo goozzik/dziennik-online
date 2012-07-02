@@ -71,6 +71,10 @@ class Student < User
     average_semestral_marks.find_by_semester_id(semester).try(:average) || "--"
   end
 
+  def absence_by_date(date)
+    absences.find_by_date(date)
+  end
+
   private
 
     def set_teacher_id

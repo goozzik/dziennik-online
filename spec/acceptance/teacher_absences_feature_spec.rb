@@ -26,7 +26,6 @@ feature 'Teacher absences feature' do
       FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
       FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
       click_link "Frekwencja"
-      save_and_open_page
       assert_info_box("Frekwencja")
     end
 

@@ -24,7 +24,7 @@
       %td= student.first_name
       %td= student.last_name
       - weeks.each do |week|
-        - absence = student.absences.find_by_date(week)
+        - absence = student.absence_by_date(week)
         - if absence
           - student_required += absence.required if absence.required
           - student_justified += absence.justified if absence.justified
@@ -38,14 +38,14 @@
       - school_class_justified += student_justified
       - school_class_unexcused += student_unexcused
       - school_class_late += student_late
-      %td= absence_percentage(student_required, student_justified, student_unexcused)
+      %td= absences_percentage(student_required, student_justified, student_unexcused)
       %td= student_required
       %td= student_justified
       %td= student_unexcused
       %td= student_late
   %tr
     %th{colspan:3+weeks.count*4} Razem
-    %th= absence_percentage(school_class_required, school_class_justified, school_class_unexcused)
+    %th= absences_percentage(school_class_required, school_class_justified, school_class_unexcused)
     %th= school_class_required
     %th= school_class_justified
     %th= school_class_unexcused

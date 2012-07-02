@@ -41,4 +41,9 @@ module AbsencesHelper
     html.html_safe
   end
 
+  def absences_percentage(required, justified, unexcused)
+    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
+    percentage == "NaN" ? "--" : percentage
+  end
+
 end
