@@ -21,7 +21,8 @@ class SchoolClass < ActiveRecord::Base
 
   validates_presence_of :letter, :profile, :yearbook, :period
 
-  before_create :deactivate_old_school_class, :set_active, :set_school_id, :set_semester_id, :set_grade
+  before_validation :set_active, :set_school_id, :set_semester_id, :set_grade, :on => :create
+  before_create :deactivate_old_school_class
   before_destroy :unset_teacher_school_class_id
 
   WEEK_DAYS = {0 => 'Niedziela',
@@ -132,6 +133,10 @@ class SchoolClass < ActiveRecord::Base
     average_semestral_mark_for_semester(second_semester_by_year(year))
   end
 
+  def school_semester
+    school.semester
+  end
+
   private
 
     def deactivate_old_school_class
@@ -147,7 +152,7 @@ class SchoolClass < ActiveRecord::Base
     end
 
     def set_semester_id
-      self.semester_id = school.semester.id
+      self.semester_id = school_semester.id if school_semester
     end
 
     def calculate_grade
