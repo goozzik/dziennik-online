@@ -26,6 +26,36 @@ module HelperMethods
     visit(current_path)
   end
 
+  def load_subjects_for_student_semester_report
+    1.upto(6).each do |mark|
+      FactoryGirl.create(:subject_template, name:mark)
+      FactoryGirl.create(:subject, subject_template_id:SubjectTemplate.last.id, school_class_id:SchoolClass.last.id)
+    end
+  end
+
+  def load_data_for_student_semester_report(semester = Semester.last)
+    time = Chronic.parse('monday this month')
+    dates = []
+    3.times do
+      dates << "#{time.year}-#{time.month}-#{time.mday}"
+      time += 10_080
+    end
+    dates.each do |date|
+      FactoryGirl.create(:absence, student_id:Student.last.id, date:date, required:30, justified:20, unexcused:0, late:5)
+    end
+    0.upto(5).each do |mark|
+      FactoryGirl.create(:semestral_mark, student_id:Student.last.id, subject_id:Subject.last.id+mark, mark:(mark+1).to_s)
+    end
+  end
+
+  def load_data_for_student_year_report
+    load_data_for_student_semester_report
+    semester = Semester.last
+    second_semester = FactoryGirl.create(:semester, school_id:School.last.id, semester:semester.semester == 1 ? 2 : 1, start_year:semester.start_year, end_year: semester.end_year)
+    SchoolClass.last.activate_semester(second_semester)
+    load_data_for_student_semester_report
+  end
+
 end
 
 RSpec.configuration.include HelperMethods, :type => :acceptance

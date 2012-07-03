@@ -71,8 +71,28 @@ class Student < User
     average_semestral_marks.find_by_semester_id(semester).try(:average) || "--"
   end
 
+  def average_semestral_mark_for_year(year)
+    average_semestral_marks.find_by_semester_id(second_semester_by_year(year)).try(:average) || "--"
+  end
+
   def absence_by_date(date)
     absences.find_by_date(date)
+  end
+
+  def school_year 
+    semesters.first.years
+  end
+
+  def year_absences(year)
+    YearAbsence.new(self, year)
+  end
+
+  def count_year_marks(mark, year)
+    count_semestral_marks(mark, second_semester_by_year(year))
+  end
+
+  def school_semesters
+    school.semesters
   end
 
   private
@@ -119,6 +139,10 @@ class Student < User
     def set_role
       self.role = "student"
       self.user_role = "uczeń"
+    end
+
+    def second_semester_by_year(year)
+      @second_semester ||= school_semesters.find_by_start_year_and_semester(year[0..3], 2)
     end
 
 end

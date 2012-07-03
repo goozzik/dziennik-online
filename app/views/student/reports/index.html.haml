@@ -1,5 +1,4 @@
 = page_header "Raporty"
-
 - current_student.semesters.each do |semester|
   %h2= semester.fullname
   %table.table.table-bordered
@@ -31,3 +30,34 @@
       - 1.upto(6).each do |i|
         %td= current_student.count_semestral_marks(i, semester)
       %td= current_student.count_semestral_marks("nkl", semester)
+- if current_student.semesters.count == 2
+  %h2= "Podsumowanie roku szkolnego #{current_student.school_year}"
+  %table.table.table-bordered
+    %tr
+      %th{colspan:"5"} Frekwencja
+      %th{colspan:"8"} Oceny
+    %tr
+      %th{style:"width:7%"} %
+      %th{style:"width:7%"} ob
+      %th{style:"width:7%"} us
+      %th{style:"width:7%"} nu
+      %th{style:"width:7%"} sp
+      %th{style:"width:5%"} Średnia
+      %th{style:"width:5%"} 1
+      %th{style:"width:5%"} 2
+      %th{style:"width:5%"} 3
+      %th{style:"width:5%"} 4
+      %th{style:"width:5%"} 5
+      %th{style:"width:5%"} 6
+      %th nkl
+    - year_absences = current_student.year_absences(current_student.school_year)
+    %tr
+      %td= year_absences.percentage
+      %td= year_absences.required
+      %td= year_absences.justified
+      %td= year_absences.unexcused
+      %td= year_absences.late
+      %td= current_student.average_semestral_mark_for_year(current_student.school_year)
+      - 1.upto(6).each do |i|
+        %td= current_student.count_year_marks(i, current_student.school_year)
+      %td= current_student.count_year_marks("nkl", current_student.school_year)
