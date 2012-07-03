@@ -8,6 +8,8 @@ class Admin < User
 
   before_validation :set_role
 
+  delegate :semesters, :to => :school
+
   private
 
     def set_role

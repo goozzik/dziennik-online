@@ -1,5 +1,6 @@
 = page_header "Ustawienia szkoły"
-- unless @semesters.empty?
+
+- unless current_admin.semesters.empty?
   %table.table.table-striped.table-bordered
     %thead
       %tr
@@ -7,7 +8,7 @@
         %th Semestr
         %th Rok
         %th{:style => "width:166px"}
-    - @semesters.each_with_index do |semester, i|
+    - current_admin.semesters.each_with_index do |semester, i|
       %tr
         %td= i+1
         %td= semester.semester
@@ -15,8 +16,7 @@
         %td
           = link_to "Ustaw jako aktywny", set_semester_as_active_path(semester), class: "btn btn-mini #{"disabled" unless can? :activate, semester}", confirm: "Czy jesteś pewien, że chcesz aktywować semestr: #{semester.fullname}?"
           = link_to delete_link_content, admin_semester_path(semester), method:"delete", confirm:"Jesteś pewien?", class:"btn btn-mini btn-danger"
-
 - else
   = alert_box "Szkoła nie ma ustawionego semestru!", "Możesz dodać semestr poprzez poniższy formularz."
 = page_header "Dodaj nowy semestr"
-= render 'admin/semesters/form', :semester => @semester
+= render 'admin/semesters/form', :semester => Semester.new

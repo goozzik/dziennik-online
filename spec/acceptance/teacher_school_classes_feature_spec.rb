@@ -106,4 +106,18 @@ feature 'Teacher school classes' do
 
   end
 
+  scenario "story #216 create school_class when there is no semester in school" do
+    FactoryGirl.create(:school)
+    FactoryGirl.create(:teacher, :school_id => School.last.id)
+    login('teacher')
+    click_link "Konto"
+    click_link "Ustawienia klas"
+    save_and_open_page
+    fill_in 'Litera', :with => 'G'
+    fill_in 'Profil', :with => 'Informatyk'
+    fill_in 'Rocznik', :with => '2013'
+    click_button 'Zapisz'
+    assert_info_box "Brak aktywnego semestru."
+  end
+
 end

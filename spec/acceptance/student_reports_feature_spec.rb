@@ -7,11 +7,7 @@ feature "Student reports" do
   context "index" do
     before do
       FactoryGirl.create(:school)
-      if Time.now.month > 9
-        FactoryGirl.create(:semester, school_id:School.last.id, semester:1, start_year:Time.now.year, end_year: Time.now.year+1)
-      else
-        FactoryGirl.create(:semester, school_id:School.last.id, semester:2, start_year:Time.now.year-1, end_year: Time.now.year)
-      end
+      load_semester
       FactoryGirl.create(:teacher, school_id:School.last.id)
       FactoryGirl.create(:school_class, teacher_id:Teacher.last.id)
       FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)

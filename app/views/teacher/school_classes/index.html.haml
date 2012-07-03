@@ -8,8 +8,10 @@
       .btn-group
         = semester_dropdown_button
         %ul.dropdown-menu
-          - current_teacher.available_semesters.each do |semester|
+          - current_teacher.semesters.each do |semester|
             = semester_dropdown_link(semester, current_teacher.school_class) 
+  - if current_teacher.semesters.empty?
+    = info_box "Brak aktywnego semestru.", "Aby móc w pełni korzystać z programu, administrator musi dodać semestr." 
 - unless current_teacher.school_classes.empty?
   = second_page_header("Klasy")
   %table.table.table-bordered

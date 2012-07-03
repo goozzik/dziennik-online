@@ -16,7 +16,7 @@ feature "Admin school" do
     end
 
     scenario "when there is one semester it should be active" do
-      FactoryGirl.create(:semester, school_id: School.last.id)
+      load_semester
       click_link "Ustawienia szkoły" 
       page.should have_content "2011/2012"
       page.should have_xpath "//a[@class='btn btn-mini disabled']"
@@ -97,15 +97,15 @@ feature "Admin school" do
       end
 
       scenario "destroy" do
-        FactoryGirl.create(:semester, school_id: School.last.id)
+        load_semester
         click_link "Ustawienia szkoły" 
         click_link "Usuń"
         assert_alert_box "Szkoła nie ma ustawionego semestru!"
       end
 
       scenario "activate" do
-        FactoryGirl.create(:semester, school_id: School.last.id)
-        FactoryGirl.create(:semester, school_id: School.last.id, semester: 2)
+        load_semester
+        load_second_semester
         click_link "Ustawienia szkoły" 
         assert Semester.find_by_active(true).semester == 1
         find(:xpath, "//a[@class='btn btn-mini '][contains(text(), 'Ustaw jako aktywny')]").click
