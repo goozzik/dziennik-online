@@ -65,26 +65,7 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def year_absences(year)
-    required = justified = unexcused = late = 0
-    semesters = school.semesters.find_all_by_end_year(year)
-    semesters.each do |semester|
-      students.each do |student|
-        absences = student.absences.find_all_by_semester_id(semester.id)
-        absences.each do |absence|
-          required += absence.required if absence.required
-          justified += absence.justified if absence.justified
-          unexcused += absence.unexcused if absence.unexcused
-          late += absence.late if absence.late
-        end
-      end
-    end
-    percentage = sprintf("%1.2f", (required - (justified + unexcused)).to_f / required * 100)
-    { :percentage => percentage == "NaN" ? "--" : percentage,
-      :required => required,
-      :justified => justified,
-      :unexcused => unexcused,
-      :late => late
-    }
+    YearAbsence.new(self, year)
   end
 
   def semester_average(semester)
@@ -110,12 +91,7 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def count_year_marks(mark, year)
-    semesters = school.semesters.find_all_by_end_year(year)
-    count = 0
-    semesters.each do |semester|
-      students.each { |student| count += student.semestral_marks.find_all_by_mark_and_semester_id(mark, semester_id).count }
-    end
-    count
+    count_semestral_marks(mark, second_semester_by_year(year))
   end
 
   def activate
@@ -152,6 +128,10 @@ class SchoolClass < ActiveRecord::Base
     school.semesters
   end
 
+  def average_semestral_mark_for_year(year)
+    average_semestral_mark_for_semester(second_semester_by_year(year))
+  end
+
   private
 
     def deactivate_old_school_class
@@ -181,6 +161,10 @@ class SchoolClass < ActiveRecord::Base
 
     def unset_teacher_school_class_id
       teacher.update_attribute(:school_class_id, nil) if active
+    end
+
+    def second_semester_by_year(year)
+      @second_semester ||= school_semesters.find_by_start_year_and_semester(year[0..3], 2)
     end
 
 end

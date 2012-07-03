@@ -1,0 +1,44 @@
+%h2= semester.fullname
+%table.table.table-bordered
+  %tr
+    %th{rowspan:"2"}
+    %th{colspan:"5"} Frekwencja
+    %th{colspan:"8"} Oceny
+  %tr
+    %th{style:"width:7%"} %
+    %th{style:"width:7%"} ob
+    %th{style:"width:7%"} us
+    %th{style:"width:7%"} nu
+    %th{style:"width:7%"} sp
+    %th{style:"width:5%"} Średnia
+    %th{style:"width:5%"} 1
+    %th{style:"width:5%"} 2
+    %th{style:"width:5%"} 3
+    %th{style:"width:5%"} 4
+    %th{style:"width:5%"} 5
+    %th{style:"width:5%"} 6
+    %th nkl
+  - semester_absences = current_student.semester_absences(semester)
+  %tr
+    %td= "#{current_student.first_name} #{current_student.last_name}"
+    %td= semester_absences.percentage
+    %td= semester_absences.required
+    %td= semester_absences.justified
+    %td= semester_absences.unexcused
+    %td= semester_absences.late
+    %td= current_student.average_semestral_mark_for_semester(semester)
+    - 1.upto(6).each do |i|
+      %td= current_student.count_semestral_marks(i, semester)
+    %td= current_student.count_semestral_marks("nkl", semester)
+  - semester_absences = current_student.school_class_semester_absences(semester)
+  %tr
+    %td Klasa
+    %td= semester_absences.percentage
+    %td= semester_absences.required
+    %td= semester_absences.justified
+    %td= semester_absences.unexcused
+    %td= semester_absences.late
+    %td= current_student.school_class_average_semestral_mark_for_semester(semester)
+    - 1.upto(6).each do |mark|
+      %td= current_student.school_class_count_semestral_marks(mark, semester.id)
+    %td= current_student.school_class_count_semestral_marks("nkl", semester.id)

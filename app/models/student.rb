@@ -22,6 +22,8 @@ class Student < User
 
   before_validation :set_role, :set_teacher_id, :set_school_id
 
+  delegate :second_semester_by_year, :to => :school_class
+
   def self.bests_by_semester_id(semester_id)
     joins(:average_semestral_marks).where(["average_semestral_marks.semester_id = ?", semester_id]).order("average_semestral_marks.average DESC").limit(4)
   end
@@ -95,6 +97,30 @@ class Student < User
     school.semesters
   end
 
+  def school_class_semester_absences(semester)
+    school_class.semester_absences(semester)
+  end
+
+  def school_class_average_semestral_mark_for_semester(semester)
+    school_class.average_semestral_mark_for_semester(semester)
+  end
+
+  def school_class_count_semestral_marks(mark, semester)
+    school_class.count_semestral_marks(mark, semester)
+  end
+
+  def school_class_year_absences(year)
+    school_class.year_absences(year)
+  end
+
+  def school_class_average_semestral_mark_for_year(year)
+    school_class.average_semestral_mark_for_year(year)
+  end
+
+  def school_class_count_year_marks(mark, year)
+    school_class.count_year_marks(mark, year)
+  end
+
   private
 
     def set_teacher_id
@@ -139,10 +165,6 @@ class Student < User
     def set_role
       self.role = "student"
       self.user_role = "uczeń"
-    end
-
-    def second_semester_by_year(year)
-      @second_semester ||= school_semesters.find_by_start_year_and_semester(year[0..3], 2)
     end
 
 end
