@@ -7,13 +7,13 @@ DziennikOnline::Application.routes.draw do
 
   namespace :admin do
     resource :school, :only => [:show]
-    resources :semesters
+    resources :semesters, :only => [:create, :destroy]
+    get "semesters/activate/:id" => "semesters#activate", :as => "set_semester_as_active"
     get "users/:id/new_password" => "users#new_password", :as => "user_new_password"
     put "users/:id/update_password" => "users#update_password", :as => "user_update_password"
     resources :users
   end
 
-  get "admin/semesters/activate/:id" => "admin/semesters#activate", :as => "set_semester_as_active"
   get "teacher/school_classes/activate/:id" => "teacher/school_classes#activate", :as => "set_school_class_as_active"
   get "teacher/semesters/activate/:id" => "teacher/semesters#activate", :as => "set_school_class_semester"
 

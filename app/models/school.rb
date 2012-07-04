@@ -6,6 +6,7 @@ class School < ActiveRecord::Base
   has_many :school_classes, :dependent => :destroy
   has_many :semesters, :dependent => :destroy
   has_many :students, :dependent => :destroy
+  has_many :users, :dependent => :destroy
   has_many :documents, :dependent => :destroy, :conditions => ["school_id IS NOT NULL"]
 
   def semester

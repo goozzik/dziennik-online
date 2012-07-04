@@ -8,7 +8,11 @@ class Admin < User
 
   before_validation :set_role
 
-  delegate :semesters, :to => :school
+  delegate :semesters,
+           :directors,
+           :teachers,
+           :admins,
+           :users, :to => :school
 
   private
 

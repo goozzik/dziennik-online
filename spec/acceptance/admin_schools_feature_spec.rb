@@ -107,9 +107,9 @@ feature "Admin school" do
         load_semester
         load_second_semester
         click_link "Ustawienia szkoły" 
-        assert Semester.find_by_active(true).semester == 1
+        assert Semester.find_by_active(true).semester == (Time.now.month > 9 ? 1 : 2)
         find(:xpath, "//a[@class='btn btn-mini '][contains(text(), 'Ustaw jako aktywny')]").click
-        assert Semester.find_by_active(true).semester == 2
+        assert Semester.find_by_active(true).semester == (Time.now.month < 9 ? 1 : 2)
       end
 
     end
