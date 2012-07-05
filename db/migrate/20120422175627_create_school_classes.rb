@@ -14,6 +14,7 @@ class CreateSchoolClasses < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :school_classes, [:teacher_id, :active], :unique => true 
   end
 
   def down

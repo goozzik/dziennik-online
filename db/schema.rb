@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
   end
 
   add_index "school_classes", ["school_id"], :name => "index_school_classes_on_school_id"
+  add_index "school_classes", ["teacher_id", "active"], :name => "index_school_classes_on_teacher_id_and_active", :unique => true
 
   create_table "schools", :force => true do |t|
     t.integer  "user_id"
