@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "average_semestral_marks", ["student_id", "semester_id"], :name => "index_average_semestral_marks_on_student_id_and_semester_id", :unique => true
+
   create_table "bells", :force => true do |t|
     t.integer  "school_id"
     t.time     "start_time"

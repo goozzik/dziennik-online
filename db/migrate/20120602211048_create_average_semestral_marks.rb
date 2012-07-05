@@ -9,6 +9,7 @@ class CreateAverageSemestralMarks < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :average_semestral_marks, [:student_id, :semester_id], :unique => true 
   end
 
   def down
