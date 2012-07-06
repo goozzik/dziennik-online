@@ -14,7 +14,6 @@ feature "Director students" do
 
     scenario "when there is no student" do
       click_link "z najwyższą średnią"
-      save_and_open_page
       assert_info_box "Brak ocen do wyliczenia średniej."
     end
 

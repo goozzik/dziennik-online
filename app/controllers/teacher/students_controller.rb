@@ -41,8 +41,6 @@ class Teacher::StudentsController < ApplicationController
   end
 
   def meeting_cards
-    @students = current_teacher.school_class.students
-    @subjects = current_teacher.school_class.subjects
   end
 
 end

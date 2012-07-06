@@ -22,7 +22,8 @@ class Student < User
 
   before_validation :set_role, :set_teacher_id, :set_school_id
 
-  delegate :second_semester_by_year, :to => :school_class
+  delegate :second_semester_by_year,
+           :semester, :to => :school_class
 
   def self.bests_by_semester_id(semester_id)
     joins(:average_semestral_marks).where(["average_semestral_marks.semester_id = ?", semester_id]).order("average_semestral_marks.average DESC").limit(4)
@@ -58,7 +59,7 @@ class Student < User
   end
 
   def list_current_marks_by_subject_id(subject_id)
-    marks.find_all_by_semester_id_and_subject_id(school_class.semester_id, subject_id).collect {|mark| mark.mark}.join(', ')
+    marks.find_all_by_semester_id_and_subject_id(semester.id, subject_id).collect {|mark| mark.mark}.join(', ')
   end
 
   def update_password(params)

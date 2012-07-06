@@ -112,7 +112,6 @@ feature 'Teacher school classes' do
     login('teacher')
     click_link "Konto"
     click_link "Ustawienia klas"
-    save_and_open_page
     fill_in 'Litera', :with => 'G'
     fill_in 'Profil', :with => 'Informatyk'
     fill_in 'Rocznik', :with => '2013'

@@ -53,7 +53,6 @@ feature "Student reports" do
       load_data_for_student_year_report
       load_data_for_school_class_year_report
       click_link "Raporty"
-      save_and_open_page
       page.should have_xpath "//h2[contains(text(), 'Podsumowanie roku szkolnego 2011/2012')]"
       page.should have_xpath "//table[3]/tr[3]/td[2][contains(text(), '33.33')]"
       page.should have_xpath "//table[3]/tr[3]/td[3][contains(text(), '180')]"

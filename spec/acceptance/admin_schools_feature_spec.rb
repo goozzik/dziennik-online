@@ -16,7 +16,7 @@ feature "Admin school" do
     end
 
     scenario "when there is one semester it should be active" do
-      load_semester
+      FactoryGirl.create(:semester, :school_id => School.last.id)
       click_link "Ustawienia szkoły" 
       page.should have_content "2011/2012"
       page.should have_xpath "//a[@class='btn btn-mini disabled']"

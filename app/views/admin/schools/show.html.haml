@@ -14,7 +14,7 @@
         %td= semester.semester
         %td= "#{semester.start_year}/#{semester.end_year}"
         %td
-          = link_to "Ustaw jako aktywny", set_semester_as_active_path(semester), class: "btn btn-mini #{"disabled" unless can? :activate, semester}", confirm: "Czy jesteś pewien, że chcesz aktywować semestr: #{semester.fullname}?"
+          = link_to "Ustaw jako aktywny", admin_semester_active_path(semester), class: "btn btn-mini #{"disabled" unless can? :activate, semester}", confirm: "Czy jesteś pewien, że chcesz aktywować semestr: #{semester.fullname}?"
           = link_to delete_link_content, admin_semester_path(semester), method:"delete", confirm:"Jesteś pewien?", class:"btn btn-mini btn-danger"
 - else
   = alert_box "Szkoła nie ma ustawionego semestru!", "Możesz dodać semestr poprzez poniższy formularz."

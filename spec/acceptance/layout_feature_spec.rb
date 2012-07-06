@@ -51,7 +51,6 @@ feature "layout" do
     end
 
     scenario "navbar" do
-      save_and_open_page
       click_link "Konto"
       page.should have_xpath "//a[@href='/users/edit'][contains(text(), 'Ustawienia konta')]"
       page.should have_xpath "//a[@href='/users/sign_out'][contains(text(), 'Wyloguj')]"

@@ -14,7 +14,8 @@ class Teacher < User
            :semester_absences,
            :semester,
            :semester_fullname,
-           :semesters, :to => :school_class
+           :semesters,
+           :subjects, :to => :school_class
   delegate :current_year_semesters, :to => :school
 
   def deactivate_school_class

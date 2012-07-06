@@ -21,8 +21,8 @@ class SchoolClass < ActiveRecord::Base
 
   validates_presence_of :letter, :profile, :yearbook, :period
 
-  before_validation :set_active, :set_school_id, :set_semester_id, :set_grade, :on => :create
-  before_create :deactivate_old_school_class
+  before_validation :set_school_id, :set_semester_id, :set_grade, :on => :create
+  before_create :deactivate_old_school_class, :set_active
   before_destroy :unset_teacher_school_class_id
 
   WEEK_DAYS = {0 => 'Niedziela',
