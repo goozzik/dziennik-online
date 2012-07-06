@@ -12,6 +12,10 @@ class Director < User
     school.school_classes.active
   end
 
+  def school_documents
+    school.documents
+  end
+
   private
 
     def set_role

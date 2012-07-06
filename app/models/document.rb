@@ -10,17 +10,21 @@ class Document < ActiveRecord::Base
 
   attr_accessor :for_teachers
 
-  before_validation :set_relations
+  before_validation :set_for_teachers_if_director, :set_relations
 
   validates_presence_of :name, :description, :document
 
   private
 
+    def set_for_teachers_if_director
+      for_teachers = "1" if user.director?
+    end
+
     def set_relations
       if for_teachers == "1"
         self.school_id = user.school_id
       else
-        self.school_class_id = Teacher.find(user.id).school_class.id
+        self.school_class_id = user.school_class_id
       end
     end
 

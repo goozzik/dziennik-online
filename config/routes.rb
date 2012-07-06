@@ -47,7 +47,7 @@ DziennikOnline::Application.routes.draw do
     get "students/top" => "students#top", :as => "students_top"
     get "students/resit" => "students#resit", :as => "students_resit"
     get "students/classification" => "students#classification", :as => "students_classification"
-    resources :documents
+    resources :documents, :only => [:index, :create, :destroy]
   end
 
 

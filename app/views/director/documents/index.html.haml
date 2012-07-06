@@ -1,13 +1,13 @@
 = page_header "Dokumenty"
 
-- unless @documents.empty?
+- unless current_director.school_documents.empty?
   %table.table.table-bordered
     %tr
       %th Nazwa pliku
       %th{:style => "width:450px;"} Opis
       %th Data dodania
       %th{style:"width:105px;"}
-    - @documents.each do |document|
+    - current_director.school_documents.each do |document|
       %tr
         %td= document.name
         %td= document.description
@@ -19,4 +19,4 @@
   = info_box "Szkoła nie ma dokumentów.", "Możesz dodać dokument poprzez poniższy formularz."
 
 = second_page_header "Dodaj nowy plik dla klasy"
-= render "form", :document => @document
+= render "form", document:Document.new 
