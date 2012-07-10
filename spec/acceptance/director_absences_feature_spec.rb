@@ -20,8 +20,9 @@ feature "Director absences" do
     end
 
     scenario "when there is data for school class" do
-      load_subjects_for_report
-      load_data_for_school_class_semester_report
+      load_subject_templates
+      subjects = load_subjects_for_school_class
+      load_data_for_school_class_semester_report(SchoolClass.last, subjects)
       click_link "Bieżąca frekwencja"
       page.should have_xpath "//tr[3]/td[3][contains(text(), '30')]"
       page.should have_xpath "//tr[3]/td[4][contains(text(), '20')]"

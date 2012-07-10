@@ -30,6 +30,10 @@ class School < ActiveRecord::Base
     end
   end
 
+  def school_classes_by_grade(grade)
+    school_classes.active.find_all_by_grade(grade)
+  end
+
   def resit_students_by_subject_template(subject_template)
     subjects = subject_template.subjects.joins(:school_class).where(["school_classes.school_id = ?", id])
     SemestralMark.where(["subject_id IN (?) AND semester_id = ? AND mark = '1'", subjects_by_subject_template(subject_template).collect(&:id), semester.id]).collect(&:student)
@@ -49,6 +53,10 @@ class School < ActiveRecord::Base
 
   def current_year_semesters
     Time.now.month > 9 ? semesters.find_all_by_start_year(Time.now.year) : semesters.find_all_by_end_year(Time.now.year)
+  end
+
+  def school_year
+    current_year_semesters.first.years
   end
 
 end

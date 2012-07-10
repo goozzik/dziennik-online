@@ -74,6 +74,13 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def school_has_active_semester?
+      if current_user.school.current_year_semesters.empty?
+        flash[:alert] = "Administrator szkoły nie aktywował jeszcze semestru."
+        redirect_to :back
+      end
+    end
+
     def authenticate_superadmin!
       authenticate_user!
       redirect_to root_path unless current_user.superadmin?

@@ -38,14 +38,19 @@ module HelperMethods
     second_semester = FactoryGirl.create(:semester, school_id:School.last.id, semester:semester.semester == 1 ? 2 : 1, start_year:semester.start_year, end_year: semester.end_year)
   end
 
-  def load_subjects_for_report
-    1.upto(6).each do |mark|
-      FactoryGirl.create(:subject_template, name:mark)
-      FactoryGirl.create(:subject, subject_template_id:SubjectTemplate.last.id, school_class_id:SchoolClass.last.id)
-    end
+  def load_subject_templates
+    subject_templates = []
+    0.upto(5).each {|i| subject_templates << FactoryGirl.create(:subject_template, name:i)}
+    subject_templates
   end
 
-  def load_data_for_student_semester_report(semester = Semester.last)
+  def load_subjects_for_school_class(school_class = SchoolClass.last)
+    subjects = []
+    0.upto(5).each {|i| subjects << FactoryGirl.create(:subject, subject_template_id:SubjectTemplate.find_by_name(i.to_s).id, school_class_id:school_class.id)} 
+    subjects
+  end
+
+  def load_data_for_student_semester_report(student, subjects, semester = Semester.last)
     time = Chronic.parse('monday this month')
     dates = []
     3.times do
@@ -53,32 +58,50 @@ module HelperMethods
       time += 10_080
     end
     dates.each do |date|
-      FactoryGirl.create(:absence, student_id:Student.last.id, date:date, required:30, justified:20, unexcused:0, late:5)
+      FactoryGirl.create(:absence, student_id:student.id, date:date, required:30, justified:20, unexcused:0, late:5)
     end
-    0.upto(5).each do |mark|
-      FactoryGirl.create(:semestral_mark, student_id:Student.last.id, subject_id:Subject.last.id+mark, mark:(mark+1).to_s)
-    end
+    subjects.each_with_index {|subject, j| FactoryGirl.create(:semestral_mark, student_id:student.id, subject_id:subject.id, mark:(j+1).to_s)}
   end
 
-  def load_data_for_student_year_report
-    load_data_for_student_semester_report
-    semester = SchoolClass.last.semester 
+  def load_data_for_student_year_report(school_class, student, subjects)
+    load_data_for_student_semester_report(student, subjects)
+    semester = school_class.semester 
     second_semester = Semester.find_by_semester(semester.semester == 1 ? 2 : 1)
-    SchoolClass.last.activate_semester(second_semester)
-    load_data_for_student_semester_report
+    school_class.activate_semester(second_semester)
+    load_data_for_student_semester_report(student, subjects)
   end
 
-  def load_data_for_school_class_semester_report
+  def load_data_for_school_class_semester_report(school_class, subjects)
     1.upto(3) do
-      FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
-      load_data_for_student_semester_report
+      student = FactoryGirl.create(:student, school_class_id:school_class.id)
+      load_data_for_student_semester_report(student, subjects)
     end
   end
 
-  def load_data_for_school_class_year_report
+  def load_data_for_school_class_year_report(school_class, subjects)
     1.upto(3) do
-      FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
-      load_data_for_student_year_report
+      student = FactoryGirl.create(:student, school_class_id:school_class.id)
+      load_data_for_student_year_report(school_class, student, subjects)
+    end
+  end
+
+  def load_data_for_school_semester_report
+    subject_templates = load_subject_templates
+    1.upto(4) do |i|
+      teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
+      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i)
+      subjects = load_subjects_for_school_class(school_class)
+      load_data_for_school_class_semester_report(school_class, subjects)
+    end
+  end
+
+  def load_data_for_school_year_report
+    subject_templates = load_subject_templates
+    1.upto(4) do |i|
+      teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
+      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i)
+      subjects = load_subjects_for_school_class(school_class)
+      load_data_for_school_class_year_report(school_class, subjects)
     end
   end
 

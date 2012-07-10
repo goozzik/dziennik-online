@@ -1,25 +1,37 @@
-= page_header "Raport frekwencji na aktualny semestr"
+= page_header "Raport frekwencji klas"
 
 %h2 Klasy pierwsze
 - unless @first_grade_school_classes.empty?
-  = render "grade_absences", :school_classes => @first_grade_school_classes
+  - current_director.current_year_semesters.each do |semester|
+    = render "grade_absences", school_classes: @first_grade_school_classes, semester: semester
+  - if current_director.current_year_semesters.count == 2
+    = render "grade_year_absences", school_classes: @first_grade_school_classes, years: current_director.school_year
 - else
   = info_box "Brak klas", "Żaden z wychowawców klas pierwszych nie dodał jeszczcze klasy."
 
 %h2 Klasy drugie
 - unless @second_grade_school_classes.empty?
-  = render "grade_absences", :school_classes => @second_grade_school_classes
+  - current_director.current_year_semesters.each do |semester|
+    = render "grade_absences", school_classes: @second_grade_school_classes, semester: semester
+  - if current_director.current_year_semesters.count == 2
+    = render "grade_year_absences", school_classes: @second_grade_school_classes, years: current_director.school_year
 - else
   = info_box "Brak klas", "Żaden z wychowawców klas drugich nie dodał jeszczcze klasy."
 
 %h2 Klasy trzecie
 - unless @third_grade_school_classes.empty?
-  = render "grade_absences", :school_classes => @third_grade_school_classes
+  - current_director.current_year_semesters.each do |semester|
+    = render "grade_absences", school_classes: @third_grade_school_classes, semester: semester
+  - if current_director.current_year_semesters.count == 2
+    = render "grade_year_absences", school_classes: @third_grade_school_classes, years: current_director.school_year
 - else
   = info_box "Brak klas", "Żaden z wychowawców klas trzecich nie dodał jeszczcze klasy."
 
 %h2 Klasy czwarte
 - unless @fourth_grade_school_classes.empty?
-  = render "grade_absences", :school_classes => @fourth_grade_school_classes
+  - current_director.current_year_semesters.each do |semester|
+    = render "grade_absences", school_classes: @fourth_grade_school_classes, semester: semester
+  - if current_director.current_year_semesters.count == 2
+    = render "grade_year_absences", school_classes: @fourth_grade_school_classes, years: current_director.school_year
 - else
   = info_box "Brak klas", "Żaden z wychowawców klas czwartych nie dodał jeszczcze klasy."

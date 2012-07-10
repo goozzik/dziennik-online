@@ -8,6 +8,10 @@ class Director < User
 
   before_validation :set_role
 
+  delegate :school_classes_by_grade,
+           :current_year_semesters,
+           :school_year, :to => :school
+
   def school_classes
     school.school_classes.active
   end

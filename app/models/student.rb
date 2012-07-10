@@ -24,6 +24,7 @@ class Student < User
 
   delegate :second_semester_by_year,
            :semester, :to => :school_class
+  delegate :school_year, :to => :school
 
   def self.bests_by_semester_id(semester_id)
     joins(:average_semestral_marks).where(["average_semestral_marks.semester_id = ?", semester_id]).order("average_semestral_marks.average DESC").limit(4)
@@ -80,10 +81,6 @@ class Student < User
 
   def absence_by_date(date)
     absences.find_by_date(date)
-  end
-
-  def school_year 
-    semesters.first.years
   end
 
   def year_absences(year)
