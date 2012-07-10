@@ -38,7 +38,7 @@ DziennikOnline::Application.routes.draw do
   end
 
   namespace :director do
-    get "reports/semestral" => "reports#semestral", :as => "reports_semestral"
+    get "reports/absences" => "reports#absences", :as => "reports_absences"
     resources :school_classes, :only => [:index] do
       get "absences" => "absences#index", :as => 'absences'
       get "report" => "reports#school_class", :as => "report"

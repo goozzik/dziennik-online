@@ -6,7 +6,8 @@ feature 'Teacher reports' do
   context "index" do
     before do
       FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, school_id:School.last.id, semester:Time.now.month > 9 ? 1 : 2 )
+      load_subject_templates
+      load_semester
       FactoryGirl.create(:teacher, school_id:School.last.id)
       login "teacher" 
     end
@@ -23,26 +24,9 @@ feature 'Teacher reports' do
     end
 
     scenario "when there is data for absences and semestral marks" do
-      FactoryGirl.create(:school_class, teacher_id:Teacher.last.id)
-      0.upto(5).each do |mark|
-        FactoryGirl.create(:subject_template, name:mark)
-        FactoryGirl.create(:subject, subject_template_id:SubjectTemplate.last.id, school_class_id:SchoolClass.last.id)
-      end
-      1.upto(3) do
-        FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
-        time = Chronic.parse('monday this month')
-        dates = []
-        3.times do
-          dates << "#{time.year}-#{time.month}-#{time.mday}"
-          time += 10_080
-        end
-        dates.each do |date|
-          FactoryGirl.create(:absence, student_id:Student.last.id, semester_id:Semester.last.id, date:date, required:30, justified:20, unexcused:0, late:5)
-        end
-        0.upto(5).each do |mark|
-          FactoryGirl.create(:semestral_mark, student_id:Student.last.id, subject_id:Subject.first.id + mark , mark:(mark + 1).to_s)
-        end
-      end
+      school_class = FactoryGirl.create(:school_class, teacher_id:Teacher.last.id)
+      subjects = load_subjects_for_school_class(school_class)
+      load_data_for_school_class_semester_report(school_class, subjects)
       click_link "Raporty"
       page.should have_xpath "//tr[6]/th[2][contains(text(), '33.33')]"
       page.should have_xpath "//tr[6]/th[3][contains(text(), '270')]"

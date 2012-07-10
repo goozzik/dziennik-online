@@ -41,8 +41,8 @@ class Semester < ActiveRecord::Base
     "#{start_year}/#{end_year}"
   end
 
-  def self.before_year(year)
-    where(["end_year <= ?", year])
+  def self.between_years(start_year, end_year)
+    where(["start_year >= ? AND end_year <= ?", start_year, end_year])
   end
 
   private

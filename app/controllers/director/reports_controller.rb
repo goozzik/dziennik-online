@@ -4,16 +4,11 @@ class Director::ReportsController < ApplicationController
                 :school_has_active_semester?,
                 :director_has_active_school_classes?
 
-  def semestral
-    @first_grade_school_classes = current_director.school_classes_by_grade(1)
-    @second_grade_school_classes = current_director.school_classes_by_grade(2)
-    @third_grade_school_classes = current_director.school_classes_by_grade(3)
-    @fourth_grade_school_classes = current_director.school_classes_by_grade(4)
+  def absences
   end
 
   def school_class
-    @school_classes = current_director.school_classes.active
-    @school_class = current_director.school_classes.active.find_by_id(params[:school_class_id])
+    @school_class = current_director.school_classes.find(params[:school_class_id])
   end
 
 end

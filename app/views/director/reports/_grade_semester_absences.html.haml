@@ -1,4 +1,4 @@
-%h3= "Podsumowanie roku szkolnego #{years}"
+%h3= semester.fullname
 %table.table.table-bordered.table-condensed
   %tr
     %th{style:"width:5%"} Klasa
@@ -8,7 +8,7 @@
     %th{style:"width:19%"} Nieusprawiedliwione
     %th{style:"width:19%"} Spóźnienia
   - school_classes.each do |school_class|
-    - absences = school_class.year_absences(years)
+    - absences = school_class.semester_absences(semester)
     %tr
       %td= "#{school_class.name}"
       %td= absences.percentage

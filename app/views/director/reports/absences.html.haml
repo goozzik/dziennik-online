@@ -1,0 +1,4 @@
+= page_header "Raport frekwencji klas"
+
+- 1.upto(4) do |grade|
+  = render "grade_absences", school_classes: current_director.school_classes_by_grade(grade), semesters: current_director.current_year_semesters, grade: grade

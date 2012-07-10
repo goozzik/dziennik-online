@@ -1,18 +1,26 @@
-%h2= semester.fullname
-%table.table.table-bordered.table-condensed
-  %tr
-    %th{style:"width:5%"} Klasa
-    %th{style:"width:19%"} %
-    %th{style:"width:19%"} Obowiązkowe
-    %th{style:"width:19%"} Usprawiedliwione
-    %th{style:"width:19%"} Nieusprawiedliwione
-    %th{style:"width:19%"} Spóźnienia
-  - school_classes.each do |school_class|
-    - absences = school_class.semester_absences(semester)
-    %tr
-      %td= "#{school_class.name}"
-      %td= absences.percentage
-      %td= absences.required
-      %td= absences.justified
-      %td= absences.unexcused
-      %td= absences.late
+%h2 
+  - case grade
+  - when 1
+    = "Klasy pierwsze"
+  - when 2
+    = "Klasy drugie"
+  - when 3
+    = "Klasy trzecie"
+  - when 4
+    = "Klasy czwarty" 
+
+- unless school_classes.empty?
+  - semesters.each do |semester|
+    = render "grade_semester_absences", school_classes: school_classes, semester: semester
+  - if semesters.count == 2
+    = render "grade_year_absences", school_classes: school_classes, years: current_director.school_year
+- else
+  - case grade
+  - when 1
+    = info_box "Brak klas", "Żaden z wychowawców klas pierwszych nie dodał jeszczcze klasy."
+  - when 2
+    = info_box "Brak klas", "Żaden z wychowawców klas drugich nie dodał jeszczcze klasy."
+  - when 3
+    = info_box "Brak klas", "Żaden z wychowawców klas trzecich nie dodał jeszczcze klasy."
+  - when 4
+    = info_box "Brak klas", "Żaden z wychowawców klas czwartych nie dodał jeszczcze klasy."

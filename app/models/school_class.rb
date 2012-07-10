@@ -54,11 +54,11 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def semester
-    school.semesters.find_by_id(semester_id)
+    semesters.find_by_id(semester_id)
   end
 
   def semesters
-    school_semesters.before_year(yearbook)
+    school_semesters.between_years(start_year, yearbook)
   end
 
   def semester_absences(semester)
@@ -135,6 +135,10 @@ class SchoolClass < ActiveRecord::Base
 
   def school_semester
     school.semester
+  end
+
+  def start_year
+    yearbook - period
   end
 
   private

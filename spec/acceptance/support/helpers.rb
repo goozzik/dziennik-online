@@ -87,7 +87,7 @@ module HelperMethods
 
   def load_data_for_school_semester_report
     subject_templates = load_subject_templates
-    1.upto(4) do |i|
+    0.upto(3) do |i|
       teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
       school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i)
       subjects = load_subjects_for_school_class(school_class)
@@ -97,7 +97,7 @@ module HelperMethods
 
   def load_data_for_school_year_report
     subject_templates = load_subject_templates
-    1.upto(4) do |i|
+    0.upto(3) do |i|
       teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
       school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i)
       subjects = load_subjects_for_school_class(school_class)
