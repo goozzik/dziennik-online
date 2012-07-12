@@ -45,6 +45,10 @@ class Semester < ActiveRecord::Base
     where(["start_year >= ? AND end_year <= ?", start_year, end_year])
   end
 
+  def school_year
+    "#{start_year}/#{end_year}"
+  end
+
   private
 
     def set_active_if_first

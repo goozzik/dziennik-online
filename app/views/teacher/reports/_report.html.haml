@@ -48,3 +48,53 @@
       - 1.upto(6).each do |mark|
         %th= school_class.count_semestral_marks(mark, semester.id)
       %th= school_class.count_semestral_marks("nkl", semester.id)
+- if semesters.count == 2
+  %h2= "Podsumowanie roku szkolnego #{school_year}"
+  %table.table.table-bordered.table-condensed
+    %tr
+      %th{rowspan:"2", style:"width:3%"} #
+      %th{rowspan:"2", style:"width:11%"} Imię
+      %th{rowspan:"2", style:"width:11%"} Nazwisko
+      %th{colspan:"5", style:"width:35%"} Frekwencja
+      %th{colspan:"8", style:"width:40%"} Oceny
+    %tr
+      %th{style:"width:7%"} %
+      %th{style:"width:7%"} ob
+      %th{style:"width:7%"} us
+      %th{style:"width:7%"} nu
+      %th{style:"width:7%"} sp
+      %th{style:"width:5%"} Średnia
+      %th{style:"width:5%"} 1
+      %th{style:"width:5%"} 2
+      %th{style:"width:5%"} 3
+      %th{style:"width:5%"} 4
+      %th{style:"width:5%"} 5
+      %th{style:"width:5%"} 6
+      %th nkl
+    - school_class.students.each_with_index do |student, i|
+      - semester_absences = student.year_absences(school_year)
+      %tr
+        %td= i+1
+        %td= student.first_name
+        %td= student.last_name
+        %td= semester_absences.percentage
+        %td= semester_absences.required
+        %td= semester_absences.justified
+        %td= semester_absences.unexcused
+        %td= semester_absences.late
+        %td= student.average_semestral_mark_for_year(school_year)
+        - 1.upto(6).each do |mark|
+          %td= student.count_year_marks(mark, school_year)
+        %td= student.count_year_marks("nkl", school_year)
+    %tr
+      %th{colspan:3} Razem
+      - semester_absences = school_class.year_absences(school_year)
+      %th= semester_absences.percentage
+      %th= semester_absences.required
+      %th= semester_absences.justified
+      %th= semester_absences.unexcused
+      %th= semester_absences.late
+      %th= school_class.average_semestral_mark_for_year(school_year)
+      - 1.upto(6).each do |mark|
+        %th= school_class.count_year_marks(mark, school_year)
+      %th= school_class.count_year_marks("nkl", school_year)

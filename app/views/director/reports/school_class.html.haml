@@ -8,4 +8,4 @@
 
 = page_header "Raport nauczania klasy #{@school_class.fullname}"
 
-= render "teacher/reports/report", :school_class => @school_class, :semesters => current_director.current_year_semesters
+= render "teacher/reports/report", school_class:@school_class, semesters:current_director.current_year_semesters, school_year:current_director.school_year
