@@ -42,4 +42,8 @@ module ApplicationHelper
     "<i class='icon-trash icon-white'></i> Usuń".html_safe
   end
 
+  def action?(action)
+    controller.action_name =~ action
+  end
+
 end

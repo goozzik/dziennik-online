@@ -1,11 +1,11 @@
 .row
-  = simple_form_for [:admin, user], :html => {:class => "well form-horizontal span5"} do |f|
-    = f.input :first_name, :label => "Imię"
-    = f.input :last_name, :label => "Nazwisko"
-    - if controller.action_name =~ /edit|update/ 
-      = f.input :username, :label => "Login"
+  = simple_form_for [:admin, user], html: { class: "well form-horizontal span5" } do |f|
+    = f.input :first_name, label: "Imię"
+    = f.input :last_name, label: "Nazwisko"
+    - if action?(/edit|update/)
+      = f.input :username, label: "Login"
     - else 
-      = f.input :user_role, :collection => Admin::AVAILABLE_ROLES, :label => "Typ użytkownika"
+      = f.input :user_role, collection: Admin::AVAILABLE_ROLES, :label => "Typ użytkownika"
     .form-actions
       = f.button :submit, "Zapisz", :class => "btn btn-primary"
       = link_to "Anuluj", admin_users_path, :class => "btn btn-inverse"

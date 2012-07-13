@@ -6,6 +6,9 @@ class Admin::UsersController < ApplicationController
   before_filter :check_current_password, :only => [:update_password]
 
   def index
+    @teachers = current_admin.teachers
+    @directors = current_admin.directors
+    @admins = current_admin.admins
   end
 
   def edit
@@ -27,7 +30,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update_password
-    user.update_password(params[:user]) ? redirect_to(:action => "index") : render(:action => "new_password")
+    user.update_password(params[:user]) ? redirect_to(action: "index") : render(action: "new_password")
   end
 
   private 
