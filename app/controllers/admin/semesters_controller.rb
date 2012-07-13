@@ -3,15 +3,15 @@ class Admin::SemestersController < ApplicationController
   before_filter :authenticate_admin!
 
   def create
-    semester.save ? redirect_to(:controller => "schools", :action => "show") : render(:action => "new")
+    semester.save ? redirect_to(controller: "schools", action: "show") : render(action: "new")
   end
 
   def destroy
-    semester.destroy && redirect_to(:controller => "schools", :action => "show")
+    semester.destroy && redirect_to(controller: "schools", action: "show")
   end
 
   def activate
-    semester.activate && redirect_to(:controller => "schools", :action => "show")
+    semester.activate && redirect_to(controller: "schools", action: "show")
   end
 
   private
