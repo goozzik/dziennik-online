@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
 
   before_validation :generate_username_and_password, :on => :create
 
-  validates_presence_of :first_name, :last_name, :username
+  validates_presence_of :first_name, :last_name
+  validates_presence_of :username, :on => :update
   validates_presence_of :user_role, :on => :create
   validate :validate_role_format, :on => :create
 

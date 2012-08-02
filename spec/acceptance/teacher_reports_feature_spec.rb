@@ -49,7 +49,6 @@ feature 'Teacher reports' do
       subjects = load_subjects_for_school_class(school_class)
       load_data_for_school_class_year_report(school_class, subjects)
       click_link "Raporty"
-      save_and_open_page
       page.should have_content "Podsumowanie roku szkolnego 2011/2012"
       page.should have_xpath "//table[3]/tr[6]/th[2][contains(text(), '33.33')]"
       page.should have_xpath "//table[3]/tr[6]/th[3][contains(text(), '540')]"

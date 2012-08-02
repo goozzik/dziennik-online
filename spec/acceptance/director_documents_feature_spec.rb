@@ -31,7 +31,6 @@ feature "Director documents" do
         fill_in "document_name", with: "test_dokument"
         fill_in "document_description", with: "testowy dokument"
         attach_file "document_document", "#{Rails.root}/test/fixtures/files/trollface.jpeg" 
-        save_and_open_page
         click_button "Zapisz"
         page.should have_content "test_dokument"
         page.should have_content "testowy dokument"
