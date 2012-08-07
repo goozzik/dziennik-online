@@ -15,7 +15,7 @@ class Semester < ActiveRecord::Base
 
   validates :start_year, :presence => true
   validates :end_year, :presence => true
-  validates :semester, :presence => true
+  validates :semester, :presence => true, :uniqueness => {:scope => [:school_id, :start_year, :end_year], :message => "już istnieje"}
   validate :validate_end_year_is_later, :validate_difference_between_years
 
   def activate

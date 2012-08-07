@@ -87,6 +87,15 @@ feature "Admin school" do
             click_button "Zapisz"
             page.should have_content "zbyt duża rożnica"
           end
+
+          scenario "when there is already similar semester" do
+            FactoryGirl.create(:semester, semester: 1, start_year: 2012, end_year: 2013, school_id: School.last.id)
+            fill_in "semester_start_year", with: "2012"
+            fill_in "semester_end_year", with: "2013"
+            select "1", from: "semester_semester"
+            click_button "Zapisz"
+            page.should have_content "już istnieje"
+          end
         end
 
         scenario "cancel" do
