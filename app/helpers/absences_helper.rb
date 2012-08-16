@@ -21,9 +21,9 @@ module AbsencesHelper
   def next_link(next_month)
     case current_user.role
     when 'teacher'
-      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, teacher_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
+      content_tag("li", link_to('Następny miesiąc &rarr;'.html_safe, teacher_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
     when 'director'
-      content_tag("li", link_to('Nestępny miesiąc &rarr;'.html_safe, director_school_class_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
+      content_tag("li", link_to('Następny miesiąc &rarr;'.html_safe, director_school_class_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
     end
   end
 
