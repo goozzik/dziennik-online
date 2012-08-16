@@ -239,6 +239,8 @@ feature "Teacher subjects" do
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 
         scenario "with to high mark" do
@@ -246,12 +248,16 @@ feature "Teacher subjects" do
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
         end
 
         scenario "with to low mark" do
           fill_in "semestral_mark_active", :with => "0"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
+          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
         end
 
@@ -269,6 +275,8 @@ feature "Teacher subjects" do
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '3')]"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '3')]"
         end
 
         scenario "with to high mark" do
@@ -276,12 +284,16 @@ feature "Teacher subjects" do
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 
         scenario "with to low mark" do
           fill_in "semestral_mark_active", :with => "0"
           sleep(1)
           find(:css, "#semestral_mark_active").native.send_key(:tab)
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
+          reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
         end
 

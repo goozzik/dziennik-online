@@ -26,7 +26,7 @@
           = student.marks.find_by_description_id(description).try(:mark)
       %td
       %td.semestral_mark{:id => "semestral_mark_#{student.id}"}
-        = student.semestral_marks.current.find_by_subject_id(@subject).try(:mark)
+        = student.semestral_marks.find_by_subject_id_and_semester_id(@subject, student.semester).try(:mark)
       %td.mark_average= student.current_average_from_subject(@subject.id)
 
 :javascript
