@@ -12,7 +12,6 @@ class Mark < ActiveRecord::Base
 
   attr_accessible :mark, :student_id, :description_id, :subject_id
 
-  before_validation :remove_spaces
   validate :validate_mark_format
 
   before_create :set_semester_id
@@ -32,11 +31,6 @@ class Mark < ActiveRecord::Base
 
     def set_semester_id
       self.semester_id = description.semester_id
-    end
-
-    # in case of FireFox javascript bugs
-    def remove_spaces
-      self.mark = mark.gsub(' ', '')[0]
     end
 
 end

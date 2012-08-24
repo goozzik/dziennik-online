@@ -47,7 +47,7 @@
       parsed_id = $(this).attr('id').split('_');
       old_mark = clone.text();
       clone.text('');
-      clone.append('<input id="mark_active" name="mark[mark]" type="text" value="'+old_mark+'">');
+      clone.append('<input id="mark_active" name="mark[mark]" type="text" value="">');
       $(this).replaceWith(clone);
       $('#' + clone.attr('id')).children().focus();
     });
@@ -72,7 +72,7 @@
       parsed_id2 = $(this).attr('id').split('_');
       old_mark = clone.text();
       clone.text('');
-      clone.append('<input id="semestral_mark_active" name="semestral_mark[mark]" type="text" value="'+old_mark+'">');
+      clone.append('<input id="semestral_mark_active" name="semestral_mark[mark]" type="text" value="">');
       $(this).replaceWith(clone);
       $('#' + clone.attr('id')).children().focus();
     });
