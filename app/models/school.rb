@@ -1,4 +1,7 @@
+#coding: utf-8
 class School < ActiveRecord::Base
+
+  MONTHS = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"] 
 
   has_many :admins, :dependent => :destroy
   has_many :directors, :dependent => :destroy

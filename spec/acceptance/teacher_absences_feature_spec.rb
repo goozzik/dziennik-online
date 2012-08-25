@@ -51,6 +51,20 @@ feature 'Teacher absences feature' do
         page.should have_content "Frekwencja"
         page.should have_content "#{I18n.t(previous_month.strftime("%B"))} #{previous_month.year}"
       end
+
+      scenario "use select list and go to november" do
+        FactoryGirl.create(:absence, student_id: Student.last.id, date: "2011-11-11", required: 30, justified: 5)
+
+
+
+
+
+      end
+
+      scenario "use select list and go to april" do
+
+      end
+
     end
 
     context "create", :js => true do

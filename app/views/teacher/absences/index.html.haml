@@ -1,3 +1,11 @@
+.btn-group
+  %button.btn Wybierz miesiąc 
+  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+    %span.caret
+  %ul.dropdown-menu
+    - School::MONTHS.each do |month|
+      = nav_link_to(month, teacher_absences_path(:date => date_by_month(month, current_teacher.school_year)))
+
 = page_header "Frekwencja", "#{I18n.t(@month.strftime("%B"))} #{@month.year}"
 
 = info_box "Frekwencja", "Żeby dodać frekwencję należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_absences_info_1.png")
