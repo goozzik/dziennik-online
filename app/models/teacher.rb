@@ -31,6 +31,10 @@ class Teacher < User
     school_class.fullname
   end
 
+  def school_class_id
+    school_class.id
+  end
+
   private
 
     def set_role
