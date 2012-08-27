@@ -52,17 +52,20 @@ feature 'Teacher absences feature' do
         page.should have_content "#{I18n.t(previous_month.strftime("%B"))} #{previous_month.year}"
       end
 
-      scenario "use select list and go to november" do
-        FactoryGirl.create(:absence, student_id: Student.last.id, date: "2011-11-11", required: 30, justified: 5)
-
-
-
-
-
+      scenario "use select list and go to october" do
+        FactoryGirl.create(:absence, student_id: Student.last.id, date: "2011-10-03", required: 30, justified: 5)
+        click_link "Październik"
+        page.should have_xpath "//td[@class='absence'][contains(text(), '30')]"
+        page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
+        page.should have_content "Październik 2011"
       end
 
       scenario "use select list and go to april" do
-
+        FactoryGirl.create(:absence, student_id: Student.last.id, date: "2012-04-02", required: 25, justified: 5)
+        click_link "Kwiecień"
+        page.should have_xpath "//td[@class='absence'][contains(text(), '25')]"
+        page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
+        page.should have_content "Kwiecień 2012"
       end
 
     end
