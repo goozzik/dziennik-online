@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
     t.integer  "subject_id"
     t.integer  "semester_id"
     t.string   "desc_type"
-    t.integer  "colour"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

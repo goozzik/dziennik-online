@@ -9,7 +9,7 @@ class Description < ActiveRecord::Base
 
   has_many :marks, :dependent => :destroy
 
-  attr_accessible :subject_id, :semester_id, :desc_type, :description, :colour
+  attr_accessible :subject_id, :semester_id, :desc_type, :description
 
   before_create :set_semester_id
 

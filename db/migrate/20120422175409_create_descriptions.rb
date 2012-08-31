@@ -5,7 +5,6 @@ class CreateDescriptions < ActiveRecord::Migration
       t.integer :subject_id
       t.integer :semester_id
       t.string :desc_type
-      t.integer :colour
       t.string :description
 
       t.timestamps
