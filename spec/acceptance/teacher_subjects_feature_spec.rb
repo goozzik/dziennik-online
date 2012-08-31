@@ -261,6 +261,15 @@ feature "Teacher subjects" do
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '')]"
         end
 
+        scenario "with nkl mark" do
+          fill_in "semestral_mark_active", :with => "nkl"
+          sleep(1)
+          find(:css, "#semestral_mark_active").native.send_key(:tab)
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), 'nkl')]"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), 'nkl')]"
+        end
+
       end
 
       context "update" do
@@ -295,6 +304,15 @@ feature "Teacher subjects" do
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
           reload_page
           page.should have_xpath "//td[@class='semestral_mark'][contains(text(), '5')]"
+        end
+
+        scenario "with nkl mark" do
+          fill_in "semestral_mark_active", :with => "nkl"
+          sleep(1)
+          find(:css, "#semestral_mark_active").native.send_key(:tab)
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), 'nkl')]"
+          reload_page
+          page.should have_xpath "//td[@class='semestral_mark'][contains(text(), 'nkl')]"
         end
 
       end

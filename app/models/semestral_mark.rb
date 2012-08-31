@@ -12,7 +12,6 @@ class SemestralMark < ActiveRecord::Base
 
   attr_accessible :mark, :student_id, :subject_id, :semester_id
 
-  before_validation :remove_spaces
   validates :mark, :presence => true
   validate :validate_mark_format
   validates :student_id, :presence => true
@@ -40,12 +39,7 @@ class SemestralMark < ActiveRecord::Base
     end
 
     def update_semestral_average_mark
-      AverageSemestralMark.find_or_create_by_student_id_and_semester_id(student_id, semester_id).update_average
-    end
-
-    # in case of FireFox javascript bugs
-    def remove_spaces
-      self.mark = mark.gsub(' ', '')[0]
+      student.average_semestral_marks.find_by_semester_id(semester_id).update_average
     end
 
 end
