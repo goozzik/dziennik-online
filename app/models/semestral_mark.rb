@@ -1,7 +1,7 @@
 # coding: utf-8
 class SemestralMark < ActiveRecord::Base
 
-  AVAILABLE_MARKS = %w{1 2 3 4 5 6 nkl}
+  AVAILABLE_MARKS = %w{1 2 3 4 5 6 nkl zw}
 
   scope :current, joins(:semester).where(["semesters.active = ?", true])
 
@@ -10,7 +10,7 @@ class SemestralMark < ActiveRecord::Base
   belongs_to :subject
   belongs_to :school_class
 
-  attr_accessible :mark, :student_id, :subject_id, :semester_id
+  attr_accessible :mark, :student_id, :subject_id
 
   validates :mark, :presence => true
   validate :validate_mark_format
@@ -39,7 +39,7 @@ class SemestralMark < ActiveRecord::Base
     end
 
     def update_semestral_average_mark
-      student.average_semestral_marks.find_by_semester_id(semester_id).update_average
+      student.average_semestral_marks.find_or_create_by_semester_id(semester_id).update_average
     end
 
 end

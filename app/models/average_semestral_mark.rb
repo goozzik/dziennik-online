@@ -8,10 +8,14 @@ class AverageSemestralMark < ActiveRecord::Base
   before_validation :set_school_class_id
 
   def update_average
-    update_attribute(:average, semestral_marks.map(&:mark).collect(&:to_i).inject(:+).to_f / semestral_marks.count)
+    update_attribute(:average, semestral_marks.map(&:mark).collect(&:to_i).inject(:+).to_f / semestral_marks.count) if countable?
   end
 
   private
+
+    def countable?
+      semestral_marks.count != 0
+    end
 
     def semestral_marks
       student.semestral_marks.where("semester_id = ? AND mark != ?", semester_id, "zw")
