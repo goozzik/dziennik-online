@@ -7,6 +7,7 @@ class CreateSemesters < ActiveRecord::Migration
       t.integer :start_year
       t.integer :end_year
       t.boolean :active, default: false
+      t.boolean :archive, default: false
 
       t.timestamps
     end
