@@ -19,6 +19,7 @@
         xhr.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content'));
       }
     });
+
     var parsed_id;
 
     $('.absence').live('click', function() {
@@ -26,7 +27,7 @@
       parsed_id = $(this).attr('id').split('_');
       old_absence = clone.text();
       clone.text('');
-      clone.append('<input id="absence_active" type="text" value="' + old_absence + '">');
+      clone.append('<input id="absence_active" type="text" value="">');
       $(this).replaceWith(clone);
       $('#' + clone.attr('id')).children().focus();
     });
@@ -42,6 +43,26 @@
         data: data,
       });
       $(this).replaceWith(value);
+    });
+
+    var mass_required_date;
+
+    $('.mass_required').live('click', function() {
+      mass_required_date = $(this).attr('id');
+      $(this).html('<input id="mass_required_active" type="text" value="">');
+      $('#mass_required_active').focus();
+    });
+
+    $('#mass_required_active').live('blur', function() {
+      required = $(this).val();
+      data = 'absence[date]=' + mass_required_date + '&absence[required]=' + required;
+      $.ajax({
+        type: 'PUT',
+        url: '/teacher/absences/mass_required_update',
+        data: data,
+      });
+      $(this).replaceWith(required);
+      $('.' + mass_required_date + '_required').text(required);
     });
 
   });

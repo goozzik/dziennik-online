@@ -111,6 +111,39 @@ feature 'Teacher absences feature' do
 
     end
 
+    context "update mass required", :js => true do
+      before do
+        FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+        FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+      end
+
+      scenario "when there is no previous 'required' fields filled" do
+        click_link "Frekwencja"
+        date = Chronic.parse('monday this month').strftime('%Y-%m-%d')
+        page.execute_script("$('##{date}').trigger('click')")
+        fill_in "mass_required_active", :with => "28"
+        sleep(1)
+        find(:css, "#mass_required_active").native.send_key(:tab)
+        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+        reload_page
+        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+      end
+
+      scenario "when there is 'required' field filled" do
+        date = Chronic.parse('monday this month').strftime('%Y-%m-%d')
+        FactoryGirl.create(:absence, date: date, student_id: Student.last.id, required: 25) 
+        click_link "Frekwencja"
+        page.execute_script("$('##{date}').trigger('click')")
+        fill_in "mass_required_active", :with => "28"
+        sleep(1)
+        find(:css, "#mass_required_active").native.send_key(:tab)
+        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+        reload_page
+        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+      end
+
+    end
+
   end
 
 end

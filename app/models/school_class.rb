@@ -141,6 +141,13 @@ class SchoolClass < ActiveRecord::Base
     yearbook - period
   end
 
+  def update_mass_required_absences(absence)
+    students.each do |student|
+      _absence = student.absences.find_by_date_and_semester_id(absence[:date], school_semester.id)
+      _absence ? _absence.update_attributes(required: absence[:required]) : student.absences.create(absence)
+    end
+  end
+
   private
 
     def deactivate_old_school_class

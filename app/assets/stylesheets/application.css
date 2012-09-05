@@ -12,7 +12,7 @@
  *= require bootstrap_and_overrides
 */
 
-#mark_active, #semestral_mark_active, #absence_active {
+#mark_active, #semestral_mark_active, #absence_active , #mass_required_active{
   width:15px;
   height:10px;
   margin:0;

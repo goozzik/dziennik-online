@@ -22,4 +22,8 @@ class Teacher::AbsencesController < ApplicationController
     end
   end
 
+  def mass_required_update
+    current_teacher.school_class.update_mass_required_absences(params[:absence])
+  end
+
 end
