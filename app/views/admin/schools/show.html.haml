@@ -7,7 +7,7 @@
         %th{style: "width:20px"} #
         %th Semestr
         %th Rok
-        %th{style: "width:166px"}
+        %th{style: "width:232px"}
     - @semesters.each_with_index do |semester, i|
       %tr
         %td= i+1
@@ -18,6 +18,10 @@
             admin_semester_active_path(semester),
             class: "btn btn-mini #{"disabled" unless can? :activate, semester}",
             confirm: "Czy jesteś pewien, że chcesz aktywować semestr: #{semester.fullname}?"
+          - if semester.archived
+            = link_to "Przywróć", admin_semester_unarchive_path(semester), class: "btn btn-mini"
+          - else
+            = link_to "Archiwizuj", admin_semester_archive_path(semester), class: "btn btn-mini #{"disabled" unless can? :archive, semester}"
           = link_to delete_link_content,
             admin_semester_path(semester),
             method: "delete",

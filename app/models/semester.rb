@@ -9,7 +9,7 @@ class Semester < ActiveRecord::Base
   has_many :marks, :dependent => :destroy
 
   attr_accessible :start_year, :end_year, :semester, :active
-  #default_scope :order => 'created_at ASC'
+  default_scope :order => 'start_year DESC, semester DESC'
 
   before_create :set_active_if_first
 
@@ -47,6 +47,14 @@ class Semester < ActiveRecord::Base
 
   def school_year
     "#{start_year}/#{end_year}"
+  end
+
+  def archive
+    update_attribute(:archived, true)
+  end
+
+  def unarchive
+    update_attribute(:archived, false)
   end
 
   private
