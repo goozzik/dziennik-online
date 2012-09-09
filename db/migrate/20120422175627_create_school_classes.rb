@@ -11,6 +11,7 @@ class CreateSchoolClasses < ActiveRecord::Migration
       t.string :profile
       t.string :letter
       t.boolean :active
+      t.integer :profile_template_id
 
       t.timestamps
     end

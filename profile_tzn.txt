@@ -1,0 +1,452 @@
+profil:Technik architektury krajobrazu:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+PDG
+JOZ
+Ochorna i ukształtowanie krajobrazu
+Urządzanie i pielęgnacja obiektów architektury krajobrazu
+Eksploatacja maszyn i urządzeń
+Rośliny ozdobne
+Pracownia projektowania architektury krajobrazu
+Pracownia urządzania i pielęgnacji obiektów architektury krajobrazu
+Pracownia projektowania obiektów małej architektury krajobrazu
+Zajęcia praktyczne
+profil:Technik architektury krajobrazu:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Godziny z wychowawcą
+Podstawy projektowania architektury krajobrazu
+Eksploatacja maszyn, urządzeń I pojazdów
+Rośliny ozdobne
+Urządzenia I pielęgnacja obiektów architektury krajobrazu
+Zajęcia praktyczne
+Prowadzenie działalności gospodarczej
+Religia
+Wychowanie do życia w rodzinie
+Praktyka zawodowa
+profil:Technik awionik:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Język angielski dla awioników
+Podstawy elektroniki
+Technika cyfrowa
+Ogólnotechniczne podstawy obsługi urządzeń lotniczych
+Układy automatyki statków powietrznych
+Konstrukcja statków powietrznych i zespołów napędowych
+Budowa i eskploatacja wyposażenia elektrycznego statków powietrznych
+Pracownia elektroniki
+Pracownia urządzeń awioniki
+Pracownia systemów pomiarowch
+Zajęcia praktyczne
+Religia
+profil:Technik awionik:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Język angielski dla techników awioników
+Podstawy elektrotechniki
+Podstawy elektroniki
+Technika cyfrowa
+Ogólnotechniczne podstawy obsługi urządzeń lotniczych 
+Zajęcia praktyczne
+Areodynamika i mechanika lotu
+Konstrukcja statków powietrznych i ich zespołów napędowych
+Budowa i eksploatacja wyposażenia elektrycznego statków powietrznych
+Budowa i eksploatacja systemów i urządzeń awioniki
+Środowisko pracy
+Przepisy lotnicze
+Religia
+Praktyka zawodowa
+profil:Technik budownictwa:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Technologia budownictwa
+Podstawy budownictwa
+Podstawy projektowania
+Konstrukcje budowlane
+Instalacje budowlane
+Organizacja robót budowlanych
+Kosztorysowanie
+Eksploatacja obiektów budowlanych
+Język obcy zawodowy
+Specjalizacja: Nowoczesne technologie budownictwa
+Zajęcia praktyczne
+Religia
+Praktyka zawodowa
+profil:Technik elektronik:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Technologia i materiałoznawstwo elektryczne
+Podstawy elektrotechniki i elektroniki
+Układy analogowe
+Układy cyfrowe
+Przyrządy pomiarowe
+Układy mikroprocesorowe
+Układy automatyki
+Urządzenia elektroniczne
+Język angielski zawodowy
+Podejmowanie i prowadzenie działalności gospodarczej
+Pracownia elektrotechniki i elektroniki
+Pracownia instalacji i eksploatacji urządzeń elektronicznych
+Religia
+profil:Technik elektronik:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Techologia i materiałoznastwo elektryczne
+Podstawy elektrotechniki i elektroniki
+Pracownia elektryczna i elektroniczna
+Układy analogowe
+Układy cyfrowe
+Przyrządy pomiarowe
+Układy mikroprocesorowe
+Układy automatyki
+Urządzenia elektroniczne
+Specjalizacja: Systemy i sieci komputerowe
+Zajęcia praktyczne
+Religia
+Praktyka zawodowa
+profil:Technik informatyk:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Systemy operacyjne i oprogramowanie komputerów
+Urządzenia techniki komputerowej
+Sieci komputerowe
+Administracja sieciowych systemów operacyjnych
+Języki programowania stron internetowych
+Aplikacje internetowe
+Systemy baz danych
+Język angielski zawodowy
+Pracownia systemów operacyjnych i oprogramowania komputerów
+Pracownia urządzeń techniki komputerowej
+Pracownia sieci komputerowych
+Pracownia języków programowania stron internetowych
+Pracownia aplikacji internetowych
+Pracownia systemów baz danych
+Religia
+profil:Technik informatyk:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Systemy operacyjne i sieci komputerowe
+Urządzenia techniki komputerowej
+Programowanie strukturalne i obiektowe
+Multimedia i grafika komputerowe
+Oprogramowanie biurowe
+Język angielski zawodowy
+Zajęcia specjalizacyjne: administrowanie sieciowymi systemami operacyjnymi
+Religia
+Praktyka zawodowa
+profil:Technik mechanik lotniczy:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Termodynamika techniczna
+Mechanika i wytrzymałość materiałów
+Podstawy konstrukcji maszyn
+Aerodynamika i mechanika lotnicza
+Elektrotechnika i elektronika
+Technika cyfrowa i przyrządy elektroniczne
+Materiałoznawstwo ogólne i lotnicze
+Język angielski dla mechaników lotniczych
+Zajęcia praktyczne
+Budowa i eksploatacja statków powietrznych
+Budowa i eksploatacja silników lotniczych
+profil:Technik mechanik lotniczy:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Język angielski dla mechaników lotniczych
+Termodynamika techniczna
+Mechanika i wytrzymałość materiałów
+Podstawy konstrukcji maszyn
+Aerodynamika i mechanika lotu
+Elektrotechnika i elektronika
+Technika cyfrowa i przyrządy elektroniczne
+Materiałoznawstwo ogólne i lotnicze
+Zajęcia praktyczne
+Budowa i eksploatacja statków powietrznych
+Budowa i eksploatacja silników lotniczych
+Środowisko pracy i przepisy lotnicze
+Religia
+Praktyka zawodowa
+profil:Technik mechanik:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Podstawy konstrukcji maszyn i urządzeń
+Technologia mechaniczna
+Układy sterowania i regulacji
+Maszynoznawstwo
+Eksploatacja maszyn i urządzeń
+Pracownia techniczna
+Bezpieczeństwo pracy, ochrona środowiska, zarządzanie jakością
+Zajęcia praktyczne
+Zajęcia specjalizujące
+Religia
+Praktyka zawodowa
+profil:Technik ochrony środowiska:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Ochrona powietrza oraz ochrona przed hałasem i drganiami
+Gospodarowanie odpadami, ochrona gleb i rekultywacja
+Ochrona wód
+Biologia i ekologia
+Język obcy zawodowy
+Prawo i ekonomika w ochronie środowiska
+Pracownia badań laboratoryjnych
+Pracownia technologii komponentów środowiska
+Użytkowanie komputerów w ochronie środowiska
+Podstawy techniki
+Historia i społeczeństwo
+Matematyka
+Religia
+profil:Technik ochrony środowiska:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Podstawy techniki
+Biologia i ekologia
+Ochrona powietrza oraz ochrona przed hałasem i drganiami
+Gospodarowanie odpadami, ochrona gleb i rekultywacja
+Ochrona wód
+Pracownia badań laboratoryjnych
+Użytkowanie komputerów
+Prawo i ekonomia w ochronie środowiska
+Religia
+Praktyka zawodowa
+profil:Technik teleinformatyk:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia	
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Systemy operacyjne i oprogramowanie komputerów	
+Elektrotechnika
+Podstawy elektroniki
+Układy elektroniczne
+Podstawy teleinformatyki
+Sieci komputerowe
+Administracja sieciowych systemów operacyjnych
+Sieci i urządzenia teleinformatyczne
+Język angielski zawodowy
+Pracownia systemów operacyjnych i oprogramowania komputerów
+Pracownia elektryczna
+Pracownia urządzeń techniki komputerowej
+Pracownia sieci komputerowych
+Pracownia sieci i urządzeń komputerowych
+Pracownia sieci rozległych
+profil:Technik teleinformatyk:2007
+Język polski
+Język angielski
+Język niemiecki
+Historia
+Wiedza o społeczeństwie
+Wiedza o kulturze
+Matematyka
+Fizyka
+Chemia
+Biologia
+Geografia
+Podstawy przedsiębiorczości
+Technologia informacyjna
+Wychowanie fizyczne
+Przysposobienie obronne
+Elektrotechnika i elektronika
+Technologia elementów teleinformatycznych
+Komputerowe wspomaganie projektowania
+Układy cyfrowe
+Podstawy teleinformatyki
+Przetwarzanie i obróbka sygnałów
+Urządzenia techniki komputerowej
+Pracownia elektroniczna
+Pracownia systemów komputerowych
+Pracownia sieci teleinformatycznych
+Język angielski dla teleinformatyków
+Religia
+Praktyka zawodowa

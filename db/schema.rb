@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602211048) do
+ActiveRecord::Schema.define(:version => 20120908134015) do
 
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
@@ -122,6 +122,19 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
   add_index "notes", ["school_class_id"], :name => "index_notes_on_school_class_id"
   add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
 
+  create_table "profile_templates", :force => true do |t|
+    t.string   "name"
+    t.integer  "school_id"
+    t.integer  "start_year"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "profile_templates_subject_templates", :id => false, :force => true do |t|
+    t.integer "profile_template_id"
+    t.integer "subject_template_id"
+  end
+
   create_table "school_classes", :force => true do |t|
     t.integer  "school_id"
     t.integer  "teacher_id"
@@ -132,8 +145,9 @@ ActiveRecord::Schema.define(:version => 20120602211048) do
     t.string   "profile"
     t.string   "letter"
     t.boolean  "active"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "profile_template_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "school_classes", ["school_id"], :name => "index_school_classes_on_school_id"

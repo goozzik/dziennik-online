@@ -7,6 +7,7 @@ class SchoolClass < ActiveRecord::Base
 
   belongs_to :school
   belongs_to :teacher
+  belongs_to :profile_template
 
   has_many :subjects, :dependent => :destroy
   has_many :students, :dependent => :destroy, :order => "last_name ASC"
@@ -21,9 +22,12 @@ class SchoolClass < ActiveRecord::Base
 
   validates_presence_of :letter, :profile, :yearbook, :period
 
-  before_validation :set_school_id, :set_semester_id, :set_grade, :on => :create
+  before_validation :set_school_id, :set_semester_id, :set_grade, :set_profile_template_id, :on => :create
   before_create :deactivate_old_school_class, :set_active
+  after_create :create_subjects_from_profile_template
   before_destroy :unset_teacher_school_class_id
+
+  delegate :profile_templates, :to => :school
 
   WEEK_DAYS = {0 => 'Niedziela',
                1 => 'Poniedziałek',
@@ -168,7 +172,8 @@ class SchoolClass < ActiveRecord::Base
 
     def calculate_grade
       _grade = period - (yearbook - Time.now.year)
-     _grade >= period ? period : _grade
+      _grade += 1 if Time.now.month >= 9
+      _grade >= period ? period : _grade
     end
 
     def set_grade
@@ -181,6 +186,19 @@ class SchoolClass < ActiveRecord::Base
 
     def second_semester_by_year(year)
       @second_semester ||= school_semesters.find_by_start_year_and_semester(year[0..3], 2)
+    end
+
+    def set_profile_template_id
+      profile_templates.find_all_by_name(profile).each do |profile|
+        if profile.start_year <= start_year
+          self.profile_template_id = profile.id
+          break
+        end
+      end
+    end
+
+    def create_subjects_from_profile_template
+      profile_template.subject_templates.each { |subject_template| subjects.create(subject_template_id: subject_template.id) }
     end
 
 end

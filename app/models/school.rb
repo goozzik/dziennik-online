@@ -11,6 +11,7 @@ class School < ActiveRecord::Base
   has_many :students, :dependent => :destroy
   has_many :users, :dependent => :destroy
   has_many :documents, :dependent => :destroy, :conditions => ["school_id IS NOT NULL"]
+  has_many :profile_templates, :dependent => :destroy
 
   def semester
     semesters.find_by_active(true)
@@ -60,6 +61,10 @@ class School < ActiveRecord::Base
 
   def school_year
     current_year_semesters.first.years
+  end
+
+  def profile_templates_names
+    profile_templates.map(&:name).uniq
   end
 
 end

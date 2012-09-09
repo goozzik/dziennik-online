@@ -7,21 +7,25 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-SubjectTemplate.create([{:name => "Administracja sieci"}, {:name => "Aplikajce biurowe" }, {:name => "Biologia"},
-                {:name => "Chemia"}, {:name => "Edukacja europejska"}, {:name => "Fizyka"}, {:name => "Geografia"},
-                {:name => "Grafika"}, {:name => "Historia"}, {:name => "Informatyka"}, {:name => "J.Angielski"},
-                {:name => "J.Francuski"}, {:name => "J.Hiszpański"}, {:name => "J.Niemiecki"}, {:name => "J.Polski"},
-                {:name => "J.Rosyjski"}, {:name => "J.Wloski"}, {:name => "Maszynoznawstwo"}, {:name => "Matematyka"},
-                {:name => "Podstawy przedsiębierczości"}, {:name => "PSIO"}, {:name => "Podstawy Technologi Maszyn"},
-                {:name => "Programowanie"}, {:name => "Przyroda"}, {:name => "Psychologia"}, {:name => "Religia"},
-                {:name => "Systemy operacyjne"}, {:name => "Technologia informacyjna"},
-                {:name => "Urządzenia techniki komputerowej"}, {:name => "Wychowanie fizyczne"},
-                {:name => "Wiedza o kulturze"}, {:name => "Wiedza o społeczeństwie"}])
+#
 
 school = FactoryGirl.create(:school)
+
+tzn = File.new("profile_tzn.txt", "r")
+
+profile = nil
+while (line = tzn.gets)
+  if line =~ /profil:/
+    line = line.gsub("\n", "")
+    profile = ProfileTemplate.create(name: line.scan(/:([^"]*):/).first.first, start_year: line[-4..-1], school_id: school)
+  else
+    profile.subject_templates << SubjectTemplate.find_or_create_by_name(line.gsub("\n", ""))
+  end
+end
+
 semester = FactoryGirl.create(:semester, school_id:school.id, start_year:2011, end_year:2012, semester:2)
 admin = FactoryGirl.create(:admin, school_id:school.id, username:"administrator")
+director = FactoryGirl.create(:director, school_id:school.id, username:"dyrektor")
 
 1.upto(4) do |a|
   teacher = FactoryGirl.create(:teacher, school_id:school.id, username:"nauczyciel#{a}")
@@ -33,4 +37,5 @@ admin = FactoryGirl.create(:admin, school_id:school.id, username:"administrator"
     end
   end
 end
-director = FactoryGirl.create(:director, school_id:school.id, username:"dyrektor")
+
+

@@ -1,9 +1,9 @@
 .row
   = simple_form_for [:teacher, school_class], :html => {:class => "well form-horizontal span5"} do |f|
-    = f.input :letter, :label => "Litera", :placeholder => "G"
-    = f.input :profile, :label => "Profil", :placeholder => "Informatyk"
-    = f.input :yearbook, :label => "Rocznik", :input_html => {:value => 2013}
-    = f.input :period, :label => "Okres nauki w latach", :input_html => {:value => 4}
+    = f.input :letter, label: "Litera", placeholder: "G"
+    = f.input :profile, collection: current_teacher.profile_templates_names, label: "Profil", placeholder: "Informatyk"
+    = f.input :yearbook, label: "Rocznik", input_html: {value: 2013}
+    = f.input :period, label: "Okres nauki w latach", input_html: {value: 4}
     .form-actions
-      = f.button :submit, "Zapisz", :class => "btn btn-primary"
-      = link_to "Anuluj", teacher_school_classes_path, :class => "btn btn-inverse"
+      = f.button :submit, "Zapisz", class: "btn btn-primary"
+      = link_to "Anuluj", teacher_school_classes_path, class: "btn btn-inverse"

@@ -17,7 +17,8 @@ class Teacher < User
            :semesters,
            :subjects, :to => :school_class
   delegate :current_year_semesters,
-           :school_year, :to => :school
+           :school_year,
+           :profile_templates_names, :to => :school
 
   def deactivate_school_class
     school_class.deactivate if school_class
