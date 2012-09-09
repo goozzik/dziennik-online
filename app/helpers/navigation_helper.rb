@@ -22,15 +22,16 @@ module NavigationHelper
   end
 
   def teacher_navigation
-     html = nav_link_to("Oceny", teacher_subjects_path)
-     html << nav_link_to("Frekwencja", teacher_absences_path)
-     html << nav_link_to("Raporty", teacher_reports_path)
-     html << nav_link_to("Wiadomości", teacher_messages_path)
-     html << nav_link_to("Dokumenty", teacher_documents_path)
-     html << nav_link_to("Plan lekcji", teacher_time_tables_path)
-     html << nav_link_to("Uczniowie", teacher_students_path)
-     #html << nav_link_to("Nauczyciele", "#")
-     html.html_safe
+    if current_teacher.school_class
+      html = nav_link_to("Oceny", teacher_subject_path(current_teacher.subjects.first))
+      html << nav_link_to("Frekwencja", teacher_absences_path)
+      html << nav_link_to("Raporty", teacher_reports_path)
+      html << nav_link_to("Wiadomości", teacher_messages_path)
+      html << nav_link_to("Dokumenty", teacher_documents_path)
+      html << nav_link_to("Plan lekcji", teacher_time_tables_path)
+      html << nav_link_to("Uczniowie", teacher_students_path)
+      html.html_safe
+    end
   end
 
   def director_reports_dropdown

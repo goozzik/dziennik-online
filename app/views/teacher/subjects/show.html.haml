@@ -1,3 +1,11 @@
+.btn-group
+  %button.btn Wybierz przedmiot
+  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+    %span.caret
+  %ul.dropdown-menu
+    - current_teacher.subjects.each do |subject|
+      = nav_link_to(subject.name, teacher_subject_path(subject))
+
 = page_header "Oceny", @subject.name
 
 = info_box "Oceny",
@@ -28,6 +36,11 @@
       %td.semestral_mark{:id => "semestral_mark_#{student.id}"}
         = student.semestral_marks.find_by_subject_id_and_semester_id(@subject, student.semester).try(:mark)
       %td.mark_average= student.current_average_from_subject(@subject.id)
+
+= info_box "Kartki z ocenami i frekwencją",
+   "Możesz wydrukować karteczki z ocenami i frekwencją kożystając z pliku PDF.",
+   link_to(image_tag("filetype_pdf.png") + "Kartki z ocenami",
+   meeting_cards_teacher_students_path + ".pdf")
 
 :javascript
   $(document).ready(function() {
