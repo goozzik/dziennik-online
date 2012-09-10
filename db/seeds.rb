@@ -29,7 +29,7 @@ director = FactoryGirl.create(:director, school_id:school.id, username:"dyrektor
 
 1.upto(4) do |a|
   teacher = FactoryGirl.create(:teacher, school_id:school.id, username:"nauczyciel#{a}")
-  school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:2016-a)
+  school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:2016-a, profile:"Technik awionik")
   1.upto(21).each do |b|
     student = FactoryGirl.create(:student, school_class_id:school_class.id, username:"Testiusz#{b}")
     ['2012-03-05', '2012-04-02', '2012-04-09', '2012-04-16', '2012-04-30', '2012-05-07', '2012-05-14', '2012-05-21', '2012-06-04', '2012-06-11', '2012-06-18', '2012-06-25'].each do |c|
@@ -37,5 +37,3 @@ director = FactoryGirl.create(:director, school_id:school.id, username:"dyrektor
     end
   end
 end
-
-

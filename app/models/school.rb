@@ -56,7 +56,7 @@ class School < ActiveRecord::Base
   end
 
   def current_year_semesters
-    Time.now.month > 9 ? semesters.find_all_by_start_year(Time.now.year) : semesters.find_all_by_end_year(Time.now.year)
+    Time.now.month >= 9 ? semesters.find_all_by_start_year(Time.now.year) : semesters.find_all_by_end_year(Time.now.year)
   end
 
   def school_year

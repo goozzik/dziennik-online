@@ -9,7 +9,8 @@ feature "Director absences" do
       FactoryGirl.create(:semester, :school_id => School.last.id)
       FactoryGirl.create(:director, :school_id => School.last.id)
       FactoryGirl.create(:teacher, :school_id => School.last.id)
-      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+      FactoryGirl.create(:profile_template, school_id: School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id, profile: "Technik awionik")
       login("director")
       click_link "Klasy"
     end
@@ -60,7 +61,7 @@ feature "Director absences" do
       scenario "use select list and go to october" do
         FactoryGirl.create(:absence, student_id: Student.last.id, date: "2011-10-03", required: 30, justified: 5)
         click_link "Październik"
-        page.should have_xpath "//td[@class='absence'][contains(text(), '30')]"
+        page.should have_xpath "//td[@class='absence 2011-10-03_required'][contains(text(), '30')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
         page.should have_content "Październik 2011"
       end
@@ -68,7 +69,7 @@ feature "Director absences" do
       scenario "use select list and go to april" do
         FactoryGirl.create(:absence, student_id: Student.last.id, date: "2012-04-02", required: 25, justified: 5)
         click_link "Kwiecień"
-        page.should have_xpath "//td[@class='absence'][contains(text(), '25')]"
+        page.should have_xpath "//td[@class='absence 2012-04-02_required'][contains(text(), '25')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
         page.should have_content "Kwiecień 2012"
       end

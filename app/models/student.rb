@@ -3,10 +3,10 @@ class Student < User
 
   default_scope :conditions => ["role = ?", "student"]
 
-#  scope :first_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 1, true])
-#  scope :second_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 2, true])
-#  scope :third_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 3, true])
-#  scope :fourth_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 4, true])
+  scope :first_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 1, true])
+  scope :second_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 2, true])
+  scope :third_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 3, true])
+  scope :fourth_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 4, true])
 
   belongs_to :school_class
   belongs_to :teacher
@@ -23,7 +23,7 @@ class Student < User
   before_validation :set_role, :set_teacher_id, :set_school_id
 
   delegate :second_semester_by_year,
-           :semester, :semester_id, :to => :school_class
+           :semester, :semester_id, :subjects, :to => :school_class
   delegate :school_year, :to => :school
 
   def self.bests_by_semester_id(semester_id)

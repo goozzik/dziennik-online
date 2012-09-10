@@ -41,16 +41,11 @@ module HelperMethods
   def load_subject_templates
     subject_templates = []
     0.upto(5).each {|i| subject_templates << FactoryGirl.create(:subject_template, name:i)}
+    FactoryGirl.create(:profile_template, name: "Technik awionik", school_id: School.last.id, subject_templates: subject_templates)
     subject_templates
   end
 
-  def load_subjects_for_school_class(school_class = SchoolClass.last)
-    subjects = []
-    0.upto(5).each {|i| subjects << FactoryGirl.create(:subject, subject_template_id:SubjectTemplate.find_by_name(i.to_s).id, school_class_id:school_class.id)} 
-    subjects
-  end
-
-  def load_data_for_student_semester_report(student, subjects, semester = Semester.last)
+  def load_data_for_student_semester_report(student, semester = Semester.last)
     time = Chronic.parse('monday this month')
     dates = []
     3.times do
@@ -60,28 +55,28 @@ module HelperMethods
     dates.each do |date|
       FactoryGirl.create(:absence, student_id:student.id, date:date, required:30, justified:20, unexcused:0, late:5)
     end
-    subjects.each_with_index {|subject, j| FactoryGirl.create(:semestral_mark, student_id:student.id, subject_id:subject.id, mark:(j+1).to_s)}
+    student.subjects.each_with_index {|subject, j| FactoryGirl.create(:semestral_mark, student_id:student.id, subject_id:subject.id, mark:(j+1).to_s)}
   end
 
-  def load_data_for_student_year_report(school_class, student, subjects)
-    load_data_for_student_semester_report(student, subjects)
+  def load_data_for_student_year_report(school_class, student)
+    load_data_for_student_semester_report(student)
     semester = school_class.semester 
     second_semester = Semester.find_by_semester(semester.semester == 1 ? 2 : 1)
     school_class.activate_semester(second_semester)
-    load_data_for_student_semester_report(student, subjects)
+    load_data_for_student_semester_report(student)
   end
 
-  def load_data_for_school_class_semester_report(school_class, subjects)
+  def load_data_for_school_class_semester_report(school_class)
     1.upto(3) do
       student = FactoryGirl.create(:student, school_class_id:school_class.id)
-      load_data_for_student_semester_report(student, subjects)
+      load_data_for_student_semester_report(student)
     end
   end
 
-  def load_data_for_school_class_year_report(school_class, subjects)
+  def load_data_for_school_class_year_report(school_class)
     1.upto(3) do
       student = FactoryGirl.create(:student, school_class_id:school_class.id)
-      load_data_for_student_year_report(school_class, student, subjects)
+      load_data_for_student_year_report(school_class, student)
     end
   end
 
@@ -89,9 +84,8 @@ module HelperMethods
     subject_templates = load_subject_templates
     0.upto(3) do |i|
       teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
-      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i)
-      subjects = load_subjects_for_school_class(school_class)
-      load_data_for_school_class_semester_report(school_class, subjects)
+      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i, profile: "Technik awionik")
+      load_data_for_school_class_semester_report(school_class)
     end
   end
 
@@ -99,9 +93,8 @@ module HelperMethods
     subject_templates = load_subject_templates
     0.upto(3) do |i|
       teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
-      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i)
-      subjects = load_subjects_for_school_class(school_class)
-      load_data_for_school_class_year_report(school_class, subjects)
+      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i, profile: "Technik awionik")
+      load_data_for_school_class_year_report(school_class)
     end
   end
 

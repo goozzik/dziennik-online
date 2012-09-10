@@ -19,13 +19,13 @@ feature "Director reports" do
       load_semester
       load_data_for_school_semester_report
       click_link "Raport frekwencji klas"
-      1.upto(3) do |i|
-        page.should have_xpath "//table[#{i}]/tr[2]/td[1][contains(text(), '#{i} G')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[2][contains(text(), '33.33')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[3][contains(text(), '270')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[4][contains(text(), '180')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[5][contains(text(), '0')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[6][contains(text(), '45')]"
+      2.upto(4) do |i|
+        page.should have_xpath "//table[#{i-1}]/tr[2]/td[1][contains(text(), '#{i} G')]"
+        page.should have_xpath "//table[#{i-1}]/tr[2]/td[2][contains(text(), '33.33')]"
+        page.should have_xpath "//table[#{i-1}]/tr[2]/td[3][contains(text(), '270')]"
+        page.should have_xpath "//table[#{i-1}]/tr[2]/td[4][contains(text(), '180')]"
+        page.should have_xpath "//table[#{i-1}]/tr[2]/td[5][contains(text(), '0')]"
+        page.should have_xpath "//table[#{i-1}]/tr[2]/td[6][contains(text(), '45')]"
       end
     end
 
@@ -34,13 +34,13 @@ feature "Director reports" do
       load_second_semester
       load_data_for_school_year_report
       click_link "Raport frekwencji klas"
-      [3, 6, 9].each do |i|
-        page.should have_xpath "//table[#{i}]/tr[2]/td[1][contains(text(), '#{i/3} G')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[2][contains(text(), '33.33')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[3][contains(text(), '540')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[4][contains(text(), '360')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[5][contains(text(), '0')]"
-        page.should have_xpath "//table[#{i}]/tr[2]/td[6][contains(text(), '90')]"
+      [6, 9, 12].each do |i|
+        page.should have_xpath "//table[#{i-3}]/tr[2]/td[1][contains(text(), '#{i/3} G')]"
+        page.should have_xpath "//table[#{i-3}]/tr[2]/td[2][contains(text(), '33.33')]"
+        page.should have_xpath "//table[#{i-3}]/tr[2]/td[3][contains(text(), '540')]"
+        page.should have_xpath "//table[#{i-3}]/tr[2]/td[4][contains(text(), '360')]"
+        page.should have_xpath "//table[#{i-3}]/tr[2]/td[5][contains(text(), '0')]"
+        page.should have_xpath "//table[#{i-3}]/tr[2]/td[6][contains(text(), '90')]"
       end
     end
 
@@ -59,7 +59,7 @@ feature "Director reports" do
       load_data_for_school_semester_report
       reload_page
       click_link "Raporty klas"
-      page.should have_content "Raport nauczania klasy 1 G Informatyk 2015"
+      page.should have_content "Raport nauczania klasy 2 G Technik awionik 2015"
       page.should have_xpath "//tr[6]/th[2][contains(text(), '33.33')]"
       page.should have_xpath "//tr[6]/th[3][contains(text(), '270')]"
       page.should have_xpath "//tr[6]/th[4][contains(text(), '180')]"
