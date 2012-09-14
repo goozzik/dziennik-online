@@ -1,7 +1,9 @@
+# coding: utf-8
 class Teacher::AbsencesController < ApplicationController
 
   before_filter :authenticate_teacher!
   before_filter :teacher_has_active_class?, :school_class_has_active_semester?, :school_class_has_students?
+  before_filter :is_semester_archived?, :only => [:update]
 
   def index
     @month = Chronic.parse('monday this month', :now => (params[:date].nil? ? Time.now : Time.parse(params[:date])))
@@ -24,6 +26,13 @@ class Teacher::AbsencesController < ApplicationController
 
   def mass_required_update
     current_teacher.school_class.update_mass_required_absences(params[:absence])
+  end
+
+  def is_semester_archived?
+    if current_teacher.semester.archived
+      flash[:alert] = "Administrator szkoły zarchiwizował ten semestr. Dostępne jest tylko przeglądanie."
+      redirect_to :back
+    end
   end
 
 end
