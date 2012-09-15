@@ -98,7 +98,7 @@ Język angielski dla techników awioników
 Podstawy elektrotechniki
 Podstawy elektroniki
 Technika cyfrowa
-Ogólnotechniczne podstawy obsługi urządzeń lotniczych 
+Ogólnotechniczne podstawy obsługi urządzeń lotniczych
 Zajęcia praktyczne
 Areodynamika i mechanika lotu
 Konstrukcja statków powietrznych i ich zespołów napędowych
@@ -108,6 +108,34 @@ Budowa i eksploatacja systemów i urządzeń awioniki
 Przepisy lotnicze
 Religia
 Praktyka zawodowa
+profil:Technik budownictwa:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Technologia budownictwa
+Instalacje budowlane
+Organizacja robót budowlanych
+Kosztorysowanie
+Język obcy zawodowy
+Działalność gospodarcza w budownictwie
+Pracownia projektowania
+Pracownia konstrukcji budowlanych
+Pracownia organizacji robót budowlanych
+Pracownia kosztorysowania
+Zajęcia praktyczne
+Religia
 profil:Technik budownictwa:2007
 Język polski
 Język angielski
@@ -308,6 +336,36 @@ Budowa i eksploatacja silników lotniczych
 Środowisko pracy i przepisy lotnicze
 Religia
 Praktyka zawodowa
+profil:Technik mechanik:2012
+Język polski
+Język angielski
+Język niemiecki
+Wiedza o kulturze
+Historia
+Wiedza o społeczeństwie
+Podstawy przedsiębiorczości
+Geografia
+Biologia
+Chemia
+Fizyka
+Matematyka
+Informatyka
+Wychowanie fizyczne
+Edukacja dla bezpieczeństwa
+Podstawy konstrukcji mechanicznych
+Technologia mechaniczna
+Układy sterowania
+Maszynoznawstwo
+Eksploatacja maszyn i urządzeń
+Bezpieczeństwo pracy, ochrona środowiska
+Język angielski zawodowy
+Zajęcia praktyczne
+Pracownia techniczna
+Rozwiązania konstrukcyjne maszyn i urządzeń i ich obsługa
+Historia i społeczeństwo
+Matematyka
+Język obcy
+Religia
 profil:Technik mechanik:2007
 Język polski
 Język angielski
@@ -395,7 +453,7 @@ Język polski
 Język angielski
 Język niemiecki
 Wiedza o kulturze
-Historia	
+Historia
 Wiedza o społeczeństwie
 Podstawy przedsiębiorczości
 Geografia
@@ -406,7 +464,7 @@ Matematyka
 Informatyka
 Wychowanie fizyczne
 Edukacja dla bezpieczeństwa
-Systemy operacyjne i oprogramowanie komputerów	
+Systemy operacyjne i oprogramowanie komputerów
 Elektrotechnika
 Podstawy elektroniki
 Układy elektroniczne
