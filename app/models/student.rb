@@ -3,10 +3,10 @@ class Student < User
 
   default_scope :conditions => ["role = ?", "student"]
 
-  #scope :first_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 1, true])
-  #scope :second_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 2, true])
-  #scope :third_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 3, true])
-  #scope :fourth_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 4, true])
+  scope :first_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 1, true])
+  scope :second_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 2, true])
+  scope :third_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 3, true])
+  scope :fourth_grade, joins(:school_class).where(["school_classes.grade = ? AND school_classes.active = ?", 4, true])
 
   belongs_to :school_class
   belongs_to :teacher
