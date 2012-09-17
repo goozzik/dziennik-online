@@ -10,6 +10,7 @@ feature "Director reports" do
   end
 
   context "absences" do
+
     scenario "when there is no active semester in school" do
       click_link "Raport frekwencji klas"
       assert_alert_box "Administrator szkoły nie aktywował jeszcze semestru."
@@ -80,19 +81,19 @@ feature "Director reports" do
       load_data_for_school_year_report
       reload_page
       click_link "Raporty klas"
-      page.should have_content "Podsumowanie roku szkolnego 2011/2012"
+      page.should have_content "Podsumowanie roku szkolnego #{School.last.school_year}"
       page.should have_xpath "//table[3]/tr[6]/th[2][contains(text(), '33.33')]"
       page.should have_xpath "//table[3]/tr[6]/th[3][contains(text(), '540')]"
       page.should have_xpath "//table[3]/tr[6]/th[4][contains(text(), '360')]"
       page.should have_xpath "//table[3]/tr[6]/th[5][contains(text(), '0')]"
       page.should have_xpath "//table[3]/tr[6]/th[6][contains(text(), '90')]"
       page.should have_xpath "//table[3]/tr[6]/th[7][contains(text(), '3.5')]"
-      page.should have_xpath "//table[3]/tr[6]/th[8][contains(text(), '3')]"
-      page.should have_xpath "//table[3]/tr[6]/th[9][contains(text(), '3')]"
-      page.should have_xpath "//table[3]/tr[6]/th[10][contains(text(), '3')]"
-      page.should have_xpath "//table[3]/tr[6]/th[11][contains(text(), '3')]"
-      page.should have_xpath "//table[3]/tr[6]/th[12][contains(text(), '3')]"
-      page.should have_xpath "//table[3]/tr[6]/th[13][contains(text(), '3')]"
+      page.should have_xpath "//table[3]/tr[6]/th[8][contains(text(), '5')]"
+      page.should have_xpath "//table[3]/tr[6]/th[9][contains(text(), '5')]"
+      page.should have_xpath "//table[3]/tr[6]/th[10][contains(text(), '5')]"
+      page.should have_xpath "//table[3]/tr[6]/th[11][contains(text(), '5')]"
+      page.should have_xpath "//table[3]/tr[6]/th[12][contains(text(), '5')]"
+      page.should have_xpath "//table[3]/tr[6]/th[13][contains(text(), '5')]"
       page.should have_xpath "//table[3]/tr[6]/th[14][contains(text(), '0')]"
     end
 

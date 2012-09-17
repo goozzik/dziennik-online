@@ -26,7 +26,7 @@ module HelperMethods
   end
 
   def load_semester
-    if Time.now.month > 9
+    if Time.now.month >= 9
       FactoryGirl.create(:semester, school_id:School.last.id, semester:1, start_year:Time.now.year, end_year: Time.now.year+1)
     else
       FactoryGirl.create(:semester, school_id:School.last.id, semester:2, start_year:Time.now.year-1, end_year: Time.now.year)
@@ -60,8 +60,8 @@ module HelperMethods
 
   def load_data_for_student_year_report(school_class, student)
     load_data_for_student_semester_report(student)
-    semester = school_class.semester 
-    second_semester = Semester.find_by_semester(semester.semester == 1 ? 2 : 1)
+    semester = school_class.semester
+    second_semester = Semester.find_by_active(false)
     school_class.activate_semester(second_semester)
     load_data_for_student_semester_report(student)
   end

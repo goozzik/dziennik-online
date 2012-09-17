@@ -6,7 +6,7 @@ feature "Director absences" do
   context "index" do
     before do
       FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, :school_id => School.last.id)
+      load_semester
       FactoryGirl.create(:director, :school_id => School.last.id)
       FactoryGirl.create(:teacher, :school_id => School.last.id)
       FactoryGirl.create(:profile_template, school_id: School.last.id)
@@ -21,9 +21,7 @@ feature "Director absences" do
     end
 
     scenario "when there is data for school class" do
-      load_subject_templates
-      subjects = load_subjects_for_school_class
-      load_data_for_school_class_semester_report(SchoolClass.last, subjects)
+      load_data_for_school_class_semester_report(SchoolClass.last)
       click_link "Bieżąca frekwencja"
       page.should have_xpath "//tr[3]/td[3][contains(text(), '30')]"
       page.should have_xpath "//tr[3]/td[4][contains(text(), '20')]"
@@ -59,19 +57,21 @@ feature "Director absences" do
       end
 
       scenario "use select list and go to october" do
-        FactoryGirl.create(:absence, student_id: Student.last.id, date: "2011-10-03", required: 30, justified: 5)
+        date = Chronic.parse('monday this month', now: Time.local(Semester.last.start_year, 10))
+        FactoryGirl.create(:absence, student_id: Student.last.id, date: date, required: 30, justified: 5)
         click_link "Październik"
-        page.should have_xpath "//td[@class='absence 2011-10-03_required'][contains(text(), '30')]"
+        page.should have_xpath "//td[@class='absence #{date.strftime("%Y-%m-%d")}_required'][contains(text(), '30')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
-        page.should have_content "Październik 2011"
+        page.should have_content "Październik #{date.year}"
       end
 
       scenario "use select list and go to april" do
-        FactoryGirl.create(:absence, student_id: Student.last.id, date: "2012-04-02", required: 25, justified: 5)
+        date = Chronic.parse('monday this month', now: Time.local(Semester.last.end_year, 4))
+        FactoryGirl.create(:absence, student_id: Student.last.id, date: date, required: 25, justified: 5)
         click_link "Kwiecień"
-        page.should have_xpath "//td[@class='absence 2012-04-02_required'][contains(text(), '25')]"
+        page.should have_xpath "//td[@class='absence #{date.strftime("%Y-%m-%d")}_required'][contains(text(), '25')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
-        page.should have_content "Kwiecień 2012"
+        page.should have_content "Kwiecień #{date.year}"
       end
 
     end

@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   factory :school_class do
     yearbook '2013'
-    profile 'Informatyk'
+    profile 'Technik awionik'
     letter 'G'
     period 4
   end

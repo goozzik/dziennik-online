@@ -9,7 +9,7 @@ feature "Admin school" do
       FactoryGirl.create(:admin, school_id: School.last.id)
       login "admin"
     end
-    
+
     scenario "when there is no semester" do
       click_link "Ustawienia szkoły" 
       assert_alert_box "Szkoła nie ma ustawionego semestru!"

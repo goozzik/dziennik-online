@@ -9,10 +9,9 @@ feature "Student time tables" do
       FactoryGirl.create(:school)
       FactoryGirl.create(:semester, school_id:School.last.id)
       FactoryGirl.create(:teacher, school_id:School.last.id)
-      FactoryGirl.create(:school_class, teacher_id:Teacher.last.id)
+      load_subject_templates
+      FactoryGirl.create(:school_class, profile:"Technik awionik", teacher_id:Teacher.last.id)
       FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
-      FactoryGirl.create(:subject_template)
-      FactoryGirl.create(:subject, :subject_template_id => SubjectTemplate.last.id, :school_class_id => SchoolClass.last.id)
       login "student"
     end
 
@@ -22,11 +21,11 @@ feature "Student time tables" do
     end
 
     scenario "when there is time table" do
-      FactoryGirl.create(:time_table, :school_class_id => SchoolClass.last.id)
-      FactoryGirl.create(:lesson, :time_table_id => TimeTable.last.id, :subject_id => Subject.last.id, :number => 0)
+      FactoryGirl.create(:time_table, school_class_id: SchoolClass.last.id)
+      FactoryGirl.create(:lesson, time_table_id: TimeTable.last.id, subject_id: Subject.last.id, number: 0)
       click_link "Plan lekcji"
       page.should have_content "Poniedziałek"
-      page.should have_content "Matematyka"
+      page.should have_content "5"
     end
 
   end

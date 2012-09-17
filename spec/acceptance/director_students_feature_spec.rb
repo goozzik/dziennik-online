@@ -6,8 +6,9 @@ feature "Director students" do
   context "top" do
     before do
       FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, :school_id => School.last.id)
-      FactoryGirl.create(:director, :school_id => School.last.id)
+      FactoryGirl.create(:profile_template, school_id: School.last.id)
+      FactoryGirl.create(:semester, school_id: School.last.id)
+      FactoryGirl.create(:director, school_id: School.last.id)
       login('director')
       click_link "Uczniowie"
     end
@@ -19,9 +20,9 @@ feature "Director students" do
 
     context "when there are students" do
       before do
-        FactoryGirl.create(:teacher, :school_id => School.last.id)
-        FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-        FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
+        FactoryGirl.create(:teacher, school_id: School.last.id)
+        FactoryGirl.create(:school_class, profile: "Technik awionik", teacher_id: Teacher.last.id)
+        FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
       end
 
       scenario "when there is no average semestral marks" do
@@ -46,10 +47,11 @@ feature "Director students" do
   context "resit" do
     before do
       FactoryGirl.create(:school)
+      FactoryGirl.create(:profile_template, school_id: School.last.id)
       FactoryGirl.create(:semester, school_id:School.last.id)
       FactoryGirl.create(:director, school_id:School.last.id)
       FactoryGirl.create(:teacher, school_id:School.last.id)
-      FactoryGirl.create(:school_class, teacher_id:Teacher.last.id)
+      FactoryGirl.create(:school_class, teacher_id: Teacher.last.id, profile: "Technik awionik", yearbook: Semester.last.end_year)
       FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
       login('director')
       click_link "Uczniowie"
@@ -74,7 +76,7 @@ feature "Director students" do
         page.should have_xpath "//h2[contains(text(), 'Matematyka')]"
         page.should have_content "Jacek"
         page.should have_content "Placek"
-        page.should have_content "3 G"
+        page.should have_content "4 G"
       end
 
     end
@@ -89,10 +91,11 @@ feature "Director students" do
   context "classification" do
     before do
       FactoryGirl.create(:school)
+      FactoryGirl.create(:profile_template, school_id: School.last.id)
       FactoryGirl.create(:semester, school_id:School.last.id)
       FactoryGirl.create(:director, school_id:School.last.id)
       FactoryGirl.create(:teacher, school_id:School.last.id)
-      FactoryGirl.create(:school_class, teacher_id:Teacher.last.id)
+      FactoryGirl.create(:school_class, teacher_id: Teacher.last.id, profile: "Technik awionik", yearbook: Semester.last.end_year)
       FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
       login('director')
       click_link "Uczniowie"
@@ -117,7 +120,7 @@ feature "Director students" do
         page.should have_xpath "//h2[contains(text(), 'Matematyka')]"
         page.should have_content "Jacek"
         page.should have_content "Placek"
-        page.should have_content "3 G"
+        page.should have_content "4 G"
       end
 
     end
