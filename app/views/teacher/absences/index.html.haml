@@ -22,6 +22,8 @@
 
     var parsed_id;
 
+    var old_absence;
+
     $('.absence').live('click', function() {
       clone = $(this).clone();
       parsed_id = $(this).attr('id').split('_');
@@ -34,15 +36,19 @@
 
     $('#absence_active').live('blur', function() {
       value = $(this).val();
-      data = 'absence[student_id]=' + parsed_id[0] +
-      '&absence[date]=' + parsed_id[1] +
-      '&absence[' + parsed_id[2] + ']=' + value;
-      $.ajax({
-        type: 'PUT',
-        url: '/teacher/absences/update',
-        data: data,
-      });
-      $(this).replaceWith(value);
+      if (value == '') {
+        $(this).replaceWith(old_absence);
+      } else {
+        data = 'absence[student_id]=' + parsed_id[0] +
+        '&absence[date]=' + parsed_id[1] +
+        '&absence[' + parsed_id[2] + ']=' + value;
+        $.ajax({
+          type: 'PUT',
+          url: '/teacher/absences/update',
+          data: data,
+        });
+        $(this).replaceWith(value);
+      }
     });
 
     var mass_required_date;
