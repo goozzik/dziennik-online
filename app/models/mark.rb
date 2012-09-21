@@ -12,6 +12,7 @@ class Mark < ActiveRecord::Base
 
   attr_accessible :mark, :student_id, :description_id, :subject_id
 
+  before_validation :sub_space_with_plus
   validate :validate_mark_format
 
   before_create :set_semester_id
@@ -21,6 +22,10 @@ class Mark < ActiveRecord::Base
   end
 
   private
+
+    def sub_space_with_plus
+      mark[1] = "+" if mark[1] == " "
+    end
 
     def validate_mark_format
       unless AVAILABLE_MARKS.include?(mark)
