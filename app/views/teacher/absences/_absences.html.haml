@@ -30,7 +30,7 @@
           - student_justified += absence.justified if absence.justified
           - student_unexcused += absence.unexcused if absence.unexcused
           - student_late += absence.late if absence.late
-        %td{id: "#{student.id}_#{week}_required", class: "absence #{week} required"}= absence.try(:required)
+        %td{id: "#{student.id}_#{week}_required", class: "absence #{week} required_absence"}= absence.try(:required)
         %td.absence{:id => "#{student.id}_#{week}_justified"}= absence.try(:justified)
         %td.absence{:id => "#{student.id}_#{week}_unexcused"}= absence.try(:unexcused)
         %td.absence{:id => "#{student.id}_#{week}_late"}= absence.try(:late)
