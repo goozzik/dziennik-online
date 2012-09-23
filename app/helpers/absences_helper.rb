@@ -46,13 +46,9 @@ module AbsencesHelper
     percentage == "NaN" ? "--" : percentage
   end
 
-  def date_by_month(month, school_year) 
+  def date_by_month(month, school_year)
     index = School::MONTHS.index(month)
-    if index >= 8
-      Chronic.parse('monday this month', :now => Time.parse("#{school_year[0..3]}-#{index+1}-01")).strftime("%Y-%m-%d")
-    else
-      Chronic.parse('monday this month', :now => Time.parse("#{school_year[5..8]}-#{index+1}-01")).strftime("%Y-%m-%d")
-    end
+    Absence.parse_first_monday(Time.parse("#{index >= 8 ? school_year[0..3] : school_year[5..8]}-#{index+1}-01")).strftime("%Y-%m-%d")
   end
 
 end

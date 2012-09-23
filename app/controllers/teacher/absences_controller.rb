@@ -6,11 +6,11 @@ class Teacher::AbsencesController < ApplicationController
   before_filter :is_semester_archived?, :only => [:update]
 
   def index
-    @month = Chronic.parse('monday this month', :now => (params[:date].nil? ? Time.now : Time.parse(params[:date])))
+    @month = Absence.parse_first_monday(params[:date].nil? ? Time.now : Time.parse(params[:date]))
     @weeks = Absence.get_weeks_from_month(@month)
     @students = current_teacher.school_class.students
-    @previous_month = Chronic.parse('monday last month', :now => @month)
-    @next_month = Chronic.parse('monday next month', :now => @month)
+    @previous_month = Absence.parse_monday_last_month(@month)
+    @next_month = Absence.parse_monday_next_month(@month)
   end
 
   def update

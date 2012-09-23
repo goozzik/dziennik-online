@@ -18,6 +18,19 @@ class Absence < ActiveRecord::Base
     weeks
   end
 
+
+  def self.parse_first_monday(date)
+    check_chronic_parse(Chronic.parse('monday this month', now: date))
+  end
+
+  def self.parse_monday_last_month(date)
+    check_chronic_parse(Chronic.parse('monday last month', now: date))
+  end
+
+  def self.parse_monday_next_month(date)
+    check_chronic_parse(Chronic.parse('monday next month', now: date))
+  end
+
   private
 
     def set_semester_id
@@ -26,6 +39,13 @@ class Absence < ActiveRecord::Base
 
     def set_school_class_id
       self.school_class_id = student.school_class_id
+    end
+
+    #check if time - week is 1st day of month
+    #chronic gem is not working properly and this is temporary patch
+    def self.check_chronic_parse(date)
+      _date = date - 604_800
+      date.month == _date.month && _date.monday? ? _date : date
     end
 
 end
