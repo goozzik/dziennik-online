@@ -12,7 +12,7 @@
     %th.sp{"data-original-title" => "sp", "data-content" => "spóźnienia", rowspan:"2"} sp
   %tr
     - weeks.each do |week|
-      %th.ob{"data-original-title" => "ob", "data-content" => "godziny obowiązkowe, kliknij tutaj, aby edytować dla całej klasy", class: "mass_required", id: "#{week}"} ob
+      %th.ob{"data-original-title" => "ob", "data-content" => "godziny obowiązkowe, kliknij tutaj, aby edytować dla całej klasy", class: "mass_required", id: "#{week}", style: "background: lightblue;"} ob
       %th.us{"data-original-title" => "us", "data-content" => "godziny usprawiedliwione"} us
       %th.nu{"data-original-title" => "nu", "data-content" => "godziny nieusprawiedliwione"} nu
       %th.sp{"data-original-title" => "sp", "data-content" => "spóźnienia"} sp
@@ -30,7 +30,7 @@
           - student_justified += absence.justified if absence.justified
           - student_unexcused += absence.unexcused if absence.unexcused
           - student_late += absence.late if absence.late
-        %td{id: "#{student.id}_#{week}_required", class: "absence #{week}_required"}= absence.try(:required)
+        %td{id: "#{student.id}_#{week}_required", class: "absence #{week} required"}= absence.try(:required)
         %td.absence{:id => "#{student.id}_#{week}_justified"}= absence.try(:justified)
         %td.absence{:id => "#{student.id}_#{week}_unexcused"}= absence.try(:unexcused)
         %td.absence{:id => "#{student.id}_#{week}_late"}= absence.try(:late)
