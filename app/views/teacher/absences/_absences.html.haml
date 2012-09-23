@@ -6,16 +6,16 @@
     - weeks.each do |week|
       %th{:colspan => "4"}= week
     %th{rowspan:"2"} %
-    %th{rowspan:"2"} ob
-    %th{rowspan:"2"} us
-    %th{rowspan:"2"} nu
-    %th{rowspan:"2"} sp
+    %th.ob{"data-original-title" => "ob", "data-content" => "godziny obowiązkowe", rowspan:"2"} ob
+    %th.us{"data-original-title" => "us", "data-content" => "godziny usprawiedliwione", rowspan:"2"} us
+    %th.nu{"data-original-title" => "nu", "data-content" => "godziny nieusprawiedliwione", rowspan:"2"} nu
+    %th.sp{"data-original-title" => "sp", "data-content" => "spóźnienia", rowspan:"2"} sp
   %tr
     - weeks.each do |week|
-      %th{class: "mass_required", id: "#{week}"} ob
-      %th us
-      %th nu
-      %th sp
+      %th.ob{"data-original-title" => "ob", "data-content" => "godziny obowiązkowe, kliknij tutaj, aby edytować dla całej klasy", class: "mass_required", id: "#{week}"} ob
+      %th.us{"data-original-title" => "us", "data-content" => "godziny usprawiedliwione"} us
+      %th.nu{"data-original-title" => "nu", "data-content" => "godziny nieusprawiedliwione"} nu
+      %th.sp{"data-original-title" => "sp", "data-content" => "spóźnienia"} sp
   - school_class_required = school_class_justified = school_class_unexcused = school_class_late = 0
   - students.each_with_index do |student, i|
     - student_required = student_justified = student_unexcused = student_late = 0
@@ -52,3 +52,12 @@
     %th= school_class_late
 
 = months_navigation(previous_month, next_month)
+
+
+:javascript
+  $(document).ready(function() {
+    $(".ob").popover();
+    $(".us").popover();
+    $(".nu").popover();
+    $(".sp").popover();
+  });
