@@ -100,7 +100,7 @@ Podstawy elektroniki
 Technika cyfrowa
 Ogólnotechniczne podstawy obsługi urządzeń lotniczych
 Zajęcia praktyczne
-Areodynamika i mechanika lotu
+Aerodynamika i mechanika lotu
 Konstrukcja statków powietrznych i ich zespołów napędowych
 Budowa i eksploatacja wyposażenia elektrycznego statków powietrznych
 Budowa i eksploatacja systemów i urządzeń awioniki
