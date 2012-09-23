@@ -3,7 +3,9 @@ prawn_document do |pdf|
     table = [[{content: "#{student.first_name} #{student.last_name} - #{current_teacher.semester_fullname}", colspan:3}]]
     table << [{content: "Przedmiot", colspan:2}, "Oceny"]
     current_teacher.subjects.each do |subject|
-      table << [{content: subject.name, colspan:2}, student.list_current_marks_by_subject_id(subject.id)]
+      unless student.current_marks_by_subject_id(subject.id).empty?
+        table << [{content: subject.name, colspan:2}, student.list_current_marks_by_subject_id(subject.id)]
+      end
     end
     absences = student.current_absences
     table << [{content: "", colspan:3}]

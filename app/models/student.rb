@@ -59,8 +59,12 @@ class Student < User
     semestral_marks.find_all_by_mark_and_semester_id(mark.to_s, semester).count
   end
 
+  def current_marks_by_subject_id(subject_id)
+    marks.find_all_by_semester_id_and_subject_id(semester.id, subject_id)
+  end
+
   def list_current_marks_by_subject_id(subject_id)
-    marks.find_all_by_semester_id_and_subject_id(semester.id, subject_id).collect {|mark| mark.mark}.join(', ')
+    current_marks_by_subject_id(subject_id).collect {|mark| mark.mark}.join(', ')
   end
 
   def update_password(params)
