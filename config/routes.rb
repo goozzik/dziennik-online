@@ -38,6 +38,8 @@ DziennikOnline::Application.routes.draw do
     resources :time_tables, :only => [:new, :create, :destroy, :index]
     resources :documents, :only => [:create, :destroy, :index]
     resources :reports, :only => [:index]
+    resources :behavior_marks, :only => [:index]
+    put "behavior_marks" => "behavior_marks#update", :as => "behavior_mark"
   end
 
   namespace :director do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120908134015) do
+ActiveRecord::Schema.define(:version => 20120924060536) do
 
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(:version => 20120908134015) do
   end
 
   add_index "average_semestral_marks", ["student_id", "semester_id"], :name => "index_average_semestral_marks_on_student_id_and_semester_id", :unique => true
+
+  create_table "behavior_marks", :force => true do |t|
+    t.integer  "semester_id"
+    t.integer  "school_class_id"
+    t.integer  "student_id"
+    t.string   "mark"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "bells", :force => true do |t|
     t.integer  "school_id"

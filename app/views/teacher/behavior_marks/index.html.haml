@@ -1,0 +1,50 @@
+= page_header "Zachowanie"
+%table.table.table-bordered
+  %tr
+    %th{style:"width:3%"} #
+    %th Imię
+    %th Nazwisko
+    %th Ocena z zachowania
+  - current_teacher.students.each_with_index do |student, i|
+    %tr
+      %td= i+1
+      %td= student.first_name
+      %td= student.last_name
+      %td{class: "behavior_mark", id: "behavior_mark_#{student.id}"}
+        - if student.current_semester_behavior_mark
+          = student.current_semester_behavior_mark.mark
+        - else
+          asd
+
+:javascript
+
+  $(document).ready(function() {
+    $.ajaxSetup({
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content'));
+      }
+    });
+
+    var parsed_id;
+
+    $('.behavior_mark').live('click', function() {
+      clone = $(this).clone();
+      parsed_id = $(this).attr('id').split('_');
+      old_mark = clone.text();
+      clone.text('');
+      clone.append('<input id="behavior_mark_active" name="mark[mark]" type="text" value="">');
+      $(this).replaceWith(clone);
+      $('#' + clone.attr('id')).children().focus();
+    });
+
+    $('#behavior_mark_active').live('blur', function() {
+      mark = $(this).val();
+      data = 'mark[mark]=' + mark +
+      '&mark[student_id]=' + parsed_id[2]
+      $.ajax({
+        type: 'PUT',
+        url: '/teacher/behavior_marks',
+        data: data,
+      });
+    });
+  });

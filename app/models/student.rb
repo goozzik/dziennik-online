@@ -15,6 +15,7 @@ class Student < User
   has_many :marks, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
   has_many :average_semestral_marks, :dependent => :destroy
+  has_many :behavior_marks, :dependent => :destroy
 
   attr_accessible :email, :student, :first_name, :last_name,
                   :pesel, :street, :city, :zip_code, :province,
@@ -121,6 +122,10 @@ class Student < User
 
   def school_class_count_year_marks(mark, year)
     school_class.count_year_marks(mark, year)
+  end
+
+  def current_semester_behavior_mark
+    behavior_marks.find_by_semester_id(semester_id)
   end
 
   private

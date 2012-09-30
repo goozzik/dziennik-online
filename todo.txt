@@ -1,0 +1,12 @@
+dopisac scenariusz odnosnie
+  + w ocenach
+  klikniecie pomylkowe na absence
+
+
+Chmurki z pomoca w frekwencji (ob, us, nu, sp)
+Kartki z ocenami Przedmioty
+Frekwenja - slupek z ob wyrozniony
+Drukowanie hasel i loginow dla nauczycieli (admin)
+piaty tydzien pazdziernik
+
+Ocena z zachowania
