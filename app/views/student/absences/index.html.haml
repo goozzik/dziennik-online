@@ -10,13 +10,13 @@
           %th nu
           %th sp
         - @absences.each do |absence|
-          - if absence.date.month != @month
-            - @month = absence.date.month
+          - if absence.month != @month
+            - @month = absence.month
             %tr
               %th{:colspan => "5", :style => "text-align:center;"}
-                = I18n.t(absence.date.strftime("%B"))
+                = School::MONTHS[absence.month-1]
           %tr
-            %td= absence.date
+            %td= absence.week
             %td= absence.try(:required)
             %td= absence.try(:justified)
             %td= absence.try(:unexcused)

@@ -18,11 +18,12 @@ ActiveRecord::Schema.define(:version => 20120924060536) do
     t.integer  "school_class_id"
     t.integer  "semester_id"
     t.integer  "absence_report_id"
-    t.date     "date"
     t.integer  "required"
     t.integer  "justified"
     t.integer  "unexcused"
     t.integer  "late"
+    t.integer  "month"
+    t.integer  "week"
     t.time     "end_time"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false

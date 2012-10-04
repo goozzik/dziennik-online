@@ -31,7 +31,7 @@ DziennikOnline::Application.routes.draw do
     resources :descriptions, :only => [:create, :destroy]
     resources :students
     put "absences/mass_required_update" => "absences#mass_required_update"
-    resources :absences, :only => [:update, :index]
+    resources :absences, only: [:update, :index]
     put "marks" => "marks#update", :as => "mark"
     resources :messages, :only => [:new, :create, :edit, :update, :destroy, :index]
     put "semestral_marks" => "semestral_marks#update", :as => "semestral_mark"

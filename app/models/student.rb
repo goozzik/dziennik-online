@@ -84,8 +84,8 @@ class Student < User
     average_semestral_marks.find_by_semester_id(second_semester_by_year(year)).try(:average) || "--"
   end
 
-  def absence_by_date(date)
-    absences.find_by_date(date)
+  def absence_by_date(month, week)
+    absences.find_by_month_and_week(month, week)
   end
 
   def year_absences(year)

@@ -1,16 +1,16 @@
 .btn-group
-  %button.btn Wybierz miesiąc 
+  %button.btn Wybierz miesiąc
   %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
     %span.caret
   %ul.dropdown-menu
-    - School::MONTHS.each do |month|
-      = nav_link_to(month, teacher_absences_path(:date => date_by_month(month, current_teacher.school_year)))
+    - School::MONTHS.each_with_index do |month, i|
+      = nav_link_to(month, teacher_absences_path(month: i))
 
-= page_header "Frekwencja", "#{I18n.t(@month.strftime("%B"))} #{@month.year}"
+= page_header "Frekwencja", "#{School::MONTHS[@month.to_i - 1]}"
 
 = info_box "Frekwencja", "Żeby dodać frekwencję należy kliknąć na odpowiednie miejsce w tabeli.", image_tag("teacher_absences_info_1.png")
 
-= render 'absences', :previous_month => @previous_month, :next_month => @next_month, :weeks => @weeks, :students => @students
+= render 'absences', month: @month, previous_month: @previous_month, next_month: @next_month, students: current_teacher.students
 
 :javascript
   $(function() {
@@ -40,7 +40,8 @@
         $(this).replaceWith(old_absence);
       } else {
         data = 'absence[student_id]=' + parsed_id[0] +
-        '&absence[date]=' + parsed_id[1] +
+        '&absence[month]=' + #{@month} + 
+        '&absence[week]=' + parsed_id[1] +
         '&absence[' + parsed_id[2] + ']=' + value;
         $.ajax({
           type: 'PUT',
@@ -51,24 +52,24 @@
       }
     });
 
-    var mass_required_date;
+    var mass_required_week;
 
     $('.mass_required').live('click', function() {
-      mass_required_date = $(this).attr('id');
+      mass_required_week = $(this).attr('id');
       $(this).html('<input id="mass_required_active" type="text" value="">');
       $('#mass_required_active').focus();
     });
 
     $('#mass_required_active').live('blur', function() {
       required = $(this).val();
-      data = 'absence[date]=' + mass_required_date + '&absence[required]=' + required;
+      data = 'absence[month]=' + #{@month} + '&absence[week]=' + mass_required_week + '&absence[required]=' + required;
       $.ajax({
         type: 'PUT',
         url: '/teacher/absences/mass_required_update',
         data: data,
       });
       $(this).replaceWith(required);
-      $('.' + mass_required_date + '.required').text(required);
+      $('.' + mass_required_week + '.required_absence').text(required);
     });
 
   });

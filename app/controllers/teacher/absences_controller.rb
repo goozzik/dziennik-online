@@ -6,16 +6,14 @@ class Teacher::AbsencesController < ApplicationController
   before_filter :is_semester_archived?, :only => [:update]
 
   def index
-    @month = Absence.parse_first_monday(params[:date].nil? ? Time.now : Time.parse(params[:date]))
-    @weeks = Absence.get_weeks_from_month(@month)
-    @students = current_teacher.school_class.students
-    @previous_month = Absence.parse_monday_last_month(@month)
-    @next_month = Absence.parse_monday_next_month(@month)
+    @month = params[:month].nil? ? Time.now.month : params[:month]
+    @previous_month = Absence.previous_month(@month)
+    @next_month = Absence.next_month(@month)
   end
 
   def update
     student = current_teacher.school_class.students.find(params[:absence][:student_id])
-    absence = student.absences.find_by_date_and_semester_id(params[:absence][:date], current_teacher.school_class.semester_id)
+    absence = student.absences.find_by_month_and_week_and_semester_id(params[:absence][:month], params[:absence][:week], current_teacher.school_class.semester_id)
     if absence
       absence.update_attributes(params[:absence])
     else

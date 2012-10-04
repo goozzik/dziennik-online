@@ -12,18 +12,18 @@ module AbsencesHelper
   def previous_link(previous_month)
     case current_user.role
     when 'teacher'
-      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, teacher_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
+      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, teacher_absences_path(month: previous_month)), class: "previous")
     when 'director'
-      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, director_school_class_absences_path(:date => previous_month.strftime('%Y-%m-%d'))), :class => "previous")
+      content_tag("li", link_to('&larr; Poprzedni miesiąc'.html_safe, director_school_class_absences_path(month: previous_month)), class: "previous")
     end
   end
 
   def next_link(next_month)
     case current_user.role
     when 'teacher'
-      content_tag("li", link_to('Następny miesiąc &rarr;'.html_safe, teacher_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
+      content_tag("li", link_to('Następny miesiąc &rarr;'.html_safe, teacher_absences_path(month: next_month)), class: "next")
     when 'director'
-      content_tag("li", link_to('Następny miesiąc &rarr;'.html_safe, director_school_class_absences_path(:date => next_month.strftime('%Y-%m-%d'))), :class => "next")
+      content_tag("li", link_to('Następny miesiąc &rarr;'.html_safe, director_school_class_absences_path(month: next_month)), class: "next")
     end
   end
 
