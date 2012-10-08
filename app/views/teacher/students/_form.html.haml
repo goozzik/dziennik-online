@@ -2,13 +2,6 @@
   = simple_form_for [:teacher, student], :html => {:class => "well form-horizontal span5"} do |f|
     = f.input :first_name, :label => "Imię"
     = f.input :last_name, :label => "Nawisko"
-    = f.input :pesel, :label => "Pesel"
-    = f.input :niu, :label => "Numer ewidencyjny ucznia"
-    = f.input :city, :label => "Miasto"
-    = f.input :street, :label => "Ulica"
-    = f.input :zip_code, :label => "Kod pocztowy"
-    = f.input :province, :label => "Województwo"
-    = f.input :telephone, :label => "Telefon"
     = f.input :individual, :label => "Zajęcia indywidualne"
     = f.input :boarding_school, :label => "Zamieszkuje w internacie"
     .form-actions

@@ -5,13 +5,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :username
       t.string :first_name
       t.string :last_name
-      t.string :pesel
-      t.integer :niu
-      t.string :street
-      t.string :city
-      t.string :zip_code
-      t.string :province
-      t.string :telephone
       t.boolean :individual
       t.boolean :boarding_school
       t.integer :school_class_id

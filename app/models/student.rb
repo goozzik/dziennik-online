@@ -18,8 +18,7 @@ class Student < User
   has_many :behavior_marks, :dependent => :destroy
 
   attr_accessible :email, :student, :first_name, :last_name,
-                  :pesel, :street, :city, :zip_code, :province,
-                  :telephone, :individual, :boarding_school, :niu
+                  :individual, :boarding_school
 
   before_validation :set_role, :set_teacher_id, :set_school_id
 
