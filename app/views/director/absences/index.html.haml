@@ -3,9 +3,9 @@
   %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
     %span.caret
   %ul.dropdown-menu
-    - School::MONTHS.each do |month|
-      = nav_link_to(month, director_school_class_absences_path(:date => date_by_month(month, current_director.school_year)))
+    - School::MONTHS.each_with_index do |month, i|
+      = nav_link_to(month, director_school_class_absences_path(month: i+1))
 
-= page_header "Frekwencja klasy #{@school_class.name}", "#{I18n.t(@month.strftime("%B"))} #{@month.year}"
+= page_header "Frekwencja klasy #{@school_class.name}", "#{School::MONTHS[@month.to_i - 1]}"
 
-= render 'teacher/absences/absences', previous_month:@previous_month, next_month:@next_month, weeks:@weeks, students:@students, absences:@absences
+= render 'teacher/absences/absences', month: @month, previous_month: @previous_month, next_month: @next_month, students: @school_class.students

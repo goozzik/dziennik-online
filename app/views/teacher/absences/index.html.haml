@@ -4,7 +4,7 @@
     %span.caret
   %ul.dropdown-menu
     - School::MONTHS.each_with_index do |month, i|
-      = nav_link_to(month, teacher_absences_path(month: i))
+      = nav_link_to(month, teacher_absences_path(month: i+1))
 
 = page_header "Frekwencja", "#{School::MONTHS[@month.to_i - 1]}"
 
