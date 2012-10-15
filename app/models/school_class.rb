@@ -50,7 +50,7 @@ class SchoolClass < ActiveRecord::Base
   end
 
   def available_time_table_days
-    WEEK_DAYS.delete_if { |i, week_day| time_tables.find_by_week_day(i) }
+    WEEK_DAYS.delete_if { |i, week_day| time_tables.find_by_week_day_and_school_class_id(i, id) }
   end
 
   def available_subject_templates
