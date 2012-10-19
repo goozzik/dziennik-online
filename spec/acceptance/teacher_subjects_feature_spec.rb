@@ -84,13 +84,14 @@ feature "Teacher subjects" do
 
   context "show" do
     before do
+
       FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, :school_id => School.last.id)
+      load_semester
+      FactoryGirl.create(:director, :school_id => School.last.id)
       FactoryGirl.create(:teacher, :school_id => School.last.id)
-      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
+      FactoryGirl.create(:profile_template, school_id: School.last.id)
+      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id, profile: "Technik awionik")
       FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
-      FactoryGirl.create(:subject_template)
-      FactoryGirl.create(:subject, :subject_template_id => SubjectTemplate.last.id, :school_class_id => SchoolClass.last.id)
       login "teacher"
     end
 
@@ -192,11 +193,11 @@ feature "Teacher subjects" do
           page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
-        scenario "with too low mark" do
+        scenario "with mark 0 (destroy)" do
           fill_in "mark_active", :with => "0"
           sleep(1)
           find(:css, "#mark_active").native.send_key(:tab)
-          page.should have_xpath "//td[@class='mark'][contains(text(), '6')]"
+          page.should_not have_xpath "//td[@class='mark'][contains(text(), '6')]"
         end
 
       end

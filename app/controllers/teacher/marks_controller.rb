@@ -9,10 +9,15 @@ class Teacher::MarksController < ApplicationController
     mark = description.marks.find_by_student_id(params[:mark][:student_id])
     if mark
       old_mark = mark.mark
-      if mark.update_attributes(params[:mark])
-        render js: "$('#mark_#{params[:mark][:student_id]}_#{params[:mark][:description_id]}').html('#{mark.mark}');"
+      if params[:mark][:mark] == "0"
+        mark.destroy
+        render js: "$('#mark_#{params[:mark][:student_id]}_#{params[:mark][:description_id]}').html('');"
       else
-        render js: "$('#mark_#{params[:mark][:student_id]}_#{params[:mark][:description_id]}').html('#{old_mark}');"
+        if mark.update_attributes(params[:mark])
+          render js: "$('#mark_#{params[:mark][:student_id]}_#{params[:mark][:description_id]}').html('#{mark.mark}');"
+        else
+          render js: "$('#mark_#{params[:mark][:student_id]}_#{params[:mark][:description_id]}').html('#{old_mark}');"
+        end
       end
     else
       if Mark.create(params[:mark])
