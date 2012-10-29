@@ -1,5 +1,7 @@
 class Absence < ActiveRecord::Base
 
+  default_scope :order => 'month ASC, week ASC'
+
   belongs_to :student
   belongs_to :semester
   belongs_to :school_class
