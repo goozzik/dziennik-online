@@ -6,20 +6,20 @@
   link_to(image_tag("filetype_pdf.png") + "Pokaż listę w PDF", "/admin/users.pdf")           |
 
 %h2 Nauczyciele
-- unless @teachers.empty?
-  = render "users", users: @teachers
+- unless current_admin.teachers.empty?
+  = render "users", users: current_admin.teachers
 - else
   = info_box "Szkoła nie posiada nauczycieli.", ""
 
 %h2 Dyrektorzy
-- unless @directors.empty?
-  = render "users", users: @directors
+- unless current_admin.directors.empty?
+  = render "users", users: current_admin.directors
 - else
   = info_box "Szkoła nie posiada dyrektorów.", ""
 
 %h2 Administratorzy
-- unless @admins.empty?
-  = render "users", users: @admins
+- unless current_admin.admins.count == 1
+  = render "users", users: current_admin.admins
 - else
   = info_box "Jesteś jedynym administratorem szkoły.", ""
 

@@ -2,13 +2,10 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :authenticate_admin!
-  before_filter :user, :only => [:edit, :new_password] 
+  before_filter :user, :only => [:edit, :new_password]
   before_filter :check_current_password, :only => [:update_password]
 
   def index
-    @teachers = current_admin.teachers
-    @directors = current_admin.directors
-    @admins = current_admin.admins
   end
 
   def edit
@@ -33,7 +30,7 @@ class Admin::UsersController < ApplicationController
     user.update_password(params[:user]) ? redirect_to(action: "index") : render(action: "new_password")
   end
 
-  private 
+  private
 
     def check_current_password
       unless current_admin.valid_password?(params[:user][:current_password])
