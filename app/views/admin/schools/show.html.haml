@@ -1,6 +1,6 @@
 = page_header "Ustawienia szkoły"
 
-- unless @semesters.empty?
+- unless current_admin.semesters.empty?
   %table.table.table-striped.table-bordered
     %thead
       %tr
@@ -8,7 +8,7 @@
         %th Semestr
         %th Rok
         %th{style: "width:233px"}
-    - @semesters.each_with_index do |semester, i|
+    - current_admin.semesters.each_with_index do |semester, i|
       %tr
         %td= i+1
         %td= semester.semester
@@ -32,4 +32,4 @@
 
 = page_header "Dodaj nowy semestr"
 
-= render 'admin/semesters/form', semester: @semester
+= render 'admin/semesters/form', semester: Semester.new

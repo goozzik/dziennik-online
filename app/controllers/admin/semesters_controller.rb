@@ -26,7 +26,7 @@ class Admin::SemestersController < ApplicationController
   end
 
   private
-  
+
     def semester
       if params[:id]
         @semester ||= current_admin.semesters.find(params[:id])
