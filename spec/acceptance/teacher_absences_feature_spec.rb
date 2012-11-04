@@ -6,87 +6,71 @@ feature 'Teacher absences feature' do
   context "index" do
     before do
       FactoryGirl.create(:school)
-      load_subject_templates
       load_semester
       FactoryGirl.create(:teacher, school_id: School.last.id)
+      FactoryGirl.create(:profile_template, school_id: School.last.id)
+      FactoryGirl.create(:school_class, profile: "Technik awionik", teacher_id: Teacher.last.id)
       login "teacher"
     end
 
-    scenario "info when school class is not set" do
-      click_link "Frekwencja"
-      assert_alert_box("Najpierw dodaj klasę.")
-    end
-
     scenario "info when school class have no students" do
-      FactoryGirl.create(:school_class, teacher_id: Teacher.last.id)
-      reload_page
       click_link "Frekwencja"
       assert_alert_box("Najpierw dodaj uczniów.")
     end
 
     scenario "info about how to add absences" do
-      FactoryGirl.create(:school_class, teacher_id: Teacher.last.id)
       FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
-      reload_page
       click_link "Frekwencja"
       assert_info_box("Frekwencja")
     end
 
     context "month navigation" do
       before do
-        FactoryGirl.create(:school_class, teacher_id: Teacher.last.id)
         FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
-        reload_page
         click_link "Frekwencja"
       end
 
       scenario "follow next month link" do
-        month = Chronic.parse('monday this month')
-        next_month = Chronic.parse('monday next month', :now => month)
-        find(:xpath, "//a[@href='/teacher/absences?date=#{next_month.strftime("%Y-%m-%d")}']").click
+        next_month = Chronic.parse('monday next month')
+        find(:xpath, "//a[@href='/teacher/absences?month=#{next_month.month}']").click
         page.should have_content "Frekwencja"
-        page.should have_content "#{I18n.t(next_month.strftime("%B"))} #{next_month.year}"
+        page.should have_content "#{I18n.t(next_month.strftime("%B"))}"
       end
 
       scenario "follow previous month link" do
-        month = Chronic.parse('monday this month')
-        previous_month = Chronic.parse('monday last month', :now => month)
-        find(:xpath, "//a[@href='/teacher/absences?date=#{previous_month.strftime("%Y-%m-%d")}']").click
+        previous_month = Chronic.parse('monday last month')
+        find(:xpath, "//a[@href='/teacher/absences?month=#{previous_month.month}']").click
         page.should have_content "Frekwencja"
-        page.should have_content "#{I18n.t(previous_month.strftime("%B"))} #{previous_month.year}"
+        page.should have_content "#{I18n.t(previous_month.strftime("%B"))}"
       end
 
       scenario "use select list and go to october" do
-        date = Chronic.parse('monday this month', now: Time.local(Semester.last.start_year, 10))
-        FactoryGirl.create(:absence, student_id: Student.last.id, date: date, required: 30, justified: 5)
+        FactoryGirl.create(:absence, student_id: Student.last.id, month: 10, week: 1, required: 30, justified: 5)
         click_link "Październik"
-        save_and_open_page
-        page.should have_xpath "//td[@class='absence #{date.strftime("%Y-%m-%d")}_required'][contains(text(), '30')]"
+        page.should have_xpath "//td[@class='absence 1 required_absence'][contains(text(), '30')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
-        page.should have_content "Październik #{date.year}"
+        page.should have_content "Październik"
       end
 
       scenario "use select list and go to april" do
-        date = Chronic.parse('monday this month', now: Time.local(Semester.last.end_year, 4))
-        FactoryGirl.create(:absence, student_id: Student.last.id, date: date, required: 25, justified: 5)
+        FactoryGirl.create(:absence, student_id: Student.last.id, month: 4, week: 1, required: 25, justified: 5)
         click_link "Kwiecień"
-        page.should have_xpath "//td[@class='absence #{date.strftime("%Y-%m-%d")}_required'][contains(text(), '25')]"
+        page.should have_xpath "//td[@class='absence 1 required_absence'][contains(text(), '25')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
-        page.should have_content "Kwiecień #{date.year}"
+        page.should have_content "Kwiecień"
       end
 
     end
 
     context "create", :js => true do
       before do
-        FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-        FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
+        FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
         click_link "Frekwencja"
       end
 
       scenario "ob" do
         reload_page
-        date = Chronic.parse("monday this month", :now => Time.now).strftime("%Y-%m-%d")
+        date = Chronic.parse("monday this month").strftime("%Y-%m-%d")
         element_id = Student.last.id.to_s + "_" + date + "_required"
         page.execute_script("$('##{element_id}').trigger('click')")
         fill_in "absence_active", :with => "33"
@@ -100,9 +84,8 @@ feature 'Teacher absences feature' do
 
     context "update", :js => true do
       before do
-        FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-        FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
-        @date = Chronic.parse("monday this month", :now => Time.now).strftime("%Y-%m-%d")
+        FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
+        @date = Chronic.parse("monday this month").strftime("%Y-%m-%d")
         FactoryGirl.create(:absence, :student_id => Student.last.id, :semester_id => Semester.last.id, :date => @date, :required => 30)
         reload_page
         click_link "Frekwencja"
