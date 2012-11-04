@@ -46,14 +46,8 @@ module HelperMethods
   end
 
   def load_data_for_student_semester_report(student, semester = Semester.last)
-    time = Chronic.parse('monday this month')
-    dates = []
-    3.times do
-      dates << "#{time.year}-#{time.month}-#{time.mday}"
-      time += 10_080
-    end
-    dates.each do |date|
-      FactoryGirl.create(:absence, student_id:student.id, date:date, required:30, justified:20, unexcused:0, late:5)
+    1.upto(3) do |week|
+      FactoryGirl.create(:absence, student_id:student.id, month:Time.now.month, week:week, required:30, justified:20, unexcused:0, late:5)
     end
     student.subjects.each_with_index {|subject, j| FactoryGirl.create(:semestral_mark, student_id:student.id, subject_id:subject.id, mark:(j+1).to_s)}
   end
