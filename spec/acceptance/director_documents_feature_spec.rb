@@ -6,8 +6,8 @@ feature "Director documents" do
   context "index" do
     before do
       FactoryGirl.create(:school)
-      FactoryGirl.create(:director, :school_id => School.last.id)
-      login "director" 
+      FactoryGirl.create(:director, school_id: School.last.id)
+      login "director"
     end
 
     scenario "when there is no documents for school" do
