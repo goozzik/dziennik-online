@@ -7,8 +7,8 @@ feature 'Teacher absences feature' do
     before do
       FactoryGirl.create(:school)
       load_semester
+      load_subject_templates
       FactoryGirl.create(:teacher, school_id: School.last.id)
-      FactoryGirl.create(:profile_template, school_id: School.last.id)
       FactoryGirl.create(:school_class, profile: "Technik awionik", teacher_id: Teacher.last.id)
       login "teacher"
     end
