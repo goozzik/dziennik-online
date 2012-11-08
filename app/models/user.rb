@@ -1,7 +1,7 @@
 # coding: utf-8
 class User < ActiveRecord::Base
 
-  default_scope :order => 'last_name ASC'
+  default_scope :order => 'last_name ASC, first_name ASC'
 
   ROLES = %w[superadmin admin director teacher student]
 
