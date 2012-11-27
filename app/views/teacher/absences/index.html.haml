@@ -13,6 +13,78 @@
 = render 'absences', month: @month, previous_month: @previous_month, next_month: @next_month, students: current_teacher.students
 
 :javascript
+
+  var first_student_id = '#{current_teacher.students.first.id}';
+  var last_student_id = '#{current_teacher.students.last.id}';
+  var current_cell_id = first_student_id + "_1_required";
+
+  function leftArrowNavigation() {
+    var parsed_last_cell_id = current_cell_id.split('_');
+    switch (parsed_last_cell_id[2]) {
+      case 'required':
+        if (parsed_last_cell_id[1] == '1') {
+          return;
+        } else {
+          return parsed_last_cell_id[0] + '_' + (parseInt(parsed_last_cell_id[1]) - 1) + '_' + 'late'
+        }
+      case 'justified':
+        return parsed_last_cell_id[0] + '_' + parsed_last_cell_id[1] + '_' + 'required';
+      case 'unexcused':
+        return parsed_last_cell_id[0] + '_' + parsed_last_cell_id[1] + '_' + 'justified';
+      case 'late':
+        return parsed_last_cell_id[0] + '_' + parsed_last_cell_id[1] + '_' + 'unexcused';
+    }
+  }
+
+  function rightArrowNavigation() {
+    var parsed_last_cell_id = current_cell_id.split('_');
+    switch (parsed_last_cell_id[2]) {
+      case 'required':
+        return parsed_last_cell_id[0] + '_' + parsed_last_cell_id[1] + '_' + 'justified';
+      case 'justified':
+        return parsed_last_cell_id[0] + '_' + parsed_last_cell_id[1] + '_' + 'unexcused';
+      case 'unexcused':
+        return parsed_last_cell_id[0] + '_' + parsed_last_cell_id[1] + '_' + 'late';
+      case 'late':
+        if (parsed_last_cell_id[1] == '5') {
+          return;
+        } else {
+          return parsed_last_cell_id[0] + '_' + (parseInt(parsed_last_cell_id[1]) + 1) + '_' + 'required'
+        }
+    }
+  }
+
+  function upArrowNavigation() {
+    var parsed_last_cell_id = current_cell_id.split('_');
+    if (parsed_last_cell_id[0] == first_student_id) {
+      return;
+    } else {
+      return (parseInt(parsed_last_cell_id[0]) - 1) + '_' + parsed_last_cell_id[1] + '_' + parsed_last_cell_id[2];
+    }
+  }
+
+  function downArrowNavigation() {
+    var parsed_last_cell_id = current_cell_id.split('_');
+    if (parsed_last_cell_id[0] == last_student_id) {
+      return;
+    } else {
+      return (parseInt(parsed_last_cell_id[0]) + 1) + '_' + parsed_last_cell_id[1] + '_' + parsed_last_cell_id[2];
+    }
+  }
+
+  function findCellNavigation(arrow_key) {
+    switch (arrow_key) {
+      case 37:
+        return leftArrowNavigation();
+      case 38:
+        return upArrowNavigation();
+      case 39:
+        return rightArrowNavigation();
+      case 40:
+        return downArrowNavigation();
+    }
+  }
+
   $(function() {
     $.ajaxSetup({
       beforeSend: function(xhr) {
@@ -20,27 +92,31 @@
       }
     });
 
-    var parsed_id;
+    $(document).keydown(function(event) {
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if (keycode >= 37 || keycode <= 40) {
+        $('#' + findCellNavigation(keycode)).click();
+      }
+    });
 
-    var old_absence;
+    var absences_table = new Array();
 
     $('.absence').live('click', function() {
-      clone = $(this).clone();
-      parsed_id = $(this).attr('id').split('_');
-      old_absence = clone.text();
-      clone.text('');
-      clone.append('<input id="absence_active" type="text" value="">');
-      $(this).replaceWith(clone);
-      $('#' + clone.attr('id')).children().focus();
+      current_cell_id = $(this).attr('id');
+      absences_table[current_cell_id] = $(this).text();
+      $(this).html('<input id="absence_active" type="text" value="">');
+      $(this).children().focus();
     });
 
     $('#absence_active').live('blur', function() {
+      parent_id = $(this).parent().attr('id');
+      parsed_id = parent_id.split('_');
       value = $(this).val();
       if (value == '') {
-        $(this).replaceWith(old_absence);
+        $(this).replaceWith(absences_table[parent_id]);
       } else {
         data = 'absence[student_id]=' + parsed_id[0] +
-        '&absence[month]=' + #{@month} + 
+        '&absence[month]=' + #{@month} +
         '&absence[week]=' + parsed_id[1] +
         '&absence[' + parsed_id[2] + ']=' + value;
         $.ajax({
