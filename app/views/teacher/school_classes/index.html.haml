@@ -1,17 +1,22 @@
 = page_header("Ustawienia klas")
 - if current_teacher.school_class
   .hero-unit
-    %h1= current_teacher.school_class_fullname
+    %center
+      %h1{:style => "margin-bottom:20px"}= current_teacher.school_class_fullname
+    %h2 Aktualny semestr
     - if current_teacher.semester
       %p
         Semestr: #{current_teacher.semester_fullname}
-      .btn-group
-        = semester_dropdown_button
-        %ul.dropdown-menu
-          - current_teacher.semesters.each do |semester|
-            = semester_dropdown_link(semester, current_teacher.school_class) 
+        .btn-group
+          = semester_dropdown_button
+          %ul.dropdown-menu
+            - current_teacher.semesters.each do |semester|
+              = semester_dropdown_link(semester, current_teacher.school_class)
+    %h2 Aktualne przedmioty
+    = render 'subjects_form', school_class: current_teacher.school_class
   - if current_teacher.semesters.empty?
-    = info_box "Brak aktywnego semestru.", "Aby móc w pełni korzystać z programu, administrator musi dodać semestr." 
+    = info_box "Brak aktywnego semestru.", "Aby móc w pełni korzystać z programu, administrator musi dodać semestr."
+
 - unless current_teacher.school_classes.empty?
   = second_page_header("Klasy")
   %table.table.table-bordered
@@ -30,5 +35,6 @@
           = link_to(delete_link_content, teacher_school_class_path(school_class), :method => :delete, :confirm => "Jesteś pewien?", class:"btn btn-mini btn-danger danger")
 - else
   = info_box("Nie masz klas.", "Możesz dodać klasę poprzez poniższy formularz.")
+
 = second_page_header("Dodaj nową klasę")
 = render 'form', :school_class => SchoolClass.new 
