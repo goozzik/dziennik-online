@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924060536) do
+ActiveRecord::Schema.define(:version => 20121128111521) do
 
   create_table "absences", :force => true do |t|
     t.integer  "student_id"
@@ -208,8 +208,9 @@ ActiveRecord::Schema.define(:version => 20120924060536) do
     t.integer  "school_class_id"
     t.integer  "subject_template_id"
     t.boolean  "deleted"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "active",              :default => true
   end
 
   add_index "subjects", ["school_class_id"], :name => "index_subjects_on_school_class_id"
