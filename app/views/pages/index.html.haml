@@ -2,4 +2,4 @@
   - current_user.news.each do |new|
     %h3= new.title
     %h6= "Wysłano #{new.created_at}"
-    %p.well= new.body
+    %p.well= new.body.html_safe
