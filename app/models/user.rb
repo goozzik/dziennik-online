@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     save
   end
 
+  def news
+    New.where(["#{self.role} = ?", true])
+  end
+
   private
 
     def validate_role_format
