@@ -26,6 +26,7 @@ DziennikOnline::Application.routes.draw do
 
   namespace :teacher do
     resources :school_classes, :only => [:create, :destroy, :index]
+    put "school_class/update_active_subjects" => "school_classes#update_active_subjects"
     resources :semesters, :only => [:create, :destroy]
     resources :subjects
     resources :descriptions, :only => [:create, :destroy]

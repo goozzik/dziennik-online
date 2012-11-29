@@ -1,5 +1,5 @@
-= simple_form_for [:teacher, school_class], :html => {:class => "form-horizontal", style: "margin-top:9px;"} do |f|
-  - school_class.subjects.each do |subject|
+= simple_form_for [:teacher, school_class], url: teacher_school_class_update_active_subjects_path, html: {class: "form-horizontal", style: "margin-top:9px;"} do |f|
+  - school_class.subjects.each_with_index do |subject, i|
     %label.checkbox
-      %input{:type => "checkbox", id: "school_class[subjects][#{subject.id}]", value: "1", checked: subject.active}= subject.name
+      %input{type: "checkbox", name: "subjects[#{subject.id}]", value: "1", checked: subject.active}= subject.name
   = f.button :submit, "Zapisz", class: "btn btn-primary", style: "margin-top: 5px;"

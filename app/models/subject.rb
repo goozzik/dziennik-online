@@ -1,6 +1,8 @@
 # coding: utf-8
 class Subject < ActiveRecord::Base
 
+  default_scope include: :subject_template, :order => 'subject_templates.name ASC'
+
   belongs_to :school_class
   belongs_to :subject_template
 
@@ -9,7 +11,7 @@ class Subject < ActiveRecord::Base
   has_many :marks, :dependent => :destroy
   has_many :semestral_marks, :dependent => :destroy
 
-  attr_accessible :school_class_id, :subject_template_id
+  attr_accessible :school_class_id, :subject_template_id, :active
 
   validates :school_class_id, :presence => true
   validates :subject_template_id, :presence => true, :uniqueness => {:scope => :school_class_id, :message => "już istnieje w klasie"}
