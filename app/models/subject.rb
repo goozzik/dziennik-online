@@ -1,7 +1,8 @@
 # coding: utf-8
 class Subject < ActiveRecord::Base
 
-  default_scope include: :subject_template, :order => 'subject_templates.name ASC'
+  default_scope include: :subject_template, order: 'subject_templates.name ASC'
+  scope :active, conditions: ["active = ?", true]
 
   belongs_to :school_class
   belongs_to :subject_template

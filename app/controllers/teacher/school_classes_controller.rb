@@ -23,7 +23,7 @@ class Teacher::SchoolClassesController < ApplicationController
   end
 
   def update_active_subjects
-    current_teacher.subjects.each do |subject|
+    current_teacher.all_subjects.each do |subject|
       subject.update_attribute(:active, params[:subjects][subject.id.to_s])
     end
     redirect_to :action => "index"

@@ -15,7 +15,8 @@ class Teacher < User
            :semester,
            :semester_fullname,
            :semesters,
-           :subjects, :to => :school_class
+           :subjects,
+           :all_subjects, :to => :school_class
   delegate :current_year_semesters,
            :school_year,
            :profile_templates_names, :to => :school
