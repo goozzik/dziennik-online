@@ -14,9 +14,7 @@ class Teacher < User
            :semester_absences,
            :semester,
            :semester_fullname,
-           :semesters,
-           :subjects,
-           :all_subjects, :to => :school_class
+           :semesters, :to => :school_class
   delegate :current_year_semesters,
            :school_year,
            :profile_templates_names, :to => :school
@@ -35,6 +33,14 @@ class Teacher < User
 
   def school_class_id
     school_class.id
+  end
+
+  def subjects
+    school_class.subjects_active
+  end
+
+  def all_subjects
+    school_class.subjects
   end
 
   private

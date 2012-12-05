@@ -37,13 +37,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def school_class_has_subjects?
-      if current_teacher.school_class.subjects.empty?
-        flash[:alert] = "Najpierw dodaj przedmioty."
-        redirect_to teacher_subjects_path
-      end
-    end
-
     def school_class_has_active_semester?
       unless current_teacher.semester
         flash[:alert] = "Najpierw ustaw semestr."

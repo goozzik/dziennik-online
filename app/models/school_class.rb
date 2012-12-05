@@ -152,12 +152,8 @@ class SchoolClass < ActiveRecord::Base
     end
   end
 
-  def subjects
-    Subject.active.where(["school_class_id = ?", self.id])
-  end
-
-  def all_subjects
-    Subject.where(["school_class_id = ?", self.id])
+  def subjects_active
+    subjects.active
   end
 
   private

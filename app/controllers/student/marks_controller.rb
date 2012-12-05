@@ -4,7 +4,7 @@ class Student::MarksController < ApplicationController
 
   def index
     @student = current_student
-    @subjects = current_student.school_class.subjects
+    @subjects = current_student.subjects
   end
 
 end

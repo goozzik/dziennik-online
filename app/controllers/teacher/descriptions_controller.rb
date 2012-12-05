@@ -4,7 +4,7 @@ class Teacher::DescriptionsController < ApplicationController
   before_filter :teacher_has_active_class?, :school_class_has_active_semester?, :school_class_has_students?
 
   def create
-    subject = current_teacher.school_class.subjects.find(params[:description][:subject_id])
+    subject = current_teacher.subjects.find(params[:description][:subject_id])
     @description = subject.descriptions.build(params[:description])
     @description.save
     redirect_to :back

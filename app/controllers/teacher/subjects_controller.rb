@@ -7,7 +7,7 @@ class Teacher::SubjectsController < ApplicationController
 
   def show
     @description = Description.new
-    @subject = current_teacher.school_class.subjects.find(params[:id])
+    @subject = current_teacher.subjects.find(params[:id])
     @descriptions = current_teacher.school_class.semester.descriptions.find_all_by_subject_id(@subject.id)
     @students = current_teacher.school_class.students
   end
