@@ -4,13 +4,14 @@ prawn_document(:margin => 0) do |pdf|
   pdf.define_grid(columns: 2, rows: rows_count)
 
   current_teacher.students.each_with_index do |student, i|
-    table = [[{content: "#{student.first_name} #{student.last_name} - #{current_teacher.semester_fullname}", colspan:3}]]
-    table << [{content: "Przedmiot", colspan:2}, "Oceny"]
+    table = [[{content: "#{student.first_name} #{student.last_name} - #{current_teacher.semester_fullname}", colspan:10}]]
+    table << [{content: "Przedmiot", colspan:4}, {content: "Oceny", colspan:5}, "OS"]
     current_teacher.subjects.each do |subject|
-      table << [{content: truncate(subject.name, length: 50), colspan:2}, student.list_current_marks_by_subject_id(subject.id)]
+      semestral_mark = student.semestral_marks.find_by_subject_id_and_semester_id(subject, current_teacher.semester)
+      table << [{content: truncate(subject.name, length: 30), colspan:4}, {content: student.list_current_marks_by_subject_id(subject.id), colspan:5}, semestral_mark ? semestral_mark.mark : ""]
     end
     absences = student.current_absences
-    table << [{content: "nieobecnosci usprawiedliwione: #{absences.justified}, nieobecnosci nieusprawiedliwione: #{absences.unexcused}, spóźnienia: #{absences.late}, frekwencja: #{absences.percentage}%", colspan:3}]
+    table << [{content: "nieobecnosci usprawiedliwione: #{absences.justified}, nieobecnosci nieusprawiedliwione: #{absences.unexcused}, spóźnienia: #{absences.late}, frekwencja: #{absences.percentage}%", colspan:10}]
 
     if rows_count == 2
       pdf.start_new_page if (i % 4 == 0 && i != 0)
