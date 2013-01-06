@@ -10,8 +10,11 @@ prawn_document(:margin => 0) do |pdf|
       semestral_mark = student.semestral_marks.find_by_subject_id_and_semester_id(subject, current_teacher.semester)
       table << [{content: truncate(subject.name, length: 30), colspan:4}, {content: student.list_current_marks_by_subject_id(subject.id), colspan:5}, semestral_mark ? semestral_mark.mark : ""]
     end
+
     absences = student.current_absences
-    table << [{content: "nieobecnosci usprawiedliwione: #{absences.justified}, nieobecnosci nieusprawiedliwione: #{absences.unexcused}, spóźnienia: #{absences.late}, frekwencja: #{absences.percentage}%", colspan:10}]
+    behavior_mark = student.current_semester_behavior_mark
+
+    table << [{content: "nieobecnosci usprawiedliwione: #{absences.justified}, nieobecnosci nieusprawiedliwione: #{absences.unexcused}, spóźnienia: #{absences.late}, frekwencja: #{absences.percentage}%" + (behavior_mark ? ", zachowanie: #{behavior_mark.mark}" : ""), colspan:10}]
 
     if rows_count == 2
       pdf.start_new_page if (i % 4 == 0 && i != 0)
