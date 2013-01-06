@@ -18,10 +18,12 @@ class Semester < ActiveRecord::Base
   validates :semester, :presence => true, :uniqueness => {:scope => [:school_id, :start_year, :end_year], :message => "już istnieje"}
   validate :validate_end_year_is_later, :validate_difference_between_years
 
+  delegate :school_classes, :to => :school
+
   def activate
     unless active
       school.deactivate_semester
-      update_attribute(:active, true)
+      update_attribute(:active, true) && update_school_classes_semester_id
     end
   end
 
@@ -73,10 +75,14 @@ class Semester < ActiveRecord::Base
 
     def validate_difference_between_years
       if start_year && end_year && end_year - start_year > 1
-        errors.add(:end_year, "zbyt duża rożnica") 
+        errors.add(:end_year, "zbyt duża różnica")
         return false
       end
       true
+    end
+
+    def update_school_classes_semester_id
+      school_classes.active.each { |school_class| school_class.activate_semester(self) }
     end
 
 end

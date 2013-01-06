@@ -84,7 +84,7 @@ class Student < User
   end
 
   def absence_by_date(month, week)
-    absences.find_by_month_and_week(month, week)
+    absences.find_by_month_and_week_and_semester_id(month, week, semester_id)
   end
 
   def year_absences(year)
