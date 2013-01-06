@@ -11,5 +11,4 @@
     - if current_user.teacher?
       = nav_link_to("Zachowanie", teacher_behavior_marks_path)
     - elsif current_user.director?
-      haha
-
+      = nav_link_to("Zachowanie", director_school_class_behavior_marks_path(school_class))

@@ -1,0 +1,29 @@
+%table.table.table-bordered.table-condensed.table-striped
+  %tr
+    %th{style:"width:3%"} #
+    %th{style:"width:11%"} Imię
+    %th{style:"width:11%"} Nazwisko
+    - descriptions.each do |description|
+      %th.description{style:"width:30px;", "data-original-title" => description.desc_type, "data-content" => description.description}
+        - if current_user.teacher?
+          = link_to_delete_description(description)
+        - elsif current_user.director?
+          = truncate(description.desc_type, :length => 4, :omission => '')
+    %th
+      - if current_user.teacher?
+        = render 'description_form', subject:subject
+        = add_description_button
+    %th{style:"width:20px;", title:"Ocena semestralna"} OS
+    %th{style:"width:20px;"}= image_tag("average_ico.png", class:"title_of_mark", title:"Średnia z podanych ocen")
+  - students.each_with_index do |student, i|
+    %tr
+      %td= i+1
+      %td= student.first_name
+      %td= student.last_name
+      - descriptions.each do |description|
+        %td.mark{id:"mark_#{student.id}_#{description.id}"}
+          = student.marks.find_by_description_id(description).try(:mark)
+      %td
+      %td.semestral_mark{id: "semestral_mark_#{student.id}"}
+        = student.semestral_marks.find_by_subject_id_and_semester_id(subject, student.semester).try(:mark)
+      %td.mark_average= student.current_average_from_subject(subject.id)

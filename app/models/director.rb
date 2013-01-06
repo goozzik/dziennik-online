@@ -10,6 +10,7 @@ class Director < User
 
   delegate :school_classes_by_grade,
            :current_year_semesters,
+           :semester,
            :school_year, :to => :school
 
   def school_classes

@@ -39,14 +39,6 @@
   width:5%;
 }
 
-.semestral_mark, .average {
-  width:20px;
-}
-
-.description {
-  width:30px;
-}
-
 .required_absence {
   background: lightblue;
 }

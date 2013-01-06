@@ -49,6 +49,7 @@ DziennikOnline::Application.routes.draw do
       get "absences" => "absences#index", :as => 'absences'
       get "report" => "reports#school_class", :as => "report"
       get "subject" => "subjects#show", :as => "subject"
+      get "behavior_marks" => "behavior_marks#index", :as => "behavior_marks"
     end
     get "students/top" => "students#top", :as => "students_top"
     get "students/resit" => "students#resit", :as => "students_resit"

@@ -25,3 +25,6 @@
 
 # Ignore own database configuration.
 /config/database.yml
+
+# Mac OS X DS_Store files
+.DS_Store

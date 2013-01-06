@@ -1,0 +1,5 @@
+= render "teacher/subjects/subjects_dropdown", subjects: @school_class.subjects_active, school_class: @school_class
+
+= page_header "Oceny klasy #{@school_class.name}", "Zachowanie"
+
+= render "teacher/behavior_marks/marks_table", students: @school_class.students

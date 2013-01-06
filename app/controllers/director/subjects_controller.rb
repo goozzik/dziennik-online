@@ -11,7 +11,7 @@ class Director::SubjectsController < ApplicationController
     else
       @subject = @school_class.subjects_active.first
     end
-    @descriptions = @subject.descriptions
+    @descriptions = current_director.semester.descriptions.find_all_by_subject_id(@subject.id)
   end
 
 end

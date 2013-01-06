@@ -6,9 +6,7 @@ module MarksHelper
             teacher_description_path(description),
             :method => :delete,
             :confirm => "Jesteś pewien?",
-            :class => "description",
-            "data-original-title" => description.desc_type,
-            "data-content" => description.description,
+            :class => "description"
            )
   end
 

@@ -1,34 +1,8 @@
-.btn-group
-  %button.btn Wybierz przedmiot
-  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-    %span.caret
-  %ul.dropdown-menu
-    - @subjects.each do |subject|
-      = nav_link_to(subject.name, director_school_class_subject_path(@school_class, :id => subject.id))
+= render "teacher/subjects/subjects_dropdown", subjects: @school_class.subjects_active, school_class: @school_class
 
 = page_header "Oceny klasy #{@school_class.name}", @subject.name
 
-%table.table.table-bordered.table-condensed.table-striped
-  %tr
-    %th{style:"width:3%"} #
-    %th.first_name Imię
-    %th.last_name Nazwisko
-    - @descriptions.each do |description|
-      %th.description{"data-original-title" => description.desc_type, "data-content" => description.description}
-        = truncate(description.desc_type, :length => 4, :omission => '')
-    %th
-    %th.semestral_mark{:title => "Ocena semestralna"} OS
-    %th.average{:title => "Średnia z podanych ocen"}= image_tag("average_ico.png")
-  - @students.each_with_index do |student, i|
-    %tr
-      %td= i+1
-      %td= student.first_name
-      %td= student.last_name
-      - @descriptions.current.each do |description|
-        %td= description.marks.find_by_student_id(student).try(:mark)
-      %td
-      %td= student.semestral_marks.current.find_by_subject_id(@subject).try(:mark)
-      %td= sprintf("%1.2f", student.current_average_from_subject(@subject))
+= render "teacher/subjects/marks_table", descriptions: @descriptions, subject: @subject, students: @students
 
 :javascript
   $(document).ready(function() {
