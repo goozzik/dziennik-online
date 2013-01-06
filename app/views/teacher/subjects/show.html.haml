@@ -3,7 +3,7 @@
 = page_header "Oceny", @subject.name
 
 = info_box "Oceny",
-  "Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli.",
+  'Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli. Jeśli chcesz usunąć ocenę należy wpisać "0"',
   image_tag("teacher_subjects_info_1.png", style:"margin:0", class:"span5")
 
 = render "marks_table", descriptions: @descriptions, subject: @subject, students: current_teacher.students
