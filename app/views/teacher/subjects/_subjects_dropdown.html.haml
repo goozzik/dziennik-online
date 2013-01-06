@@ -1,0 +1,15 @@
+.btn-group
+  %button.btn Wybierz przedmiot
+  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+    %span.caret
+  %ul.dropdown-menu
+    - subjects.each do |subject|
+      - if current_user.teacher?
+        = nav_link_to(subject.name, teacher_subject_path(subject))
+      - elsif current_user.director?
+        = nav_link_to(subject.name, director_school_class_subject_path(school_class, id: subject.id))
+    - if current_user.teacher?
+      = nav_link_to("Zachowanie", teacher_behavior_marks_path)
+    - elsif current_user.director?
+      haha
+

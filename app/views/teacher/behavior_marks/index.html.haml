@@ -1,9 +1,16 @@
-= page_header "Zachowanie"
-%table.table.table-bordered
+= render "teacher/subjects/subjects_dropdown", subjects: current_teacher.subjects
+
+= page_header "Zachowanie", "Ocena semestralna z zachowania"
+
+= info_box "Zachowanie",
+  'Żeby dodać ocenę należy kliknąć na odpowiednie miejsce w tabeli. Jeśli chcesz usunąć ocenę należy wpisać "0"',
+  image_tag("teacher_behavior_marks_info_1.png", style:"margin:0", class:"span5")
+
+%table.table.table-bordered.table-condensed
   %tr
     %th{style:"width:3%"} #
-    %th Imię
-    %th Nazwisko
+    %th{style:"width:11%"} Imię
+    %th{style:"width:11%"} Nazwisko
     %th Ocena z zachowania
   - current_teacher.students.each_with_index do |student, i|
     %tr
@@ -13,8 +20,6 @@
       %td{class: "behavior_mark", id: "behavior_mark_#{student.id}"}
         - if student.current_semester_behavior_mark
           = student.current_semester_behavior_mark.mark
-        - else
-          asd
 
 :javascript
 

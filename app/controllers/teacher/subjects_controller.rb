@@ -2,14 +2,11 @@
 class Teacher::SubjectsController < ApplicationController
 
   before_filter :authenticate_teacher!
-  before_filter :teacher_has_active_class?, :school_class_has_active_semester?
-  before_filter :school_class_has_students?, :only => [:show]
+  before_filter :teacher_has_active_class?, :school_class_has_active_semester?, :school_class_has_students?
 
   def show
-    @description = Description.new
     @subject = current_teacher.subjects.find(params[:id])
-    @descriptions = current_teacher.school_class.semester.descriptions.find_all_by_subject_id(@subject.id)
-    @students = current_teacher.school_class.students
+    @descriptions = current_teacher.semester.descriptions.find_all_by_subject_id(@subject.id)
   end
 
 end

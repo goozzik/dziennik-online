@@ -2,7 +2,7 @@
 
 class BehaviorMark < ActiveRecord::Base
 
-  AVAILABLE_MARKS = ["naganne", "nieodpowiednie", "dostateczne", "dobre", "bardzo dobre", "wzorowe"]
+  AVAILABLE_MARKS = ["naganne", "nieodpowiednie", "poprawne", "dobre", "bardzo dobre", "wzorowe"]
 
   belongs_to :semester
   belongs_to :school_class
@@ -10,11 +10,22 @@ class BehaviorMark < ActiveRecord::Base
 
   attr_accessible :student_id, :mark
 
-  before_validation :set_school_class_id, :set_semester_id
+  before_validation :decode_mark, :set_school_class_id, :set_semester_id
 
   validate :validate_mark_format
 
   private
+
+    def decode_mark
+      case mark
+      when "1" then self.mark = "naganne"
+      when "2" then self.mark = "nieodpowiednie"
+      when "3" then self.mark = "poprawne"
+      when "4" then self.mark = "dobre"
+      when "5" then self.mark = "bardzo dobre"
+      when "6" then self.mark = "wzorowe"
+      end
+    end
 
     def set_school_class_id
       self.school_class_id = student.school_class_id

@@ -4,10 +4,10 @@
     %h3
       Dodaj nowy typ oceny
   .modal-body
-    = simple_form_for [:teacher, description], :html => {:class => "well form-horizontal"} do |f|
-      = f.hidden_field :subject_id, :value => subject.id
-      = f.input :desc_type, :label => "Typ"
-      = f.input :description, :label => "Opis"
+    = simple_form_for [:teacher, Description.new], html: {class: "well form-horizontal"} do |f|
+      = f.hidden_field :subject_id, value: subject.id
+      = f.input :desc_type, label: "Typ"
+      = f.input :description, label: "Opis"
       .form-actions
-        = f.button :submit, "Zapisz", :class => "btn btn-primary"
+        = f.button :submit, "Zapisz", class: "btn btn-primary"
         %button.btn.btn-inversary{"data-dismiss" => "modal"} Anuluj

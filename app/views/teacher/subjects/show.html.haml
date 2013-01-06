@@ -1,10 +1,4 @@
-.btn-group
-  %button.btn Wybierz przedmiot
-  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-    %span.caret
-  %ul.dropdown-menu
-    - current_teacher.subjects.each do |subject|
-      = nav_link_to(subject.name, teacher_subject_path(subject))
+= render "subjects_dropdown", subjects: current_teacher.subjects
 
 = page_header "Oceny", @subject.name
 
@@ -20,11 +14,11 @@
     - @descriptions.each do |description|
       %th{style:"width:30px;"}= link_to_delete_description(description)
     %th
-      = render 'description_form', description:@description, subject:@subject
+      = render 'description_form', subject:@subject
       = add_description_button
     %th{style:"width:20px;", title:"Ocena semestralna"} OS
     %th{style:"width:20px;"}= image_tag("average_ico.png", class:"title_of_mark", title:"Średnia z podanych ocen")
-  - @students.each_with_index do |student, i|
+  - current_teacher.students.each_with_index do |student, i|
     %tr
       %td= i+1
       %td= student.first_name
@@ -33,7 +27,7 @@
         %td.mark{id:"mark_#{student.id}_#{description.id}"}
           = student.marks.find_by_description_id(description).try(:mark)
       %td
-      %td.semestral_mark{:id => "semestral_mark_#{student.id}"}
+      %td.semestral_mark{id:  "semestral_mark_#{student.id}"}
         = student.semestral_marks.find_by_subject_id_and_semester_id(@subject, student.semester).try(:mark)
       %td.mark_average= student.current_average_from_subject(@subject.id)
 
