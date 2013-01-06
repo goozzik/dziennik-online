@@ -1,6 +1,7 @@
 = page_header "Oceny"
-- unless @subjects.empty?
-  - @subjects.each do |subject|
+
+- unless current_student.subjects.empty?
+  - current_student.subjects.each do |subject|
     %h3= subject.name
     - unless subject.descriptions_by_current_semester.empty?
       .row
@@ -14,8 +15,13 @@
               %tr
                 %td= description.desc_type
                 %td= description.description
-                %td= description.marks.find_by_student_id(@student).try(:mark)
+                %td= description.marks.find_by_student_id(current_student).try(:mark)
     - else
       = info_box "Wychowawca nie uzupełnił jeszcze ocen z tego przedmiotu.", ""
+  %h3 Zachowanie
+  - if current_student.current_semester_behavior_mark
+    = current_student.current_semester_behavior_mark.mark
+  - else
+    = info_box "Wychowawca nie uzupełnił jeszcze oceny z zachowania.", ""
 - else
   = info_box "Wychowawca nie uzupełnił jeszcze listy przedmiotów.", ""
