@@ -156,6 +156,10 @@ class SchoolClass < ActiveRecord::Base
     subjects.active
   end
 
+  def students_by_average(semester)
+    students.sort_by {|student| student.average_semestral_mark_for_semester(semester)}.reverse
+  end
+
   private
 
     def deactivate_old_school_class
