@@ -1,10 +1,13 @@
+%h3
+  Najwyższa średnia
+  %small= link_to "pokaż PDF", teacher_average_and_attendance_report_path + ".pdf?semester_id=#{semester.id}"
 %table.table.table-bordered.table-condensed
   %tr
     %th{style:"width:3%"} #
     %th{style:"width:11%"} Imię
     %th{style:"width:11%"} Nazwisko
-    %th Średnia
-    %th Frekwencja
+    %th{style:"width:35%"} Średnia
+    %th{style:"width:40%"} Frekwencja
   - school_class.students_by_average(semester).each_with_index do |student, i|
     - semester_absences = student.semester_absences(semester)
     %tr

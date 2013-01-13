@@ -1,9 +1,11 @@
 = page_header "Raporty"
 
 - current_teacher.current_year_semesters.each do |semester|
+  %h2= semester.fullname
   = render "semester_report", school_class:current_teacher.school_class, semester:semester
-  = render "average_and_absences_report", school_class:current_teacher.school_class, semester:semester
+  = render "average_and_attendance_report", school_class:current_teacher.school_class, semester:semester
+  %hr{class: "bs-docs-separator"}
 
-- if current_teacher.current_year_semesters.count == 2
-  = render "year_report", school_class:current_teacher.school_class, school_year:current_teacher.school_year
+//- if current_teacher.current_year_semesters.count == 2
+//= render "year_report", school_class:current_teacher.school_class, school_year:current_teacher.school_year
 

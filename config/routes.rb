@@ -39,6 +39,7 @@ DziennikOnline::Application.routes.draw do
     resources :time_tables, :only => [:new, :create, :destroy, :index]
     resources :documents, :only => [:create, :destroy, :index]
     resources :reports, :only => [:index]
+    get "reports/average_and_attendance_report" => "reports#average_and_attendance_report", :as => "average_and_attendance_report"
     resources :behavior_marks, :only => [:index]
     put "behavior_marks" => "behavior_marks#update", :as => "behavior_mark"
   end

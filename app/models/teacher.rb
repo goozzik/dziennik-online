@@ -14,7 +14,8 @@ class Teacher < User
            :semester_absences,
            :semester,
            :semester_fullname,
-           :semesters, :to => :school_class
+           :semesters,
+           :students_by_average, :to => :school_class
   delegate :current_year_semesters,
            :school_year,
            :profile_templates_names, :to => :school

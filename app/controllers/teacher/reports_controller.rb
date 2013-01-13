@@ -6,4 +6,8 @@ class Teacher::ReportsController < ApplicationController
   def index
   end
 
+  def average_and_attendance_report
+    @semester = Semester.find(params[:semester_id])
+  end
+
 end
