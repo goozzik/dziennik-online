@@ -10,4 +10,8 @@ class Teacher::ReportsController < ApplicationController
     @semester = Semester.find(params[:semester_id])
   end
 
+  def semester_report
+    @semester = Semester.find(params[:semester_id])
+  end
+
 end
