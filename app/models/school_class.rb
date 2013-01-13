@@ -122,7 +122,7 @@ class SchoolClass < ActiveRecord::Base
 
   def average_semestral_mark_for_semester(semester)
     averages = average_semestral_marks.find_all_by_semester_id(semester)
-    averages.empty? ? "--" : averages.map(&:average).inject(:+) / averages.count 
+    averages.empty? ? "--" : sprintf("%1.2f", averages.map(&:average).inject(:+) / averages.count)
   end
 
   def semester_fullname
