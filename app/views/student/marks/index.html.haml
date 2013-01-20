@@ -19,7 +19,7 @@
             - if current_student.semestral_marks.find_by_subject_id_and_semester_id(subject, current_student.semester)
               %tr
                 %th{colspan: "2"} Ocena semestralna
-                %td= current_student.semestral_marks.find_by_subject_id_and_semester_id(subject, current_student.semester).mark
+                %th= current_student.semestral_marks.find_by_subject_id_and_semester_id(subject, current_student.semester).mark
     - else
       = info_box "Wychowawca nie uzupełnił jeszcze ocen z tego przedmiotu.", ""
   %h3 Zachowanie
