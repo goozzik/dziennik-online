@@ -23,7 +23,10 @@ class Student < User
   before_validation :set_role, :set_teacher_id, :set_school_id
 
   delegate :second_semester_by_year,
-           :semester, :semester_id, :messages, :to => :school_class
+           :semester,
+           :semester_id,
+           :messages,
+           :time_tables, :to => :school_class
   delegate :school_year, :to => :school
 
   def self.bests_by_semester_id(semester_id)
