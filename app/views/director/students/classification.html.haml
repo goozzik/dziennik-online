@@ -2,8 +2,7 @@
 
 - @subject_templates.each do |subject_template|
   %h2= subject_template.name
-  - students = @school.classification_students_by_subject_template(subject_template)
-  - unless students.empty?
+  - unless current_director.school_classification_students_by_subject_template(subject_template).empty?
     .row
       .span6
         %table.table.table-bordered.table-condensed
@@ -12,7 +11,7 @@
             %th Imię
             %th Nazwisko
             %th Klasa
-            - students.each_with_index do |student, i|
+            - current_director.school_classification_students_by_subject_template(subject_template).each_with_index do |student, i|
               %tr
                 %td= i+1
                 %td= student.first_name

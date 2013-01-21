@@ -60,8 +60,7 @@ class ApplicationController < ActionController::Base
 
     def director_school_class_has_students?
       @school_class = current_director.school_classes.find(params[:school_class_id])
-      @students = @school_class.students
-      if @students.empty?
+      if @school_class.students.empty?
         flash[:alert] = "Wychowawca klasy nie dodał jeszcze uczniów."
         redirect_to :back
       end

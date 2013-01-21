@@ -1,13 +1,13 @@
 = page_header "Aktywne klasy"
 
-- unless @school_classes.empty?
+- unless current_director.school_classes.empty?
   .row
     .span6
       %table.table.table-bordered
         %tr
           %th Klasa
           %th{style:"width:199px;"}
-        - @school_classes.each do |school_class|
+        - current_director.school_classes.each do |school_class|
           %tr
             %td= school_class.fullname
             %td

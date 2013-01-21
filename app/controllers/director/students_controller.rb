@@ -12,18 +12,15 @@ class Director::StudentsController < ApplicationController
   end
 
   def resit
-    @school = current_director.school
   end
 
   def classification
-    @school = current_director.school
   end
 
   private
 
     def school_has_subject_templates?
-      @subject_templates = current_director.school.subject_templates
-      if @subject_templates.empty?
+      if current_director.subject_templates.empty?
         flash[:alert] = "Wychowawcy klas nie dodali jeszcze przedmiotów."
         redirect_to :back
       end

@@ -11,7 +11,8 @@ class Director < User
   delegate :school_classes_by_grade,
            :current_year_semesters,
            :semester,
-           :school_year, :to => :school
+           :school_year,
+           :subject_templates, :to => :school
 
   def school_classes
     school.school_classes.active
@@ -19,6 +20,14 @@ class Director < User
 
   def school_documents
     school.documents
+  end
+
+  def school_classification_students_by_subject_template(subject_template)
+    school.classification_students_by_subject_template(subject_template)
+  end
+
+  def school_resit_students_by_subject_template(subject_template)
+    school.resit_students_by_subject_template(subject_template)
   end
 
   private

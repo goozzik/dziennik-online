@@ -8,4 +8,5 @@
 
 = page_header "Frekwencja klasy #{@school_class.name}", "#{School::MONTHS[@month.to_i - 1]}"
 
-= render 'teacher/absences/absences', month: @month, previous_month: @previous_month, next_month: @next_month, students: @school_class.students
+= render 'teacher/absences/absences', month: @month, previous_month: Absence.previous_month(@month),
+  next_month: Absence.next_month(@month), students: @school_class.students

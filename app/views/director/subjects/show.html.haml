@@ -2,7 +2,7 @@
 
 = page_header "Oceny klasy #{@school_class.name}", @subject.name
 
-= render "teacher/subjects/marks_table", descriptions: @descriptions, subject: @subject, students: @students
+= render "teacher/subjects/marks_table", descriptions: @descriptions, subject: @subject, students: @school_class.students
 
 :javascript
   $(document).ready(function() {
