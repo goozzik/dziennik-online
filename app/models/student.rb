@@ -131,6 +131,18 @@ class Student < User
     school_class.subjects_active
   end
 
+  def current_absences_first_year
+    absences.where(["semester_id = ? AND month BETWEEN 9 AND 12", semester_id])
+  end
+
+  def current_absences_second_year
+    absences.where(["semester_id = ? AND month BETWEEN 1 AND 8", semester_id])
+  end
+
+  def current_absences_chronologically
+    current_absences_first_year + current_absences_second_year
+  end
+
   private
 
     def set_teacher_id

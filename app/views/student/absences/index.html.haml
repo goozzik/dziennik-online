@@ -1,5 +1,5 @@
-= page_header "Frekwencja ucznia #{@student.first_name} #{@student.last_name}"
-- unless @absences.empty?
+= page_header "Frekwencja ucznia #{current_student.first_name} #{current_student.last_name}"
+- unless current_student.current_absences_chronologically.empty?
   .row
     .span6
       %table.table.table-bordered.table-condensed
@@ -9,7 +9,7 @@
           %th us
           %th nu
           %th sp
-        - @absences.each do |absence|
+        - current_student.current_absences_chronologically.each do |absence|
           - if absence.month != @month
             - @month = absence.month
             %tr
