@@ -79,11 +79,13 @@ class Student < User
   end
 
   def average_semestral_mark_for_semester(semester)
-    average_semestral_marks.find_by_semester_id(semester).try(:average) || "--"
+    average = average_semestral_marks.find_by_semester_id(semester).try(:average)
+    average ? sprintf("%1.2f", average) : "--"
   end
 
   def average_semestral_mark_for_year(year)
-    average_semestral_marks.find_by_semester_id(second_semester_by_year(year)).try(:average) || "--"
+    average = average_semestral_marks.find_by_semester_id(second_semester_by_year(year)).try(:average)
+    average ? sprintf("%1.2f", average) : "--"
   end
 
   def absence_by_date(month, week)
