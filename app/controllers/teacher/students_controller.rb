@@ -41,6 +41,7 @@ class Teacher::StudentsController < ApplicationController
   end
 
   def meeting_cards
+    @show_semester = params[:show_semester]
   end
 
 end

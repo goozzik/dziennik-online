@@ -9,9 +9,7 @@
 = render "marks_table", descriptions: @descriptions, subject: @subject, students: current_teacher.students
 
 = info_box "Kartki z ocenami i frekwencją",
-   "Możesz wydrukować karteczki z ocenami i frekwencją korzystając z pliku PDF.",
-   link_to(image_tag("filetype_pdf.png") + "Kartki z ocenami",
-   meeting_cards_teacher_students_path + ".pdf")
+   "Możesz wydrukować karteczki z ocenami i frekwencją korzystając z pliku PDF.", links_to_meeting_cards
 
 :javascript
   $(document).ready(function() {
