@@ -147,7 +147,7 @@ class SchoolClass < ActiveRecord::Base
 
   def update_mass_required_absences(absence)
     students.each do |student|
-      _absence = student.absences.find_by_month_and_week_and_semester_id(absence[:month], absence[:week], school_semester.id)
+      _absence = student.absences.find_by_month_and_week_and_semester_id(absence[:month], absence[:week], semester_id)
       _absence ? _absence.update_attributes(required: absence[:required]) : student.absences.create(absence)
     end
   end
