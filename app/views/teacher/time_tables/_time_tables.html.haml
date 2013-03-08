@@ -6,9 +6,9 @@
         %th{:colspan => "2"}
           = time_table.week_day_name
           - if current_user.teacher?
-            = link_to "Usuń", teacher_time_table_path(time_table), :method => :delete, :confirm => "Jesteś pewien?", :class => "btn btn-mini btn-danger danger"
+            = link_to delete_link_content, teacher_time_table_path(time_table), :method => :delete, :confirm => "Jesteś pewien?", :class => "btn btn-mini btn-danger danger", style: "float: right;"
       - time_table.lessons.each do |lesson|
         %tr
           %td{:style => "width:15px;"}= lesson.number
-          %td= lesson.subject_name
+          %td= truncate(lesson.subject_name, length: 40)
   = end_row_3(i, time_tables.count)
