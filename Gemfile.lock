@@ -248,6 +248,7 @@ DEPENDENCIES
   prawn_rails
   rails (= 3.2.3)
   rails_best_practices
+  rspec-mocks
   ruby_parser
   sass-rails (~> 3.2.3)
   simple_form

@@ -37,6 +37,7 @@ group :test do
   gem "launchy"
   gem "simplecov"
   gem "steak"
+  gem "rspec-mocks"
 end
 
 group :development do
