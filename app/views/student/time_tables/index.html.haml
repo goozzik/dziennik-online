@@ -1,5 +1,5 @@
 = page_header "Plan lekcji"
-- unless current_student.time_tables.empty
+- unless current_student.time_tables.empty?
   = render "teacher/time_tables/time_tables", time_tables: current_student.time_tables
 - else
   = info_box "Wychowawca nie uzupełnił jeszcze planu lekcji.", ""
