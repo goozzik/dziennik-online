@@ -1,0 +1,7 @@
+Modele
+
+SchoolClass - klasa
+
+yearbook - rok ukończenia szkoły
+profile - profil klasy
+letter - litera klasy

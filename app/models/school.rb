@@ -60,7 +60,7 @@ class School < ActiveRecord::Base
   end
 
   def school_year
-    current_year_semesters.first.years
+    current_year_semesters.first.school_year
   end
 
   def profile_templates_names

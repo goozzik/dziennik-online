@@ -8,7 +8,6 @@ class SchoolClass < ActiveRecord::Base
   belongs_to :school
   belongs_to :teacher
   belongs_to :profile_template
-
   has_many :subjects, :dependent => :destroy
   has_many :students, :dependent => :destroy, :order => "last_name ASC"
   has_many :time_tables, :dependent => :destroy
@@ -18,24 +17,18 @@ class SchoolClass < ActiveRecord::Base
   has_many :semestral_marks, :dependent => :destroy
   has_many :average_semestral_marks, :dependent => :destroy
 
-  attr_accessible :letter, :profile, :yearbook, :period, :grade, :semester_id
+  attr_accessible :letter, :profile, :yearbook, :period, :grade, :semester_id, :active
+
+  before_validation :set_school_id, :set_semester_id, :set_grade, :set_profile_template_id, :on => :create
 
   validates_presence_of :letter, :profile, :yearbook, :period
 
-  before_validation :set_school_id, :set_semester_id, :set_grade, :set_profile_template_id, :on => :create
   before_create :deactivate_old_school_class, :set_active
   after_create :create_subjects_from_profile_template
+
   before_destroy :unset_teacher_school_class_id
 
   delegate :profile_templates, :to => :school
-
-  WEEK_DAYS = {0 => 'Niedziela',
-               1 => 'Poniedziałek',
-               2 => 'Wtorek',
-               3 => 'Środa',
-               4 => 'Czwartek',
-               5 => 'Piątek',
-               6 => 'Sobota'}
 
   def absences_by_current_school_semester
     semester_absences(school.semester)
@@ -111,13 +104,8 @@ class SchoolClass < ActiveRecord::Base
     update_attribute(:active, false)
   end
 
-  def activate_semester(semester)
-    update_attributes(semester_id:semester.id, grade:check_for_new_grade)
-  end
-
-  def check_for_new_grade
-    _grade = calculate_grade
-    _grade != grade ? _grade : grade
+  def activate_semester(semester_id)
+    is_actual? ? update_attributes(semester_id:semester_id, grade:calculate_grade) : deactivate
   end
 
   def average_semestral_mark_for_semester(semester)
@@ -179,9 +167,9 @@ class SchoolClass < ActiveRecord::Base
     end
 
     def calculate_grade
-      _grade = period - (yearbook - Time.now.year)
-      _grade += 1 if Time.now.month >= 9
-      _grade >= period ? period : _grade
+      grade = period - (yearbook - Time.now.year)
+      grade += 1 if Time.now.month >= 9
+      grade >= period ? period : grade
     end
 
     def set_grade
@@ -207,6 +195,10 @@ class SchoolClass < ActiveRecord::Base
 
     def create_subjects_from_profile_template
       profile_template.subject_templates.each { |subject_template| subjects.create(subject_template_id: subject_template.id) }
+    end
+
+    def is_actual?
+      school_semester.end_year <= yearbook
     end
 
 end
