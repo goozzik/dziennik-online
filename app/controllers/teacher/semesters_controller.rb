@@ -4,8 +4,8 @@ class Teacher::SemestersController < ApplicationController
   before_filter :teacher_has_active_class?
 
   def activate
-    semester = current_teacher.school.semesters.find(params[:id])
-    current_teacher.school_class.activate_semester(semester) if semester
+    semester = current_teacher.semesters.find(params[:id])
+    current_teacher.activate_semester(params[:id]) if semester
     redirect_to :controller => "school_classes", :action => "index"
   end
 
