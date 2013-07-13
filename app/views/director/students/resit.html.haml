@@ -1,6 +1,6 @@
 = page_header "Uczniowie do egzaminów poprawkowych"
 
-- @subject_templates.each do |subject_template|
+- current_director.subject_templates.each do |subject_template|
   %h2= subject_template.name
   - unless current_director.school_resit_students_by_subject_template(subject_template).empty?
     .row
