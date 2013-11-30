@@ -62,11 +62,15 @@ class Semester < ActiveRecord::Base
     end
 
     def end_year_should_be_later
-      errors.add(:end_year, "musi być późniejszy niż rok rozpoczęcia") if start_year > end_year
+      if start_year.present? && end_year.present? && start_year > end_year
+        errors.add(:end_year, "musi być późniejszy niż rok rozpoczęcia")
+      end
     end
 
     def should_be_one_year_difference
-      errors.add(:end_year, "zbyt duża różnica") if end_year - start_year > 1
+      if end_year.present? && start_year.present? && end_year - start_year > 1
+        errors.add(:end_year, "zbyt duża różnica")
+      end
     end
 
     def update_school_classes_semester_id
