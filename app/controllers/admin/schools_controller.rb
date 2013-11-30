@@ -1,6 +1,1 @@
-class Admin::SchoolsController < Admin::AdminController
-
-  def show
-  end
-
-end
+class Admin::SchoolsController < Admin::AdminController ; end

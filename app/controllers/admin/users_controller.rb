@@ -4,12 +4,6 @@ class Admin::UsersController < Admin::AdminController
   before_filter :user, :only => [:edit, :new_password]
   before_filter :check_current_password, :only => [:update_password]
 
-  def index
-  end
-
-  def edit
-  end
-
   def create
     user.save_with_role ? redirect_to(admin_users_path) : render("new")
   end
@@ -20,9 +14,6 @@ class Admin::UsersController < Admin::AdminController
 
   def destroy
     user.destroy && redirect_to(admin_users_path)
-  end
-
-  def new_password
   end
 
   def update_password
