@@ -1,6 +1,4 @@
-class Admin::SchoolsController < ApplicationController
-
-  before_filter :authenticate_admin!
+class Admin::SchoolsController < Admin::AdminController
 
   def show
   end

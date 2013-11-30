@@ -1,7 +1,6 @@
 #coding: utf-8
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::AdminController
 
-  before_filter :authenticate_admin!
   before_filter :user, :only => [:edit, :new_password]
   before_filter :check_current_password, :only => [:update_password]
 

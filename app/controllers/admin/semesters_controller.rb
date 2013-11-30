@@ -1,7 +1,6 @@
 # coding: utf-8
-class Admin::SemestersController < ApplicationController
+class Admin::SemestersController < Admin::AdminController
 
-  before_filter :authenticate_admin!
   before_filter :semester_is_archived?, :only => [:activate]
   before_filter :semester_is_active?, :only => [:archive]
 
