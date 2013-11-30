@@ -1,8 +1,8 @@
 # coding: utf-8
 class Admin::SemestersController < Admin::AdminController
 
-  before_filter :semester_is_archived?, :only => [:activate]
-  before_filter :semester_is_active?, :only => [:archive]
+  before_filter :semester_is_archived?, only: [:activate]
+  before_filter :semester_is_active?, only: [:archive]
 
   def create
     semester.save ? redirect_to(controller: "schools", action: "show") : render(action: "new")
