@@ -87,7 +87,7 @@ feature "Admin school" do
             fill_in "semester_end_year", with: "2013"
             select "1", from: "semester_semester"
             click_button "Zapisz"
-            page.should have_content "zbyt duża rożnica"
+            page.should have_content "zbyt duża różnica"
           end
 
           scenario "when there is already similar semester" do
