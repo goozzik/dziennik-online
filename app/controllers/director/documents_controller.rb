@@ -1,9 +1,4 @@
-class Director::DocumentsController < ApplicationController
-
-  before_filter :authenticate_director!
-
-  def index
-  end
+class Director::DocumentsController < Director::DirectorController
 
   def create
     document.save ? redirect_to(action:"index") : render(action:"new")

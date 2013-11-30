@@ -1,6 +1,6 @@
-class Director::AbsencesController < ApplicationController
+class Director::AbsencesController < Director::DirectorController
 
-  before_filter :authenticate_director!, :director_school_class_has_students?
+  before_filter :director_school_class_has_students?
 
   def index
     @month = params[:month].nil? ? Time.now.month : params[:month]

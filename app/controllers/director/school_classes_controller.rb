@@ -1,8 +1,1 @@
-class Director::SchoolClassesController < ApplicationController
-
-  before_filter :authenticate_director!
-
-  def index
-  end
-
-end
+class Director::SchoolClassesController < Director::DirectorController; end

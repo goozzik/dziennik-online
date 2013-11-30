@@ -1,7 +1,7 @@
 # coding: utf-8
-class Director::SubjectsController < ApplicationController
+class Director::SubjectsController < Director::DirectorController
 
-  before_filter :authenticate_director!, :director_school_class_has_students?
+  before_filter :director_school_class_has_students?
 
   def show
     if params[:id]

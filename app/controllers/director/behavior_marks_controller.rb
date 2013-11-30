@@ -1,9 +1,5 @@
-class Director::BehaviorMarksController < ApplicationController
+class Director::BehaviorMarksController < Director::DirectorController
 
-  before_filter :authenticate_director!, :director_school_class_has_students?
-
-  def index
-  end
+  before_filter :director_school_class_has_students?
 
 end
-
