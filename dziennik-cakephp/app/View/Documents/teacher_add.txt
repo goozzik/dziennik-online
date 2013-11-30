@@ -1,6 +1,0 @@
-<h1> DOKUMENTY </h1>
-
-Dodaj nowy plik:
-<?php echo $this->Form->create('Document', array('action'=>'add','enctype' => 'multipart/form-data') );?>
-<?php echo $this->Form->input('file', array('label'=>'','type'=>'file'));?>
-<?php echo $this->Form->end('Submit');?>
