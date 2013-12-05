@@ -56,11 +56,6 @@ feature "Director school classes" do
           FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
         end
 
-        scenario "and no subject" do
-          click_link "Bieżące oceny"
-          assert_alert_box "Wychowawca klasy nie dodał jeszcze przedmiotów."
-        end
-
         scenario "and subject" do
           FactoryGirl.create(:subject_template)
           FactoryGirl.create(:subject, subject_template_id:SubjectTemplate.last.id, school_class_id: SchoolClass.last.id)

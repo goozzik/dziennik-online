@@ -8,4 +8,10 @@
 
 = page_header "Raport nauczania klasy #{@school_class.fullname}"
 
-= render "teacher/reports/report", school_class:@school_class, semesters:current_director.current_year_semesters, school_year:current_director.school_year
+- current_director.current_year_semesters.each do |semester|
+  = render 'teacher/reports/semester_report',
+    school_class: @school_class, semester: semester
+
+- if current_director.current_year_semesters.count == 2
+  = render "teacher/reports/year_report",
+    school_class: @school_class, school_year: current_director.school_year
