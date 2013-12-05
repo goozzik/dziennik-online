@@ -21,7 +21,7 @@ class Absence < ActiveRecord::Base
   private
 
     def set_semester_id
-      self.semester_id = student.semester_id
+      self.semester_id = student.semester_id unless semester_id.present?
     end
 
     def set_school_class_id

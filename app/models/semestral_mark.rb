@@ -35,7 +35,7 @@ class SemestralMark < ActiveRecord::Base
     end
 
     def set_semester_id
-      self.semester_id = school_class.semester_id
+      self.semester_id = school_class.semester_id unless semester_id.present?
     end
 
     def update_semestral_average_mark

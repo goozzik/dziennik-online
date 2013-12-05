@@ -27,67 +27,84 @@ module HelperMethods
 
   def load_semester
     if Time.now.month >= 9
-      FactoryGirl.create(:semester, school_id:School.last.id, semester:1, start_year:Time.now.year, end_year: Time.now.year+1)
+      FactoryGirl.create(:semester, school: School.first, semester: 1,
+                         start_year: Time.now.year, end_year: Time.now.year+1)
     else
-      FactoryGirl.create(:semester, school_id:School.last.id, semester:2, start_year:Time.now.year-1, end_year: Time.now.year)
+      FactoryGirl.create(:semester, school: School.first, semester:2,
+                         start_year: Time.now.year-1, end_year: Time.now.year)
     end
   end
 
   def load_second_semester
-    semester = Semester.last
-    second_semester = FactoryGirl.create(:semester, school_id:School.last.id, semester:semester.semester == 1 ? 2 : 1, start_year:semester.start_year, end_year: semester.end_year)
+    semester = Semester.first
+    FactoryGirl.create(:semester, school: School.first,
+                       semester: semester.semester == 1 ? 2 : 1,
+                       start_year: semester.start_year,
+                       end_year: semester.end_year)
   end
 
   def load_subject_templates
     subject_templates = []
-    0.upto(5).each {|i| subject_templates << FactoryGirl.create(:subject_template, name:i)}
-    FactoryGirl.create(:profile_template, name: "Technik awionik", school_id: School.last.id, subject_templates: subject_templates)
+    0.upto(5).each do |i|
+      subject_templates << FactoryGirl.create(:subject_template, name: i)
+    end
+    FactoryGirl.create(:profile_template, name: "Technik awionik",
+                       school: School.first,
+                       subject_templates: subject_templates)
     subject_templates
   end
 
-  def load_data_for_student_semester_report(student, semester = Semester.last)
+  def load_data_for_student_semester_report(student, semester = Semester.first)
     1.upto(3) do |week|
-      FactoryGirl.create(:absence, student_id:student.id, month:Time.now.month, week:week, required:30, justified:20, unexcused:0, late:5)
+      FactoryGirl.create(:absence, student_id: student.id,
+                         month: Time.now.month, week: week,
+                         required: 30, justified: 20,unexcused: 0,
+                         late: 5, semester_id: semester.id )
     end
-    student.subjects.each_with_index {|subject, j| FactoryGirl.create(:semestral_mark, student_id:student.id, subject_id:subject.id, mark:(j+1).to_s)}
+    student.subjects.each_with_index do |subject, j|
+      FactoryGirl.create(:semestral_mark, student: student,
+                         subject: subject, mark: (j+1).to_s,
+                         semester_id: semester.id)
+    end
   end
 
   def load_data_for_student_year_report(school_class, student)
-    load_data_for_student_semester_report(student)
-    semester = school_class.semester
-    second_semester = Semester.find_by_active(false)
-    school_class.activate_semester(second_semester)
-    load_data_for_student_semester_report(student)
+    load_data_for_student_semester_report(student, Semester.first)
+    load_data_for_student_semester_report(student, Semester.last)
   end
 
   def load_data_for_school_class_semester_report(school_class)
     1.upto(3) do
-      student = FactoryGirl.create(:student, school_class_id:school_class.id)
+      student = FactoryGirl.create(:student, school_class: school_class)
       load_data_for_student_semester_report(student)
     end
   end
 
   def load_data_for_school_class_year_report(school_class)
     1.upto(3) do
-      student = FactoryGirl.create(:student, school_class_id:school_class.id)
+      student = FactoryGirl.create(:student, school_class: school_class)
       load_data_for_student_year_report(school_class, student)
     end
   end
 
   def load_data_for_school_semester_report
-    subject_templates = load_subject_templates
+    load_subject_templates
     0.upto(3) do |i|
-      teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
-      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i, profile: "Technik awionik")
+      teacher = FactoryGirl.create(:teacher, school: School.last)
+      school_class = FactoryGirl.create(:school_class, teacher: teacher,
+                                        yearbook: Time.now.year+i,
+                                        profile: "Technik awionik")
       load_data_for_school_class_semester_report(school_class)
     end
   end
 
   def load_data_for_school_year_report
-    subject_templates = load_subject_templates
+    load_subject_templates
     0.upto(3) do |i|
-      teacher = FactoryGirl.create(:teacher, school_id:School.last.id)
-      school_class = FactoryGirl.create(:school_class, teacher_id:teacher.id, yearbook:Time.now.year+i, profile: "Technik awionik")
+      teacher = FactoryGirl.create(:teacher, school: School.last)
+      school_class = FactoryGirl.create(:school_class, teacher: teacher,
+                                        yearbook:Time.now.year+i,
+                                        profile: "Technik awionik")
       load_data_for_school_class_year_report(school_class)
     end
   end
