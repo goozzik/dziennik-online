@@ -25,25 +25,7 @@ module HelperMethods
     visit(current_path)
   end
 
-  def load_semester
-    if Time.now.month >= 9
-      FactoryGirl.create(:semester, school: School.first, semester: 1,
-                         start_year: Time.now.year, end_year: Time.now.year+1)
-    else
-      FactoryGirl.create(:semester, school: School.first, semester:2,
-                         start_year: Time.now.year-1, end_year: Time.now.year)
-    end
-  end
-
-  def load_second_semester
-    semester = Semester.first
-    FactoryGirl.create(:semester, school: School.first,
-                       semester: semester.semester == 1 ? 2 : 1,
-                       start_year: semester.start_year,
-                       end_year: semester.end_year)
-  end
-
-  def load_subject_templates
+  def load_profile
     subject_templates = []
     0.upto(5).each do |i|
       subject_templates << FactoryGirl.create(:subject_template, name: i)
@@ -51,7 +33,6 @@ module HelperMethods
     FactoryGirl.create(:profile_template, name: "Technik awionik",
                        school: School.first,
                        subject_templates: subject_templates)
-    subject_templates
   end
 
   def load_data_for_student_semester_report(student, semester = Semester.first)

@@ -3,33 +3,31 @@ require 'acceptance/acceptance_helper'
 
 feature 'Teacher absences feature' do
 
-  context "index" do
-    before do
-      FactoryGirl.create(:school)
-      load_semester
-      load_subject_templates
-      FactoryGirl.create(:teacher, school_id: School.last.id)
-      FactoryGirl.create(:school_class, profile: "Technik awionik", teacher_id: Teacher.last.id)
-      login "teacher"
-    end
+  describe "index" do
+    let!(:school) { create(:school) }
+    let!(:semester) { create(:semester, school: school) }
+    let!(:teacher) { create(:teacher, school: school) }
+    let!(:profile_template) { load_profile }
+    let!(:school_class) { create(:school_class, profile: "Technik awionik",
+                         teacher: teacher) }
+
+    before { login "teacher" }
 
     scenario "info when school class have no students" do
       click_link "Frekwencja"
-      save_and_open_page
       assert_alert_box("Najpierw dodaj uczniów.")
     end
 
     scenario "info about how to add absences" do
-      FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
+      create(:student, school_class: school_class)
       click_link "Frekwencja"
       assert_info_box("Frekwencja")
     end
 
     context "month navigation" do
-      before do
-        FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
-        click_link "Frekwencja"
-      end
+      let!(:student) { create(:student, school_class: school_class) }
+
+      before { click_link "Frekwencja" }
 
       scenario "follow next month link" do
         next_month = Chronic.parse('monday next month')
@@ -46,7 +44,7 @@ feature 'Teacher absences feature' do
       end
 
       scenario "use select list and go to october" do
-        FactoryGirl.create(:absence, student_id: Student.last.id, month: 10, week: 1, required: 30, justified: 5)
+        create(:absence, student: student, month: 10, week: 1, required: 30, justified: 5)
         click_link "Październik"
         page.should have_xpath "//td[@class='absence 1 required_absence'][contains(text(), '30')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
@@ -54,91 +52,82 @@ feature 'Teacher absences feature' do
       end
 
       scenario "use select list and go to april" do
-        FactoryGirl.create(:absence, student_id: Student.last.id, month: 4, week: 1, required: 25, justified: 5)
+        create(:absence, student_id: Student.last.id, month: 4, week: 1, required: 25, justified: 5)
         click_link "Kwiecień"
         page.should have_xpath "//td[@class='absence 1 required_absence'][contains(text(), '25')]"
         page.should have_xpath "//td[@class='absence'][contains(text(), '5')]"
         page.should have_content "Kwiecień"
       end
-
     end
 
-    context "create", :js => true do
-      before do
-        FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
-        click_link "Frekwencja"
-      end
+    context "create", js: true do
+      let!(:student) { create(:student, school_class: school_class) }
+
+      before { click_link "Frekwencja" }
 
       scenario "ob" do
         reload_page
+        element_id = student.id.to_s + "_1_required"
+        page.execute_script("$('##{element_id}').trigger('click')")
+        fill_in "absence_active", with: "33"
+        sleep(1)
+        find(:css, "#absence_active").native.send_key(:tab)
+        reload_page
+        page.should have_xpath "//td[@id='#{element_id}'][contains(text(), '33')]"
+      end
+
+    end
+
+    context "update", js: true do
+      let!(:student) { create(:student, school_class: school_class) }
+      let!(:absence) { create(:absence, student: student, month: Time.now.month,
+                              week: 1, semester: semester, required: 30) }
+
+      scenario "ob" do
         date = Chronic.parse("monday this month").strftime("%Y-%m-%d")
-        element_id = Student.last.id.to_s + "_" + date + "_required"
-        page.execute_script("$('##{element_id}').trigger('click')")
-        fill_in "absence_active", :with => "33"
-        sleep(1)
-        find(:css, "#absence_active").native.send_key(:tab)
-        reload_page
-        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '33')]"
-      end
-
-    end
-
-    context "update", :js => true do
-      before do
-        FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
-        @date = Chronic.parse("monday this month").strftime("%Y-%m-%d")
-        FactoryGirl.create(:absence, :student_id => Student.last.id, :semester_id => Semester.last.id, :date => @date, :required => 30)
         reload_page
         click_link "Frekwencja"
-      end
-
-      scenario "ob" do
-        element_id = Student.last.id.to_s + "_" + @date + "_required"
+        element_id = student.id.to_s + "_1_required"
         page.execute_script("$('##{element_id}').trigger('click')")
-        fill_in "absence_active", :with => "20"
+        fill_in "absence_active", with: "20"
         sleep(1)
         find(:css, "#absence_active").native.send_key(:tab)
         reload_page
-        page.should have_xpath "//td[@class='absence #{@date}_required'][contains(text(), '20')]"
+        page.should have_xpath "//td[@id='#{element_id}'][contains(text(), '20')]"
       end
-
     end
 
-    context "update mass required", :js => true do
-      before do
-        FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-        FactoryGirl.create(:student, :school_class_id => SchoolClass.last.id)
-      end
+    context "update mass required", js: true do
+      let!(:student) { create(:student, school_class: school_class) }
 
       scenario "when there is no previous 'required' fields filled" do
         reload_page
         click_link "Frekwencja"
-        date = Chronic.parse('monday this month').strftime('%Y-%m-%d')
-        page.execute_script("$('##{date}').trigger('click')")
+        page.execute_script("$('#1').trigger('click')")
         fill_in "mass_required_active", :with => "28"
         sleep(1)
         find(:css, "#mass_required_active").native.send_key(:tab)
-        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+        element_id = student.id.to_s + "_1_required"
+        page.should have_xpath "//td[@id='#{element_id}'][contains(text(), '28')]"
         reload_page
-        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+        page.should have_xpath "//td[@id='#{element_id}'][contains(text(), '28')]"
       end
 
       scenario "when there is 'required' field filled" do
-        date = Chronic.parse('monday this month').strftime('%Y-%m-%d')
-        FactoryGirl.create(:absence, date: date, student_id: Student.last.id, required: 25)
+        create(:absence, week: 1, month: Time.now.month,
+               student: student, required: 25)
         reload_page
         click_link "Frekwencja"
-        page.execute_script("$('##{date}').trigger('click')")
-        fill_in "mass_required_active", :with => "28"
+        page.execute_script("$('#1').trigger('click')")
+        fill_in "mass_required_active", with: "28"
         sleep(1)
         find(:css, "#mass_required_active").native.send_key(:tab)
-        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+        element_id = student.id.to_s + "_1_required"
+        page.should have_xpath "//td[@id='#{element_id}'][contains(text(), '28')]"
         reload_page
-        page.should have_xpath "//td[@class='absence #{date}_required'][contains(text(), '28')]"
+        page.should have_xpath "//td[@id='#{element_id}'][contains(text(), '28')]"
       end
-
     end
-
   end
 
 end
