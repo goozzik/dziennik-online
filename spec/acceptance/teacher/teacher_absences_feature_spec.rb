@@ -15,6 +15,7 @@ feature 'Teacher absences feature' do
 
     scenario "info when school class have no students" do
       click_link "Frekwencja"
+      save_and_open_page
       assert_alert_box("Najpierw dodaj uczniów.")
     end
 
