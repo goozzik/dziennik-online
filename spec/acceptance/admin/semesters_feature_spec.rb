@@ -3,20 +3,21 @@ require 'acceptance/acceptance_helper'
 
 feature "Admin semesters" do
 
+  let!(:school) { create(:school) }
+  let!(:admin) { create(:admin, school: school) }
+  let!(:teacher) { create(:teacher, school: school) }
+  let!(:semester) { create(:semester, school: school, semester: 2) }
+  let!(:profile) { create(:profile_template, school: school) }
+
   background do
     time_now = Time.parse("Feb 24 2013")
     Time.stub!(:now).and_return(time_now)
-    @school = FactoryGirl.create(:school)
-    FactoryGirl.create(:admin, school_id:@school.id)
-    @teacher = FactoryGirl.create(:teacher, :school_id => @school.id)
-    FactoryGirl.create(:semester, school_id:@school.id, semester:2, start_year:2012, end_year:2013)
-    FactoryGirl.create(:profile_template, school_id: @school.id)
     login "admin"
     click_link "Ustawienia szkoły"
   end
 
   scenario "it should update 1st grade school classes to 2nd when new year come" do
-    school_class = FactoryGirl.create(:school_class, yearbook:2016, :teacher_id => @teacher.id)
+    school_class = create(:school_class, yearbook: 2016, teacher: teacher)
     fill_in "semester_start_year", with: "2013"
     fill_in "semester_end_year", with: "2014"
     select "1", from: "semester_semester"
@@ -29,7 +30,7 @@ feature "Admin semesters" do
   end
 
   scenario "it should update 2nd grade school classes to 3rd when new year come" do
-    school_class = FactoryGirl.create(:school_class, yearbook:2015, :teacher_id => @teacher.id)
+    school_class = create(:school_class, yearbook:2015, teacher: teacher)
     fill_in "semester_start_year", with: "2013"
     fill_in "semester_end_year", with: "2014"
     select "1", from: "semester_semester"
@@ -42,7 +43,7 @@ feature "Admin semesters" do
   end
 
   scenario "it should update 3rd grade school classes to 4th when new year come" do
-    school_class = FactoryGirl.create(:school_class, yearbook:2014, :teacher_id => @teacher.id)
+    school_class = create(:school_class, yearbook:2014, teacher: teacher)
     fill_in "semester_start_year", with: "2013"
     fill_in "semester_end_year", with: "2014"
     select "1", from: "semester_semester"
@@ -55,7 +56,7 @@ feature "Admin semesters" do
   end
 
   scenario "it should not update 4th grade school classes to 5th when new year come" do
-    school_class = FactoryGirl.create(:school_class, yearbook:2013, :teacher_id => @teacher.id)
+    school_class = create(:school_class, yearbook:2013, teacher: teacher)
     fill_in "semester_start_year", with: "2013"
     fill_in "semester_end_year", with: "2014"
     select "1", from: "semester_semester"

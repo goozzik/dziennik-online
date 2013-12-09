@@ -5,11 +5,9 @@ require 'acceptance/acceptance_helper'
 feature "Admin school" do
 
   context "show" do
-    before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:admin, school_id: School.last.id)
-      login "admin"
-    end
+    let!(:school) { create(:school) }
+    let!(:admin) { create(:admin, school: school) }
+    before { login "admin" }
 
     scenario "when there is no semester" do
       click_link "Ustawienia szkoły"
@@ -17,9 +15,9 @@ feature "Admin school" do
     end
 
     scenario "when there is one semester it should be active" do
-      FactoryGirl.create(:semester, school_id: School.last.id)
+      create(:semester, school: school)
       click_link "Ustawienia szkoły"
-      page.should have_content "2011/2012"
+      page.should have_content "2012/2013"
       page.should have_xpath "//a[@class='btn btn-mini disabled'][contains(text(), 'Ustaw jako aktywny')]"
     end
 
@@ -37,7 +35,8 @@ feature "Admin school" do
           end
 
           scenario "when there is one semester already" do
-            FactoryGirl.create(:semester, school_id: School.last.id)
+            create(:semester, school: school)
+            select "2", from: "semester_semester"
             click_button "Zapisz"
             page.should have_content "2012/2013"
             page.should have_xpath "//a[@class='btn btn-mini ']"
@@ -48,11 +47,9 @@ feature "Admin school" do
             page.should have_content "2012/2013"
             page.should have_xpath "//a[@class='btn btn-mini disabled'][contains(text(), 'Ustaw jako aktywny')]"
           end
-
         end
 
         context "validate" do
-
           scenario "when empty start year field" do
             fill_in "semester_end_year", with: "2013"
             select "1", from: "semester_semester"
@@ -108,8 +105,8 @@ feature "Admin school" do
       end
 
       context "destroy" do
+        let!(:semester) { create(:semester, school: school) }
         before do
-          load_semester
           click_link "Ustawienia szkoły"
         end
 
@@ -119,7 +116,7 @@ feature "Admin school" do
         end
 
         scenario "when there are two semesters" do
-          load_second_semester
+          create(:semester, school: school, semester: 2)
           click_link "Usuń"
           page.should_not have_content "Szkoła nie ma ustawionego semestru!"
         end
@@ -127,63 +124,56 @@ feature "Admin school" do
       end
 
       context "activate" do
-        before do
-          FactoryGirl.create(:semester, school_id:School.last.id, semester:1, start_year:"2011", end_year:"2012")
-          FactoryGirl.create(:semester, school_id:School.last.id, semester:2, start_year:"2011", end_year:"2012")
-        end
+         let!(:semester_1) { create(:semester, school: school, semester: 1) }
+         let!(:semester_2) { create(:semester, school: school, semester: 2) }
 
         scenario "active when semester is not active and not archived" do
           click_link "Ustawienia szkoły"
-          assert Semester.find_by_semester(1).active
+          semester_1.active.should be_true
           find(:xpath, "//a[@class='btn btn-mini '][contains(text(), 'Ustaw jako aktywny')]").click
-          assert Semester.find_by_semester(2).active
+          Semester.find_by_semester(2).active.should be_true
         end
 
         scenario "active when semester is not active and archived" do
           Semester.find_by_semester(2).update_attribute(:archived, true)
           click_link "Ustawienia szkoły"
           find(:xpath, "//a[@class='btn btn-mini disabled'][contains(text(), 'Ustaw jako aktywny')]").click
-          assert !Semester.find_by_semester(2).active
+          Semester.find_by_semester(2).active.should_not be_true
           assert_error_box "Nie można aktywować zarchiwizowanego semestru!"
         end
 
         #scenario "active not actual year semester" do
         #
         #end
-
       end
 
       context "archive" do
-        before do
-          FactoryGirl.create(:semester, school_id:School.last.id, semester:1, start_year:"2011", end_year:"2012")
-          FactoryGirl.create(:semester, school_id:School.last.id, semester:2, start_year:"2011", end_year:"2012")
-        end
+        let!(:semester_1) { create(:semester, school: school, semester: 1) }
+        let!(:semester_2) { create(:semester, school: school, semester: 2) }
 
         scenario "archive not archived and not active semester" do
           click_link "Ustawienia szkoły"
+          save_and_open_page
           find(:xpath, "//a[@class='btn btn-mini '][contains(text(), 'Archiwizuj')]").click
-          assert Semester.find_by_semester(2).archived
+          Semester.find_by_semester(2).archived.should be_true
         end
 
         scenario "archive not archived and active semester" do
           click_link "Ustawienia szkoły"
           find(:xpath, "//a[@class='btn btn-mini disabled'][contains(text(), 'Archiwizuj')]").click
-          assert !Semester.find_by_semester(1).archived
+          Semester.find_by_semester(1).archived.should_not be_true
           assert_error_box "Nie można zarchiwizować aktywnego semestru!"
         end
-
       end
 
       scenario "unarchive" do
-        FactoryGirl.create(:semester, school_id:School.last.id, semester:1, start_year:"2011", end_year:"2012")
-        FactoryGirl.create(:semester, school_id:School.last.id, semester:2, start_year:"2011", end_year:"2012", archived:true)
+        create(:semester, school: school, semester:1)
+        semester_2 = create(:semester, school: school, semester:2, archived:true)
         click_link "Ustawienia szkoły"
         click_link "Przywróć"
-        assert !Semester.find_by_semester(2).archived
+        Semester.find_by_semester(2).active.should_not be_true
       end
-
     end
-
   end
 
 end

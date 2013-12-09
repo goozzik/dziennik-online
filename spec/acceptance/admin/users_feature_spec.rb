@@ -5,9 +5,9 @@ require 'acceptance/acceptance_helper'
 feature "Admin accounts" do
 
   context "index" do
+    let!(:school) { create(:school) }
+    let!(:admin) { create(:admin, school: school) }
     before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:admin, school_id: School.last.id)
       login "admin"
     end
 
@@ -19,9 +19,9 @@ feature "Admin accounts" do
     end
 
     scenario "when there are director, teacher and other admin" do
-      FactoryGirl.create(:director, school_id: School.last.id)
-      FactoryGirl.create(:teacher, school_id: School.last.id)
-      FactoryGirl.create(:admin, school_id: School.last.id)
+      create(:director, school: school)
+      create(:teacher, school: school)
+      create(:admin, school_id: school)
       click_link "Użytkownicy"
       page.should have_content "Nauczycieliusz"
       page.should have_content "Dyrektoriusz"
@@ -77,11 +77,10 @@ feature "Admin accounts" do
         click_button "Zapisz"
         page.should have_content "nieprawidłowa rola"
       end
-
     end
 
     scenario "destroy" do
-      FactoryGirl.create(:teacher, school_id: School.last.id)
+      create(:teacher, school: school)
       click_link "Użytkownicy"
       find(:xpath, "//table[1]//a[@data-method='delete']").click
       assert_info_box "Szkoła nie posiada nauczycieli."
@@ -89,7 +88,7 @@ feature "Admin accounts" do
 
     context "update_password" do
       before do
-        FactoryGirl.create(:teacher, school_id: School.last.id)
+        create(:teacher, school: school)
         click_link "Użytkownicy"
         click_link "Zmień hasło"
       end
@@ -101,31 +100,30 @@ feature "Admin accounts" do
       end
 
       scenario "validate new password presence" do
-        fill_in "user_current_password", with: Admin.last.username
+        fill_in "user_current_password", with: admin.username
         click_button "Zapisz"
         page.should have_content "nie może być puste"
       end
 
       scenario "validate password length" do
-        fill_in "user_current_password", with: Admin.last.username
+        fill_in "user_current_password", with: admin.username
         fill_in "user_password", with: "test"
         click_button "Zapisz"
         page.should have_content "za krótkie"
       end
 
       scenario "validate password confirmation" do
-        fill_in "user_current_password", with: Admin.last.username
+        fill_in "user_current_password", with: admin.username
         fill_in "user_password", with: "test123"
         fill_in "user_password_confirmation", with: "test124"
         click_button "Zapisz"
         page.should have_content "potwierdzenie hasła nie zgadza się"
       end
-
     end
 
     context "update" do
+      let!(:teacher) { create(:teacher, school: school) }
       before do
-        FactoryGirl.create(:teacher, school_id: School.last.id)
         click_link "Użytkownicy"
         click_link "Edytuj"
       end
@@ -156,7 +154,6 @@ feature "Admin accounts" do
         page.should have_content "nie może być puste"
       end
     end
-
   end
 
 end
