@@ -34,4 +34,7 @@ DziennikOnline::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :log
+
+  t = Time.local(2012, 12, 12)
+  Timecop.travel(t)
 end

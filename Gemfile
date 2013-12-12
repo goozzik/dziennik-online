@@ -38,6 +38,7 @@ group :test do
   gem "simplecov"
   gem "steak"
   gem "rspec-mocks"
+  gem "timecop"
 end
 
 group :development do
