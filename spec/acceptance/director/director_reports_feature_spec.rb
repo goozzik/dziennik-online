@@ -1,23 +1,23 @@
 # coding: utf-8
 require "acceptance/acceptance_helper"
 
-feature "Director reports" do
+feature "reports" do
+
+  let!(:school) { create(:school) }
+  let!(:director) { create(:director, school: school) }
   before do
-    FactoryGirl.create(:school)
-    FactoryGirl.create(:director, school_id:School.last.id)
     login "director"
     click_link "Raporty"
   end
 
   context "absences" do
-
     scenario "when there is no active semester in school" do
       click_link "Raport frekwencji klas"
       assert_alert_box "Administrator szkoły nie aktywował jeszcze semestru."
     end
 
     scenario "when there is data for semester" do
-      load_semester
+      create(:semester, school: school)
       load_data_for_school_semester_report
       click_link "Raport frekwencji klas"
       2.upto(4) do |i|
@@ -31,8 +31,8 @@ feature "Director reports" do
     end
 
     scenario "when there is data for year" do
-      load_semester
-      load_second_semester
+      create(:semester, school: school)
+      create(:semester, semester: 2, school: school)
       load_data_for_school_year_report
       click_link "Raport frekwencji klas"
       [6, 9, 12].each do |i|
@@ -44,13 +44,10 @@ feature "Director reports" do
         page.should have_xpath "//table[#{i-3}]/tr[2]/td[6][contains(text(), '90')]"
       end
     end
-
   end
 
   context "school_class" do
-    before do
-      load_semester
-    end
+    let!(:semester) { create(:semester, school: school) }
 
     scenario "when there is no school class in school" do
       page.should_not have_xpath "//a[contains(text(), 'Raporty klas')]"
@@ -79,11 +76,11 @@ feature "Director reports" do
     end
 
     scenario "when there is data for school class year report" do
-      load_second_semester
+      create(:semester, semester: 2, school: school)
       load_data_for_school_year_report
       reload_page
       click_link "Raporty klas"
-      page.should have_content "Podsumowanie roku szkolnego #{School.last.school_year}"
+      page.should have_content "Podsumowanie roku szkolnego #{school.school_year}"
       page.should have_xpath "//table[3]/tr[6]/th[2][contains(text(), '33.33')]"
       page.should have_xpath "//table[3]/tr[6]/th[3][contains(text(), '540')]"
       page.should have_xpath "//table[3]/tr[6]/th[4][contains(text(), '360')]"
@@ -98,7 +95,6 @@ feature "Director reports" do
       page.should have_xpath "//table[3]/tr[6]/th[13][contains(text(), '3')]"
       page.should have_xpath "//table[3]/tr[6]/th[14][contains(text(), '0')]"
     end
-
   end
 
 end

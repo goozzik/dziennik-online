@@ -69,7 +69,7 @@ module HelperMethods
   end
 
   def load_data_for_school_semester_report
-    load_subject_templates
+    load_profile
     0.upto(3) do |i|
       teacher = FactoryGirl.create(:teacher, school: School.last)
       school_class = FactoryGirl.create(:school_class, teacher: teacher,
@@ -80,7 +80,7 @@ module HelperMethods
   end
 
   def load_data_for_school_year_report
-    load_subject_templates
+    load_profile
     0.upto(3) do |i|
       teacher = FactoryGirl.create(:teacher, school: School.last)
       school_class = FactoryGirl.create(:school_class, teacher: teacher,

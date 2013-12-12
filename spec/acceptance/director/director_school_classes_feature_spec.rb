@@ -1,14 +1,15 @@
 # coding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature "Director school classes" do
+feature "school classes" do
+
+  let!(:school) { create(:school) }
+  let!(:profile) { create(:profile_template, school: school) }
+  let!(:semester) { create(:semester, school: school) }
+  let!(:director) { create(:director, school: school) }
 
   context "index" do
     before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:profile_template, school_id: School.last.id)
-      load_semester
-      FactoryGirl.create(:director, school_id: School.last.id)
       login('director')
     end
 
@@ -18,16 +19,19 @@ feature "Director school classes" do
     end
 
     scenario "when there is active school class in school" do
-      FactoryGirl.create(:teacher, school_id: School.last.id)
-      FactoryGirl.create(:school_class, teacher_id: Teacher.last.id, profile: "Technik awionik", yearbook: Semester.last.end_year)
+      teacher = create(:teacher, school: school)
+      create(:school_class, teacher: teacher, profile: "Technik awionik",
+             yearbook: semester.end_year)
       click_link "Klasy"
-      page.should have_content "4 G Technik awionik #{Semester.last.end_year}"
+      page.should have_content "4 G Technik awionik #{semester.end_year}"
     end
 
     context "follow 'Bieżąca frekwencja'" do
+      let!(:teacher) { create(:teacher, school: school) }
+      let!(:school_class) { create(:school_class, teacher: teacher,
+                                   profile: "Technik awionik",
+                                   yearbook: semester.end_year) }
       before do
-        FactoryGirl.create(:teacher, school_id: School.last.id)
-        FactoryGirl.create(:school_class, teacher_id: Teacher.last.id, profile: "Technik awionik", yearbook: Semester.last.end_year)
         click_link "Klasy"
       end
 
@@ -37,41 +41,37 @@ feature "Director school classes" do
       end
 
       scenario "when there is student" do
-        FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
+        create(:student, school_class: school_class)
         click_link "Bieżąca frekwencja"
         page.should have_content "Frekwencja klasy 4 G"
       end
-
     end
 
     context "follow 'Bieżące Oceny'" do
+      let!(:teacher) { create(:teacher, school: school) }
+      let!(:school_class) { create(:school_class, profile: "Technik awionik",
+                                   teacher: teacher) }
       before do
-        FactoryGirl.create(:teacher, school_id: School.last.id)
-        FactoryGirl.create(:school_class, profile: "Technik awionik", teacher_id: Teacher.last.id)
         click_link "Klasy"
       end
 
       context "when there is student" do
-        before do
-          FactoryGirl.create(:student, school_class_id: SchoolClass.last.id)
-        end
+        let!(:student) { create(:student, school_class: school_class) }
+        let!(:subject_template) { create(:subject_template) }
+        let!(:subject) { create(:subject, subject_template: subject_template,
+                                school_class: school_class) }
 
         scenario "and subject" do
-          FactoryGirl.create(:subject_template)
-          FactoryGirl.create(:subject, subject_template_id:SubjectTemplate.last.id, school_class_id: SchoolClass.last.id)
           click_link "Bieżące oceny"
           page.should have_content "Oceny klasy 4 G"
         end
-
       end
 
       scenario "when there is no students" do
         click_link "Bieżące oceny"
         assert_alert_box "Wychowawca klasy nie dodał jeszcze uczniów."
       end
-
     end
-
   end
 
 end
