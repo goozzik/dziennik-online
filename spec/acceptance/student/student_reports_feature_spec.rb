@@ -2,20 +2,19 @@
 
 require "acceptance/acceptance_helper"
 
-feature "Student reports" do
+feature "reports" do
+
+  let!(:school) { create(:school) }
+  let!(:teacher) { create(:teacher, school: school) }
+  let!(:semester) { create(:semester, school: school) }
+  let!(:profile) { load_profile }
 
   context "index" do
-    before do
-      FactoryGirl.create(:school)
-      load_subject_templates
-      FactoryGirl.create(:teacher, school: School.first)
-      load_semester
-      FactoryGirl.create(:school_class, profile: "Technik awionik",
-                         teacher_id: Teacher.last.id)
-    end
+    let!(:school_class) { create(:school_class, profile: "Technik awionik",
+                                 teacher: teacher) }
 
     scenario "when there is data for semester" do
-      load_data_for_school_class_semester_report(SchoolClass.first)
+      load_data_for_school_class_semester_report(school_class)
       login "student"
       click_link "Raporty"
       page.should have_xpath "//tr[3]/td[2][contains(text(), '33.33')]"
@@ -48,11 +47,11 @@ feature "Student reports" do
     end
 
     scenario "when there is data for year" do
-      load_second_semester
-      load_data_for_school_class_year_report(SchoolClass.first)
+      create(:semester, semester: 2, school: school)
+      load_data_for_school_class_year_report(school_class)
       login "student"
       click_link "Raporty"
-      page.should have_xpath "//h2[contains(text(), 'Podsumowanie roku szkolnego #{School.first.school_year}')]"
+      page.should have_xpath "//h2[contains(text(), 'Podsumowanie roku szkolnego #{school.school_year}')]"
       page.should have_xpath "//table[3]/tr[3]/td[2][contains(text(), '33.33')]"
       page.should have_xpath "//table[3]/tr[3]/td[3][contains(text(), '180')]"
       page.should have_xpath "//table[3]/tr[3]/td[4][contains(text(), '120')]"
@@ -83,7 +82,7 @@ feature "Student reports" do
     end
 
     scenario "when there is no data" do
-      FactoryGirl.create(:student, school_class: SchoolClass.first)
+      create(:student, school_class: school_class)
       login "student"
       click_link "Raporty"
       page.should have_xpath "//tr[3]/td[2][contains(text(), '--')]"

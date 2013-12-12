@@ -2,32 +2,34 @@
 
 require "acceptance/acceptance_helper"
 
-feature "Student time tables" do
+feature "time tables" do
 
   context "index" do
+    let!(:school) { create(:school) }
+    let!(:semester) { create(:semester, school: school) }
+    let!(:teacher) { create(:teacher, school: school) }
+    let!(:profile) { load_profile }
+    let!(:school_class) { create(:school_class, profile: "Technik awionik",
+                                 teacher: teacher) }
+    let!(:student) { create(:student, school_class: school_class) }
+
     before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, school_id:School.last.id)
-      FactoryGirl.create(:teacher, school_id:School.last.id)
-      load_subject_templates
-      FactoryGirl.create(:school_class, profile:"Technik awionik", teacher_id:Teacher.last.id)
-      FactoryGirl.create(:student, school_class_id:SchoolClass.last.id)
       login "student"
     end
 
-    scenario "when there is no time tables" do
+    scenario "when there are no time tables" do
       click_link "Plan lekcji"
       assert_info_box "Wychowawca nie uzupełnił jeszcze planu lekcji."
     end
 
     scenario "when there is time table" do
-      FactoryGirl.create(:time_table, school_class_id: SchoolClass.last.id)
-      FactoryGirl.create(:lesson, time_table_id: TimeTable.last.id, subject_id: Subject.last.id, number: 0)
+      time_table = create(:time_table, school_class: school_class)
+      create(:lesson, time_table: time_table, subject: Subject.last,
+             number: 0)
       click_link "Plan lekcji"
       page.should have_content "Poniedziałek"
       page.should have_content "5"
     end
-
   end
 
 end
