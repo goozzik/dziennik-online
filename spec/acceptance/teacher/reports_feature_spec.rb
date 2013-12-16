@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature 'Teacher reports' do
+feature 'reports' do
 
   let!(:school) { create(:school) }
   let!(:semester) { create(:semester, school: school) }

@@ -2,7 +2,7 @@
 
 require 'acceptance/acceptance_helper'
 
-feature 'Teacher time tables' do
+feature 'time tables' do
 
   let!(:school) { create(:school) }
   let!(:semester) { create(:semester, school: school) }

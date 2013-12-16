@@ -2,7 +2,7 @@
 
 require 'acceptance/acceptance_helper'
 
-feature 'Teacher students' do
+feature 'students' do
 
   context "index" do
     let!(:school) { create(:school) }
