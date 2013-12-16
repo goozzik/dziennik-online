@@ -1,19 +1,22 @@
 # coding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature 'Teacher messages' do
+feature 'messages' do
+
+  let!(:school) { create(:school) }
+  let!(:semester) { create(:semester, school: school) }
+  let!(:teacher) { create(:teacher, school: school) }
+  let!(:profile) { load_profile }
+  let!(:school_class) { create(:school_class, profile: "Technik awionik",
+                               teacher: teacher) }
+
+  before do
+    login('teacher')
+  end
 
   context "index" do
-    before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, :school_id => School.last.id)
-      FactoryGirl.create(:teacher, :school_id => School.last.id)
-      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      login('teacher')
-    end
-
     scenario "when there is message" do
-      FactoryGirl.create(:message, :school_class_id => SchoolClass.last.id)
+      create(:message, school_class: school_class)
       click_link "Wiadomości"
       page.should have_content "Witam"
       page.should have_content "Przykładowa wiadomość"
@@ -23,16 +26,10 @@ feature 'Teacher messages' do
       click_link "Wiadomości"
       assert_info_box "Klasa nie ma wiadomośći."
     end
-
   end
 
   context "create" do
     before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, :school_id => School.last.id)
-      FactoryGirl.create(:teacher, :school_id => School.last.id)
-      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      login('teacher')
       click_link "Wiadomości"
     end
 
@@ -54,17 +51,12 @@ feature 'Teacher messages' do
       page.should have_content "Witam"
       page.should have_content "Przykładowa wiadomość"
     end
-
   end
 
   context "update" do
+    let!(:message) { create(:message, school_class: school_class) }
+
     before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, :school_id => School.last.id)
-      FactoryGirl.create(:teacher, :school_id => School.last.id)
-      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      login('teacher')
-      FactoryGirl.create(:message, :school_class_id => SchoolClass.last.id)
       click_link "Wiadomości"
       click_link "Edytuj"
     end
@@ -80,21 +72,13 @@ feature 'Teacher messages' do
       click_button "Zapisz"
       page.should have_content "nie może być puste"
     end
-
   end
 
   context "destroy" do
-    before do
-      FactoryGirl.create(:school)
-      FactoryGirl.create(:semester, :school_id => School.last.id)
-      FactoryGirl.create(:teacher, :school_id => School.last.id)
-      FactoryGirl.create(:school_class, :teacher_id => Teacher.last.id)
-      FactoryGirl.create(:message, :school_class_id => SchoolClass.last.id)
-      login('teacher')
-    end
+    let!(:message) { create(:message, school_class: school_class) }
 
     scenario "when there are two messages" do
-      FactoryGirl.create(:message, :title => "Witam!", :school_class_id => SchoolClass.last.id)
+      create(:message, title: "Witam!", school_class: school_class)
       click_link "Wiadomości"
       click_link "Usuń"
       assert Message.count == 1
@@ -105,7 +89,6 @@ feature 'Teacher messages' do
       click_link "Usuń"
       assert_info_box "Klasa nie ma wiadomośći."
     end
-
   end
 
 end

@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature 'Teacher absences feature' do
+feature 'absences' do
 
   describe "index" do
     let!(:school) { create(:school) }
